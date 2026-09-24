@@ -1,0 +1,23 @@
+# Environment
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Data never goes into git (plan section 13). Results JSON and manifests do.
+data/
+*.nii
+*.nii.gz
+*.dcm
+*.npy
+*.npz
+logs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

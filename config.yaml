@@ -1,0 +1,32 @@
+# Study constants: the ONLY place a tunable value may live.
+#
+# `null` means UNDECIDED. Reading it raises (gbmc.config.get). Filling one in
+# is a decision: record it in DECISIONS.md in the same commit, before any
+# number it governs has been seen.
+#
+# Source of record: docs/plan/final_plan.md (plan section numbers are shared
+# vocabulary in comments below).
+
+study:
+  name: gbm-rec
+  title: Where does glioblastoma come back?
+  question: >-
+    Do MRI-based models add predictive information about where glioblastoma
+    recurs beyond distance from the tumour, on an independent cohort, and does
+    more model complexity buy more?
+  plan: docs/plan/final_plan.md
+
+seeds:
+  master: null          # set with the tournament rules (Step 1.1)
+  n_bootstrap: 1000     # patient-level BCa bootstrap (Step 1.5)
+
+preprocessing:
+  itk_threads: 1        # gbm-4d D9: ITK output depends on thread count (Step 0.3)
+
+data:
+  lumiere:
+    license: CC0
+    local_root: null    # wired in Phase 1; override with $GBMC_LUMIERE_ROOT
+  rhuh_gbm:
+    license: CC BY 4.0
+    local_root: null    # must stay null until the OSF pre-registration is posted (Phase 2)

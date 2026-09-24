@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gbmc"
+version = "0.1.0"
+description = "Where does glioblastoma come back? Can MRI-based models beat distance?"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [{ name = "Sophie Zhu", email = "sophiezhu2028@gmail.com" }]
+dependencies = [
+  # gbm-4d is frozen; its preprocessing, label transport and screens are reused
+  # at this exact commit (plan Step 0.2).
+  "gbm4d @ git+https://github.com/sophiezla/gbm-4d.git@eeba7779804412b0a32d0b5ba0f23c3156448549",
+  "numpy>=2.5",
+  "scipy>=1.18",
+  "pandas>=3.0",
+  "scikit-learn>=1.9",
+  "lightgbm>=4.7",
+  "nibabel>=5.4",
+  "SimpleITK>=2.5",
+  "scikit-image>=0.26",
+  "trimesh>=5.1",
+  "pyyaml>=6.0",
+  "matplotlib>=3.11",
+  "tqdm>=4.70",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.1", "pytest-cov>=7.1", "ruff>=0.16"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+
+[tool.ruff]
+line-length = 100
+src = ["src", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "NPY"]
