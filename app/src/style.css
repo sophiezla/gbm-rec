@@ -1,0 +1,134 @@
+:root {
+  --bg: #f7f7f5;
+  --fg: #1c1c1c;
+  --muted: #5a5a5a;
+  --panel: #ffffff;
+  --border: #d6d6d2;
+  --viewer-bg: #111316;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181b;
+    --fg: #ececec;
+    --muted: #a8a8a8;
+    --panel: #1f2226;
+    --border: #33373c;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.top { padding: 12px 16px 0; }
+.top h1 { margin: 0; font-size: 1.3rem; }
+.question { margin: 4px 0 0; color: var(--muted); }
+
+.fixed-label {
+  margin: 8px 16px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  font-size: 0.85rem;
+}
+
+.explore {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr;
+  gap: 12px;
+  padding: 0 16px 16px;
+  height: calc(100vh - 130px);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  overflow: auto;
+}
+
+.controls fieldset { border: 1px solid var(--border); border-radius: 6px; }
+.controls label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.layer { flex-direction: row !important; align-items: center; gap: 8px !important; }
+.swatch { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.summary, .credit { font-size: 0.8rem; color: var(--muted); margin: 0; }
+
+.viewer-3d, .viewer-slices {
+  background: var(--viewer-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 300px;
+  position: relative;
+}
+.viewer-3d:focus { outline: 2px solid #56b4e9; }
+.viewer-slices canvas { width: 100%; height: 100%; display: block; }
+
+@media (max-width: 800px) {
+  .explore { grid-template-columns: 1fr; height: auto; }
+  .viewer-3d, .viewer-slices { height: 60vh; }
+}
+
+/* ---- shell and screens (plan Step 5.2) ---- */
+.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+nav { display: flex; gap: 4px; flex-wrap: wrap; }
+nav a {
+  padding: 6px 12px; border-radius: 6px; color: var(--fg); text-decoration: none;
+  border: 1px solid transparent;
+}
+nav a[aria-current="page"] { border-color: var(--border); background: var(--panel); font-weight: 600; }
+nav a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 2px solid #56b4e9; outline-offset: 2px;
+}
+main[hidden] { display: none !important; }
+.panel {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px;
+}
+.muted, .pending { color: var(--muted); }
+.pending { font-style: italic; }
+
+.story {
+  display: grid; grid-template-columns: 1fr 380px; gap: 12px; padding: 0 16px 16px;
+  height: calc(100vh - 150px);
+}
+.story .panel { display: flex; flex-direction: column; gap: 8px; overflow: auto; }
+.story h2 { margin: 0; font-size: 1.15rem; }
+.story-nav { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+.story-nav button, #pde-play {
+  padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--fg); cursor: pointer;
+}
+.story-nav button:disabled { opacity: 0.4; cursor: default; }
+
+.compare {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px 16px;
+}
+.compare-bar { grid-column: 1 / -1; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.compare .viewer-3d { height: 55vh; margin-top: 6px; }
+
+.page { padding: 0 16px 16px; max-width: 900px; }
+.prose dt { font-weight: 600; margin-top: 10px; }
+.prose dd { margin: 2px 0 0 0; }
+.chart { margin: 12px 0; }
+.chart svg { width: 100%; height: auto; }
+.chart figcaption { font-size: 0.9rem; color: var(--muted); margin-bottom: 4px; }
+table { border-collapse: collapse; font-size: 0.9rem; }
+th, td { text-align: left; padding: 4px 10px 4px 0; }
+table.scores caption { text-align: left; color: var(--muted); font-size: 0.8rem; caption-side: bottom; }
+.verdict { font-size: 1.05rem; }
+
+@media (max-width: 800px) {
+  .story, .compare { grid-template-columns: 1fr; height: auto; }
+  .story .viewer-3d { height: 50vh; }
+}

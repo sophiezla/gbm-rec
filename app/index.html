@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Where does glioblastoma come back?</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body data-screen="story">
+    <header class="top">
+      <div>
+        <h1>Where does glioblastoma come back?</h1>
+        <p class="question">Can MRI-based models beat distance?</p>
+      </div>
+      <nav aria-label="Screens">
+        <a id="tab-story" href="#story">Story</a>
+        <a id="tab-explore" href="#explore">Explore</a>
+        <a id="tab-compare" href="#compare">Compare</a>
+        <a id="tab-results" href="#results">Results</a>
+        <a id="tab-learn" href="#learn">Learn</a>
+      </nav>
+    </header>
+    <p class="fixed-label" id="fixed-label"></p>
+
+    <main id="screen-story" class="story">
+      <section class="viewer-3d" id="story-3d" tabindex="0"
+               aria-label="3D view of the story case. Arrow keys on the page step through the story."></section>
+      <aside class="panel" aria-live="polite">
+        <p class="muted" id="story-case"></p>
+        <div id="story-text"></div>
+        <div class="story-nav">
+          <button id="story-prev" type="button">Back</button>
+          <span id="story-progress" class="muted"></span>
+          <button id="story-next" type="button">Next</button>
+        </div>
+      </aside>
+    </main>
+
+    <main id="screen-explore" class="explore" hidden>
+      <aside class="controls panel" aria-label="Case controls">
+        <label>Case <select id="case-select"></select></label>
+        <fieldset id="layers"><legend>Layers</legend></fieldset>
+        <label>Model <select id="model-select"></select></label>
+        <label>Time <input id="time" type="range" min="0" max="0" step="1" value="0" /></label>
+        <output id="time-label"></output>
+        <button id="pde-play" type="button" hidden>Play diffusion model</button>
+        <output id="pde-label"></output>
+        <p class="summary" id="summary" aria-live="polite"></p>
+        <p class="credit" id="credit"></p>
+      </aside>
+      <section class="viewer-3d" id="viewer-3d" tabindex="0"
+               aria-label="3D view. Left and right arrows rotate, plus and minus zoom."></section>
+      <section class="viewer-slices"><canvas id="slices"></canvas></section>
+    </main>
+
+    <main id="screen-compare" class="compare" hidden>
+      <div class="compare-bar panel">
+        <label>Case <select id="compare-case"></select></label>
+        <label><input type="checkbox" id="compare-reveal" /> Reveal the recurrence</label>
+        <span id="compare-note" class="muted"></span>
+      </div>
+      <section>
+        <select id="compare-select-a" aria-label="Left model"></select>
+        <div class="viewer-3d" id="compare-a" tabindex="0" aria-label="Left model, 3D"></div>
+        <p id="compare-score-a" aria-live="polite"></p>
+      </section>
+      <section>
+        <select id="compare-select-b" aria-label="Right model"></select>
+        <div class="viewer-3d" id="compare-b" tabindex="0" aria-label="Right model, 3D"></div>
+        <p id="compare-score-b" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <main id="screen-results" class="page" hidden>
+      <div id="results-body" class="panel"></div>
+    </main>
+
+    <main id="screen-learn" class="page" hidden>
+      <article id="learn-body" class="panel prose"></article>
+    </main>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

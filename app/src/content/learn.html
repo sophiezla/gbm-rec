@@ -1,0 +1,50 @@
+<h2>How each model works</h2>
+<p>Every model gives each 1 mm voxel of brain outside the treatment target a score. A higher score means the model ranks that voxel as more likely to hold recurrence. "Predicts" here always means ranking voxels in retrospective public data, never a prediction for a patient.</p>
+<dl>
+  <dt>C0 · Distance</dt>
+  <dd>The closer a voxel is to the tumour and resection cavity, the higher it ranks. This is the clinical margin written as a ranking, and every other model is compared with it.</dd>
+  <dt>C0T · Trimmed distance</dt>
+  <dd>Distance again, but the path may not cross the skull or the falx and may reach only 5 mm into the ventricles, following the barrier rules of the ESTRO-EANO 2023 guideline.</dd>
+  <dt>C4 · FLAIR edge</dt>
+  <dd>A rule with nothing learned: voxels near the edge of the FLAIR-abnormal region rank highest. It asks whether the oedema boundary alone ranks voxels better than the tumour boundary.</dd>
+  <dt>C1 · Distance + FLAIR, linear</dt>
+  <dd>A logistic regression with four inputs: distance, whether the voxel is FLAIR-abnormal, distance to the FLAIR edge, and the product of the first two. It is the simplest learned model.</dd>
+  <dt>C3 · Distance + FLAIR + anatomy, linear</dt>
+  <dd>C1 plus one more input: the shortest path from the tumour that goes around the falx and the ventricles.</dd>
+  <dt>C2 · Distance + FLAIR, boosted trees</dt>
+  <dd>The same inputs as C1, learned by gradient-boosted trees (LightGBM), which can bend and combine them in non-linear ways.</dd>
+  <dt>C5 · 3D convolutional network</dt>
+  <dd>C5 is a small AI model that reads the scans themselves. It runs only if the hardware gate recorded in week 1 passed.</dd>
+  <dt>C6 · Ensemble</dt>
+  <dd>An ensemble with nothing fitted: the average of the learned models' within-patient ranks, so that their errors can partly cancel.</dd>
+</dl>
+
+<h2>Glossary</h2>
+<dl>
+  <dt>PR-AUC</dt>
+  <dd>Area under the precision-recall curve. It scores how well a ranking puts recurrent voxels first, at every treated volume at once. Recurrence fills a small share of the brain, so PR-AUC values are small; "lift over chance" divides by what a random ranking would score.</dd>
+  <dt>Guideline margin</dt>
+  <dd>The 15 mm region around the tumour and cavity that the 2023 ESTRO-EANO guideline recommends treating, trimmed only at anatomical barriers.</dd>
+  <dt>Coverage at matched volume</dt>
+  <dd>Treat exactly as much brain as the patient's own 15 mm guideline margin, choosing the voxels each model ranks highest. Coverage is the share of the recurrence outside the target that falls inside that volume.</dd>
+  <dt>FLAIR</dt>
+  <dd>An MRI sequence in which oedema and non-enhancing tumour look bright. The guideline says FLAIR abnormality "may represent non-enhancing tumour".</dd>
+  <dt>Registration</dt>
+  <dd>Warping the recurrence scan onto the post-operative scan so that the recurrence can be drawn on the same brain. Screens can exclude a patient whose registration looks wrong; they cannot prove one right.</dd>
+  <dt>Pre-registration</dt>
+  <dd>Posting the models, their fingerprints (hashes), the analysis and the possible result sentences on OSF before the test data were downloaded, so none of it could be tuned to the answer.</dd>
+</dl>
+
+<h2>Limits</h2>
+<ul>
+  <li>Registration accuracy was screened, never measured against landmarks.</li>
+  <li>The confirmatory cohort is small, so the result is stated with its confidence interval and the smallest effect the design could detect.</li>
+  <li>The two cohorts were labelled differently (automatic segmentation in LUMIERE, corrected labels in RHUH-GBM) and preprocessed differently.</li>
+  <li>These results are evidence about where recurrence occurs in public data. Margin recommendations remain the guideline's.</li>
+</ul>
+
+<h2>Data credits</h2>
+<ul>
+  <li>LUMIERE: Suter et al., Scientific Data 2022, doi:10.1038/s41597-022-01881-7. Licence CC0.</li>
+  <li>RHUH-GBM: Cepeda et al., Data in Brief 2023; The Cancer Imaging Archive, doi:10.7937/4545-c905. Licence CC BY 4.0.</li>
+</ul>

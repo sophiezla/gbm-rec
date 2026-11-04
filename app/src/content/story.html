@@ -1,0 +1,32 @@
+<section data-step="a" data-show="brain target">
+  <h2>The brain after surgery</h2>
+  <p>This is one patient's brain on the scan taken after surgery. Orange is the treatment target: what is left of the enhancing tumour, plus the cavity where the tumour was removed.</p>
+</section>
+<section data-step="b" data-show="brain target guideline_margin">
+  <h2>The guideline margin</h2>
+  <p>Blue is the 15 mm margin that the 2023 ESTRO-EANO guideline recommends treating, trimmed at the skull, the falx and the ventricles.</p>
+</section>
+<section data-step="c" data-show="brain target model:C0 model:lead">
+  <h2>The prediction</h2>
+  <p>Each model now commits to the voxels it ranks highest, treating exactly the volume of the guideline margin: distance on one side, the lead model on the other. The recurrence is still hidden.</p>
+</section>
+<section data-step="d" data-show="brain target model:C0 model:lead recurrence">
+  <h2>The reveal</h2>
+  <p>The actual recurrence appears, on the scan taken when the tumour came back.</p>
+</section>
+<section data-step="e" data-show="brain target recurrence" data-scores="true">
+  <h2>The score</h2>
+  <p>At the same treated volume, how much of the recurrence outside the target did each region catch?</p>
+</section>
+<section data-step="f" data-show="brain target">
+  <h2>The truth test</h2>
+  <p>{{n_models}} models were compared on 63 LUMIERE patients. The rule picked one challenger, its weights were frozen and fingerprinted, and the plan was posted on OSF. Only then were 40 new RHUH-GBM patients downloaded, and the script ran once. It refuses to run a second time.</p>
+</section>
+<section data-step="g" data-show="brain target" data-results="true">
+  <h2>Does more complexity help?</h2>
+  <p>Every model against distance, from the simplest to the most complex. The line at zero is distance itself.</p>
+</section>
+<section data-step="h" data-show="brain target recurrence">
+  <h2>What it means</h2>
+  <p>The answer is evidence about where glioblastoma recurs in public data. It is not a treatment prediction, and margin recommendations remain the guideline's. See Learn for the limits.</p>
+</section>
