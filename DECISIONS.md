@@ -84,6 +84,199 @@ Consequences:
 Do Not Revisit Unless:
 PyTorch is added (CNN gate, Step 0.4) and needs a different version of something.
 
+## D5: LUMIERE inputs come from gbm-4d's frozen derived data
+
+Date: (set at commit)
+Status: Active
+
+Decision:
+`gbmc.lumiere` reads the 63 locked patients from gbm-4d's `results/cohort_lock/cohort_lock.json` (train and test together, V1), the baselines from gbm-4d `data/interim/preprocessed/`, the recurrence labels from `data/interim/label_field/` (Enhancing_Core only, gbm-4d D18), and the native DeepBraTumIA segmentation and atlas transform from the shared LUMIERE copy. Both roots are set in `config.yaml:data.lumiere` and can be overridden with `$GBMC_LUMIERE_ROOT` / `$GBMC_GBM4D_ROOT`. Nothing is re-fitted or re-transported.
+
+Reason:
+Plan Step 1.2: "in gbm-4d's baseline space, with gbm-4d's transported labels".
+
+Consequences:
+Checked on Patient-001: the evaluation mask and the 3,303 positive voxels are identical to gbm-4d's cached features.
+
+## D6: Tournament rules (plan Step 1.1). DRAFT, not yet committed
+
+Date: (set at commit)
+Status: **Proposed.** No candidate may be scored until this entry is committed with `seeds.master` set. `scripts/02_tournament.py` enforces both (clean tree, non-null seed).
+
+Decision:
+1. **Cohort and endpoint.** 63 locked LUMIERE patients; label = enhancing tumour at the first segmented RANO progression; evaluation region = brain minus target (DeepBraTumIA labels 1 + 2). A patient with no positive voxel there is *undefined* for every metric and is left out of every mean and Δ, never scored 0. Undefined patients still give training negatives (20,000 random voxels, gbm-4d arm2).
+2. **Features** (`gbmc.features`), baseline only:
+   - f1: signed Euclidean distance to the target surface.
+   - f2: DeepBraTumIA label 3 (Edema_Compartment).
+   - f3: signed Euclidean distance to the f2 surface, capped at 300 mm when f2 is empty.
+   - f4: f1 × f2.
+   - f5: fast-marching geodesic distance from the target inside the brain, with gbm-4d's derived falx (gbm4d.barriers) and the ventricles (gbm4d.ventricles, lesion excluded) closed.
+   - Unreachable voxels are capped at 300 mm.
+3. **Candidates** (`gbmc.candidates`), in complexity order C0, C0T, C4, C1, C3, C2, C5, C6:
+   - C0 = −f1.
+   - C0T = −(geodesic distance with the falx closed, entering the ventricles at most 5 mm); a ventricle voxel inherits its nearest wall voxel's distance plus its depth below the wall.
+   - C4 = −f3.
+   - C1 = L2 logistic regression (gbm-4d's standardise + C = 1 pipeline) on f1–f4, with patient-balanced sample weights.
+   - C3 = the same on f1–f5, with the same weights.
+   - C2 = LightGBM with gbm-4d's frozen `LIGHTGBM_PARAMS` on f1–f4, unweighted.
+   - C6 = unweighted mean of within-patient percentile ranks of C1, C3, C2 (+ C5 if the gate passes), from their held-out predictions.
+   - Training rows for C1, C3 and C2: every positive plus 50 negatives per positive, seeded per patient and the same in every fold (gbm-4d arm2).
+4. **Folds.** One 7-fold split (9 patients each) drawn from the sorted IDs with `stable_seed("tournament_folds")`, shared by every candidate.
+5. **Metrics per held-out patient.**
+   - PR-AUC (average precision, gbm-4d's function).
+   - Lift = PR-AUC ÷ prevalence.
+   - Coverage (denominator: recurrence outside the target) at matched volume. The matched volume is the number of evaluation voxels inside the patient's own C0T margin at 15 mm (headline) and at 20 mm, plus 50 ml. At the cut, tied scores share the remaining treated volume in proportion, so coverage is the expected value under a random tie-break.
+6. **Aggregation.** Mean over evaluable patients. Δ vs C0 with a patient-level BCa bootstrap 95% CI, 1000 resamples, seeded per candidate and metric.
+7. **Selection rule.** From C4, C1, C3, C2, C5, C6, take the highest mean held-out PR-AUC. If any simpler candidate is within 0.005 of it, the simplest such one is the challenger. The challenger goes to Phase 4 whatever its Δ vs C0.
+
+Open points needing approval before commit (methodology, so not decided by Claude):
+- (a) `seeds.master` value.
+- (b) f1 follows the plan's text (Euclidean). gbm-4d's Arm 0 used a brain-constrained geodesic, so C0 will not reproduce gbm-4d's 0.0743 exactly. On Patient-001 the two correlate at 0.9999, with a median difference of 0.95 mm.
+- (c) The C0T ventricle rule (item 3) is one reading of "cut to 5 mm at the ventricles".
+- (d) f5 closes the ventricles fully. The plan's f5 names the falx, ventricles and skull, and the plan does not give the 5 mm allowance to f5.
+- (e) Rule 7 applies the 0.005 margin to every pair. The plan spells it out only for C6, but also says "a simple model wins ties".
+- (f) C3 uses patient-balanced weights like C1. The plan states the weights only for C1; using them for C3 too makes C3 vs C1 isolate f5.
+- (g) C5 is out until Step 0.4 is recorded (GPU, starting weights).
+- (h) Power (Step 2.1): a simulated study "detects" when the BCa lower bound is above 0, which is how the verdict rule reads the CI. gbm-4d used a two-sided percentile test. The assumed arm correlation rho is reported at 0.5, 0.7 and 0.9, with 0.5 as the pessimistic headline (`config.yaml:power`).
+- (j) Patient-074: gbm-4d's ventricle segmentation found no central component ("segmentation not trusted"), so this patient's f5 and C0T have the falx barrier but no ventricle barrier. The other 62 patients have both. Options: accept this and report it, or segment its ventricles another way before scoring.
+- (i) Step 1.8 label: the *new* enhancing tumour at progressions 2 and 3 (enhancing then, not enhancing at the first progression). It is scored in the same evaluation region with each candidate's held-out map from `02_`. Only transports that pass gbm-4d's 2 mm round-trip screen are used. It is labelled exploratory.
+
+Reason:
+Plan Step 1.1: rules on record before the first score. Any change after a score is seen is a deviation.
+
+## D7: Native voxel spacing is not a feature
+
+Date: (set at commit)
+Status: Active (plan Step 1.3 asks for this to be recorded)
+
+Decision:
+gbm-4d's spacing covariate is left out of every candidate.
+
+Reason:
+RHUH-GBM's open files are resampled to 1 mm, and their native spacing is only in the controlled DICOM.
+
+## D8: No weighted stacking
+
+Date: (set at commit)
+Status: Active (plan Step 1.4 asks for this to be recorded)
+
+Decision:
+C6 is an unweighted rank average; no second-level model is fitted.
+
+Reason:
+Learning member weights would need nested cross-validation, and with about 54 training patients per fold the weights would be noisy.
+
+## D9: Later progressions are transported with gbm-4d's frozen scripts (proposed)
+
+Date: (set at commit)
+Status: Proposed
+
+Decision:
+`scripts/05_later_progressions.py` selects the second and third segmented PD timepoints with gbm-4d's own rules. It runs gbm-4d's `03_preprocess.process_one` and `04_label_transport.transport_one`, loaded from the gbm-4d checkout. The loader refuses unless that checkout is at the pinned commit with `scripts/` and `src/` unmodified, and it redirects every output root into this repository's `data/interim/`. The seed is gbm-4d's master seed, 20260819 (`config.yaml:later_progression.transport_master_seed`), so the recipe matches the one that made the first-progression labels.
+
+Reason:
+Plan Step 1.8: later progressions are "carried into baseline space by the same transport". gbm-4d transported only the first progression.
+
+Consequences:
+83 later timepoints in 46 of 63 patients (37 have both a 2nd and a 3rd). The smoke test on Patient-002 (week-047) passed: transport ok, label written, round-trip median 0.87 mm, verdict pass. It took 1,101 s at one ITK thread, so all 83 need about 25 hours sequentially. That suits the second machine, or several worker processes, since each timepoint is independent.
+
+## D10: Mesh face budget by marching-cubes step, not quadric decimation (proposed)
+
+Date: (set at commit)
+Status: Proposed
+
+Decision:
+`gbmc.export.surface` raises the marching-cubes step size until a layer fits its face budget (brain ≤ 60k, others ≤ 20k; plan Step 5.4). Taubin smoothing follows.
+
+Reason:
+trimesh's decimation needs `fast_simplification`, which is not in the lock and would be a new dependency.
+
+Do Not Revisit Unless:
+The app needs finer meshes within budget. Then approve `fast_simplification`.
+
+## D11: App stack is Vite + TypeScript + three.js + NiiVue, without React (proposed)
+
+Date: (set at commit)
+Status: Proposed. The plan leaves React vs plain TypeScript to the user ("choose once in week 2").
+
+Decision:
+The app uses plain TypeScript. Its dependencies are three 0.186, @niivue/niivue 0.69, vite 8 and typescript 7, recorded in `app/package-lock.json`. The build uses a relative base, so the same output works on GitHub Pages and from disk offline.
+
+Open:
+Exported cases (`app/public/cases/`) are kept out of git for now. Publishing them to GitHub Pages means committing meshes derived from LUMIERE (CC0) and later RHUH-GBM (CC BY 4.0) images, which needs a decision.
+
+## D12: RHUH-GBM transport uses gbm-wm's tuned recipe; the threshold is set on LUMIERE first (proposed)
+
+Date: (set at commit)
+Status: Proposed
+
+Decision:
+`gbmc.registration` copies gbm-wm's `register_syn` and its D11 settings (`TUNED_SYN`). `transport_pair` follows gbm-wm's `12_` step for step: rigid pre-alignment; SyN forward and backward with the cavity masked; round trip in the peritumoral region; Jacobian QC; nearest-neighbour warp. The seed is `config.yaml:registration.master_seed` (20260819, gbm-4d's, as in D9).
+
+`scripts/07_roundtrip_threshold.py` runs this recipe on the 63 LUMIERE baseline→first-progression pairs with **registration only**. The progression segmentation is never read (plan Step 3.3: "a check that uses no LUMIERE labels").
+
+Open, to decide before OSF:
+- `registration.roundtrip_threshold_rule`: how that distribution becomes the RHUH-GBM threshold, e.g. its p95 or its max.
+- `registration.roundtrip_threshold_mm`: the value that rule gives.
+
+Consequences:
+Smoke test on Patient-001: registration ok, round-trip median 0.77 mm (p95 1.86 mm), no label written, 2,932 s on one ITK thread.
+
+Reason:
+gbm-wm lost 21 of 72 patients when a threshold fixed for one recipe met another (plan §2, row 7).
+
+## D13: RHUH-GBM pipeline built before download; every file-dependent constant is null (proposed)
+
+Date: (set at commit)
+Status: Proposed
+
+Decision:
+`gbmc.rhuh`, `gbmc.consort`, `gbmc.screens`, `gbmc.rhuh_features`, `gbmc.confirm`, `gbmc.verdict` and scripts `20_`–`23_`, `30_`, `31_` are written and unit-tested on synthetic data. They use only what the plan states about the dataset. Everything that depends on the files is null in `config.yaml` until the download and refuses to run: the layout, the clinical columns, the timepoint and sequence names, the cavity rule, the SRI24 midline, the falx T1 sequence, the mapping agreement, the cavity dark threshold, the screen thresholds, `verdict.mde_rho`, `osf.url` and `osf.timestamp`.
+
+Rules implemented as code (plan Step 2.2):
+- The label-mapping check may only correct a pure relabelling agreed by `rhuh.mapping_min_agreement` of scans. Otherwise it raises.
+- The cavity rule: "labelled:<value>" gives enhancing + that label. "unlabelled" gives post-op enhancing + the pre-op core (1+3) carried rigidly and clipped to the brain.
+
+Proposed, not in the plan:
+- **Alternative-cavity sensitivity arm** (`31_`). If the primary is "unlabelled", the alternative is residual + only the fluid-dark (T1ce < `rhuh.cavity_dark_t1ce_z`) part of the carried core. If the primary is labelled, the alternative is the carried-core rule.
+- **Falx in SRI24.** gbm-4d's `falx_barrier` is applied through a translation to the SRI24 midline, instead of LUMIERE's shipped MNI transform (Step 4.1 asks for this adaptation to be recorded before scoring).
+- **Probability maps (Step 4.6).** They are rounded to float16 precision and stored as float32, because SimpleITK cannot write float16 NIfTI.
+- **Not built:** the exploratory C1 + ADC arm, which is first in the plan's cut order.
+
+## D14: Figures and colour roles (proposed)
+
+Date: (set at commit)
+Status: Proposed
+
+Decision:
+All Step 4.7 figures come from `gbmc.figures`, fed only from `results/` by `scripts/50_figures.py` and `51_reveal_figure.py`. The colour roles are the same in the figures and the app:
+
+| Role | Colour |
+|---|---|
+| target | #e69f00 |
+| FLAIR region | #56b4e9 |
+| guideline margin | #0072b2 |
+| distance | #cc79a7 |
+| challenger / champion | #009e73 |
+| recurrence | #d55e00 |
+
+The dataviz skill's validator passes every check on a light surface, all pairs. Distance vs challenger is in the 6–8 CVD band, which is legal only with secondary encoding, so both are always direct-labelled. The rule-chosen demo patient is the median per-patient Δ; with an even count, the lower middle one.
+
+Open:
+- No dark-surface palette passes yet: orange vs vermillion collides in dark mode.
+- In the lit 3D view the target and the recurrence look alike (seen in the browser check).
+
+## D15: PDE mode re-runs gbm-4d's frozen Fisher–KPP simulation (proposed)
+
+Date: (set at commit)
+Status: Proposed
+
+Decision:
+`scripts/42_pde_frames.py` calls gbm-4d `23_arm1_fkpp.py`'s `load_patient` and `build_fields` through the verified loader, at gbm-4d's population point (D 0.5 mm²/day, ρ 0.002/day). It runs the solver in chunks with gbm-4d's exact time step and keeps nine frames from day 0 to 206. Nothing is fitted.
+
+Consequences:
+The final frame equals gbm-4d's saved density exactly (maximum absolute difference 0.0, checked for Patients 038, 039 and 090).
+
 ## D0: Documentation structure
 
 Date: 2026-09-23
