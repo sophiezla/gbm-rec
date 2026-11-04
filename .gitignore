@@ -21,3 +21,9 @@ logs/
 Thumbs.db
 .vscode/
 .idea/
+
+# Exported app cases are derived from patient images. Whether they are
+# committed for GitHub Pages is an open decision (HANDOFF); until then, not in git.
+app/public/cases/
+app/node_modules/
+app/dist/
