@@ -2,6 +2,9 @@
 
 ## [Unreleased: Phase 1 start, not committed]
 
+### Changed
+- 2026-11-03: gbm-rec is standalone (deviation V3). New modules `gbmc.imaging`, `transport`, `anatomy`, `pde` replace the gbm4d package and scripts; `results/cohort_lock/cohort_lock.json` is committed; data paths now come only from `$GBMC_LUMIERE_ROOT` and `$GBMC_DERIVED_ROOT`; rigid resampling direction corrected; `--recipe gbm4d` renamed `original`.
+
 ### Added
 - 2026-10-29: `docs/plan/project_plan_lacsef.md`, a team build guide for LACSEF derived from the final plan (no timeline, no individual role split). Shared copies: Claude doc https://claude.ai/artifact/7jD9jT6FFKRUhkA4Ljft7g and Google Doc https://docs.google.com/document/d/1Dqy4ejZ648nCc8FEF9tCRtQ8wHXmTVFzzuxGZhdR2q0/edit. `final_plan.docx` stays authoritative.
 - `src/gbmc/lumiere.py` (D5), `features.py` (f1-f5, C0T distance), `metrics.py` (PR-AUC, lift, tie-aware matched-volume coverage), `stats.py` (BCa, from gbm-wm), `candidates.py` (C0-C6 except C5, folds, selection rule).

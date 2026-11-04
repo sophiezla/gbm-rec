@@ -1,12 +1,5 @@
 """Run manifests: make every file in ``results/`` traceable to its cause.
 
-Adapted from ``gbm4d.provenance`` with two changes:
-
-* git state is read from this repository. gbm4d's version resolves the repo
-  from its own file location, which after installation is site-packages.
-* every manifest also records the gbm4d commit that was installed, so a result
-  can be tied to the exact frozen predecessor code.
-
 Usage
 -----
 >>> from gbmc.provenance import run_manifest
@@ -18,7 +11,10 @@ Usage
 from __future__ import annotations
 
 import contextlib
+import hashlib
 import json
+import os
+import platform
 import subprocess
 import sys
 import time
@@ -27,8 +23,6 @@ from dataclasses import dataclass, field
 from importlib import metadata
 from pathlib import Path
 from typing import Any
-
-from gbm4d.provenance import env_state, file_digest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MANIFEST_NAME = "run.manifest.json"
@@ -57,19 +51,23 @@ def git_state() -> dict[str, Any]:
     }
 
 
-def gbm4d_source() -> dict[str, Any]:
-    """Return where the installed gbm4d came from (URL and commit), if recorded."""
-    try:
-        raw = metadata.distribution("gbm4d").read_text("direct_url.json")
-    except metadata.PackageNotFoundError:
-        return {"installed": False}
-    info = json.loads(raw) if raw else {}
-    return {
-        "installed": True,
-        "version": metadata.version("gbm4d"),
-        "url": info.get("url"),
-        "commit": info.get("vcs_info", {}).get("commit_id"),
-    }
+def file_digest(path: str | Path) -> str:
+    """SHA-256 of a file, streamed so large images are fine."""
+    digest = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for block in iter(lambda: fh.read(1 << 20), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def env_state() -> dict[str, Any]:
+    """Interpreter, platform and installed-package versions."""
+    packages = sorted(f"{d.metadata['Name']}=={d.version}" for d in metadata.distributions()
+                      if d.metadata.get("Name"))
+    return {"python": sys.version, "python_executable": sys.executable,
+            "in_project_venv": str(REPO_ROOT / ".venv") in sys.executable,
+            "platform": platform.platform(), "machine": platform.machine(),
+            "pythonhashseed": os.environ.get("PYTHONHASHSEED"), "packages": packages}
 
 
 def _repo_relative(path: Path) -> str:
@@ -100,7 +98,6 @@ class Manifest:
             "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(self.started)),
             "duration_s": round(time.time() - self.started, 3),
             "git": git_state(),
-            "gbm4d": gbm4d_source(),
             "environment": env_state(),
             "inputs": [
                 {"path": str(p), "sha256": file_digest(p), "bytes": Path(p).stat().st_size}

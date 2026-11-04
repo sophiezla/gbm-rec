@@ -75,13 +75,12 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 4. Step 0.7: send the expert emails.
 
 ## Known Issues
-- gbm-4d commit `eeba777` is not on GitHub (local gbm-4d is 48 commits ahead of `origin/main`). A fresh clone of this repo cannot install gbm4d until gbm-4d is pushed.
+- Resolved 2026-11-03: the gbm-4d dependency is gone (deviation V3).
 
 ## Blockers
 - ISEF forms not signed (blocks Phase 1).
 
 ## Items Requiring Approval
-- Pushing gbm-4d, so the `eeba777` pin resolves from GitHub.
 - The fair date. The plan assumes the week of Nov 16 but says the date is not recorded yet.
 
 ## Recent Changes

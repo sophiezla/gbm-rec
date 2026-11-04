@@ -17,22 +17,19 @@ def _lock(tmp_path, cohort, train, test):
 def test_cohort_reads_the_list_and_checks_it(tmp_path, monkeypatch):
     ids = [f"Patient-{i:03d}" for i in range(63)]
     _lock(tmp_path, list(reversed(ids)), ids[:50], ids[50:])
-    monkeypatch.setenv("GBMC_GBM4D_ROOT", str(tmp_path))
+    monkeypatch.setattr(lumiere, "COHORT_LOCK", tmp_path / "results/cohort_lock/cohort_lock.json")
     assert lumiere.cohort() == ids
 
 
 def test_cohort_refuses_inconsistent_lock(tmp_path, monkeypatch):
     ids = [f"Patient-{i:03d}" for i in range(63)]
     _lock(tmp_path, ids, ids[:50], ids[51:])
-    monkeypatch.setenv("GBMC_GBM4D_ROOT", str(tmp_path))
+    monkeypatch.setattr(lumiere, "COHORT_LOCK", tmp_path / "results/cohort_lock/cohort_lock.json")
     with pytest.raises(ValueError):
         lumiere.cohort()
 
 
-def test_real_cohort_when_available():
-    try:
-        patients = lumiere.cohort()
-    except FileNotFoundError:
-        pytest.skip("gbm-4d checkout not present")
+def test_committed_cohort_lock():
+    patients = lumiere.cohort()
     assert len(patients) == 63
     assert "Patient-040" not in patients and "Patient-087" not in patients

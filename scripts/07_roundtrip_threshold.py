@@ -44,14 +44,12 @@ OUT = REPO_ROOT / "results" / "registration_threshold"
 
 def one(patient: str, master: int, overwrite: bool = False) -> dict:
     import SimpleITK as sitk
-    from gbm4d.preprocess import use_deterministic_threads
-
-    use_deterministic_threads(int(config.get("preprocessing.itk_threads")))
+    config.pin_itk_threads()
     out = WORK / patient
     if (out / "qc.json").is_file() and not overwrite:
         return json.loads((out / "qc.json").read_text(encoding="utf-8")) | {"skipped": True}
     qc = lumiere.transport_qc(patient)
-    pre = lumiere.gbm4d_root() / "data" / "interim" / "preprocessed" / patient
+    pre = lumiere.derived_root() / "data" / "interim" / "preprocessed" / patient
     base, prog = pre / qc["baseline"], pre / qc["progression"]
     seg_img = sitk.ReadImage(str(lumiere.lumiere_root() / "Imaging" / patient / qc["baseline"]
                                  / lumiere.NATIVE_SEG), sitk.sitkUInt8)

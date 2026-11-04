@@ -4,6 +4,7 @@ _Last updated: 2026-09-24_
 
 ## Current State (Phase 1, uncommitted)
 All of this work was committed and pushed to the public `sophiezla/gbm-rec` on 2026-11-03, so both partners work from that repo; clone it outside Google Drive. No dates were filled in. **No candidate has been scored, and no RHUH-GBM file exists.**
+- **Standalone (2026-11-03, deviation V3).** gbm-rec no longer imports or installs gbm-4d; the code is rewritten in `gbmc`, and the rigid resampling direction is corrected. Earlier sections below that mention `eeba777`, or the old `C:/` paths, are historical. Setup is in `docs/SETUP.md`.
 - **Team (2026-10-29).** The project is now a LACSEF team project. The team build guide is `docs/plan/project_plan_lacsef.md` (also a Google Doc: https://docs.google.com/document/d/1Dqy4ejZ648nCc8FEF9tCRtQ8wHXmTVFzzuxGZhdR2q0/edit). It adds no methodology; `final_plan.docx` still governs. The LACSEF SRC questions (team forms, continuation with a new partner, who may test the app under V2) were resolved by the user on 2026-10-30; the outcomes are not recorded here.
 - **Rules.** The tournament rules are drafted as `DECISIONS.md` D6, with open points (a)–(j); D9–D15 are proposed. Every script that produces a reportable number refuses a dirty tree, and the ones that need it refuse a null `seeds.master`.
 - **Data on disk (not in git):**

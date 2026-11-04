@@ -1,4 +1,4 @@
-"""Seeds must be stable across processes and identical to gbm-4d's.
+"""Seeds must be stable across processes and pinned.
 
 The subprocess test is the point of this file: an in-process equality check
 also passes for ``hash()``, which is exactly the failure it guards against.
@@ -32,7 +32,9 @@ def test_seed_is_stable_across_processes_and_hash_salts():
     assert seeds.pop() == str(stable_seed("patient-001", "fold", 3))
 
 
-def test_seed_is_the_frozen_gbm4d_implementation():
-    import gbm4d.rng
-
-    assert stable_seed is gbm4d.rng.stable_seed
+def test_seed_values_are_pinned():
+    # Values from the implementation these seeds were first drawn with. A change here
+    # would silently redraw every fold and bootstrap.
+    assert stable_seed("patient-001", "fold", 3) == 4026506090
+    assert stable_seed("a", "b", master_seed=7) == 693144360
+    assert stable_seed("ab", master_seed=7) != 693144360

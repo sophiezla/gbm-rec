@@ -24,6 +24,17 @@ def load(patient: str, cache: Path = CACHE) -> dict:
                                     z["matched_voxels"].tolist(), strict=True))}
 
 
+def subsample_negatives(truth: np.ndarray, ratio: int, seed: int) -> np.ndarray:
+    """Row indices: every positive, plus ``ratio`` random negatives per positive."""
+    positives = np.flatnonzero(truth)
+    if positives.size == 0:
+        raise ValueError("no positive voxels: this patient cannot train a fold")
+    negatives = np.flatnonzero(~truth)
+    count = min(negatives.size, ratio * positives.size)
+    chosen = np.random.default_rng(seed).choice(negatives, size=count, replace=False)
+    return np.concatenate([positives, chosen])
+
+
 def missing(patients: list[str], cache: Path = CACHE) -> list[str]:
     return [p for p in patients if not (cache / f"{p}.npz").is_file()]
 
@@ -34,8 +45,6 @@ def training_rows(patient: str, master: int, cache: Path = CACHE
 
     A patient with no positives still contributes random negatives.
     """
-    from gbm4d.arm2 import subsample_negatives
-
     data = load(patient, cache)
     truth = data["truth"]
     seed = stable_seed("tournament_negatives", patient, master_seed=master)

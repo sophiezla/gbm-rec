@@ -1,6 +1,6 @@
 """Minimum detectable effect under the real decision rule (plan Step 2.1).
 
-The data-generating model is gbm-4d's (``gbm4d.mde.power_at``): each simulated
+The data-generating model: each simulated
 patient's C0 PR-AUC is resampled from the observed LUMIERE C0 scores, a shared
 patient difficulty is split from independent noise by the assumed correlation
 ``rho``, and both arms are clipped to [0, 1] symmetrically.
@@ -17,8 +17,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-from gbm4d.mde import paired_difference_sd
 from scipy import stats
+
+
+def paired_difference_sd(sd: float, rho: float) -> float:
+    """SD of a per-patient difference between two equal-variance arms correlated at ``rho``."""
+    if not -1.0 <= rho < 1.0:
+        raise ValueError(f"rho must be in [-1, 1): got {rho}")
+    return float(sd * np.sqrt(2.0 * (1.0 - rho)))
 
 
 @dataclass(frozen=True)

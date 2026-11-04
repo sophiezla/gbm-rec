@@ -25,7 +25,7 @@ def repo(tmp_path, monkeypatch):
     return tmp_path
 
 
-def test_manifest_records_git_gbm4d_and_outputs(repo):
+def test_manifest_records_git_and_outputs(repo):
     out = repo / "results" / "stage"
     with provenance.run_manifest(out) as m:
         m.record(seed=5)
@@ -33,7 +33,6 @@ def test_manifest_records_git_gbm4d_and_outputs(repo):
     manifest = json.loads((out / provenance.MANIFEST_NAME).read_text(encoding="utf-8"))
     assert manifest["schema"] == "gbmc/manifest/1"
     assert manifest["git"]["commit"]
-    assert manifest["gbm4d"]["installed"] is True
     assert manifest["values"] == {"seed": 5}
     assert [o["path"] for o in manifest["outputs"]] == ["results/stage/x.json"]
 

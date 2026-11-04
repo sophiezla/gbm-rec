@@ -33,7 +33,7 @@ import numpy as np
 import SimpleITK as sitk
 from scipy import ndimage
 
-#: Same cap as gbm-4d (``gbm4d.features.MAX_PATH_MM``).
+#: Cap on geodesic path length (mm).
 MAX_PATH_MM = 300.0
 
 COLUMNS = ("f1", "f2", "f3", "f4", "f5", "c0t")
@@ -59,12 +59,11 @@ def geodesic_distance_mm(target: np.ndarray, allowed: np.ndarray,
                          reference: sitk.Image) -> np.ndarray:
     """Distance from ``target`` travelling only through ``allowed``, capped.
 
-    Wraps gbm-4d's fast-marching implementation (``gbm4d.arm0``) unchanged.
+    Uses fast marching (:func:`gbmc.anatomy.geodesic_distance`).
     """
-    from gbm4d import arm0
+    from gbmc import anatomy
 
-    distance = arm0.distance_from_target(_image(target, reference),
-                                         _image(allowed, reference))
+    distance = anatomy.geodesic_distance(_image(target, reference), _image(allowed, reference))
     return np.minimum(sitk.GetArrayFromImage(distance), MAX_PATH_MM).astype(np.float32)
 
 

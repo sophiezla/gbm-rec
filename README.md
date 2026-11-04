@@ -27,7 +27,7 @@ gbm-rec/
 ├── DECISIONS.md         decision register (D-numbers)
 ├── CHANGELOG.md
 ├── config.yaml          every study constant; undecided ones are null and raise when read
-├── pyproject.toml       package gbmc; pins gbm4d at eeba777
+├── pyproject.toml       package gbmc
 ├── requirements.lock    exact package versions
 ├── src/gbmc/            library: rng, config, provenance (features, candidates, scoring, export to come)
 ├── scripts/             numbered stages 01_ ... 40_ (none yet)
@@ -42,17 +42,10 @@ gbm-rec/
 ```
 
 ## Installation / Setup
-Windows, Python **3.13.14** (the interpreter gbm-4d used).
-```bash
-python -m venv .venv                       # must report Python 3.13.14
-.venv/Scripts/python -m pip install -r requirements.lock
-.venv/Scripts/python -m pip install --no-deps "gbm4d @ git+https://github.com/sophiezla/gbm-4d.git@eeba7779804412b0a32d0b5ba0f23c3156448549"
-.venv/Scripts/python -m pip install --no-deps -e .
-```
-**Known issue:** commit `eeba777` is not yet on GitHub (local gbm-4d is 48 commits ahead of `origin/main`), so the second command fails until gbm-4d is pushed. Until then, install from a sibling checkout: `git+file:///C:/Documents/Projects/gbm-4d@eeba7779804412b0a32d0b5ba0f23c3156448549`.
+See [docs/SETUP.md](docs/SETUP.md).
 
 ## Dependencies
-`requirements.lock` is gbm-4d's lockfile unchanged, plus scikit-image 0.26.0 and trimesh 5.1.0 (plan Step 0.3) and their dependencies (ImageIO, lazy-loader, networkx, tifffile). PyTorch will be added only if the CNN gate passes (Step 0.4).
+`requirements.lock` holds exact versions, including scikit-image 0.26.0 and trimesh 5.1.0 (plan Step 0.3) and their dependencies (ImageIO, lazy-loader, networkx, tifffile). PyTorch will be added only if the CNN gate passes (Step 0.4).
 
 ## How to Run / Example Usage / Inputs & Outputs
 TODO: no analysis scripts yet.
@@ -63,10 +56,10 @@ TODO: no analysis scripts yet.
 .venv/Scripts/python -m ruff check src tests
 ```
 The tests check the following:
-- seeds are stable across processes and identical to gbm-4d's
+- seeds are stable across processes and pinned to fixed values
 - null constants raise when read
 - ITK is pinned to one thread
-- manifests record git state and the gbm4d commit
+- manifests record git state
 - `require_clean_tree` refuses a dirty tree
 - the installed packages match the lockfile
 - data and images are git-ignored

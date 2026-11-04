@@ -6,28 +6,31 @@ labels and the cohort lock are read exactly as gbm-4d left them (plan Step 1.2:
 
 Where things live, first hit wins for each root:
 
-* ``$GBMC_LUMIERE_ROOT`` or ``config.yaml:data.lumiere.local_root``: the raw
+* ``$GBMC_LUMIERE_ROOT``: the raw
   LUMIERE archive (``Imaging/``, ``metadata/``), for the native DeepBraTumIA
   segmentation and the shipped atlas transform.
-* ``$GBMC_GBM4D_ROOT`` or ``config.yaml:data.lumiere.gbm4d_root``: the gbm-4d
-  checkout, for ``data/interim/{preprocessed,label_field}`` and
-  ``results/cohort_lock/cohort_lock.json``.
+* ``$GBMC_DERIVED_ROOT``: a folder holding the preprocessed baselines and first-progression
+  labels under ``data/interim/{preprocessed,label_field}``.
+
+The cohort lock is in this repository: ``results/cohort_lock/cohort_lock.json``.
 """
 
 from __future__ import annotations
 
 import json
 import os
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 import SimpleITK as sitk
 
-from gbmc import config
+COHORT_LOCK = Path(__file__).resolve().parents[2] / "results" / "cohort_lock" / "cohort_lock.json"
 
 #: DeepBraTumIA label values, as gbm-4d's 02_verify_labels.py derived them from
-#: the shipped volumes (gbm4d.labels.EXPECTED_DEEPBRATUMIA). Label 2 is what
+#: the shipped volumes. Label 2 is what
 #: gbm-4d treats as the resection cavity.
 ENHANCING, NECROTIC_NONENHANCING, OEDEMA = 1, 2, 3
 
@@ -38,18 +41,44 @@ DBT = "DeepBraTumIA-segmentation"
 NATIVE_SEG = f"{DBT}/native/segmentation/ct1_seg_mask.nii.gz"
 
 
-def _root(env_var: str, key: str) -> Path:
+def _root(env_var: str) -> Path:
     if env := os.environ.get(env_var):
         return Path(env)
-    return Path(config.get(key))
+    raise ValueError(f"set ${env_var} to this computer's data folder (see docs/SETUP.md)")
 
 
 def lumiere_root() -> Path:
-    return _root("GBMC_LUMIERE_ROOT", "data.lumiere.local_root")
+    return _root("GBMC_LUMIERE_ROOT")
 
 
-def gbm4d_root() -> Path:
-    return _root("GBMC_GBM4D_ROOT", "data.lumiere.gbm4d_root")
+def derived_root() -> Path:
+    return _root("GBMC_DERIVED_ROOT")
+
+
+def timepoint_sort_key(timepoint: str) -> tuple[int, int]:
+    """Order ``week-000-1`` < ``week-000-2`` < ``week-044``; string order would not."""
+    match = re.fullmatch(r"week-(\d+)(?:-(\d+))?", timepoint.strip())
+    if not match:
+        raise ValueError(f"unparseable timepoint {timepoint!r}")
+    return int(match.group(1)), int(match.group(2) or 0)
+
+
+def load_ratings(metadata: Path) -> pd.DataFrame:
+    """RANO ratings per patient and timepoint, in columns Patient, Timepoint, Rating."""
+    table = pd.read_csv(metadata / "LUMIERE-ExpertRating-v202211.csv")
+    rating = next(c for c in table.columns if c.startswith("Rating (according to RANO"))
+    table = table.rename(columns={rating: "Rating", "Date": "Timepoint"})
+    table["Rating"] = table["Rating"].astype("string").str.strip()
+    return table
+
+
+def load_completeness(metadata: Path) -> pd.DataFrame:
+    """Which sequences and segmentations each timepoint has, as booleans ("x" = present)."""
+    table = pd.read_csv(metadata / "LUMIERE-datacompleteness.csv")
+    for column in table.columns.difference(["Patient", "Timepoint"]):
+        cells = table[column].astype("string").str.strip().str.lower()
+        table[column] = cells.eq("x").fillna(False)
+    return table
 
 
 def cohort() -> list[str]:
@@ -58,8 +87,7 @@ def cohort() -> list[str]:
     LUMIERE is development data only in this project (deviation V1), so the
     gbm-4d train/test split is deliberately not carried over.
     """
-    lock = json.loads((gbm4d_root() / "results" / "cohort_lock" / "cohort_lock.json")
-                      .read_text(encoding="utf-8"))
+    lock = json.loads(COHORT_LOCK.read_text(encoding="utf-8"))
     patients = sorted(lock["cohort"])
     if set(patients) != set(lock["train"]) | set(lock["test"]):
         raise ValueError("cohort lock: train + test does not equal the cohort list")
@@ -128,13 +156,13 @@ def atlas_transform(patient: str, session: str) -> sitk.Transform:
 
 
 def transport_qc(patient: str) -> dict:
-    path = gbm4d_root() / "data" / "interim" / "label_field" / patient / "qc.json"
+    path = derived_root() / "data" / "interim" / "label_field" / patient / "qc.json"
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_baseline(patient: str) -> BaselineCase:
     baseline = transport_qc(patient)["baseline"]
-    base = gbm4d_root() / "data" / "interim" / "preprocessed" / patient / baseline
+    base = derived_root() / "data" / "interim" / "preprocessed" / patient / baseline
     reference = sitk.ReadImage(str(base / "CT1.nii.gz"), sitk.sitkFloat32)
     native = sitk.ReadImage(str(lumiere_root() / "Imaging" / patient / baseline / NATIVE_SEG),
                             sitk.sitkUInt8)
@@ -156,5 +184,6 @@ def load_recurrence(patient: str) -> np.ndarray:
     gbm-4d D18: only ``Enhancing_Core`` counts as recurrence, because the
     necrotic/non-enhancing label at progression sits largely on the old cavity.
     """
-    path = gbm4d_root() / "data" / "interim" / "label_field" / patient / "recurrence_labels.nii.gz"
+    fields = derived_root() / "data" / "interim" / "label_field"
+    path = fields / patient / "recurrence_labels.nii.gz"
     return _array(path, sitk.sitkUInt8) == ENHANCING

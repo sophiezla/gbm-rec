@@ -50,13 +50,13 @@ def transported() -> list[str]:
 
 
 def surface(patient: str) -> dict:
-    from gbm4d import transport, ventricles
+    from gbmc import anatomy, transport
 
     fixed = sitk.ReadImage(str(LF / patient / "brain_mask.nii.gz"), sitk.sitkUInt8)
     moving = sitk.ReadImage(str(LF / patient / "recurrence_brain_mask.nii.gz"), sitk.sitkUInt8)
     forward = sitk.ReadTransform(str(LF / patient / "forward_transform.h5"))
-    after = ventricles.surface_distance_mm(fixed, transport.warp_label(moving, fixed, forward))
-    before = ventricles.surface_distance_mm(
+    after = anatomy.surface_distance_mm(fixed, transport.warp_label(moving, fixed, forward))
+    before = anatomy.surface_distance_mm(
         fixed, transport.warp_label(moving, fixed, sitk.Transform(3, sitk.sitkIdentity))
     )
     return {
@@ -68,7 +68,7 @@ def surface(patient: str) -> dict:
 
 
 def arbiters(patient: str, master: int) -> dict:
-    from gbm4d import preprocess, transport
+    from gbmc import imaging, transport
 
     post, rec = rhuh.files(patient, "postop"), rhuh.files(patient, "recurrence")
     fixed = sitk.ReadImage(str(post["T1ce"]), sitk.sitkFloat32)
@@ -87,10 +87,10 @@ def arbiters(patient: str, master: int) -> dict:
             continue
         f = sitk.ReadImage(str(post[seq]), sitk.sitkFloat32)
         m = sitk.ReadImage(str(rec[seq]), sitk.sitkFloat32)
-        rigid, _ = preprocess.register_rigid(
+        rigid, _ = imaging.register_rigid(
             f, m, stable_seed(patient, "arb", seq, "rigid", master_seed=master)
         )
-        aligned = sitk.Resample(m, f, rigid.GetInverse(), sitk.sitkLinear, 0.0, m.GetPixelID())
+        aligned = sitk.Resample(m, f, rigid, sitk.sitkLinear, 0.0, m.GetPixelID())
         deform, info = register_syn(
             f,
             aligned,
@@ -109,7 +109,7 @@ def arbiters(patient: str, master: int) -> dict:
 
 
 def simulate(patient: str, master: int) -> dict:
-    from gbm4d import preprocess, transport
+    from gbmc import imaging, transport
 
     post = rhuh.files(patient, "postop")
     fixed = sitk.ReadImage(str(post["T1ce"]), sitk.sitkFloat32)
@@ -135,11 +135,11 @@ def simulate(patient: str, master: int) -> dict:
         0.0,
         fixed.GetPixelID(),
     )
-    rigid, _ = preprocess.register_rigid(
+    rigid, _ = imaging.register_rigid(
         fixed, moving, stable_seed(patient, "sim-rigid", master_seed=master)
     )
     aligned = sitk.Resample(
-        moving, fixed, rigid.GetInverse(), sitk.sitkLinear, 0.0, moving.GetPixelID()
+        moving, fixed, rigid, sitk.sitkLinear, 0.0, moving.GetPixelID()
     )
     deform, _ = register_syn(
         fixed, aligned, stable_seed(patient, "sim-syn", master_seed=master), None, None, **TUNED_SYN
@@ -166,9 +166,7 @@ def _cached(kind: str, patient: str, fn, *a) -> dict:
     path = CACHE / kind / f"{patient}.json"
     if path.is_file():
         return json.loads(path.read_text(encoding="utf-8"))
-    from gbm4d.preprocess import use_deterministic_threads
-
-    use_deterministic_threads(int(config.get("preprocessing.itk_threads")))
+    config.pin_itk_threads()
     out = {"patient": patient} | fn(patient, *a)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(out, indent=2), encoding="utf-8")

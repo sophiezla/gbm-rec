@@ -1,84 +1,87 @@
 #!/usr/bin/env python
 """Preprocess and transport the 2nd and 3rd progressions into baseline space (plan Step 1.8).
 
-Runs gbm-4d's own frozen code: ``03_preprocess.process_one`` for each later
-timepoint and ``04_label_transport.transport_one`` from it to the baseline,
-with the same recipe, thread pinning and seed derivation. Only the output roots
-change, to this repository's ``data/interim/`` (not in git):
+Uses the original SyN recipe, which made the first-progression labels (deviation V3).
+Output goes under ``data/interim/`` (not in git):
 
 * ``data/interim/preprocessed_later/<patient>/<timepoint>/``
 * ``data/interim/label_field_later/<timepoint>/<patient>/`` (labels, transforms, qc.json)
 
-The baseline preprocessing is read from gbm-4d, never recomputed. No candidate
-is scored here. Resumable; a finished (patient, timepoint) is skipped.
-
-The seed is gbm-4d's master seed (``config.yaml:later_progression.transport_master_seed``),
-so the recipe is the one that made the first-progression labels (D9, proposed).
-
-Long run: 83 timepoints at about 18 min each on one thread. Use --workers
-(about 3 GB of RAM each) or the second machine (scripts/08_pack_bundle.py).
+The baselines are read from ``$GBMC_DERIVED_ROOT``. No candidate is scored here. Resumable;
+a finished (patient, timepoint) is skipped.
 
     python scripts/05_later_progressions.py --list
     python scripts/05_later_progressions.py --workers 3
     python scripts/05_later_progressions.py --patients Patient-002
 """
 
+
 from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import sys
 import time
+from dataclasses import asdict
 from pathlib import Path
 
-from gbmc import config
-from gbmc.lumiere import cohort, gbm4d_root
-from gbmc.progressions import frozen_gbm4d_script, schedule
+import SimpleITK as sitk
+
+from gbmc import config, imaging
+from gbmc.lumiere import (
+    NATIVE_SEG,
+    NECROTIC_NONENHANCING,
+    OEDEMA,
+    cohort,
+    derived_root,
+    lumiere_root,
+)
+from gbmc.progressions import schedule
+from gbmc.registration import PairInputs, transport_pair
+from gbmc.rng import stable_seed
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 PREPROC = REPO_ROOT / "data" / "interim" / "preprocessed_later"
 LABELS = REPO_ROOT / "data" / "interim" / "label_field_later"
 
 
-def _stage_baseline(patient: str, baseline: str) -> None:
-    """Make the frozen transport see baseline + later timepoint under one root.
-
-    ``transport_one`` reads both timepoints from ``PREPROC_ROOT``; the baseline
-    is copied (not recomputed) from gbm-4d so both come from one folder.
-    """
-    src = gbm4d_root() / "data" / "interim" / "preprocessed" / patient / baseline
-    dst = PREPROC / patient / baseline
-    if not (dst / "qc.json").is_file():
-        shutil.copytree(src, dst, dirs_exist_ok=True)
-
-
-_MODULES: dict = {}
-
-
 def run_timepoint(patient: str, baseline: str, timepoint: str) -> dict:
-    """Preprocess one later timepoint and transport it. Runs in a worker process.
-
-    Each process loads (and verifies) the frozen gbm-4d scripts once.
-    """
-    if not _MODULES:
-        _MODULES["pre"] = frozen_gbm4d_script("03_preprocess", {"OUT_ROOT": PREPROC})
-        _MODULES["tr"] = frozen_gbm4d_script("04_label_transport", {"PREPROC_ROOT": PREPROC})
-        from gbm4d import config as g4config  # gbm-4d's own config.yaml, via the loader
-        _MODULES["roundtrip_mm"] = float(
-            g4config.get("cohort.registration_qc.roundtrip_error_threshold_mm"))
-    seed = int(config.get("later_progression.transport_master_seed"))
-    threads = int(config.get("preprocessing.itk_threads"))
+    """Preprocess one later timepoint and transport it. Runs in a worker process."""
+    config.pin_itk_threads()
     start = time.time()
-    _stage_baseline(patient, baseline)
-    rec = _MODULES["pre"].process_one(patient, timepoint, 1.0, seed, False, threads)
-    if not rec.get("ok", False):
-        return {"patient": patient, "timepoint": timepoint, "ok": False,
-                "note": f"preprocessing failed: {rec.get('note')}", "seconds": time.time() - start}
-    tr = _MODULES["tr"]
-    tr.OUT_ROOT = LABELS / timepoint
-    qc = tr.transport_one(patient, baseline, timepoint, seed, threads,
-                          _MODULES["roundtrip_mm"], False)
+    out = LABELS / timepoint / patient
+    if (out / "qc.json").is_file():
+        done = json.loads((out / "qc.json").read_text(encoding="utf-8"))
+        return done | {"timepoint": timepoint, "skipped": True}
+    master = int(config.get("later_progression.transport_master_seed"))
+    native = lumiere_root() / "Imaging" / patient / timepoint
+    moving = PREPROC / patient / timepoint
+    if not (moving / "qc.json").is_file():
+        images, pre_qc = imaging.preprocess_timepoint(native, patient, timepoint, master)
+        if not pre_qc.ok:
+            return {"patient": patient, "timepoint": timepoint, "ok": False,
+                    "note": f"preprocessing failed: {pre_qc.note}", "seconds": time.time() - start}
+        moving.mkdir(parents=True, exist_ok=True)
+        for name, image in images.items():
+            sitk.WriteImage(image, str(moving / f"{name}.nii.gz"), useCompression=True)
+        (moving / "qc.json").write_text(json.dumps(asdict(pre_qc), indent=2), encoding="utf-8")
+
+    base = derived_root() / "data" / "interim" / "preprocessed" / patient / baseline
+    reference = sitk.ReadImage(str(base / "CT1.nii.gz"), sitk.sitkFloat32)
+    seg = sitk.GetArrayFromImage(sitk.Resample(
+        sitk.ReadImage(str(lumiere_root() / "Imaging" / patient / baseline / NATIVE_SEG),
+                       sitk.sitkUInt8),
+        reference, sitk.Transform(3, sitk.sitkIdentity), sitk.sitkNearestNeighbor, 0,
+        sitk.sitkUInt8))
+    inputs = PairInputs(
+        patient=patient, fixed=base / "CT1.nii.gz", fixed_brain=base / "brain_mask.nii.gz",
+        moving=moving / "CT1.nii.gz", moving_brain=moving / "brain_mask.nii.gz",
+        cavity=seg == NECROTIC_NONENHANCING, peritumoral=seg == OEDEMA,
+        moving_seg=native / NATIVE_SEG)
+    seeds = {step: stable_seed(patient, timepoint, step, master_seed=master)
+             for step in ("prealign", "forward", "backward")}
+    threshold = float(config.get("later_progression.roundtrip_threshold_mm"))
+    qc = transport_pair(inputs, out, seeds, threshold, recipe={})
     return qc | {"timepoint": timepoint, "seconds": time.time() - start}
 
 

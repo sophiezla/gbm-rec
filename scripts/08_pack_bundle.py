@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # ruff: noqa: E501  (embedded .bat launchers cannot be wrapped)
-"""Pack the long registration jobs into a folder another PC can run (gbm-4d 25_ / gbm-wm 16_ pattern).
+"""Pack the long registration jobs into a folder another PC can run.
 
 Jobs:
   later      scripts/05_later_progressions.py  (Step 1.8 inputs; 83 timepoints)
@@ -10,12 +10,8 @@ The bundle holds only what those two scripts read:
 
   repo/      this project's src/gbmc, the two scripts, config.yaml, pyproject.toml,
              requirements.lock
-  gbm-4d/    a VENDORED copy of the pinned gbm-4d code (scripts, src, config.yaml,
-             pyproject.toml) plus VENDORED.json with every file's SHA-256, written
-             from this machine's verified checkout; the frozen loader checks it
-             before running anything. Also the cohort lock, each patient's
-             transport qc.json (baseline and first-progression names only), and the
-             preprocessed baseline and first-progression folders.
+  derived/   each patient's transport qc.json (baseline and first-progression names only)
+             and the preprocessed baseline and first-progression folders.
   lumiere/   LUMIERE metadata, each baseline's native DeepBraTumIA segmentation,
              and the raw later-progression timepoints. All CC0.
 
@@ -40,7 +36,7 @@ import zipfile
 from pathlib import Path
 
 from gbmc import lumiere
-from gbmc.progressions import PINNED_GBM4D, schedule, verify_frozen_gbm4d, write_vendored_manifest
+from gbmc.progressions import schedule
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ("05_later_progressions.py", "07_roundtrip_threshold.py")
@@ -53,7 +49,7 @@ set WORKERS=%2
 if "%JOB%"=="" set JOB=both
 if "%WORKERS%"=="" set WORKERS=2
 set GBMC_LUMIERE_ROOT=%~dp0lumiere
-set GBMC_GBM4D_ROOT=%~dp0gbm-4d
+set GBMC_DERIVED_ROOT=%~dp0derived
 call :ensure_env || exit /b 1
 echo Each worker needs about 3 GB of RAM. Progress is saved after every unit;
 echo closing this window stops it, and running this again resumes. Keep the PC awake.
@@ -81,7 +77,6 @@ if not exist .venv\Scripts\python.exe (
 )
 .venv\Scripts\python -m pip install --quiet --upgrade pip
 .venv\Scripts\python -m pip install --quiet -r repo\requirements.lock || goto fail
-.venv\Scripts\python -m pip install --quiet --no-deps .\gbm-4d || goto fail
 .venv\Scripts\python -m pip install --quiet --no-deps -e .\repo || goto fail
 exit /b 0
 :fail
@@ -167,30 +162,20 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=REPO_ROOT.parent / "gbmrec_bundle")
     ap.add_argument("--zip", action="store_true")
     args = ap.parse_args()
-    if verify_frozen_gbm4d() != "git":
-        raise SystemExit("pack from the machine with the gbm-4d git checkout")
     out = args.out
     if out.exists():
         shutil.rmtree(out)
-    g4, lum = lumiere.gbm4d_root(), lumiere.lumiere_root()
+    derived, lum = lumiere.derived_root(), lumiere.lumiere_root()
     start = time.time()
 
     # repo
-    for rel in ("src/gbmc", "config.yaml", "pyproject.toml", "requirements.lock", "README.md"):
+    for rel in ("src/gbmc", "config.yaml", "pyproject.toml", "requirements.lock", "README.md",
+                "results/cohort_lock/cohort_lock.json"):
         _copy(REPO_ROOT / rel, out / "repo" / rel)
     for name in SCRIPTS:
         _copy(REPO_ROOT / "scripts" / name, out / "repo" / "scripts" / name)
 
-    # vendored gbm-4d code, hashed
-    vend = out / "gbm-4d"
-    for rel in ("scripts", "src/gbm4d", "config.yaml", "pyproject.toml", "README.md",
-                "results/cohort_lock/cohort_lock.json"):
-        if (g4 / rel).exists():
-            _copy(g4 / rel, vend / rel)
-    for stray in (vend / "scripts").glob("*"):
-        if stray.suffix != ".py":
-            shutil.rmtree(stray) if stray.is_dir() else stray.unlink()
-    write_vendored_manifest(vend)
+    vend = out / "derived"
 
     # data: per patient
     patients = lumiere.cohort()
@@ -198,10 +183,10 @@ def main() -> int:
     n_later = 0
     for row in plan:
         p, base, first = row["patient"], row["baseline"], row["first"]
-        _copy(g4 / "data/interim/label_field" / p / "qc.json",
+        _copy(derived / "data/interim/label_field" / p / "qc.json",
               vend / "data/interim/label_field" / p / "qc.json")
         for tp in (base, first):
-            _copy(g4 / "data/interim/preprocessed" / p / tp, vend / "data/interim/preprocessed" / p / tp)
+            _copy(derived / "data/interim/preprocessed" / p / tp, vend / "data/interim/preprocessed" / p / tp)
         _copy(lum / "Imaging" / p / base / "DeepBraTumIA-segmentation" / "native",
               out / "lumiere/Imaging" / p / base / "DeepBraTumIA-segmentation" / "native")
         for tp in row["later"]:
@@ -221,8 +206,7 @@ def main() -> int:
     (out / "pack_results.py").write_text(PACK_RESULTS_PY, encoding="utf-8")
     (out / "README.txt").write_text(README, encoding="utf-8")
     (out / "BUNDLE.json").write_text(json.dumps({
-        "packed_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "gbm4d_commit": PINNED_GBM4D,
-        "patients": len(patients), "later_timepoints": n_later, "jobs": list(SCRIPTS)},
+        "packed_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "patients": len(patients), "later_timepoints": n_later, "jobs": list(SCRIPTS)},
         indent=2) + "\n", encoding="utf-8")
     size = sum(f.stat().st_size for f in out.rglob("*") if f.is_file()) / 1e9
     print(f"bundle: {len(patients)} patients, {n_later} later timepoints, {size:.2f} GB -> {out} "

@@ -47,12 +47,11 @@ CREDIT = ("LUMIERE (Suter et al., Scientific Data 2022, doi:10.1038/s41597-022-0
 
 
 def _week(timepoint: str) -> int:
-    from gbm4d.cohort import timepoint_week
-    return timepoint_week(timepoint)
+    return lumiere.timepoint_sort_key(timepoint)[0]
 
 
 def _source_name(path: Path) -> str:
-    for label, root in (("gbm-4d", lumiere.gbm4d_root()), ("gbm-rec", REPO_ROOT)):
+    for label, root in (("derived", lumiere.derived_root()), ("gbm-rec", REPO_ROOT)):
         try:
             return f"{label}:{path.relative_to(root).as_posix()}"
         except ValueError:
@@ -175,15 +174,13 @@ def export_case(patient: str) -> dict:
     pde = None
     frames_path = PDE / f"{patient}.npz"
     if frames_path.is_file():
-        import yaml
-        g4cfg = yaml.safe_load((lumiere.gbm4d_root() / "config.yaml").read_text(encoding="utf-8"))
-        threshold = float(g4cfg["fkpp"]["c_density_flair_threshold"])
+        threshold = float(config.get("pde.c_density_flair"))
         with np.load(frames_path) as z:
             box = tuple(slice(int(a), int(b)) for a, b in z["box"])
-            pde = {"label": "what a diffusion model draws", "model": "Fisher-KPP (gbm-4d Arm 1)",
+            pde = {"label": "what a diffusion model draws", "model": "Fisher-KPP",
                    "d_white_mm2_per_day": float(z["params"][0]),
                    "rho_per_day": float(z["params"][1]),
-                   "surface": f"density >= {threshold} (gbm-4d's FLAIR detection threshold)",
+                   "surface": f"density >= {threshold} (FLAIR detection threshold)",
                    "frames": []}
             for frame, day in zip(z["frames"], z["days"], strict=True):
                 full = np.zeros(shape, np.float32)
@@ -198,7 +195,7 @@ def export_case(patient: str) -> dict:
     else:
         sources_extra = []
 
-    base = lumiere.gbm4d_root() / "data" / "interim" / "preprocessed" / patient / row["baseline"]
+    base = lumiere.derived_root() / "data" / "interim" / "preprocessed" / patient / row["baseline"]
     export.slice_volume(ref, out / "t1ce.nii.gz", case.brain)
     export.slice_volume(sitk.ReadImage(str(base / "FLAIR.nii.gz"), sitk.sitkFloat32),
                         out / "flair.nii.gz", case.brain)
@@ -209,7 +206,7 @@ def export_case(patient: str) -> dict:
         overlays[tp] = name
 
     sources = [base / "CT1.nii.gz", base / "FLAIR.nii.gz", base / "brain_mask.nii.gz",
-               lumiere.gbm4d_root() / "data" / "interim" / "label_field" / patient
+               lumiere.derived_root() / "data" / "interim" / "label_field" / patient
                / "recurrence_labels.nii.gz", FEATURES / f"{patient}.npz"]
     if oof.is_file():
         sources.append(oof)

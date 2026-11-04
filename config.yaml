@@ -26,12 +26,8 @@ preprocessing:
 data:
   lumiere:
     license: CC0
-    # The one shared LUMIERE copy (gbm-4d config data.primary.local_root).
-    # Override with $GBMC_LUMIERE_ROOT. D5.
-    local_root: C:/Documents/Projects/gbm-ews/data
-    # gbm-4d checkout: preprocessed baselines, transported labels, cohort lock.
-    # Read only. Override with $GBMC_GBM4D_ROOT. D5.
-    gbm4d_root: C:/Documents/Projects/gbm-4d
+    # This computer's copies are set by environment variable, never here:
+    # $GBMC_LUMIERE_ROOT (raw LUMIERE) and $GBMC_DERIVED_ROOT (preprocessed baselines, labels).
   rhuh_gbm:
     license: CC BY 4.0
     local_root: null    # must stay null until the OSF pre-registration is posted (Phase 2)
@@ -67,6 +63,7 @@ power:
 # Later progressions (plan Step 1.8, exploratory). D9, proposed.
 later_progression:
   transport_master_seed: 20260819   # gbm-4d's seeds.master: the recipe that made the first-progression labels
+  roundtrip_threshold_mm: 2.0       # value gbm-4d used for its round-trip screen
 
 # Explainer app (plan Phase 5).
 app:
@@ -103,3 +100,13 @@ osf:
 verdict:
   fdr_q: 0.05                     # plan Step 2.3
   mde_rho: null                   # which rho's achieved MDE the Step 4.4 outcome uses; proposal 0.5 (pessimistic)
+
+# PDE animation for the app (plan Step 5.3). Values carried over from gbm-4d's Arm 1; nothing fitted here.
+pde:
+  d_white_mm2_per_day: 0.5
+  rho_per_day: 0.002
+  white_to_grey_ratio: 10.0
+  cfl_safety: 0.5
+  horizon_days: 206
+  c_density_t1c: 0.80
+  c_density_flair: 0.16

@@ -33,20 +33,20 @@ CACHE = REPO_ROOT / "data" / "interim" / "features"
 
 
 def extract(patient: str, out_dir: Path) -> dict:
-    from gbm4d import barriers, ventricles
+    from gbmc import anatomy
 
     case = lumiere.load_baseline(patient)
     target = case.target
     if not target.any():
         return {"patient": patient, "note": "empty treatment target"}
 
-    falx = barriers.falx_barrier(case.reference, case.to_atlas, case.brain, case.t1)
+    falx = anatomy.falx_barrier(case.reference, case.to_atlas, case.brain, case.t1)
 
     brain_img = sitk.GetImageFromArray(case.brain.astype(np.uint8))
     brain_img.CopyInformation(case.reference)
     lesion = sitk.GetImageFromArray((case.seg > 0).astype(np.uint8))
     lesion.CopyInformation(case.reference)
-    vent_img, vent_qc = ventricles.segment_ventricles(case.reference, brain_img, lesion)
+    vent_img, vent_qc = anatomy.segment_ventricles(case.reference, brain_img, lesion)
     vent = sitk.GetArrayFromImage(vent_img) > 0
     if not vent_qc.ok:
         vent = np.zeros_like(vent)
@@ -80,7 +80,7 @@ def extract(patient: str, out_dir: Path) -> dict:
         "evaluable": bool(truth.any()),
         "target_ml": round(float(target.sum()) * voxel_ml, 2),
         "flair_abnormal_ml": round(float(case.flair_abnormal.sum()) * voxel_ml, 2),
-        "falx": barriers.barrier_report(falx, case.brain, case.spacing_zyx),
+        "falx": anatomy.barrier_report(falx, case.brain, case.spacing_zyx),
         "ventricles": vent_qc.as_dict() | {"used": bool(vent.any())},
         "matched_voxels": matched,
     }

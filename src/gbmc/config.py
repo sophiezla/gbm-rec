@@ -1,8 +1,7 @@
 """Single source of truth for study constants.
 
-Adapted from ``gbm4d.config``. It cannot be imported from gbm4d directly: that
-module locates ``config.yaml`` relative to its own file, which after
-installation is inside site-packages rather than in this repository.
+``config.yaml`` sits at the repository root. Machine-specific data paths are not
+stored there: they come from environment variables (see ``gbmc.lumiere``).
 """
 
 from __future__ import annotations
@@ -49,6 +48,6 @@ def pin_itk_threads() -> int:
     Returns the previous setting. Call once per process, including inside every
     worker, because the setting does not cross a process boundary (gbm-4d D9).
     """
-    from gbm4d.preprocess import use_deterministic_threads
+    from gbmc.imaging import set_itk_threads
 
-    return use_deterministic_threads(int(get("preprocessing.itk_threads")))
+    return set_itk_threads(int(get("preprocessing.itk_threads")))

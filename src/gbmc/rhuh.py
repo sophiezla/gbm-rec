@@ -197,12 +197,13 @@ def cavity_rule() -> int | None:
 def carried_preop_core(patient: str, mapping: dict[int, str], seed: int) -> np.ndarray:
     """Pre-op core (1 + 3) carried RIGIDLY onto the early post-op grid (Step 2.2 rule)."""
     import SimpleITK as sitk
-    from gbm4d import preprocess, transport
+
+    from gbmc import imaging, transport
 
     pre, post = files(patient, "preop"), files(patient, "postop")
     fixed = sitk.ReadImage(str(post["T1ce"]), sitk.sitkFloat32)
     moving = sitk.ReadImage(str(pre["T1ce"]), sitk.sitkFloat32)
-    rigid, _ = preprocess.register_rigid(fixed, moving, seed)
+    rigid, _ = imaging.register_rigid(fixed, moving, seed)
     seg = sitk.ReadImage(str(pre["seg"]), sitk.sitkUInt8)
     core = sitk.GetImageFromArray(preop_core(sitk.GetArrayFromImage(seg), mapping).astype(np.uint8))
     core.CopyInformation(seg)

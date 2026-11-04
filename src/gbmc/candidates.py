@@ -52,6 +52,12 @@ RULES = {
 }
 
 
+#: Plan Step 1.4 fixes these values; they are the ones gbm-4d used.
+LIGHTGBM_PARAMS = {"n_estimators": 300, "learning_rate": 0.05, "num_leaves": 31,
+                   "min_child_samples": 50, "subsample": 0.8, "subsample_freq": 1,
+                   "colsample_bytree": 0.8, "reg_lambda": 1.0, "verbose": -1}
+LOGISTIC_PARAMS = {"C": 1.0, "max_iter": 2000, "solver": "lbfgs"}
+
 @dataclass(frozen=True)
 class LearnedCandidate:
     name: str
@@ -66,12 +72,19 @@ class LearnedCandidate:
     def build(self, seed: int):
         """A fresh estimator with an explicit random_state.
 
-        Uses gbm-4d's frozen constructor, so LightGBM runs with gbm-4d's
-        hyperparameters and the logistic model with its standardise-then-L2
-        pipeline.
+        LightGBM uses :data:`LIGHTGBM_PARAMS`. The logistic model standardises first,
+        because distances run to 300 mm and L2 would otherwise be scale-dependent.
         """
-        from gbm4d.arm2 import build_model
-        return build_model(self.learner, seed)
+        if self.learner == "lightgbm":
+            from lightgbm import LGBMClassifier
+            return LGBMClassifier(random_state=seed, **LIGHTGBM_PARAMS)
+        if self.learner == "logistic_l2":
+            from sklearn.linear_model import LogisticRegression
+            from sklearn.pipeline import make_pipeline
+            from sklearn.preprocessing import StandardScaler
+            return make_pipeline(StandardScaler(),
+                                 LogisticRegression(random_state=seed, **LOGISTIC_PARAMS))
+        raise KeyError(f"unknown learner {self.learner!r}")
 
 
 LEARNED = {

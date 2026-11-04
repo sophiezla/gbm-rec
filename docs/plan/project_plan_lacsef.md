@@ -181,7 +181,7 @@ The recurrence label lives on a later scan, so it must be carried back onto the 
 
 ### Label transport
 
-- **LUMIERE:** reuse gbm-4d's transported labels exactly (frozen code at commit `eeba777`). Later progressions are transported with the same frozen scripts (D9, proposed).
+- **LUMIERE:** use the first-progression labels gbm-4d produced, already in the feature caches (deviation V3). Later progressions are transported with the same frozen scripts (D9, proposed).
 - **RHUH-GBM:** deformable SyN registration driven by T1ce, resection cavity masked out of the similarity metric, carrying the recurrence segmentation into the early post-op grid.
 
 | Choice | Primary | Sensitivity |
@@ -368,17 +368,7 @@ The analysis is a Python library (`gbmc`) driven by numbered scripts, one per st
 
 ### Environment
 
-Python 3.13.14; gbm-4d's lockfile (LightGBM 4.7.0, scikit-learn 1.9.0, SimpleITK 2.5.6, numpy 2.5.2) + scikit-image + trimesh; PyTorch only if the C5 gate passes. `gbm4d` installed `--no-deps` pinned at commit `eeba777`. No other dependencies without team approval.
-
-```bash
-"<python 3.13.14>" -m venv .venv
-.venv/Scripts/python -m pip install -r requirements.lock
-.venv/Scripts/python -m pip install --no-deps "gbm4d @ git+file:///<path>/gbm-4d@eeba7779804412b0a32d0b5ba0f23c3156448549"
-.venv/Scripts/python -m pip install --no-deps -e .
-.venv/Scripts/python -m pytest
-```
-
-Known issue: `eeba777` is not on GitHub yet, so a fresh clone (including a teammate's) cannot install gbm4d until gbm-4d is pushed. Pushing needs approval.
+Python 3.13.14, with exact versions in `requirements.lock`; PyTorch only if the C5 gate passes. The project is standalone (deviation V3). Install steps are in `docs/SETUP.md`. No other dependencies without team approval.
 
 ### Repository layout
 
@@ -662,7 +652,7 @@ The research chain runs top to bottom; the app receives RHUH-GBM results only af
 ### Phase 0 — Setup and paperwork
 
 - [ ] Sign all ISEF/LACSEF forms for every team member; email the SRC; keep the exemption confirmation
-- [x] Repository scaffolded; gbm4d pinned at `eeba777`
+- [x] Repository scaffolded; standalone, with no gbm-4d dependency (deviation V3)
 - [x] Environment installed; ITK threads pinned to 1
 - [x] Reproducibility helpers (`rng`, `config`, `provenance`) and tests
 - [ ] Push gbm-4d so the pin resolves on every team member's machine (needs approval)

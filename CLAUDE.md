@@ -10,7 +10,7 @@ These are standing instructions for every Claude session. The user gave them on 
 - **Do not download RHUH-GBM before the OSF pre-registration is posted.** The download date is committed after the OSF timestamp.
 - **The confirmatory run happens once.** An irreversible marker file blocks any rerun. Nothing is tuned, reselected or rerun on RHUH-GBM.
 - **Write tournament rules into DECISIONS.md before the first candidate is scored** (Step 1.1). Any change after a score has been seen is a deviation.
-- **gbm-4d and gbm-wm are frozen.** Reuse their code (gbm-4d pinned at `eeba777`); re-fit nothing from them.
+- **This project is standalone** (deviation V3). It does not import or install gbm-4d or gbm-wm; their write-ups are only sources for constants, findings and the first-progression labels already in the feature caches. Re-fit nothing from them.
 - **LUMIERE is development data only** (deviation V1). Only RHUH-GBM numbers may be called *validation*.
 - Patients with no enhancing recurrence outside the target are *undefined*, never zero.
 - Reproducibility contract (plan §13): BLAKE2b `stable_seed`; explicit seeds everywhere; a `run_manifest` on every result; `require_clean_tree()` before any reportable number; undecided constants are null and raise when read; model hash check before scoring; number-audit script; data never goes into git.
@@ -24,7 +24,7 @@ These are standing instructions for every Claude session. The user gave them on 
   - Fixed label: "Research visualization of a pre-registered method comparison on public data. Not a treatment prediction."
 
 ## Session start
-1. Read `HANDOFF.md`, then `PROJECT_STATUS.md`.
+1. `git pull`, then read `HANDOFF.md`, then `PROJECT_STATUS.md`. Two people share this repo, so never start from stale work.
 2. Read the plan section for the current phase, and `DECISIONS.md` before any methodological change.
 3. Read the relevant source files. Continue from the existing state.
 

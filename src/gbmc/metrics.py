@@ -8,15 +8,22 @@ pooled across patients.
 from __future__ import annotations
 
 import numpy as np
-from gbm4d.arm0 import patient_pr_auc
+from sklearn.metrics import average_precision_score
+
+#: Treated volumes (ml) for the coverage curve.
+COVERAGE_VOLUMES_ML = (5, 10, 20, 30, 50, 75, 100, 150, 200, 300)
 
 
 def pr_auc(scores: np.ndarray, truth: np.ndarray) -> float:
     """Average precision; NaN when the patient has no positive voxel (undefined, never 0).
 
-    gbm-4d's implementation, reused so the endpoint is computed identically.
+    Computed per patient as a step-wise sum: interpolating a PR curve is optimistically
+    biased, most of all at low prevalence.
     """
-    return patient_pr_auc(np.asarray(scores), np.asarray(truth, dtype=bool))
+    truth = np.asarray(truth, dtype=bool)
+    if not truth.any() or truth.all():
+        return float("nan")
+    return float(average_precision_score(truth.astype(np.uint8), np.asarray(scores)))
 
 
 def lift_over_chance(ap: float, truth: np.ndarray) -> float:
@@ -58,13 +65,11 @@ def coverage_at_voxels(scores: np.ndarray, truth: np.ndarray, n_treated: int) ->
 
 def coverage_curve(scores: np.ndarray, truth: np.ndarray, voxels_per_ml: float,
                    volumes_ml=None) -> dict[str, float]:
-    """Coverage at each treated volume (ml) on gbm-4d's grid (``gbm4d.arm0.COVERAGE_VOLUMES_ML``).
+    """Coverage at each treated volume (ml) on the :data:`COVERAGE_VOLUMES_ML` grid.
 
     Keys are the volume as a string (JSON-safe). Volumes larger than the
     evaluation region are skipped.
     """
-    from gbm4d.arm0 import COVERAGE_VOLUMES_ML
-
     out = {}
     for ml in volumes_ml or COVERAGE_VOLUMES_ML:
         n = int(round(ml * voxels_per_ml))

@@ -1,20 +1,11 @@
 #!/usr/bin/env python
-"""Frames of gbm-4d's Fisher-KPP simulation for the app's PDE mode (plan Step 5.3).
+"""Frames of a Fisher-KPP simulation for the app's PDE mode (plan Step 5.3).
 
-"Plays the Fisher-KPP simulation from day 0 to day 206, labelled 'what a
-diffusion model draws'." gbm-4d saved only the final field, so the frozen
-simulation is re-run, not re-fitted:
+"Plays the Fisher-KPP simulation from day 0 to day 206, labelled 'what a diffusion model
+draws'." Parameters are in ``config.yaml:pde``. Nothing is fitted here.
 
-* inputs and fields come from gbm-4d ``scripts/23_arm1_fkpp.py`` itself
-  (``load_patient``, ``build_fields``), loaded through the verified frozen
-  loader, at gbm-4d's population choice D = 0.5 mm^2/day, rho = 0.002/day
-  (its 27_/28_, read from its ``results/test_set/test_set.json``);
-* the horizon is split into frames with the SAME time step gbm-4d's single
-  run used (dt = horizon / n_steps from its CFL rule), so the step sequence is
-  identical, and the final frame is checked against gbm-4d's saved density.
-
-Writes ``data/interim/pde_frames/<patient>.npz`` (float32 frames on the
-brain box, the box, the days). ``40_`` turns them into meshes.
+Writes ``data/interim/pde_frames/<patient>.npz`` (float32 frames on the brain box, the box,
+the days). ``40_`` turns them into meshes.
 
     python scripts/42_pde_frames.py
 """
@@ -22,14 +13,12 @@ brain box, the box, the days). ``40_`` turns them into meshes.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-from gbmc import config, lumiere
-from gbmc.progressions import frozen_gbm4d_script
+from gbmc import anatomy, config, lumiere, pde
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "data" / "interim" / "pde_frames"
@@ -42,56 +31,35 @@ def main() -> int:
     ap.add_argument("--patients", nargs="+", default=None)
     args = ap.parse_args()
     config.pin_itk_threads()
-    g4 = lumiere.gbm4d_root()
-    arm1 = frozen_gbm4d_script("23_arm1_fkpp", {})
-    from gbm4d import config as g4config
-    from gbm4d import fkpp
-
-    point = json.loads((g4 / "results/test_set/test_set.json").read_text(encoding="utf-8"))[
-        "arm1_population_point"]
-    horizon = float(g4config.get("fkpp.horizon_days"))
-    ratio = float(g4config.get("fkpp.white_to_grey_diffusivity_ratio"))
-    safety = float(g4config.get("fkpp.cfl_safety_factor"))
-    from gbm4d.barriers import DEFAULT_WHITE_MATTER_Z
+    d_white = float(config.get("pde.d_white_mm2_per_day"))
+    rho_value = float(config.get("pde.rho_per_day"))
+    horizon = float(config.get("pde.horizon_days"))
 
     OUT.mkdir(parents=True, exist_ok=True)
     for patient in args.patients or config.get("app.lumiere_cases"):
-        # gbm-4d cached the opened test patients' features separately.
-        for cache in ("features", "features_test"):
-            arm1.FEATURE_CACHE = g4 / "data" / "interim" / cache
-            data = arm1.load_patient(patient)
-            if data is not None:
-                break
-        if data is None:
-            print(f"{patient}: no gbm-4d inputs", flush=True)
-            continue
-        d_field, rho, c0 = arm1.build_fields(data, point["d_white_mm2_per_day"],
-                                             point["rho_per_day"], ratio, DEFAULT_WHITE_MATTER_Z)
-        box = data["box"]
-        dt_cfl = fkpp.cfl_dt(1.0, float(np.max(d_field)), safety=safety, ndim=3)
-        n_steps = int(np.ceil(horizon / dt_cfl))
+        case = lumiere.load_baseline(patient)
+        d_field, rho, c0 = pde.build_fields(
+            case.brain, case.t1, case.seg == lumiere.ENHANCING, case.seg == lumiere.OEDEMA,
+            case.seg == lumiere.NECROTIC_NONENHANCING, d_white, rho_value,
+            float(config.get("pde.white_to_grey_ratio")), anatomy.WHITE_MATTER_Z,
+            float(config.get("pde.c_density_t1c")), float(config.get("pde.c_density_flair")))
+        where = np.argwhere(case.brain)
+        box = tuple(slice(int(low), int(high) + 1)
+                    for low, high in zip(where.min(0), where.max(0), strict=True))
+        limit = pde.stable_dt(1.0, float(d_field.max()), float(config.get("pde.cfl_safety")))
+        n_steps = int(np.ceil(horizon / limit))
         dt = horizon / n_steps
         cuts = np.unique(np.round(np.linspace(0, n_steps, N_FRAMES)).astype(int))
-        c = c0[box].astype(float)
+        c = c0[box]
         frames, days = [c.astype(np.float32)], [0.0]
-        for a, b in zip(cuts[:-1], cuts[1:], strict=True):
-            c = fkpp.simulate_fast(c, d_field[box], rho[box], (b - a) * dt,
-                                   data["brain"][box], spacing_mm=1.0, dt_days=dt).density
+        for start, stop in zip(cuts[:-1], cuts[1:], strict=True):
+            c = pde.advance(c, d_field[box], rho[box], case.brain[box], dt, int(stop - start))
             frames.append(c.astype(np.float32))
-            days.append(round(b * dt, 1))
-        saved = g4 / "results/test_set/arm1_fields" / f"{patient}_density.nii.gz"
-        if not saved.is_file():
-            saved = g4 / "data/interim/arm1_fields" / f"{patient}_density.nii.gz"
-        check = None
-        if saved.is_file():
-            import SimpleITK as sitk
-            ref = sitk.GetArrayFromImage(sitk.ReadImage(str(saved)))[box]
-            check = float(np.abs(ref - frames[-1]).max())
-        np.savez_compressed(OUT / f"{patient}.npz", frames=np.stack(frames),
-                            days=np.array(days), box=np.array([[s.start, s.stop] for s in box]),
-                            params=np.array([point["d_white_mm2_per_day"], point["rho_per_day"]]))
-        print(f"{patient}: {len(frames)} frames to day {days[-1]}; max |final - gbm-4d saved| = "
-              f"{check}", flush=True)
+            days.append(round(float(stop) * dt, 1))
+        np.savez_compressed(OUT / f"{patient}.npz", frames=np.stack(frames), days=np.array(days),
+                            box=np.array([[s.start, s.stop] for s in box]),
+                            params=np.array([d_white, rho_value]))
+        print(f"{patient}: {len(frames)} frames to day {days[-1]}", flush=True)
     return 0
 
 

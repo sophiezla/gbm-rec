@@ -10,9 +10,6 @@ readme = "README.md"
 requires-python = ">=3.13"
 authors = [{ name = "Sophie Zhu", email = "sophiezhu2028@gmail.com" }]
 dependencies = [
-  # gbm-4d is frozen; its preprocessing, label transport and screens are reused
-  # at this exact commit (plan Step 0.2).
-  "gbm4d @ git+https://github.com/sophiezla/gbm-4d.git@eeba7779804412b0a32d0b5ba0f23c3156448549",
   "numpy>=2.5",
   "scipy>=1.18",
   "pandas>=3.0",

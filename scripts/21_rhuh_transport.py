@@ -2,7 +2,7 @@
 """RHUH-GBM label transport, recurrence -> early post-op (plan Step 3.3).
 
 Primary: gbm-wm's tuned SyN (``gbmc.registration.TUNED_SYN``). Sensitivity:
-gbm-4d's original recipe (``--recipe gbm4d``), which made the LUMIERE labels.
+the original recipe (``--recipe original``), which made the LUMIERE labels.
 Driven by T1ce, cavity masked from the metric, round-trip error in the
 peritumoral region against the threshold fixed in Phase 2.
 
@@ -14,7 +14,7 @@ Per patient -> ``data/interim/rhuh/label_field_<recipe>/<patient>/`` (resumable)
 No model score is computed.
 
     python scripts/21_rhuh_transport.py --workers 2
-    python scripts/21_rhuh_transport.py --recipe gbm4d --workers 2
+    python scripts/21_rhuh_transport.py --recipe original --workers 2
 """
 
 from __future__ import annotations
@@ -44,9 +44,7 @@ def _mapping() -> dict[int, str]:
 
 
 def one(patient: str, recipe_name: str, master: int, mapping: dict[int, str]) -> dict:
-    from gbm4d.preprocess import use_deterministic_threads
-
-    use_deterministic_threads(int(config.get("preprocessing.itk_threads")))
+    config.pin_itk_threads()
     out = WORK / f"label_field_{recipe_name}" / patient
     if (out / "qc.json").is_file():
         return json.loads((out / "qc.json").read_text(encoding="utf-8")) | {"skipped": True}
@@ -106,7 +104,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    ap.add_argument("--recipe", choices=("tuned", "gbm4d"), default="tuned")
+    ap.add_argument("--recipe", choices=("tuned", "original"), default="tuned")
     ap.add_argument("--workers", type=int, default=1)
     args = ap.parse_args()
     rhuh.layout()

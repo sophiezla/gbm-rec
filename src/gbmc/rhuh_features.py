@@ -22,23 +22,23 @@ from gbmc import config, features
 
 
 def falx(reference: sitk.Image, brain: np.ndarray, t1_z: np.ndarray) -> np.ndarray:
-    from gbm4d import barriers
+    from gbmc import anatomy
 
     midline = float(config.get("rhuh.sri24_midline_x_mm"))
     to_midline = sitk.TranslationTransform(3, (-midline, 0.0, 0.0))
-    return barriers.falx_barrier(reference, to_midline, brain, t1_z)
+    return anatomy.falx_barrier(reference, to_midline, brain, t1_z)
 
 
 def build(reference: sitk.Image, brain: np.ndarray, target: np.ndarray,
           flair_abnormal: np.ndarray, t1_z: np.ndarray, lesion: np.ndarray
           ) -> tuple[features.FeatureVolumes, dict]:
-    from gbm4d import ventricles
+    from gbmc import anatomy
 
     brain_img = sitk.GetImageFromArray(brain.astype(np.uint8))
     brain_img.CopyInformation(reference)
     lesion_img = sitk.GetImageFromArray(lesion.astype(np.uint8))
     lesion_img.CopyInformation(reference)
-    vent_img, vent_qc = ventricles.segment_ventricles(reference, brain_img, lesion_img)
+    vent_img, vent_qc = anatomy.segment_ventricles(reference, brain_img, lesion_img)
     vent = sitk.GetArrayFromImage(vent_img) > 0 if vent_qc.ok else np.zeros(brain.shape, bool)
     falx_mask = falx(reference, brain, t1_z)
     vols = features.build(reference, brain, target, flair_abnormal, falx_mask, vent,

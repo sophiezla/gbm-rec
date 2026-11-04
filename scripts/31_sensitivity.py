@@ -7,8 +7,8 @@ The primary itself is never recomputed or replaced.
 
   unscreened        every transported patient with recurrence outside the
                     target, registration screens not applied
-  gbm4d_recipe      labels transported with gbm-4d's original recipe
-                    (``21_ --recipe gbm4d``), same screens
+  original_recipe   labels transported with the original recipe
+                    (``21_ --recipe original``), same screens
   alt_cavity        the other branch of the Step 2.2 cavity rule
   enh_necrosis      recurrence label = enhancing + necrosis
   no_secondary      the patients scanned partly at a secondary facility removed
@@ -90,9 +90,9 @@ def main() -> int:
     tuned = RHUH / "label_field_tuned"
     arms = {
         "unscreened": dict(patients=_transported(tuned), label_dir=tuned),
-        "gbm4d_recipe": dict(patients=[p for p in _transported(RHUH / "label_field_gbm4d")
+        "original_recipe": dict(patients=[p for p in _transported(RHUH / "label_field_original")
                                        if p not in screened_out],
-                             label_dir=RHUH / "label_field_gbm4d"),
+                             label_dir=RHUH / "label_field_original"),
         "alt_cavity": dict(patients=lock["evaluable"], label_dir=tuned, alt_cavity=True),
         "enh_necrosis": dict(patients=lock["evaluable"], label_dir=tuned,
                              positive=("enhancing", "necrosis")),

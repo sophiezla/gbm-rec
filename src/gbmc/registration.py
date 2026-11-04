@@ -112,9 +112,9 @@ def transport_pair(inputs: PairInputs, out_dir: Path, seeds: dict[str, int],
     """Register follow-up -> baseline and warp the follow-up labels. Returns a QC record.
 
     ``seeds`` holds ``prealign``, ``forward`` and ``backward``. ``recipe=None``
-    means :data:`TUNED_SYN`; ``{}`` would be gbm-4d's defaults (the sensitivity arm).
+    means :data:`TUNED_SYN`; ``{}`` uses the original recipe's defaults (the sensitivity arm).
     """
-    from gbm4d import preprocess, transport
+    from gbmc import imaging, transport
 
     recipe = TUNED_SYN if recipe is None else recipe
     rec: dict = {"patient": inputs.patient, "ok": False, "note": "", "recipe": recipe}
@@ -132,10 +132,12 @@ def transport_pair(inputs: PairInputs, out_dir: Path, seeds: dict[str, int],
 
     fixed_metric = transport.metric_mask(fixed_brain, as_image(inputs.cavity))
     moving_metric = transport.metric_mask(moving_brain, None)
-    rigid, rigid_qc = preprocess.register_rigid(fixed, moving, seeds["prealign"])
-    moving_aligned = sitk.Resample(moving, fixed, rigid.GetInverse(), sitk.sitkLinear, 0.0,
+    rigid, rigid_qc = imaging.register_rigid(fixed, moving, seeds["prealign"])
+    # The registration transform maps fixed points into moving space, which is what
+    # Resample wants (deviation V3: gbm-wm and gbm-4d used the inverse here).
+    moving_aligned = sitk.Resample(moving, fixed, rigid, sitk.sitkLinear, 0.0,
                                    moving.GetPixelID())
-    moving_metric_aligned = sitk.Resample(moving_metric, fixed, rigid.GetInverse(),
+    moving_metric_aligned = sitk.Resample(moving_metric, fixed, rigid,
                                           sitk.sitkNearestNeighbor, 0, moving_metric.GetPixelID())
     deform_fwd, fwd_info = register_syn(fixed, moving_aligned, seeds["forward"], fixed_metric,
                                         moving_metric_aligned, **recipe)
