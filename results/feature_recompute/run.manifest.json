@@ -3,7 +3,7 @@
     "scripts/10_compare_feature_caches.py"
   ],
   "command": "10_compare_feature_caches.py",
-  "duration_s": 2.105,
+  "duration_s": 1.988,
   "environment": {
     "in_project_venv": true,
     "machine": "arm64",
@@ -57,11 +57,9 @@
   },
   "git": {
     "branch": "main",
-    "commit": "1fc2578db75e479aa4d6a4c57bcb2817e32ab8e8",
-    "dirty": true,
-    "dirty_files": [
-      "?? results/feature_recompute/"
-    ],
+    "commit": "2a832496a5c1a10f3b3824f81c5be8bee210d2bd",
+    "dirty": false,
+    "dirty_files": [],
     "remote": "https://github.com/sophiezla/gbm-rec.git"
   },
   "inputs": [],
@@ -72,6 +70,6 @@
     }
   ],
   "schema": "gbmc/manifest/1",
-  "started_utc": "2026-11-06T18:20:26Z",
+  "started_utc": "2026-11-06T18:22:29Z",
   "values": {}
 }
