@@ -28,6 +28,7 @@ import pandas as pd
 import SimpleITK as sitk
 
 COHORT_LOCK = Path(__file__).resolve().parents[2] / "results" / "cohort_lock" / "cohort_lock.json"
+BASELINES = COHORT_LOCK.with_name("baselines.json")
 
 #: DeepBraTumIA label values, as gbm-4d's 02_verify_labels.py derived them from
 #: the shipped volumes. Label 2 is what
@@ -160,8 +161,13 @@ def transport_qc(patient: str) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def baseline_name(patient: str) -> str:
+    """The post-operative baseline timepoint, from the committed list."""
+    return json.loads(BASELINES.read_text(encoding="utf-8"))[patient]
+
+
 def load_baseline(patient: str) -> BaselineCase:
-    baseline = transport_qc(patient)["baseline"]
+    baseline = baseline_name(patient)
     base = derived_root() / "data" / "interim" / "preprocessed" / patient / baseline
     reference = sitk.ReadImage(str(base / "CT1.nii.gz"), sitk.sitkFloat32)
     native = sitk.ReadImage(str(lumiere_root() / "Imaging" / patient / baseline / NATIVE_SEG),

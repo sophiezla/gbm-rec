@@ -75,3 +75,33 @@ def test_matrix_columns():
     m = vols.matrix()
     assert m.shape == (int(vols.evaluate.sum()), len(features.COLUMNS))
     assert m.dtype == np.float32
+
+
+def _old_cache():
+    old = np.zeros((4, 4, 4), dtype=bool)
+    old[1:3, 1:3, 1:3] = True
+    truth = np.zeros(int(old.sum()), dtype=bool)
+    truth[0] = True
+    return old, truth
+
+
+def test_carry_truth_follows_voxels_and_counts_what_is_dropped():
+    old, truth = _old_cache()
+    new = old.copy()
+    new[1, 1, 1] = False
+    labels, info = features.carry_truth(np.packbits(old.ravel()), old.shape, truth, new,
+                                        max_dropped=0.5)
+    assert labels.size == int(new.sum()) and not labels.any()
+    assert info == {"voxels_dropped": 1, "positives_dropped": 1}
+
+
+def test_carry_truth_refuses_unlabelled_voxels_and_large_drops():
+    old, truth = _old_cache()
+    grown = old.copy()
+    grown[0, 0, 0] = True
+    with pytest.raises(ValueError, match="no carried label"):
+        features.carry_truth(np.packbits(old.ravel()), old.shape, truth, grown)
+    shrunk = old.copy()
+    shrunk[1, 1, 1] = False
+    with pytest.raises(ValueError, match="dropped"):
+        features.carry_truth(np.packbits(old.ravel()), old.shape, truth, shrunk)

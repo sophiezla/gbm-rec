@@ -134,3 +134,24 @@ def build(reference: sitk.Image, brain: np.ndarray, target: np.ndarray,
     return FeatureVolumes(
         volumes={"f1": f1, "f2": f2, "f3": f3, "f4": f4, "f5": f5, "c0t": c0t},
         evaluate=brain & ~target)
+
+
+def carry_truth(old_packed: np.ndarray, old_shape, old_truth: np.ndarray, evaluate: np.ndarray,
+                max_dropped: float = 0.001) -> tuple[np.ndarray, dict]:
+    """Move labels from an earlier cache onto ``evaluate``, a near-identical mask.
+
+    Refuses if the grid differs, ``evaluate`` has a voxel the old mask lacks (it would have no
+    label), or more than ``max_dropped`` of the old voxels would go.
+    """
+    if tuple(int(n) for n in old_shape) != evaluate.shape:
+        raise ValueError(f"grid changed: {tuple(old_shape)} vs {evaluate.shape}")
+    old = np.unpackbits(old_packed)[:evaluate.size].astype(bool).reshape(evaluate.shape)
+    if (evaluate & ~old).any():
+        raise ValueError(f"{int((evaluate & ~old).sum())} new voxels have no carried label")
+    dropped = old & ~evaluate
+    if dropped.sum() > max_dropped * old.sum():
+        raise ValueError(f"{int(dropped.sum())} of {int(old.sum())} old voxels would be dropped")
+    labels = np.zeros(evaluate.shape, dtype=bool)
+    labels[old] = old_truth.astype(bool)
+    return labels[evaluate], {"voxels_dropped": int(dropped.sum()),
+                              "positives_dropped": int((labels & dropped).sum())}

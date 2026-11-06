@@ -32,7 +32,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 CACHE = REPO_ROOT / "data" / "interim" / "features"
 
 
-def extract(patient: str, out_dir: Path) -> dict:
+def extract(patient: str, out_dir: Path, truth_from: Path | None = None) -> dict:
     from gbmc import anatomy
 
     case = lumiere.load_baseline(patient)
@@ -55,7 +55,13 @@ def extract(patient: str, out_dir: Path) -> dict:
     vols = features.build(case.reference, case.brain, target, case.flair_abnormal,
                           falx, vent, depth)
     evaluate = vols.evaluate
-    truth = lumiere.load_recurrence(patient)[evaluate]
+    carried = None
+    if truth_from is None:
+        truth = lumiere.load_recurrence(patient)[evaluate]
+    else:
+        with np.load(truth_from / f"{patient}.npz") as old:
+            truth, carried = features.carry_truth(old["evaluate_packed"], old["evaluate_shape"],
+                                                  old["truth"], evaluate)
 
     c0t = vols.volumes["c0t"][evaluate]
     matched = {f"margin{int(r)}": int((c0t <= float(r)).sum())
@@ -83,6 +89,7 @@ def extract(patient: str, out_dir: Path) -> dict:
         "falx": anatomy.barrier_report(falx, case.brain, case.spacing_zyx),
         "ventricles": vent_qc.as_dict() | {"used": bool(vent.any())},
         "matched_voxels": matched,
+        "labels_carried": carried,
     }
     (out_dir / f"{patient}.json").write_text(json.dumps(qc, indent=2) + "\n", encoding="utf-8")
     return qc
@@ -94,6 +101,8 @@ def main() -> int:
     ap.add_argument("--patients", nargs="+", default=None)
     ap.add_argument("--overwrite", action="store_true")
     ap.add_argument("--out", type=Path, default=CACHE)
+    ap.add_argument("--truth-from", type=Path, default=None,
+                    help="reuse labels from this cache instead of the label fields")
     args = ap.parse_args()
 
     config.pin_itk_threads()
@@ -103,7 +112,7 @@ def main() -> int:
             print(f"{patient}: cached, skipped")
             continue
         start = time.time()
-        qc = extract(patient, args.out)
+        qc = extract(patient, args.out, args.truth_from)
         summary = qc.get("note") or (f"eval {qc['n_eval_voxels']}, positives {qc['n_positive']}, "
                                      f"ventricles used {qc['ventricles']['used']}")
         print(f"{patient}: {summary} ({time.time() - start:.0f} s)", flush=True)
