@@ -78,31 +78,22 @@ def test_matrix_columns():
     assert m.dtype == np.float32
 
 
-def _old_cache():
-    old = np.zeros((4, 4, 4), dtype=bool)
-    old[1:3, 1:3, 1:3] = True
-    truth = np.zeros(int(old.sum()), dtype=bool)
-    truth[0] = True
-    return old, truth
+def test_brain_from_cache_reproduces_the_cached_evaluation_mask():
+    evaluate = np.zeros((4, 4, 4), dtype=bool)
+    evaluate[1:3, 1:3, 1:3] = True
+    target = np.zeros_like(evaluate)
+    target[0, 0, 0] = True
+    other_computer = np.zeros_like(evaluate)
+    other_computer[:2] = True
+    brain = features.brain_from_cache(np.packbits(evaluate.ravel()), evaluate.shape,
+                                      other_computer, target)
+    assert np.array_equal(brain & ~target, evaluate)
 
 
-def test_carry_truth_follows_voxels_and_counts_what_is_dropped():
-    old, truth = _old_cache()
-    new = old.copy()
-    new[1, 1, 1] = False
-    labels, info = features.carry_truth(np.packbits(old.ravel()), old.shape, truth, new,
-                                        max_dropped=0.5)
-    assert labels.size == int(new.sum()) and not labels.any()
-    assert info == {"voxels_dropped": 1, "positives_dropped": 1}
-
-
-def test_carry_truth_refuses_unlabelled_voxels_and_large_drops():
-    old, truth = _old_cache()
-    grown = old.copy()
-    grown[0, 0, 0] = True
-    with pytest.raises(ValueError, match="no carried label"):
-        features.carry_truth(np.packbits(old.ravel()), old.shape, truth, grown)
-    shrunk = old.copy()
-    shrunk[1, 1, 1] = False
-    with pytest.raises(ValueError, match="dropped"):
-        features.carry_truth(np.packbits(old.ravel()), old.shape, truth, shrunk)
+def test_brain_from_cache_refuses_a_changed_target_or_grid():
+    evaluate = np.ones((2, 2, 2), dtype=bool)
+    with pytest.raises(ValueError, match="target"):
+        features.brain_from_cache(np.packbits(evaluate.ravel()), evaluate.shape, evaluate, evaluate)
+    with pytest.raises(ValueError, match="grid"):
+        features.brain_from_cache(np.packbits(evaluate.ravel()), (2, 2, 3), evaluate,
+                                  np.zeros((2, 2, 2), bool))
