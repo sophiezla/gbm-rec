@@ -25,6 +25,6 @@ npm run dev
 ## Data (never in git)
 | Variable or folder | Holds | Needed for |
 |---|---|---|
-| `data/interim/features/` | Feature caches for all 63 LUMIERE patients, about 2.7 GB | The tournament |
+| `data/interim/features/` | Corrected feature caches for all 63 LUMIERE patients | The tournament |
 | `$GBMC_LUMIERE_ROOT` | Raw LUMIERE archive (`Imaging/`, `metadata/`; CC0) | `01_`, `05_`, `07_`, `40_`, `42_` |
 | `$GBMC_DERIVED_ROOT` | `data/interim/preprocessed/` and `data/interim/label_field/` | `01_`, `05_`, `06_`, `07_`, `40_`, `42_` |
