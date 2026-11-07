@@ -76,6 +76,7 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 
 ## Known Issues
 - Resolved 2026-11-03: the gbm-4d dependency is gone (deviation V3).
+- Open 2026-11-06: ventricle masks are unreliable, and Patient-002's covers 52.8% of the brain. They feed f5, C0T and the matched volume. Decision needed before the rules lock: `DECISIONS.md` D6 (k).
 
 ## Blockers
 - ISEF forms not signed (blocks Phase 1).

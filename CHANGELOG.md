@@ -2,6 +2,9 @@
 
 ## [Unreleased: Phase 1 start, not committed]
 
+### Added
+- 2026-11-06: `scripts/11_f5_cap_survey.py` and `results/f5_cap_survey/`: anatomy-only survey of voxels at the f5 cap. No sealed-off tissue; found unreliable ventricle masks (`DECISIONS.md` D6 (k), open). Nothing changed in the features.
+
 ### Changed
 - 2026-11-06: rebuilt the 63 LUMIERE baselines from raw data with the corrected alignment and recomputed f1-f5 and C0T, keeping the original evaluation masks and labels (`00_`, `01_ --keep-from`, `10_`; results in `results/feature_recompute/`; deviation V3).
 - 2026-11-03: gbm-rec is standalone (deviation V3). New modules `gbmc.imaging`, `transport`, `anatomy`, `pde` replace the gbm4d package and scripts; `results/cohort_lock/cohort_lock.json` is committed; data paths now come only from `$GBMC_LUMIERE_ROOT` and `$GBMC_DERIVED_ROOT`; rigid resampling direction corrected; `--recipe gbm4d` renamed `original`.
