@@ -1,0 +1,2900 @@
+[
+  {
+    "patient": "Patient-001",
+    "voxels": 1253130,
+    "matched_voxels_old": {
+      "margin15": 68621,
+      "margin20": 98321,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 68621,
+      "margin20": 98311,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 282.04718017578125,
+        "mean": 4.996508598327637,
+        "share_changed_over_0_01": 0.34473598110331727
+      },
+      "c0t": {
+        "max": 283.28460693359375,
+        "mean": 1.533331274986267,
+        "share_changed_over_0_01": 0.35174403294151446
+      }
+    }
+  },
+  {
+    "patient": "Patient-002",
+    "voxels": 1430273,
+    "matched_voxels_old": {
+      "margin15": 118743,
+      "margin20": 156075,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 123314,
+      "margin20": 181344,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 293.7209777832031,
+        "mean": 139.2215118408203,
+        "share_changed_over_0_01": 0.8667750841972127
+      },
+      "c0t": {
+        "max": 292.8216247558594,
+        "mean": 101.43550872802734,
+        "share_changed_over_0_01": 0.876942373938402
+      }
+    }
+  },
+  {
+    "patient": "Patient-003",
+    "voxels": 1495984,
+    "matched_voxels_old": {
+      "margin15": 164728,
+      "margin20": 239259,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 166030,
+      "margin20": 242813,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.1081848144531,
+        "mean": 9.79284381866455,
+        "share_changed_over_0_01": 0.418507818265436
+      },
+      "c0t": {
+        "max": 290.87921142578125,
+        "mean": 1.5793782472610474,
+        "share_changed_over_0_01": 0.42894643258216664
+      }
+    }
+  },
+  {
+    "patient": "Patient-004",
+    "voxels": 1649567,
+    "matched_voxels_old": {
+      "margin15": 135064,
+      "margin20": 192997,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 135048,
+      "margin20": 192936,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 287.9069519042969,
+        "mean": 1.1530004739761353,
+        "share_changed_over_0_01": 0.3399831592169339
+      },
+      "c0t": {
+        "max": 281.4488525390625,
+        "mean": 0.5237237215042114,
+        "share_changed_over_0_01": 0.36163005200758747
+      }
+    }
+  },
+  {
+    "patient": "Patient-006",
+    "voxels": 1589173,
+    "matched_voxels_old": {
+      "margin15": 176634,
+      "margin20": 263265,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 176692,
+      "margin20": 264268,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 290.2925720214844,
+        "mean": 7.842304229736328,
+        "share_changed_over_0_01": 0.3658544412722844
+      },
+      "c0t": {
+        "max": 289.59832763671875,
+        "mean": 0.8646864891052246,
+        "share_changed_over_0_01": 0.3752039582852213
+      }
+    }
+  },
+  {
+    "patient": "Patient-007",
+    "voxels": 1698853,
+    "matched_voxels_old": {
+      "margin15": 132624,
+      "margin20": 198755,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 132686,
+      "margin20": 198902,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.0780334472656,
+        "mean": 9.381274223327637,
+        "share_changed_over_0_01": 0.3731735470932447
+      },
+      "c0t": {
+        "max": 293.0,
+        "mean": 1.2209246158599854,
+        "share_changed_over_0_01": 0.3827965103513959
+      }
+    }
+  },
+  {
+    "patient": "Patient-008",
+    "voxels": 1273617,
+    "matched_voxels_old": {
+      "margin15": 176396,
+      "margin20": 259331,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 176774,
+      "margin20": 260412,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.05340576171875,
+        "mean": 16.073619842529297,
+        "share_changed_over_0_01": 0.46814152135218046
+      },
+      "c0t": {
+        "max": 283.0135498046875,
+        "mean": 1.3867473602294922,
+        "share_changed_over_0_01": 0.47566419104016355
+      }
+    }
+  },
+  {
+    "patient": "Patient-009",
+    "voxels": 1446041,
+    "matched_voxels_old": {
+      "margin15": 96293,
+      "margin20": 144966,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 96283,
+      "margin20": 144823,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 285.98187255859375,
+        "mean": 1.8762080669403076,
+        "share_changed_over_0_01": 0.3598134492728768
+      },
+      "c0t": {
+        "max": 280.6282043457031,
+        "mean": 0.784010112285614,
+        "share_changed_over_0_01": 0.3862476928385848
+      }
+    }
+  },
+  {
+    "patient": "Patient-011",
+    "voxels": 1212190,
+    "matched_voxels_old": {
+      "margin15": 70047,
+      "margin20": 103168,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 70373,
+      "margin20": 104241,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 290.54913330078125,
+        "mean": 15.409820556640625,
+        "share_changed_over_0_01": 0.623742152632838
+      },
+      "c0t": {
+        "max": 286.85345458984375,
+        "mean": 2.8424062728881836,
+        "share_changed_over_0_01": 0.6352230260932692
+      }
+    }
+  },
+  {
+    "patient": "Patient-012",
+    "voxels": 1540513,
+    "matched_voxels_old": {
+      "margin15": 134133,
+      "margin20": 193068,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 133717,
+      "margin20": 192250,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.0,
+        "mean": 3.1014580726623535,
+        "share_changed_over_0_01": 0.4227409960188587
+      },
+      "c0t": {
+        "max": 281.75146484375,
+        "mean": 0.9531120657920837,
+        "share_changed_over_0_01": 0.4454892623431286
+      }
+    }
+  },
+  {
+    "patient": "Patient-015",
+    "voxels": 1347378,
+    "matched_voxels_old": {
+      "margin15": 130589,
+      "margin20": 190810,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 130857,
+      "margin20": 191781,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 290.0010070800781,
+        "mean": 8.229690551757812,
+        "share_changed_over_0_01": 0.40816534038703317
+      },
+      "c0t": {
+        "max": 279.6959228515625,
+        "mean": 1.4196572303771973,
+        "share_changed_over_0_01": 0.4201018570883598
+      }
+    }
+  },
+  {
+    "patient": "Patient-017",
+    "voxels": 1419349,
+    "matched_voxels_old": {
+      "margin15": 118598,
+      "margin20": 172893,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 118487,
+      "margin20": 172582,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.1081848144531,
+        "mean": 1.650296926498413,
+        "share_changed_over_0_01": 0.4546260292570749
+      },
+      "c0t": {
+        "max": 292.7311706542969,
+        "mean": 0.3191574215888977,
+        "share_changed_over_0_01": 0.4653718007339985
+      }
+    }
+  },
+  {
+    "patient": "Patient-018",
+    "voxels": 1556929,
+    "matched_voxels_old": {
+      "margin15": 61323,
+      "margin20": 96284,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 61323,
+      "margin20": 96296,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 282.71051025390625,
+        "mean": 2.9802310466766357,
+        "share_changed_over_0_01": 0.4689051331178236
+      },
+      "c0t": {
+        "max": 268.6388854980469,
+        "mean": 0.842693030834198,
+        "share_changed_over_0_01": 0.4932440721445872
+      }
+    }
+  },
+  {
+    "patient": "Patient-019",
+    "voxels": 1493773,
+    "matched_voxels_old": {
+      "margin15": 102367,
+      "margin20": 150795,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 102391,
+      "margin20": 151095,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 287.1875305175781,
+        "mean": 6.7831244468688965,
+        "share_changed_over_0_01": 0.4419660818611663
+      },
+      "c0t": {
+        "max": 282.6923828125,
+        "mean": 1.8158842325210571,
+        "share_changed_over_0_01": 0.46053985444910306
+      }
+    }
+  },
+  {
+    "patient": "Patient-021",
+    "voxels": 1440124,
+    "matched_voxels_old": {
+      "margin15": 66862,
+      "margin20": 100605,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 66862,
+      "margin20": 100627,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 282.374267578125,
+        "mean": 7.650741100311279,
+        "share_changed_over_0_01": 0.5248964672486536
+      },
+      "c0t": {
+        "max": 272.13275146484375,
+        "mean": 1.5703984498977661,
+        "share_changed_over_0_01": 0.5391327413472728
+      }
+    }
+  },
+  {
+    "patient": "Patient-022",
+    "voxels": 1143638,
+    "matched_voxels_old": {
+      "margin15": 117379,
+      "margin20": 169794,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 117419,
+      "margin20": 169959,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 287.6573791503906,
+        "mean": 16.129226684570312,
+        "share_changed_over_0_01": 0.505675747045831
+      },
+      "c0t": {
+        "max": 280.2734680175781,
+        "mean": 1.9958277940750122,
+        "share_changed_over_0_01": 0.5155897233215405
+      }
+    }
+  },
+  {
+    "patient": "Patient-023",
+    "voxels": 1823749,
+    "matched_voxels_old": {
+      "margin15": 83732,
+      "margin20": 133857,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 83774,
+      "margin20": 134075,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 290.85491943359375,
+        "mean": 10.69554615020752,
+        "share_changed_over_0_01": 0.5786114207602033
+      },
+      "c0t": {
+        "max": 284.0,
+        "mean": 1.6826177835464478,
+        "share_changed_over_0_01": 0.5923095776885964
+      }
+    }
+  },
+  {
+    "patient": "Patient-024",
+    "voxels": 1665193,
+    "matched_voxels_old": {
+      "margin15": 59944,
+      "margin20": 96187,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 59941,
+      "margin20": 96207,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 286.87835693359375,
+        "mean": 4.603864669799805,
+        "share_changed_over_0_01": 0.4653406542064493
+      },
+      "c0t": {
+        "max": 279.3626403808594,
+        "mean": 1.1674890518188477,
+        "share_changed_over_0_01": 0.48823830030512977
+      }
+    }
+  },
+  {
+    "patient": "Patient-027",
+    "voxels": 1313336,
+    "matched_voxels_old": {
+      "margin15": 128441,
+      "margin20": 183181,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 128237,
+      "margin20": 183113,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 291.40362548828125,
+        "mean": 7.411701202392578,
+        "share_changed_over_0_01": 0.4515424841776971
+      },
+      "c0t": {
+        "max": 278.73687744140625,
+        "mean": 1.6668826341629028,
+        "share_changed_over_0_01": 0.46518788794337473
+      }
+    }
+  },
+  {
+    "patient": "Patient-028",
+    "voxels": 1690277,
+    "matched_voxels_old": {
+      "margin15": 172832,
+      "margin20": 249612,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 175279,
+      "margin20": 253898,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.1283874511719,
+        "mean": 13.803750038146973,
+        "share_changed_over_0_01": 0.5229125167058417
+      },
+      "c0t": {
+        "max": 285.70697021484375,
+        "mean": 1.3479000329971313,
+        "share_changed_over_0_01": 0.5270473419445452
+      }
+    }
+  },
+  {
+    "patient": "Patient-029",
+    "voxels": 1244373,
+    "matched_voxels_old": {
+      "margin15": 154244,
+      "margin20": 229569,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 152918,
+      "margin20": 226612,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.0,
+        "mean": 3.255091905593872,
+        "share_changed_over_0_01": 0.35653055795971145
+      },
+      "c0t": {
+        "max": 292.5852355957031,
+        "mean": 0.9765134453773499,
+        "share_changed_over_0_01": 0.3729050694606842
+      }
+    }
+  },
+  {
+    "patient": "Patient-030",
+    "voxels": 1273789,
+    "matched_voxels_old": {
+      "margin15": 79851,
+      "margin20": 121130,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 79877,
+      "margin20": 121352,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 289.4862060546875,
+        "mean": 9.968575477600098,
+        "share_changed_over_0_01": 0.3677846173895363
+      },
+      "c0t": {
+        "max": 280.15203857421875,
+        "mean": 0.8809616565704346,
+        "share_changed_over_0_01": 0.37229242833781734
+      }
+    }
+  },
+  {
+    "patient": "Patient-031",
+    "voxels": 1523005,
+    "matched_voxels_old": {
+      "margin15": 113662,
+      "margin20": 166689,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 113755,
+      "margin20": 167342,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 289.7247619628906,
+        "mean": 12.774764060974121,
+        "share_changed_over_0_01": 0.4893765942987712
+      },
+      "c0t": {
+        "max": 288.46990966796875,
+        "mean": 2.073467493057251,
+        "share_changed_over_0_01": 0.5043148249677447
+      }
+    }
+  },
+  {
+    "patient": "Patient-032",
+    "voxels": 1291884,
+    "matched_voxels_old": {
+      "margin15": 92417,
+      "margin20": 141673,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 92365,
+      "margin20": 141639,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 292.0175476074219,
+        "mean": 1.5977013111114502,
+        "share_changed_over_0_01": 0.32016264618185536
+      },
+      "c0t": {
+        "max": 285.3026123046875,
+        "mean": 0.5927274227142334,
+        "share_changed_over_0_01": 0.33315452470964885
+      }
+    }
+  },
+  {
+    "patient": "Patient-033",
+    "voxels": 1486837,
+    "matched_voxels_old": {
+      "margin15": 133908,
+      "margin20": 182243,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 133908,
+      "margin20": 182302,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 283.6404724121094,
+        "mean": 8.630472183227539,
+        "share_changed_over_0_01": 0.48992323973643376
+      },
+      "c0t": {
+        "max": 283.0472106933594,
+        "mean": 0.9035292863845825,
+        "share_changed_over_0_01": 0.498510596655854
+      }
+    }
+  },
+  {
+    "patient": "Patient-034",
+    "voxels": 1537055,
+    "matched_voxels_old": {
+      "margin15": 124500,
+      "margin20": 185248,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 124500,
+      "margin20": 185248,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 276.5514221191406,
+        "mean": 1.4559168815612793,
+        "share_changed_over_0_01": 0.2707912208736838
+      },
+      "c0t": {
+        "max": 274.4270324707031,
+        "mean": 0.44559210538864136,
+        "share_changed_over_0_01": 0.2855792408209205
+      }
+    }
+  },
+  {
+    "patient": "Patient-035",
+    "voxels": 1573405,
+    "matched_voxels_old": {
+      "margin15": 145868,
+      "margin20": 212291,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 145864,
+      "margin20": 212401,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 287.0529479980469,
+        "mean": 13.762788772583008,
+        "share_changed_over_0_01": 0.5410584051785776
+      },
+      "c0t": {
+        "max": 282.859130859375,
+        "mean": 1.3217984437942505,
+        "share_changed_over_0_01": 0.5502798071698005
+      }
+    }
+  },
+  {
+    "patient": "Patient-037",
+    "voxels": 1700699,
+    "matched_voxels_old": {
+      "margin15": 138887,
+      "margin20": 215011,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 138837,
+      "margin20": 214847,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 293.386962890625,
+        "mean": 1.1842087507247925,
+        "share_changed_over_0_01": 0.2380556465312204
+      },
+      "c0t": {
+        "max": 279.2742614746094,
+        "mean": 0.6447251439094543,
+        "share_changed_over_0_01": 0.26265376765671056
+      }
+    }
+  },
+  {
+    "patient": "Patient-038",
+    "voxels": 1418626,
+    "matched_voxels_old": {
+      "margin15": 101205,
+      "margin20": 150622,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 101084,
+      "margin20": 150533,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 289.4551696777344,
+        "mean": 1.9310755729675293,
+        "share_changed_over_0_01": 0.3549307569436906
+      },
+      "c0t": {
+        "max": 289.0868225097656,
+        "mean": 0.7242891192436218,
+        "share_changed_over_0_01": 0.36988889249174906
+      }
+    }
+  },
+  {
+    "patient": "Patient-039",
+    "voxels": 1696583,
+    "matched_voxels_old": {
+      "margin15": 166612,
+      "margin20": 237202,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 167043,
+      "margin20": 238060,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 293.90570068359375,
+        "mean": 2.106029510498047,
+        "share_changed_over_0_01": 0.2929423435222444
+      },
+      "c0t": {
+        "max": 283.3922424316406,
+        "mean": 0.700608491897583,
+        "share_changed_over_0_01": 0.3113405002879317
+      }
+    }
+  },
+  {
+    "patient": "Patient-041",
+    "voxels": 1390824,
+    "matched_voxels_old": {
+      "margin15": 139568,
+      "margin20": 202769,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 139194,
+      "margin20": 202111,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.2402648925781,
+        "mean": 1.642357349395752,
+        "share_changed_over_0_01": 0.36285827682007216
+      },
+      "c0t": {
+        "max": 293.6843566894531,
+        "mean": 0.6188015341758728,
+        "share_changed_over_0_01": 0.3866053504972592
+      }
+    }
+  },
+  {
+    "patient": "Patient-042",
+    "voxels": 1416479,
+    "matched_voxels_old": {
+      "margin15": 75707,
+      "margin20": 116406,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 75707,
+      "margin20": 116406,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 276.4677734375,
+        "mean": 2.0041146278381348,
+        "share_changed_over_0_01": 0.2779998856319084
+      },
+      "c0t": {
+        "max": 270.8074645996094,
+        "mean": 0.42152249813079834,
+        "share_changed_over_0_01": 0.28781577418373305
+      }
+    }
+  },
+  {
+    "patient": "Patient-043",
+    "voxels": 1566552,
+    "matched_voxels_old": {
+      "margin15": 34751,
+      "margin20": 59842,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 34751,
+      "margin20": 59835,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 284.32928466796875,
+        "mean": 1.0435446500778198,
+        "share_changed_over_0_01": 0.3201681144322053
+      },
+      "c0t": {
+        "max": 262.35772705078125,
+        "mean": 0.36158743500709534,
+        "share_changed_over_0_01": 0.3356192453234875
+      }
+    }
+  },
+  {
+    "patient": "Patient-045",
+    "voxels": 1400952,
+    "matched_voxels_old": {
+      "margin15": 67060,
+      "margin20": 97441,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 67060,
+      "margin20": 97441,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 278.3545227050781,
+        "mean": 1.754918098449707,
+        "share_changed_over_0_01": 0.415086312735911
+      },
+      "c0t": {
+        "max": 271.4636535644531,
+        "mean": 0.7041761875152588,
+        "share_changed_over_0_01": 0.4420915206231191
+      }
+    }
+  },
+  {
+    "patient": "Patient-046",
+    "voxels": 1436283,
+    "matched_voxels_old": {
+      "margin15": 92781,
+      "margin20": 141701,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 92556,
+      "margin20": 141216,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.0735778808594,
+        "mean": 2.1854944229125977,
+        "share_changed_over_0_01": 0.4439417579961609
+      },
+      "c0t": {
+        "max": 281.4928894042969,
+        "mean": 0.6983256340026855,
+        "share_changed_over_0_01": 0.4695731969256755
+      }
+    }
+  },
+  {
+    "patient": "Patient-048",
+    "voxels": 1098067,
+    "matched_voxels_old": {
+      "margin15": 97930,
+      "margin20": 139623,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 97930,
+      "margin20": 139627,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 280.4261474609375,
+        "mean": 7.98403263092041,
+        "share_changed_over_0_01": 0.3752038810017968
+      },
+      "c0t": {
+        "max": 278.75433349609375,
+        "mean": 0.8369105458259583,
+        "share_changed_over_0_01": 0.3823537179425299
+      }
+    }
+  },
+  {
+    "patient": "Patient-050",
+    "voxels": 1541251,
+    "matched_voxels_old": {
+      "margin15": 83085,
+      "margin20": 120168,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 83085,
+      "margin20": 120168,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 275.07598876953125,
+        "mean": 1.4083317518234253,
+        "share_changed_over_0_01": 0.32832874074372054
+      },
+      "c0t": {
+        "max": 275.0576171875,
+        "mean": 0.3574446141719818,
+        "share_changed_over_0_01": 0.34016393176711646
+      }
+    }
+  },
+  {
+    "patient": "Patient-051",
+    "voxels": 1443724,
+    "matched_voxels_old": {
+      "margin15": 132798,
+      "margin20": 189819,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 132530,
+      "margin20": 189361,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 292.0011291503906,
+        "mean": 2.959592342376709,
+        "share_changed_over_0_01": 0.3014980702682784
+      },
+      "c0t": {
+        "max": 269.594970703125,
+        "mean": 0.31095343828201294,
+        "share_changed_over_0_01": 0.3095536265934486
+      }
+    }
+  },
+  {
+    "patient": "Patient-052",
+    "voxels": 1365083,
+    "matched_voxels_old": {
+      "margin15": 91162,
+      "margin20": 141240,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 91162,
+      "margin20": 141236,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 280.6391906738281,
+        "mean": 11.713953018188477,
+        "share_changed_over_0_01": 0.40200119699681264
+      },
+      "c0t": {
+        "max": 280.4747619628906,
+        "mean": 1.0553562641143799,
+        "share_changed_over_0_01": 0.40831656390124266
+      }
+    }
+  },
+  {
+    "patient": "Patient-054",
+    "voxels": 1221075,
+    "matched_voxels_old": {
+      "margin15": 86123,
+      "margin20": 131231,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 86105,
+      "margin20": 131335,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 288.794189453125,
+        "mean": 4.206939697265625,
+        "share_changed_over_0_01": 0.44063714350060396
+      },
+      "c0t": {
+        "max": 278.7577819824219,
+        "mean": 0.9208204746246338,
+        "share_changed_over_0_01": 0.45873758778125834
+      }
+    }
+  },
+  {
+    "patient": "Patient-055",
+    "voxels": 1621785,
+    "matched_voxels_old": {
+      "margin15": 220449,
+      "margin20": 307548,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 220742,
+      "margin20": 308260,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 293.8614196777344,
+        "mean": 10.751961708068848,
+        "share_changed_over_0_01": 0.3938980814349621
+      },
+      "c0t": {
+        "max": 282.885009765625,
+        "mean": 1.6408416032791138,
+        "share_changed_over_0_01": 0.40419414410664795
+      }
+    }
+  },
+  {
+    "patient": "Patient-058",
+    "voxels": 1269802,
+    "matched_voxels_old": {
+      "margin15": 65317,
+      "margin20": 106315,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 65316,
+      "margin20": 106221,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 285.1361389160156,
+        "mean": 1.781639575958252,
+        "share_changed_over_0_01": 0.31644146095217995
+      },
+      "c0t": {
+        "max": 274.92681884765625,
+        "mean": 0.5389811396598816,
+        "share_changed_over_0_01": 0.32845829507277513
+      }
+    }
+  },
+  {
+    "patient": "Patient-059",
+    "voxels": 1358189,
+    "matched_voxels_old": {
+      "margin15": 41489,
+      "margin20": 67433,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 41489,
+      "margin20": 67444,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 282.2569580078125,
+        "mean": 1.6689356565475464,
+        "share_changed_over_0_01": 0.4014912504813395
+      },
+      "c0t": {
+        "max": 266.8985290527344,
+        "mean": 0.5100657343864441,
+        "share_changed_over_0_01": 0.41777396223942326
+      }
+    }
+  },
+  {
+    "patient": "Patient-060",
+    "voxels": 1442969,
+    "matched_voxels_old": {
+      "margin15": 105661,
+      "margin20": 160848,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 105661,
+      "margin20": 160867,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 282.6622314453125,
+        "mean": 7.978808879852295,
+        "share_changed_over_0_01": 0.42443877865706053
+      },
+      "c0t": {
+        "max": 278.1041259765625,
+        "mean": 1.1428663730621338,
+        "share_changed_over_0_01": 0.43408416951438317
+      }
+    }
+  },
+  {
+    "patient": "Patient-061",
+    "voxels": 1452681,
+    "matched_voxels_old": {
+      "margin15": 130722,
+      "margin20": 190571,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 130722,
+      "margin20": 190571,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 283.3150329589844,
+        "mean": 0.9984859824180603,
+        "share_changed_over_0_01": 0.2587216326227162
+      },
+      "c0t": {
+        "max": 282.8047180175781,
+        "mean": 0.3631208539009094,
+        "share_changed_over_0_01": 0.2730806006273917
+      }
+    }
+  },
+  {
+    "patient": "Patient-062",
+    "voxels": 1318116,
+    "matched_voxels_old": {
+      "margin15": 145358,
+      "margin20": 204094,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 145490,
+      "margin20": 205523,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.1219177246094,
+        "mean": 5.927693843841553,
+        "share_changed_over_0_01": 0.3964764861362733
+      },
+      "c0t": {
+        "max": 291.5168762207031,
+        "mean": 0.902642011642456,
+        "share_changed_over_0_01": 0.4048634566305242
+      }
+    }
+  },
+  {
+    "patient": "Patient-063",
+    "voxels": 1285049,
+    "matched_voxels_old": {
+      "margin15": 88846,
+      "margin20": 134863,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 88879,
+      "margin20": 135106,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 289.5216369628906,
+        "mean": 4.805440902709961,
+        "share_changed_over_0_01": 0.44021278566031335
+      },
+      "c0t": {
+        "max": 279.6833801269531,
+        "mean": 1.001652479171753,
+        "share_changed_over_0_01": 0.4553577334405147
+      }
+    }
+  },
+  {
+    "patient": "Patient-064",
+    "voxels": 1583700,
+    "matched_voxels_old": {
+      "margin15": 118996,
+      "margin20": 179260,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 118996,
+      "margin20": 179260,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 279.5709533691406,
+        "mean": 2.158003330230713,
+        "share_changed_over_0_01": 0.34744901180779186
+      },
+      "c0t": {
+        "max": 274.7421569824219,
+        "mean": 0.8123009204864502,
+        "share_changed_over_0_01": 0.3624840563237987
+      }
+    }
+  },
+  {
+    "patient": "Patient-065",
+    "voxels": 1270264,
+    "matched_voxels_old": {
+      "margin15": 87778,
+      "margin20": 132539,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 87785,
+      "margin20": 132591,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 285.4644470214844,
+        "mean": 3.2337863445281982,
+        "share_changed_over_0_01": 0.4289509897155237
+      },
+      "c0t": {
+        "max": 272.7189636230469,
+        "mean": 1.037523865699768,
+        "share_changed_over_0_01": 0.4478872108475089
+      }
+    }
+  },
+  {
+    "patient": "Patient-066",
+    "voxels": 1634663,
+    "matched_voxels_old": {
+      "margin15": 155902,
+      "margin20": 230134,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 155899,
+      "margin20": 229575,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 285.0870056152344,
+        "mean": 1.293186902999878,
+        "share_changed_over_0_01": 0.24626115596915082
+      },
+      "c0t": {
+        "max": 280.7024230957031,
+        "mean": 0.33357059955596924,
+        "share_changed_over_0_01": 0.26227913643362577
+      }
+    }
+  },
+  {
+    "patient": "Patient-067",
+    "voxels": 1410794,
+    "matched_voxels_old": {
+      "margin15": 44214,
+      "margin20": 71042,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 44214,
+      "margin20": 71171,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 284.869384765625,
+        "mean": 13.37008285522461,
+        "share_changed_over_0_01": 0.5205876974242873
+      },
+      "c0t": {
+        "max": 277.6687927246094,
+        "mean": 2.475762367248535,
+        "share_changed_over_0_01": 0.5293997564492052
+      }
+    }
+  },
+  {
+    "patient": "Patient-070",
+    "voxels": 1555246,
+    "matched_voxels_old": {
+      "margin15": 175552,
+      "margin20": 250243,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 176371,
+      "margin20": 251653,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.0254211425781,
+        "mean": 4.4789204597473145,
+        "share_changed_over_0_01": 0.32991629620008667
+      },
+      "c0t": {
+        "max": 293.16058349609375,
+        "mean": 0.6865237355232239,
+        "share_changed_over_0_01": 0.3384403496295763
+      }
+    }
+  },
+  {
+    "patient": "Patient-071",
+    "voxels": 1751647,
+    "matched_voxels_old": {
+      "margin15": 146447,
+      "margin20": 212846,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 146454,
+      "margin20": 212886,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 285.48651123046875,
+        "mean": 1.096134901046753,
+        "share_changed_over_0_01": 0.20412446114999197
+      },
+      "c0t": {
+        "max": 284.6124267578125,
+        "mean": 0.40966930985450745,
+        "share_changed_over_0_01": 0.21722013624891318
+      }
+    }
+  },
+  {
+    "patient": "Patient-072",
+    "voxels": 1531828,
+    "matched_voxels_old": {
+      "margin15": 176606,
+      "margin20": 262634,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 174410,
+      "margin20": 260008,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.2926025390625,
+        "mean": 1.7539950609207153,
+        "share_changed_over_0_01": 0.3790712795431341
+      },
+      "c0t": {
+        "max": 293.31573486328125,
+        "mean": 0.6919687390327454,
+        "share_changed_over_0_01": 0.3950456578675935
+      }
+    }
+  },
+  {
+    "patient": "Patient-073",
+    "voxels": 1327322,
+    "matched_voxels_old": {
+      "margin15": 183825,
+      "margin20": 252788,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 184042,
+      "margin20": 253497,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 294.0,
+        "mean": 6.809627056121826,
+        "share_changed_over_0_01": 0.44790186556088124
+      },
+      "c0t": {
+        "max": 286.4048156738281,
+        "mean": 0.984800398349762,
+        "share_changed_over_0_01": 0.46240324503021873
+      }
+    }
+  },
+  {
+    "patient": "Patient-074",
+    "voxels": 1392065,
+    "matched_voxels_old": {
+      "margin15": 191743,
+      "margin20": 265870,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 191387,
+      "margin20": 265353,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 292.3791198730469,
+        "mean": 1.7808250188827515,
+        "share_changed_over_0_01": 0.21594537611390272
+      },
+      "c0t": {
+        "max": 287.284423828125,
+        "mean": 0.11477934569120407,
+        "share_changed_over_0_01": 0.216027268841613
+      }
+    }
+  },
+  {
+    "patient": "Patient-075",
+    "voxels": 1594079,
+    "matched_voxels_old": {
+      "margin15": 66881,
+      "margin20": 107750,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 66855,
+      "margin20": 107661,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 287.30364990234375,
+        "mean": 1.2713831663131714,
+        "share_changed_over_0_01": 0.36233022328253495
+      },
+      "c0t": {
+        "max": 273.4972229003906,
+        "mean": 0.6067854166030884,
+        "share_changed_over_0_01": 0.38689362321440784
+      }
+    }
+  },
+  {
+    "patient": "Patient-077",
+    "voxels": 1502320,
+    "matched_voxels_old": {
+      "margin15": 159334,
+      "margin20": 227118,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 159334,
+      "margin20": 227092,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 283.55523681640625,
+        "mean": 2.055018663406372,
+        "share_changed_over_0_01": 0.2730796368283721
+      },
+      "c0t": {
+        "max": 278.9123840332031,
+        "mean": 0.5847181081771851,
+        "share_changed_over_0_01": 0.29270661377070134
+      }
+    }
+  },
+  {
+    "patient": "Patient-078",
+    "voxels": 1362022,
+    "matched_voxels_old": {
+      "margin15": 99076,
+      "margin20": 155046,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 99077,
+      "margin20": 155340,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 285.32196044921875,
+        "mean": 14.579367637634277,
+        "share_changed_over_0_01": 0.5340714026645679
+      },
+      "c0t": {
+        "max": 283.67352294921875,
+        "mean": 1.4968059062957764,
+        "share_changed_over_0_01": 0.5405243087116067
+      }
+    }
+  },
+  {
+    "patient": "Patient-081",
+    "voxels": 1525482,
+    "matched_voxels_old": {
+      "margin15": 94869,
+      "margin20": 139090,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 94869,
+      "margin20": 139083,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 281.4602355957031,
+        "mean": 2.0576493740081787,
+        "share_changed_over_0_01": 0.27632184450553987
+      },
+      "c0t": {
+        "max": 274.1661682128906,
+        "mean": 0.39937904477119446,
+        "share_changed_over_0_01": 0.2931657010702191
+      }
+    }
+  },
+  {
+    "patient": "Patient-085",
+    "voxels": 1382479,
+    "matched_voxels_old": {
+      "margin15": 116760,
+      "margin20": 172263,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 116760,
+      "margin20": 172252,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 281.6820068359375,
+        "mean": 1.571529507637024,
+        "share_changed_over_0_01": 0.26105423662854915
+      },
+      "c0t": {
+        "max": 278.4560546875,
+        "mean": 0.5353323817253113,
+        "share_changed_over_0_01": 0.2753517413284397
+      }
+    }
+  },
+  {
+    "patient": "Patient-089",
+    "voxels": 1371812,
+    "matched_voxels_old": {
+      "margin15": 164232,
+      "margin20": 239988,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 164301,
+      "margin20": 239981,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 293.6278076171875,
+        "mean": 0.7034789323806763,
+        "share_changed_over_0_01": 0.17589655142249813
+      },
+      "c0t": {
+        "max": 288.0811767578125,
+        "mean": 0.13460086286067963,
+        "share_changed_over_0_01": 0.18452528480578972
+      }
+    }
+  },
+  {
+    "patient": "Patient-090",
+    "voxels": 1472574,
+    "matched_voxels_old": {
+      "margin15": 50070,
+      "margin20": 84877,
+      "volume50ml": 50000
+    },
+    "matched_voxels_new": {
+      "margin15": 49957,
+      "margin20": 84658,
+      "volume50ml": 50000
+    },
+    "columns": {
+      "f1": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f2": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f3": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f4": {
+        "max": 0.0,
+        "mean": 0.0,
+        "share_changed_over_0_01": 0.0
+      },
+      "f5": {
+        "max": 293.8508605957031,
+        "mean": 1.140553593635559,
+        "share_changed_over_0_01": 0.4531269735850287
+      },
+      "c0t": {
+        "max": 277.8552551269531,
+        "mean": 0.41752493381500244,
+        "share_changed_over_0_01": 0.4598750215608859
+      }
+    }
+  }
+]
