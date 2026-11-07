@@ -12,10 +12,19 @@ FALX_HALF_THICKNESS_MM = 2.0
 WHITE_MATTER_Z = 0.0
 UNREACHABLE_MM = 1.0e6
 
-VENTRICLE_EROSION_MM = 8.0    # removes sulcal CSF, leaves the deep ventricles
+VENTRICLE_EROSION_MM = 8.0    # original rule only (segment_ventricles_otsu)
 LESION_MARGIN_MM = 5.0        # necrosis and cavity are as dark as CSF on T1c
 CENTRALITY_MM = 55.0          # further than this from the deep-brain centre is not ventricle
 MIN_COMPONENT_MM3 = 1500.0
+
+# Ventricle rule V4 (DECISIONS.md D16, deviation V4). Chosen on LUMIERE anatomy only, by eye,
+# with no recurrence label read; frozen before any candidate is scored.
+VENTRICLE_DEPTH_MM = 15.0     # ventricles lie this deep below the brain surface; sulci less often
+CSF_PERCENTILE = 1.0          # the CSF level is this percentile of T1c in the deep brain
+CORE_RADIUS_MM = 1.0          # ventricles survive an opening of this radius; thin sulci rarely do
+MIN_CORE_MM3 = 500.0
+GROW_MM = 10.0                # from the core, follow dark voxels at most this far
+MAX_VENTRICLE_MM3 = 150000.0  # larger than this is a failed segmentation (LUMIERE range: 6-62 ml)
 
 
 @dataclass
@@ -87,7 +96,94 @@ def otsu_threshold(values: np.ndarray, bins: int = 256) -> float:
 
 def segment_ventricles(image: sitk.Image, brain: sitk.Image, lesion: sitk.Image | None = None
                        ) -> tuple[sitk.Image, VentricleQC]:
-    """Lateral ventricles from T1c: dark, deep, central, large, and away from the lesion."""
+    """Lateral ventricles from T1c (rule V4: DECISIONS.md D16, deviation V4).
+
+    1. Deep brain: at least ``VENTRICLE_DEPTH_MM`` inside the brain mask and
+       ``LESION_MARGIN_MM`` away from the lesion.
+    2. Dark: T1c at or below the midpoint between the CSF level (the
+       ``CSF_PERCENTILE`` percentile of the deep brain) and the median tissue
+       level. This adapts to each scan's contrast, whereas Otsu sometimes split
+       grey from white matter instead.
+    3. Dark components of at least ``MIN_COMPONENT_MM3``.
+    4. Cores: what survives an opening of ``CORE_RADIUS_MM``, kept when at least
+       ``MIN_CORE_MM3`` and centred within ``CENTRALITY_MM`` of the deep-brain centre.
+    5. Grow the cores through dark voxels by at most ``GROW_MM``, so thin horns
+       are recovered but sulci attached further away are not; close by 2 mm.
+
+    It prefers missing some ventricle to marking tissue as barrier.
+    """
+    from scipy import ndimage
+
+    def radius(mm: float) -> list[int]:
+        return [max(1, int(round(mm / s))) for s in image.GetSpacing()]
+
+    def as_mask(array: np.ndarray) -> sitk.Image:
+        mask = sitk.GetImageFromArray(array.astype(np.uint8))
+        mask.CopyInformation(image)
+        return mask
+
+    def failed(threshold: float, note: str) -> tuple[sitk.Image, VentricleQC]:
+        empty = np.zeros(sitk.GetArrayFromImage(image).shape, np.uint8)
+        return as_mask(empty), VentricleQC(0.0, 0, threshold, False, note)
+
+    deep = sitk.BinaryErode(sitk.Cast(brain > 0, sitk.sitkUInt8), radius(VENTRICLE_DEPTH_MM))
+    if lesion is not None and sitk.GetArrayFromImage(lesion > 0).any():
+        grown = sitk.BinaryDilate(sitk.Cast(lesion > 0, sitk.sitkUInt8), radius(LESION_MARGIN_MM))
+        deep = sitk.And(deep, sitk.Cast(grown == 0, sitk.sitkUInt8))
+    inside = sitk.GetArrayFromImage(deep).astype(bool)
+    if not inside.any():
+        return failed(float("nan"), "deep brain mask empty")
+
+    intensity = sitk.GetArrayFromImage(image).astype(np.float64)
+    values = intensity[inside]
+    threshold = float((np.percentile(values, CSF_PERCENTILE) + np.median(values)) / 2.0)
+    voxel_mm3 = float(np.prod(image.GetSpacing()))
+    parts = sitk.GetArrayFromImage(sitk.RelabelComponent(
+        sitk.ConnectedComponent(as_mask(inside & (intensity <= threshold))),
+        minimumObjectSize=int(round(MIN_COMPONENT_MM3 / voxel_mm3))))
+    dark = parts > 0
+    if not dark.any():
+        return failed(threshold, "no component survived the size filter")
+
+    core = sitk.GetArrayFromImage(
+        sitk.BinaryMorphologicalOpening(as_mask(dark), radius(CORE_RADIUS_MM))) > 0
+    cores, n_cores = ndimage.label(core)
+    centre = np.argwhere(inside).mean(axis=0)
+    scale = np.array(image.GetSpacing()[::-1])
+    seed = np.zeros(dark.shape, dtype=bool)
+    kept = 0
+    for label in range(1, n_cores + 1):
+        voxels = np.argwhere(cores == label)
+        if len(voxels) * voxel_mm3 < MIN_CORE_MM3:
+            continue
+        if np.linalg.norm((voxels.mean(axis=0) - centre) * scale) > CENTRALITY_MM:
+            continue
+        seed |= cores == label
+        kept += 1
+    if not kept:
+        return failed(threshold, "no central core; segmentation not trusted")
+    for _ in range(int(round(GROW_MM / min(image.GetSpacing())))):
+        seed = ndimage.binary_dilation(seed) & dark
+
+    mask = sitk.BinaryMorphologicalClosing(as_mask(seed), radius(2.0))
+    volume = float(sitk.GetArrayFromImage(mask).sum()) * voxel_mm3
+    if volume < MIN_COMPONENT_MM3:
+        return mask, VentricleQC(volume, kept, threshold, False,
+                                 "ventricle volume implausibly small")
+    if volume > MAX_VENTRICLE_MM3:
+        return mask, VentricleQC(volume, kept, threshold, False,
+                                 "ventricle volume implausibly large")
+    return mask, VentricleQC(volume, kept, threshold, True)
+
+
+def segment_ventricles_otsu(image: sitk.Image, brain: sitk.Image, lesion: sitk.Image | None = None
+                            ) -> tuple[sitk.Image, VentricleQC]:
+    """The original rule (gbm-4d), kept for the record and comparison only; not used by features.
+
+    Lateral ventricles from T1c: dark, deep, central, large, and away from the lesion.
+    Superseded by :func:`segment_ventricles` (deviation V4): Otsu sometimes split grey from
+    white matter, and one mask covered 52.8% of the brain.
+    """
     def radius(mm: float) -> list[int]:
         return [max(1, int(round(mm / s))) for s in image.GetSpacing()]
 

@@ -10,7 +10,7 @@ Only the barriers need adapting:
   used for the white-matter test (``rhuh.falx_t1_sequence``) are decisions to
   record before scoring (plan Step 4.1), so both are null until then and
   reading them raises.
-* ventricles: gbm-4d's segmentation on the post-op T1ce, lesion excluded, as on LUMIERE.
+* ventricles: rule V4 (DECISIONS.md D16) on the post-op T1ce, lesion excluded, as on LUMIERE.
 """
 
 from __future__ import annotations

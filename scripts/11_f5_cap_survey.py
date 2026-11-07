@@ -132,6 +132,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--patients", nargs="+", default=None, help="print only; writes nothing")
+    ap.add_argument("--out", type=Path, default=OUT,
+                    help="results folder (results/f5_cap_survey holds the original-rule run)")
     args = ap.parse_args()
     config.pin_itk_threads()
 
@@ -141,13 +143,14 @@ def main() -> int:
         return 0
 
     require_clean_tree()
-    OUT.mkdir(parents=True, exist_ok=True)
-    with run_manifest(OUT):
+    out = args.out
+    out.mkdir(parents=True, exist_ok=True)
+    with run_manifest(out):
         rows = []
         for patient in lumiere.cohort():
             rows.append(survey(patient))
             print(patient, f"{rows[-1]['unreached_ml']} ml unreached", flush=True)
-        (OUT / "survey.json").write_text(
+        (out / "survey.json").write_text(
             json.dumps({"summary": summarise(rows), "patients": rows}, indent=2) + "\n",
             encoding="utf-8")
     return 0

@@ -32,6 +32,29 @@ Direction of effect:
 - Computer differences: 15 of 63 rebuilt brain masks differ from the originals, mostly near scan edges, by up to 1.68% of voxels. Keeping the original masks removes this from the tournament inputs, and reportable numbers should come from one computer.
 - No score has been seen, so none of this was chosen in light of a result.
 
+## V4: New ventricle segmentation rule for f5 and C0T
+
+Date: 2026-11-07
+Source: plan Steps 1.3 (f5 "gbm-4d Block B"), 1.4 (C0T) and 4.1 ("derive the falx and ventricle barriers the same way gbm-4d did"); user decision on 2026-11-07 ("Fix for all patients"); `DECISIONS.md` D16
+
+Departure:
+gbm-4d's ventricle segmentation (Otsu on T1c in the brain eroded by 8 mm) is replaced for every patient, on LUMIERE and RHUH-GBM alike, by rule V4 in `gbmc.anatomy.segment_ventricles`: a midpoint threshold between each scan's CSF and tissue levels, a 15 mm depth limit, a 1 mm core test and 10 mm of growth from the core (D16). The old rule stays as `segment_ventricles_otsu` for comparison only. The falx is unchanged.
+
+Why:
+The f5 cap survey (`results/f5_cap_survey/`, anatomy only) found the old masks unreliable: Patient-002's covered 52.8% of the brain (771 ml) and passed QC, and in 27 of 62 masks fewer than half the voxels passed a rough T2/FLAIR CSF screen. Overlays showed masks spreading into deep tissue.
+
+How the rule was chosen:
+Nine variants were tried on the 63 LUMIERE baselines and judged on volumes, the T2/FLAIR screen and overlays, by eye, by Claude. No recurrence label, outcome or score was read at any point. The rule favours specificity: missing some ventricle shortens a path slightly, while marking tissue as barrier distorts distances and trims the margin. It is frozen before any candidate is scored and is applied unchanged to RHUH-GBM.
+
+Direction of effect:
+- Masks: all 63 pass QC (the old rule failed Patient-074), with volumes of 6.2 to 61.7 ml (median 23.9); the old rule gave 0 to 771 ml (median 49). On the rough screen, which uses T2 and FLAIR that the rule does not, a median of 82% of mask voxels look like CSF (old 63%), and 2 masks are under half (old 27).
+- Known weaknesses: thin ventricles are under-segmented (Patient-028, 6 ml), and some deep sulci remain (Patient-018). The overlay review was at thumbnail size, by one reviewer.
+- On f5, C0T and the matched volume: see the recompute results below. Direction on any score: unknown, nothing scored.
+- RHUH-GBM: same rule, T1c only, so it needs no sequence the plan does not already use. Untested there (no download).
+
+Recompute:
+TODO: filled in after `01_` is rerun.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29
