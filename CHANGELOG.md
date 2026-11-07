@@ -3,6 +3,7 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-07: ventricle rule V4 in `gbmc.anatomy.segment_ventricles` (the old rule is kept as `segment_ventricles_otsu`); `tests/test_ventricles.py`; `--old/--new/--out` options on `10_` and `--out` on `11_`; `results/feature_recompute_v4/` and `results/f5_cap_survey_v4/`. f5 and C0T are recomputed for all 63 (D16, deviation V4).
 - 2026-11-06: `scripts/11_f5_cap_survey.py` and `results/f5_cap_survey/`: anatomy-only survey of voxels at the f5 cap. No sealed-off tissue; found unreliable ventricle masks (`DECISIONS.md` D6 (k), open). Nothing changed in the features.
 
 ### Changed

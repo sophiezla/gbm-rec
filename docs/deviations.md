@@ -52,8 +52,15 @@ Direction of effect:
 - On f5, C0T and the matched volume: see the recompute results below. Direction on any score: unknown, nothing scored.
 - RHUH-GBM: same rule, T1c only, so it needs no sequence the plan does not already use. Untested there (no download).
 
-Recompute:
-TODO: filled in after `01_` is rerun.
+Recompute (2026-11-07; `results/feature_recompute_v4/`, `results/f5_cap_survey_v4/`):
+- `01_` was rerun for all 63 patients, keeping the original evaluation masks and labels (`--keep-from features_v1`). Masks, labels and f1–f4 are identical to the V3 caches. The V3 caches are kept in `data/interim/features_v3/` (not in git).
+- f5: the mean absolute change per patient has a median of 3.23 mm (mean 7.55). It is largest in Patient-002 (139.2 mm), where half the brain had been barrier, then about 16 mm in Patients 008, 022 and 011. A median of 39% of voxels changed by more than 0.01 mm.
+- C0T: the mean absolute change per patient has a median of 0.84 mm (mean 2.54). It is largest in Patient-002 (101.4 mm); every other patient is at or under 2.8 mm.
+- Matched volume:
+  - 15 mm margin: median change 0.0%, range −1.2% (Patient-072) to +3.8% (Patient-002).
+  - 20 mm margin: median change 0.0%, range −1.3% to +16.2% (Patient-002).
+- Capped share of evaluation voxels: median 3.5%, at most 6.0% (V3: 5.4%, up to 55%). The tissue that is truly unreached is at most 0.17 ml.
+- No score has been seen, so none of this was chosen in light of a result.
 
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 

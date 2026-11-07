@@ -5,7 +5,7 @@
     "results/f5_cap_survey_v4"
   ],
   "command": "11_f5_cap_survey.py --out results/f5_cap_survey_v4",
-  "duration_s": 194.843,
+  "duration_s": 194.458,
   "environment": {
     "in_project_venv": true,
     "machine": "arm64",
@@ -59,11 +59,9 @@
   },
   "git": {
     "branch": "main",
-    "commit": "08a720dab3b0790b49bba93c29cc40a536e98419",
-    "dirty": true,
-    "dirty_files": [
-      "?? results/f5_cap_survey_v4/"
-    ],
+    "commit": "06b4923ebc24c05227752d21055fcd41b9cdb732",
+    "dirty": false,
+    "dirty_files": [],
     "remote": "https://github.com/sophiezla/gbm-rec.git"
   },
   "inputs": [],
@@ -74,6 +72,6 @@
     }
   ],
   "schema": "gbmc/manifest/1",
-  "started_utc": "2026-11-07T23:38:05Z",
+  "started_utc": "2026-11-07T23:41:22Z",
   "values": {}
 }
