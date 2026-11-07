@@ -26,7 +26,23 @@ from gbmc.provenance import require_clean_tree, run_manifest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CACHE = REPO_ROOT / "data" / "interim" / "features"
 OUT = REPO_ROOT / "results" / "f5_cap_survey"
+F1 = features.COLUMNS.index("f1")
 F5 = features.COLUMNS.index("f5")
+C0T = features.COLUMNS.index("c0t")
+#: Rough screen for CSF on z-scored scans: bright on T2 and dark on FLAIR. Not validated.
+CSF_T2_Z = 1.0
+CSF_FLAIR_Z = 0.0
+SHELL_MM = 15.0
+
+
+def _csf_like_share(patient: str, baseline: str, mask: np.ndarray) -> float | None:
+    """Share of ``mask`` that looks like CSF on T2 and FLAIR; None for an empty mask."""
+    if not mask.any():
+        return None
+    base = lumiere.derived_root() / "data" / "interim" / "preprocessed" / patient / baseline
+    t2 = sitk.GetArrayFromImage(sitk.ReadImage(str(base / "T2.nii.gz"), sitk.sitkFloat32))
+    flair = sitk.GetArrayFromImage(sitk.ReadImage(str(base / "FLAIR.nii.gz"), sitk.sitkFloat32))
+    return float(((t2 > CSF_T2_Z) & (flair < CSF_FLAIR_Z))[mask].mean())
 
 
 def _signed_atlas_x(case, mask: np.ndarray) -> np.ndarray:
@@ -46,6 +62,8 @@ def survey(patient: str) -> dict:
         case.brain = features.brain_from_cache(cached["evaluate_packed"],
                                                cached["evaluate_shape"], case.brain, target)
         f5_values = cached["matrix"][:, F5]
+        f1_values = cached["matrix"][:, F1]
+        c0t_values = cached["matrix"][:, C0T]
     evaluate = case.brain & ~target
     f5 = np.zeros(evaluate.shape, dtype=np.float32)
     f5[evaluate] = f5_values
@@ -93,6 +111,9 @@ def survey(patient: str) -> dict:
         "ventricle_parts": vent_qc.n_components,
         "csf_threshold": round(vent_qc.threshold, 4),
         "ventricle_segmentation_ok": bool(vent_qc.ok),
+        "ventricle_csf_like_share": _csf_like_share(patient, case.baseline, vent),
+        "euclidean_shell_15mm_voxels": int((f1_values <= SHELL_MM).sum()),
+        "c0t_margin_15mm_voxels": int((c0t_values <= SHELL_MM).sum()),
     }
 
 
