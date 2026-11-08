@@ -110,7 +110,7 @@ Decision:
    - f2: DeepBraTumIA label 3 (Edema_Compartment).
    - f3: signed Euclidean distance to the f2 surface, capped at 300 mm when f2 is empty.
    - f4: f1 × f2.
-   - f5: fast-marching geodesic distance from the target inside the brain, with gbm-4d's derived falx (gbm4d.barriers) and the ventricles (gbm4d.ventricles, lesion excluded) closed.
+   - f5: fast-marching geodesic distance from the target inside the brain, with the falx (`gbmc.anatomy.falx_barrier`, rewritten from gbm-4d, deviation V3) and the ventricles (rule V4, D16; lesion excluded) closed.
    - Unreachable voxels are capped at 300 mm.
 3. **Candidates** (`gbmc.candidates`), in complexity order C0, C0T, C4, C1, C3, C2, C5, C6:
    - C0 = −f1.
@@ -129,14 +129,14 @@ Decision:
 6. **Aggregation.** Mean over evaluable patients. Δ vs C0 with a patient-level BCa bootstrap 95% CI, 1000 resamples, seeded per candidate and metric.
 7. **Selection rule.** From C4, C1, C3, C2, C5, C6, take the highest mean held-out PR-AUC. If any simpler candidate is within 0.005 of it, the simplest such one is the challenger. The challenger goes to Phase 4 whatever its Δ vs C0.
 
-Open points needing approval before commit (methodology, so not decided by Claude):
-- (a) `seeds.master` value.
+Open points. The user decided on 2026-11-07: (a) 20261107; (b), (c), (d), (e), (f), (h) and (i) approved as written below. Still open: (g), because the user has a GPU on another computer, whose details decide the Step 0.4 gate. `seeds.master` is written into `config.yaml` only when (g) is settled and the lock is committed, so `02_` cannot score anything before then.
+- (a) `seeds.master` value. **Decided: 20261107** (the date the rules were set).
 - (b) f1 follows the plan's text (Euclidean). gbm-4d's Arm 0 used a brain-constrained geodesic, so C0 will not reproduce gbm-4d's 0.0743 exactly. On Patient-001 the two correlate at 0.9999, with a median difference of 0.95 mm.
 - (c) The C0T ventricle rule (item 3) is one reading of "cut to 5 mm at the ventricles".
 - (d) f5 closes the ventricles fully. The plan's f5 names the falx, ventricles and skull, and the plan does not give the 5 mm allowance to f5.
 - (e) Rule 7 applies the 0.005 margin to every pair. The plan spells it out only for C6, but also says "a simple model wins ties".
 - (f) C3 uses patient-balanced weights like C1. The plan states the weights only for C1; using them for C3 too makes C3 vs C1 isolate f5.
-- (g) C5 is out until Step 0.4 is recorded (GPU, starting weights).
+- (g) C5 is out until Step 0.4 is recorded (GPU, starting weights). **Open (2026-11-07):** the user has a GPU on another computer. The plan's gate needs a CUDA GPU with at least 8 GB of memory: TODO, record the model and memory. Starting weights: the plan says C5 trains from scratch if no weights were "found and verified in week 1". The candidates in `PROJECT_STATUS.md` (Step 0.4 facts) were never verified, so by the plan's text C5 trains from scratch. If C5 runs, its fixed epoch count, patch size and architecture must be recorded here before the lock.
 - (h) Power (Step 2.1): a simulated study "detects" when the BCa lower bound is above 0, which is how the verdict rule reads the CI. gbm-4d used a two-sided percentile test. The assumed arm correlation rho is reported at 0.5, 0.7 and 0.9, with 0.5 as the pessimistic headline (`config.yaml:power`).
 - (j) **Resolved 2026-11-07 by D16:** the V4 rule finds Patient-074's ventricles (10 ml), so all 63 have both barriers. Original note: gbm-4d's ventricle segmentation found no central component ("segmentation not trusted"), so this patient's f5 and C0T had the falx barrier but no ventricle barrier.
 - (k) **Resolved 2026-11-07 by D16 (user: "Fix for all patients"; deviation V4).** Ventricle masks (found 2026-11-06, no labels read, `results/f5_cap_survey/`). The segmenter applies Otsu to T1c in the deep brain. Confirmed: Patient-002's mask is 771 ml (52.8% of the brain) with threshold 1.08, against a cohort median of 49 ml and -0.18, and it passes the QC because the QC has no upper limit. In 27 of 62 masks under half the voxels pass a rough CSF screen (T2 z > 1 and FLAIR z < 0; not validated), and 12 are under a quarter. Overlays of the 9 masks checked by eye show several spreading into deep tissue. Lower CSF share goes with a higher threshold (r = -0.87), which suggests Otsu is sometimes splitting grey from white matter rather than CSF from tissue (hypothesis, not proven). The masks feed f5, C0T and so the matched volume: C0T's 15 mm margin holds a median 6.4% fewer voxels than the Euclidean shell, up to 18.5%, though falx trimming is part of that. Direction of effect on any score: unknown, nothing scored. The rewrite matched the original code, so this is inherited, and plan Step 4.1 says to derive barriers "the same way gbm-4d did", so any change is a deviation. Options: fix the segmenter for all patients before scoring; fix or exclude only Patient-002; or keep and report. Any fix must also work on RHUH-GBM (its sequences: TODO verify from the plan, no download).
