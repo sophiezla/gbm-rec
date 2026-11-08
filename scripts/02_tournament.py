@@ -8,7 +8,9 @@ candidate is scored.
 Writes ``results/tournament/``: ``folds.json``, ``per_patient.json``,
 ``leaderboard.json`` (means, Δ vs C0 with BCa CIs, the challenger) and the run
 manifest; and every held-out voxel score map to ``data/interim/oof/`` (not in git).
-C5 is absent until the Step 0.4 gate is decided and implemented.
+C5 passed the Step 0.4 gate (D6 (g)). It is trained on the GPU computer, and its held-out
+maps are imported into ``data/interim/c5_oof/``. This script refuses to run until they are
+present, hash-checked and made on the same folds, so C6 always has its fixed members.
 
     python scripts/02_tournament.py
 """
@@ -27,7 +29,7 @@ from gbmc.lumiere import cohort
 from gbmc.provenance import require_clean_tree, run_manifest
 from gbmc.rng import stable_seed
 from gbmc.stats import mean_with_bca
-from gbmc.tournament import CACHE, load, missing, training_rows
+from gbmc.tournament import CACHE, c5_held_out, load, missing, training_rows
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "results" / "tournament"
@@ -49,6 +51,7 @@ def main() -> int:
 
     folds = candidates.patient_folds(patients, int(config.get("tournament.n_folds")),
                                      stable_seed("tournament_folds", master_seed=master))
+    c5 = c5_held_out(patients, folds)
     train_cache = {p: training_rows(p, master) for p in patients}
 
     per_patient: dict[str, dict] = {}
@@ -65,6 +68,9 @@ def main() -> int:
             scores = {name: rule.score(x) for name, rule in candidates.RULES.items()}
             for name, cand in candidates.LEARNED.items():
                 scores[name] = candidates.predict(cand, models[name], x)
+            if c5[patient].shape != truth.shape:
+                raise SystemExit(f"C5 map for {patient} has the wrong number of voxels")
+            scores["C5"] = c5[patient]
             scores["C6"] = candidates.rank_average(
                 [scores[m] for m in candidates.ENSEMBLE_MEMBERS])
             row = {"fold": k, "evaluable": bool(truth.any()),

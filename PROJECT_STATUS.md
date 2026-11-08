@@ -77,6 +77,7 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 ## Known Issues
 - Resolved 2026-11-03: the gbm-4d dependency is gone (deviation V3).
 - Resolved 2026-11-07: the unreliable ventricle masks are replaced by rule V4 (D16, deviation V4), and f5 and C0T are recomputed. Patient-074 now has ventricles, which resolves D6 (j).
+- 2026-11-07: the tournament rules are locked (D6, Step 1.1), with seed 20261107 and C5 in. Nothing is scored yet. Blocking the tournament: the C5 training script (GPU computer) and the import of its maps.
 
 ## Blockers
 - ISEF forms not signed (blocks Phase 1).

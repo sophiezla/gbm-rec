@@ -61,6 +61,11 @@ def score_patient(inp: PatientInputs, models: dict) -> tuple[dict, dict[str, np.
     scores = {name: rule.score(x) for name, rule in candidates.RULES.items()}
     for name, cand in candidates.LEARNED.items():
         scores[name] = candidates.predict(cand, models[name], x)
+    if "C5" in models:
+        scores["C5"] = np.asarray(models["C5"], dtype=np.float64)
+    if any(m not in scores for m in candidates.ENSEMBLE_MEMBERS):
+        # TODO (D6 (g)): C5's RHUH-GBM maps come from the GPU computer; the import is not built.
+        raise RuntimeError("C5 scores missing: C6 cannot be formed with its fixed members")
     scores["C6"] = candidates.rank_average([scores[m] for m in candidates.ENSEMBLE_MEMBERS])
 
     escape = f1 > 20.0   # plan Step 2.3: the escape region, > 20 mm from the target

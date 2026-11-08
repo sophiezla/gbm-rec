@@ -98,10 +98,10 @@ Plan Step 1.2: "in gbm-4d's baseline space, with gbm-4d's transported labels".
 Consequences:
 Checked on Patient-001: the evaluation mask and the 3,303 positive voxels are identical to gbm-4d's cached features.
 
-## D6: Tournament rules (plan Step 1.1). DRAFT, not yet committed
+## D6: Tournament rules (plan Step 1.1). LOCKED
 
-Date: (set at commit)
-Status: **Proposed.** No candidate may be scored until this entry is committed with `seeds.master` set. `scripts/02_tournament.py` enforces both (clean tree, non-null seed).
+Date: 2026-11-07
+Status: **Locked** (user approved every open point on 2026-11-07). Committed with `seeds.master` = 20261107 before any candidate was scored. Any change from here on is a deviation, logged with its direction of effect. `scripts/02_tournament.py` refuses a dirty tree, a null seed, or missing C5 maps.
 
 Decision:
 1. **Cohort and endpoint.** 63 locked LUMIERE patients; label = enhancing tumour at the first segmented RANO progression; evaluation region = brain minus target (DeepBraTumIA labels 1 + 2). A patient with no positive voxel there is *undefined* for every metric and is left out of every mean and Δ, never scored 0. Undefined patients still give training negatives (20,000 random voxels, gbm-4d arm2).
@@ -119,7 +119,8 @@ Decision:
    - C1 = L2 logistic regression (gbm-4d's standardise + C = 1 pipeline) on f1–f4, with patient-balanced sample weights.
    - C3 = the same on f1–f5, with the same weights.
    - C2 = LightGBM with gbm-4d's frozen `LIGHTGBM_PARAMS` on f1–f4, unweighted.
-   - C6 = unweighted mean of within-patient percentile ranks of C1, C3, C2 (+ C5 if the gate passes), from their held-out predictions.
+   - C5 = small 3D U-Net on images, trained from scratch on the GPU computer; settings in item 8.
+   - C6 = unweighted mean of within-patient percentile ranks of C1, C3, C2 and C5, from their held-out predictions.
    - Training rows for C1, C3 and C2: every positive plus 50 negatives per positive, seeded per patient and the same in every fold (gbm-4d arm2).
 4. **Folds.** One 7-fold split (9 patients each) drawn from the sorted IDs with `stable_seed("tournament_folds")`, shared by every candidate.
 5. **Metrics per held-out patient.**
@@ -128,15 +129,31 @@ Decision:
    - Coverage (denominator: recurrence outside the target) at matched volume. The matched volume is the number of evaluation voxels inside the patient's own C0T margin at 15 mm (headline) and at 20 mm, plus 50 ml. At the cut, tied scores share the remaining treated volume in proportion, so coverage is the expected value under a random tie-break.
 6. **Aggregation.** Mean over evaluable patients. Δ vs C0 with a patient-level BCa bootstrap 95% CI, 1000 resamples, seeded per candidate and metric.
 7. **Selection rule.** From C4, C1, C3, C2, C5, C6, take the highest mean held-out PR-AUC. If any simpler candidate is within 0.005 of it, the simplest such one is the challenger. The challenger goes to Phase 4 whatever its Δ vs C0.
+8. **C5** (plan Step 1.4 C5 rules; all fixed before training, never tuned; `config.yaml:c5`):
+   - Inputs: baseline T1c and FLAIR (z-scored), target mask, FLAIR mask and the f1 map. No pretrained weights: none were verified in week 1, so C5 trains from scratch as the plan directs.
+   - Network: small 3D U-Net, 4 levels, 16 base channels.
+   - Training: 96³ patches, batch 2, with half the patches centred on recurrence voxels.
+   - Loss: weighted binary cross-entropy. Positives are weighted by the training fold's negative-to-positive ratio, capped at 100.
+   - Optimiser: Adam at a learning rate of 1e-3, decaying to 0.
+   - Length: exactly 200 epochs × 100 steps. The last epoch is kept; there is no early stopping.
+   - Augmentation: left–right flips and rotations up to 10° only.
+   - Seeds: one per fold, `stable_seed("C5", fold)`, with PyTorch's deterministic flags on.
+   - Prediction: sliding window with 50% overlap. A score is kept for each evaluation voxel, in the feature cache's order.
+   - Folds: the same 7 as every other candidate.
+9. **Machines** (user decision, 2026-11-07):
+   - The GPU computer only trains C5 and writes its held-out maps, model files and their SHA-256 hashes. It runs from a clean, recorded commit with the same folds.
+   - This Mac imports those files with hash checks (`gbmc.tournament.c5_held_out`) and computes every reportable number, C6 and the confirmatory run included.
+   - PyTorch is approved for C5. It is pinned in a separate GPU lockfile; the main environment is unchanged.
+   - Not built yet (TODO): the C5 training script, the release-model import for `03_`, and the RHUH-GBM map import for `30_`. Until they exist, `02_`, `03_` and the confirmatory scoring refuse to run.
 
-Open points. The user decided on 2026-11-07: (a) 20261107; (b), (c), (d), (e), (f), (h) and (i) approved as written below. Still open: (g), because the user has a GPU on another computer, whose details decide the Step 0.4 gate. `seeds.master` is written into `config.yaml` only when (g) is settled and the lock is committed, so `02_` cannot score anything before then.
+Open points: the user decided all of them on 2026-11-07. (a) is 20261107; (b), (c), (d), (e), (f), (h) and (i) are approved as written below; (g) is approved with C5 in (item 8).
 - (a) `seeds.master` value. **Decided: 20261107** (the date the rules were set).
 - (b) f1 follows the plan's text (Euclidean). gbm-4d's Arm 0 used a brain-constrained geodesic, so C0 will not reproduce gbm-4d's 0.0743 exactly. On Patient-001 the two correlate at 0.9999, with a median difference of 0.95 mm.
 - (c) The C0T ventricle rule (item 3) is one reading of "cut to 5 mm at the ventricles".
 - (d) f5 closes the ventricles fully. The plan's f5 names the falx, ventricles and skull, and the plan does not give the 5 mm allowance to f5.
 - (e) Rule 7 applies the 0.005 margin to every pair. The plan spells it out only for C6, but also says "a simple model wins ties".
 - (f) C3 uses patient-balanced weights like C1. The plan states the weights only for C1; using them for C3 too makes C3 vs C1 isolate f5.
-- (g) C5 is out until Step 0.4 is recorded (GPU, starting weights). **Open (2026-11-07):** the user has a GPU on another computer. The plan's gate needs a CUDA GPU with at least 8 GB of memory: TODO, record the model and memory. Starting weights: the plan says C5 trains from scratch if no weights were "found and verified in week 1". The candidates in `PROJECT_STATUS.md` (Step 0.4 facts) were never verified, so by the plan's text C5 trains from scratch. If C5 runs, its fixed epoch count, patch size and architecture must be recorded here before the lock.
+- (g) C5 is out until Step 0.4 is recorded (GPU, starting weights). **Decided 2026-11-07: the gate passes.** The user reports an NVIDIA RTX GPU on another computer that meets the gate (CUDA, at least 8 GB). The exact model and memory are not recorded yet (TODO: verify with `nvidia-smi` before C5 training). Starting weights: none were verified in week 1, so C5 trains from scratch (plan Step 0.4). Settings are in item 8; the machine split is in item 9.
 - (h) Power (Step 2.1): a simulated study "detects" when the BCa lower bound is above 0, which is how the verdict rule reads the CI. gbm-4d used a two-sided percentile test. The assumed arm correlation rho is reported at 0.5, 0.7 and 0.9, with 0.5 as the pessimistic headline (`config.yaml:power`).
 - (j) **Resolved 2026-11-07 by D16:** the V4 rule finds Patient-074's ventricles (10 ml), so all 63 have both barriers. Original note: gbm-4d's ventricle segmentation found no central component ("segmentation not trusted"), so this patient's f5 and C0T had the falx barrier but no ventricle barrier.
 - (k) **Resolved 2026-11-07 by D16 (user: "Fix for all patients"; deviation V4).** Ventricle masks (found 2026-11-06, no labels read, `results/f5_cap_survey/`). The segmenter applies Otsu to T1c in the deep brain. Confirmed: Patient-002's mask is 771 ml (52.8% of the brain) with threshold 1.08, against a cohort median of 49 ml and -0.18, and it passes the QC because the QC has no upper limit. In 27 of 62 masks under half the voxels pass a rough CSF screen (T2 z > 1 and FLAIR z < 0; not validated), and 12 are under a quarter. Overlays of the 9 masks checked by eye show several spreading into deep tissue. Lower CSF share goes with a higher threshold (r = -0.87), which suggests Otsu is sometimes splitting grey from white matter rather than CSF from tissue (hypothesis, not proven). The masks feed f5, C0T and so the matched volume: C0T's 15 mm margin holds a median 6.4% fewer voxels than the Euclidean shell, up to 18.5%, though falx trimming is part of that. Direction of effect on any score: unknown, nothing scored. The rewrite matched the original code, so this is inherited, and plan Step 4.1 says to derive barriers "the same way gbm-4d did", so any change is a deviation. Options: fix the segmenter for all patients before scoring; fix or exclude only Patient-002; or keep and report. Any fix must also work on RHUH-GBM (its sequences: TODO verify from the plan, no download).

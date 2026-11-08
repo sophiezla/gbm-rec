@@ -57,6 +57,10 @@ def main() -> int:
             rel = f"models/{name}.joblib"
             register[rel] = freeze.save_model(model, OUT / rel)
             print(f"{name}: {register[rel]}")
+        if "models/C5.joblib" not in register:
+            # TODO (D6 (g)): import C5's release model and hash from the GPU computer here.
+            raise SystemExit("C5 is a C6 member, but its release model is trained on the GPU "
+                             "computer and its import is not built yet; refusing")
         members = {m: register[f"models/{m}.joblib"] for m in candidates.ENSEMBLE_MEMBERS}
         (OUT / "model_hashes.json").write_text(json.dumps(
             {"challenger": challenger, "models": register, "C6_members": members},

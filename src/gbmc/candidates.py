@@ -11,8 +11,8 @@ C4    FLAIR edge                      f3             none: -f3
 C1    distance + FLAIR, linear        f1-f4          L2 logistic, patient-balanced
 C3    + anatomy, linear               f1-f5          L2 logistic, patient-balanced
 C2    distance + FLAIR, non-linear    f1-f4          LightGBM, gbm-4d's parameters
-C5    3D CNN (gated, Step 0.4)        images         not implemented here
-C6    rank-average ensemble           C1, C3, C2     mean within-patient percentile rank
+C5    3D CNN (gate passed, D6 (g))    images         small 3D U-Net, GPU computer
+C6    rank-average ensemble           C1, C3, C2, C5 mean within-patient percentile rank
 ====  ==============================  =============  =============================
 """
 
@@ -94,8 +94,8 @@ LEARNED = {
 }
 
 #: Fixed now, never by how the members score (plan Step 1.4, C6 rule 1).
-#: C5 joins only if the Step 0.4 gate passes.
-ENSEMBLE_MEMBERS = ("C1", "C3", "C2")
+#: C5 passed the Step 0.4 gate on 2026-11-07 (D6 (g)), so it is a member.
+ENSEMBLE_MEMBERS = ("C1", "C3", "C2", "C5")
 
 
 def fit(candidate: LearnedCandidate, matrices: Sequence[np.ndarray],
