@@ -14,7 +14,7 @@ PATIENTS = ["Patient-001", "Patient-002"]
 FOLDS = [["Patient-001"], ["Patient-002"]]
 
 
-def _write(tmp_path, folds=FOLDS, dirty=False, tamper=False):
+def _write(tmp_path, folds=FOLDS, dirty=False, tamper=False, smoke=False):
     hashes = {}
     for i, patient in enumerate(PATIENTS):
         path = tmp_path / f"{patient}.npz"
@@ -23,7 +23,8 @@ def _write(tmp_path, folds=FOLDS, dirty=False, tamper=False):
     if tamper:
         np.savez(tmp_path / "Patient-002.npz", score=np.zeros(5))
     (tmp_path / "manifest.json").write_text(
-        json.dumps({"folds": folds, "dirty": dirty, "sha256": hashes}), encoding="utf-8")
+        json.dumps({"folds": folds, "dirty": dirty, "smoke": smoke, "sha256": hashes}),
+        encoding="utf-8")
 
 
 def test_accepts_matching_maps(tmp_path):
@@ -46,6 +47,12 @@ def test_refuses_other_folds(tmp_path):
 def test_refuses_uncommitted_code(tmp_path):
     _write(tmp_path, dirty=True)
     with pytest.raises(SystemExit, match="uncommitted"):
+        c5_held_out(PATIENTS, FOLDS, tmp_path)
+
+
+def test_refuses_a_smoke_run(tmp_path):
+    _write(tmp_path, smoke=True)
+    with pytest.raises(SystemExit, match="smoke"):
         c5_held_out(PATIENTS, FOLDS, tmp_path)
 
 

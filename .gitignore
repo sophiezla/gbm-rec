@@ -27,3 +27,4 @@ Thumbs.db
 app/public/cases/
 app/node_modules/
 app/dist/
+.venv-*/

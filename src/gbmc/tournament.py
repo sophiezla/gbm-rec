@@ -81,6 +81,8 @@ def c5_held_out(patients: list[str], folds: list[list[str]], maps: Path = C5_MAP
         raise SystemExit("C5 maps were made with different folds; refusing")
     if manifest.get("dirty", True):
         raise SystemExit("C5 maps were made from uncommitted code; refusing")
+    if manifest.get("smoke", True):
+        raise SystemExit("C5 maps are from a smoke run, not the fixed settings; refusing")
     scores = {}
     for patient in patients:
         path = maps / f"{patient}.npz"
