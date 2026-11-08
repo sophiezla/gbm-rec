@@ -1,0 +1,5 @@
+# C5 only, on the GPU computer (DECISIONS.md D6 item 9). Installed on top of requirements.lock.
+# torch 2.15.0 is the version tested on the Mac (CPU). Install the CUDA build that matches the
+# GPU computer's driver from the selector at pytorch.org (TODO: record the index URL used),
+# then freeze the result to requirements-gpu.lock (docs/C5_GPU.md).
+torch==2.15.0

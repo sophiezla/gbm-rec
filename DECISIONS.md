@@ -140,11 +140,18 @@ Decision:
    - Seeds: one per fold, `stable_seed("C5", fold)`, with PyTorch's deterministic flags on.
    - Prediction: sliding window with 50% overlap. A score is kept for each evaluation voxel, in the feature cache's order.
    - Folds: the same 7 as every other candidate.
+   - Implementation details the approved settings left open, fixed in `gbmc.c5` on 2026-11-07 before any C5 training or score:
+     - Downsampling uses stride-2 convolutions, not max-pooling, because CUDA max-pool has no deterministic backward.
+     - The learning rate decays linearly to 0.
+     - The f1 channel is divided by 100 mm, and every input is 0 outside the brain.
+     - The loss counts only evaluation voxels (brain minus target).
+     - "Half the patches" alternates exactly: positive, then random.
+     - The overlapping sliding windows are averaged with equal weight.
 9. **Machines** (user decision, 2026-11-07):
    - The GPU computer only trains C5 and writes its held-out maps, model files and their SHA-256 hashes. It runs from a clean, recorded commit with the same folds.
    - This Mac imports those files with hash checks (`gbmc.tournament.c5_held_out`) and computes every reportable number, C6 and the confirmatory run included.
    - PyTorch is approved for C5. It is pinned in a separate GPU lockfile; the main environment is unchanged.
-   - Not built yet (TODO): the C5 training script, the release-model import for `03_`, and the RHUH-GBM map import for `30_`. Until they exist, `02_`, `03_` and the confirmatory scoring refuse to run.
+   - Built 2026-11-07: `scripts/12_c5_pack.py` (Mac), `scripts/13_c5_train.py` (GPU computer) and `docs/C5_GPU.md`. Not built yet (TODO): the release-model import for `03_` and the RHUH-GBM map import for `30_`; until they exist, `03_` and the confirmatory scoring refuse to run.
 
 Open points: the user decided all of them on 2026-11-07. (a) is 20261107; (b), (c), (d), (e), (f), (h) and (i) are approved as written below; (g) is approved with C5 in (item 8).
 - (a) `seeds.master` value. **Decided: 20261107** (the date the rules were set).
