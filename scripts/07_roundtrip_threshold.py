@@ -39,7 +39,35 @@ from gbmc.rng import stable_seed
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 WORK = REPO_ROOT / "data" / "interim" / "roundtrip_tuned"
+PREPROC = REPO_ROOT / "data" / "interim" / "preprocessed_later"
 OUT = REPO_ROOT / "results" / "registration_threshold"
+
+
+def preprocessed_progression(patient: str, timepoint: str) -> Path | None:
+    """The first-progression scan preprocessed like the baselines (``00_``), made if absent.
+
+    Same function and seed as ``00_`` and ``05_`` (``imaging.preprocess_timepoint``,
+    ``later_progression.transport_master_seed``); kept in ``05_``'s folder. Only images
+    are written; the progression segmentation is not read.
+    """
+    from dataclasses import asdict
+
+    import SimpleITK as sitk
+
+    from gbmc import imaging
+
+    out = PREPROC / patient / timepoint
+    if (out / "qc.json").is_file():
+        return out if json.loads((out / "qc.json").read_text(encoding="utf-8"))["ok"] else None
+    master = int(config.get("later_progression.transport_master_seed"))
+    native = lumiere.lumiere_root() / "Imaging" / patient / timepoint
+    images, qc = imaging.preprocess_timepoint(native, patient, timepoint, master)
+    out.mkdir(parents=True, exist_ok=True)
+    if qc.ok:
+        for name, image in images.items():
+            sitk.WriteImage(image, str(out / f"{name}.nii.gz"), useCompression=True)
+    (out / "qc.json").write_text(json.dumps(asdict(qc), indent=2), encoding="utf-8")
+    return out if qc.ok else None
 
 
 def one(patient: str, master: int, overwrite: bool = False) -> dict:
@@ -48,10 +76,12 @@ def one(patient: str, master: int, overwrite: bool = False) -> dict:
     out = WORK / patient
     if (out / "qc.json").is_file() and not overwrite:
         return json.loads((out / "qc.json").read_text(encoding="utf-8")) | {"skipped": True}
-    qc = lumiere.transport_qc(patient)
-    pre = lumiere.derived_root() / "data" / "interim" / "preprocessed" / patient
-    base, prog = pre / qc["baseline"], pre / qc["progression"]
-    seg_img = sitk.ReadImage(str(lumiere.lumiere_root() / "Imaging" / patient / qc["baseline"]
+    baseline, progression = lumiere.baseline_name(patient), lumiere.first_progression(patient)
+    base = lumiere.derived_root() / "data" / "interim" / "preprocessed" / patient / baseline
+    prog = preprocessed_progression(patient, progression)
+    if prog is None:
+        return {"patient": patient, "ok": False, "note": "progression preprocessing failed"}
+    seg_img = sitk.ReadImage(str(lumiere.lumiere_root() / "Imaging" / patient / baseline
                                  / lumiere.NATIVE_SEG), sitk.sitkUInt8)
     reference = sitk.ReadImage(str(base / "CT1.nii.gz"), sitk.sitkFloat32)
     seg = sitk.GetArrayFromImage(sitk.Resample(

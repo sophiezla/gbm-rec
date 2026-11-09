@@ -4,7 +4,10 @@
 Same settings and training rows as the tournament (``02_``). The app shows
 every candidate, so all learned candidates are refit, not only the challenger.
 C6 has no weights of its own: it is rebuilt from the refit members, and the
-register lists their hashes under ``C6_members``.
+register lists their hashes under ``C6_members``. C5 is not refit here: its release
+model is trained on the GPU computer (``13_c5_train.py --release``, copied to
+``data/interim/c5_release/``) and imported by ``gbmc.c5_import.import_release``, which
+checks its hash, settings, cohort and code before copying it to ``models/C5.pt``.
 
 Writes ``results/release/models/<candidate>.joblib`` and
 ``results/release/model_hashes.json`` (the register the confirmatory run
@@ -23,7 +26,7 @@ import json
 import sys
 from pathlib import Path
 
-from gbmc import candidates, config, freeze
+from gbmc import c5_import, candidates, config, freeze, tournament
 from gbmc.lumiere import cohort
 from gbmc.provenance import require_clean_tree, run_manifest
 from gbmc.rng import stable_seed
@@ -31,6 +34,7 @@ from gbmc.tournament import missing, training_rows
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "results" / "release"
+C5_RELEASE = REPO_ROOT / "data" / "interim" / "c5_release"
 LEADERBOARD = REPO_ROOT / "results" / "tournament" / "leaderboard.json"
 
 
@@ -57,16 +61,20 @@ def main() -> int:
             rel = f"models/{name}.joblib"
             register[rel] = freeze.save_model(model, OUT / rel)
             print(f"{name}: {register[rel]}")
-        if "models/C5.joblib" not in register:
-            # TODO (D6 (g)): import C5's release model and hash from the GPU computer here.
-            raise SystemExit("C5 is a C6 member, but its release model is trained on the GPU "
-                             "computer and its import is not built yet; refusing")
-        members = {m: register[f"models/{m}.joblib"] for m in candidates.ENSEMBLE_MEMBERS}
+        # C5 is trained on the GPU computer (D6 item 9); its model is checked and copied in.
+        rel, digest, c5_provenance = c5_import.import_release(
+            C5_RELEASE, OUT, tournament.C5_MAPS / "manifest.json", c5_import.settings_dict(),
+            patients)
+        register[rel] = digest
+        print(f"C5: {digest} (imported, trained at {c5_provenance['commit']})")
+        files = {name: f"models/{name}.joblib" for name in candidates.LEARNED}
+        files["C5"] = rel
+        members = {m: register[files[m]] for m in candidates.ENSEMBLE_MEMBERS}
         (OUT / "model_hashes.json").write_text(json.dumps(
-            {"challenger": challenger, "models": register, "C6_members": members},
-            indent=2) + "\n", encoding="utf-8")
+            {"challenger": challenger, "models": register, "C6_members": members,
+             "C5": c5_provenance}, indent=2) + "\n", encoding="utf-8")
         manifest.record(master_seed=master, n_patients=len(patients), challenger=challenger,
-                        model_sha256=register)
+                        model_sha256=register, c5=c5_provenance)
     return 0
 
 

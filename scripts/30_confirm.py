@@ -5,7 +5,10 @@ Order, and every refusal:
 1. Refuses a dirty tree, a missing OSF record (``config.yaml:osf``), an
    unlocked cohort (``results/rhuh_lock/consort.json``) or missing frozen models.
 2. Hash check: every model's SHA-256 must equal ``results/release/model_hashes.json``
-   (the values posted to OSF) before anything is loaded.
+   (the values posted to OSF) before anything is loaded. C5's RHUH-GBM maps
+   (``data/interim/rhuh/c5_maps/tuned/``, made on the GPU computer by
+   ``14_c5_score_rhuh.py``) must name that register's C5 hash and the inputs this Mac
+   packed (``24_rhuh_c5_pack.py``); ``gbmc.c5_import.rhuh_scores`` checks them here.
 3. Writes the irreversible marker ``results/confirm/OPENED.json`` BEFORE the
    first RHUH-GBM label is read. Once ``DONE.json`` exists it refuses to run;
    there is no flag to bypass it. An interrupted run may resume, and each
@@ -33,9 +36,8 @@ import sys
 from pathlib import Path
 
 import numpy as np
-import SimpleITK as sitk
 
-from gbmc import candidates, config, confirm, freeze, rhuh, verdict
+from gbmc import c5_import, candidates, config, confirm, freeze, rhuh, verdict
 from gbmc.provenance import require_clean_tree, run_manifest
 from gbmc.rng import stable_seed
 from gbmc.stats import mean_with_bca
@@ -43,32 +45,10 @@ from gbmc.stats import mean_with_bca
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "results" / "confirm"
 RELEASE = REPO_ROOT / "results" / "release"
-LF = REPO_ROOT / "data" / "interim" / "rhuh" / "label_field_tuned"
 
 
 def _json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def patient_inputs(patient: str, mapping: dict[int, str], label_dir: Path = LF,
-                   positive: tuple[str, ...] = ("enhancing",),
-                   target: np.ndarray | None = None) -> confirm.PatientInputs:
-    """Load one RHUH-GBM patient. ``positive`` names the label(s) counted as recurrence."""
-    post = rhuh.files(patient, "postop")
-    reference = sitk.ReadImage(str(post["T1ce"]), sitk.sitkFloat32)
-    arr = lambda p: sitk.GetArrayFromImage(sitk.ReadImage(str(p)))  # noqa: E731
-    seg = arr(post["seg"])
-    brain = arr(label_dir / patient / "brain_mask.nii.gz") > 0
-    if target is None:
-        target = arr(label_dir / patient / "target_mask.nii.gz") > 0
-    rec = arr(label_dir / patient / "recurrence_labels.nii.gz")
-    peri = next(v for v, n in mapping.items() if n == "peritumoral")
-    pos_values = [v for v, n in mapping.items() if n in positive]
-    t1_seq = config.get("rhuh.falx_t1_sequence")
-    return confirm.PatientInputs(
-        patient=patient, reference=reference, brain=brain, target=target,
-        flair_abnormal=(seg == peri) & brain, t1_z=arr(post[t1_seq]).astype(np.float32),
-        lesion=seg > 0, recurrence=np.isin(rec, pos_values) & brain)
 
 
 def summarise(per_patient: dict, challenger: str, master: int, n_boot: int) -> dict:
@@ -112,13 +92,15 @@ def main() -> int:
 
     freeze.verify_hashes(register["models"], RELEASE)                     # Step 4.2
     models = confirm.load_models(RELEASE, register["models"])
+    c5_scores = c5_import.rhuh_scores("tuned", lock["evaluable"],         # D6 item 9
+                                      register["models"][c5_import.RELEASE_FILE])
     freeze.open_once(OUT, lock["evaluable"],                              # Step 4.3
                      note="Written before any RHUH-GBM label was read by this script.")
 
     per_patient, qc = {}, {}
     for p in lock["evaluable"]:
-        inp = patient_inputs(p, mapping)
-        row, scores, feature_qc = confirm.score_patient(inp, models)
+        inp = confirm.load_patient(p, mapping)
+        row, scores, feature_qc = confirm.score_patient(inp, models, c5_scores[p])
         row["maps"] = confirm.write_maps(OUT / "maps", p, inp.reference,
                                          inp.brain & ~inp.target, scores)
         per_patient[p], qc[p] = row, feature_qc

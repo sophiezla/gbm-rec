@@ -24,14 +24,13 @@ marker in ``results/confirm_sensitivity/``.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
 
-from gbmc import config, confirm, freeze, rhuh
+from gbmc import c5_import, config, confirm, freeze
 from gbmc.provenance import require_clean_tree, run_manifest
 from gbmc.rng import stable_seed
 from gbmc.stats import mean_with_bca
@@ -39,24 +38,10 @@ from gbmc.stats import mean_with_bca
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "results" / "confirm_sensitivity"
 RELEASE = REPO_ROOT / "results" / "release"
-RHUH = REPO_ROOT / "data" / "interim" / "rhuh"
 
 
 def _json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _primary_module():
-    spec = importlib.util.spec_from_file_location("_confirm30",
-                                                  REPO_ROOT / "scripts" / "30_confirm.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
-def _transported(label_dir: Path) -> list[str]:
-    return sorted(p.name for p in label_dir.iterdir()
-                  if (p / "qc.json").is_file() and _json(p / "qc.json").get("ok"))
 
 
 def arm_delta(rows: dict, challenger: str, master: int, n_boot: int, arm: str) -> dict:
@@ -75,57 +60,26 @@ def main() -> int:
         raise SystemExit("the primary (30_) has not completed")
     master = int(config.get("seeds.master"))
     n_boot = int(config.get("seeds.n_bootstrap"))
-    primary = _primary_module()
     register = _json(RELEASE / "model_hashes.json")
     challenger = register["challenger"]
     freeze.verify_hashes(register["models"], RELEASE)
     models = confirm.load_models(RELEASE, register["models"])
     inv = _json(REPO_ROOT / "results/rhuh_inventory/inventory.json")
     mapping = {int(k): v for k, v in inv["mapping"]["decision"]["mapping"].items()}
-    lock = _json(REPO_ROOT / "results/rhuh_lock/consort.json")
-    screened_out = {r["patient"] for r in _json(REPO_ROOT / "results/rhuh_screens/verdict.json")
-                    ["rows"] if r["status"] == "EXCLUDE"}
-    secondary = {r["patient"] for r in inv["rows"] if r.get("secondary_facility")}
-
-    tuned = RHUH / "label_field_tuned"
-    arms = {
-        "unscreened": dict(patients=_transported(tuned), label_dir=tuned),
-        "original_recipe": dict(patients=[p for p in _transported(RHUH / "label_field_original")
-                                       if p not in screened_out],
-                             label_dir=RHUH / "label_field_original"),
-        "alt_cavity": dict(patients=lock["evaluable"], label_dir=tuned, alt_cavity=True),
-        "enh_necrosis": dict(patients=lock["evaluable"], label_dir=tuned,
-                             positive=("enhancing", "necrosis")),
-        "no_secondary": dict(patients=[p for p in lock["evaluable"] if p not in secondary],
-                             label_dir=tuned),
-    }
+    arms = confirm.sensitivity_arms(REPO_ROOT)
+    c5_scores = {variant: c5_import.rhuh_scores(variant, patients,
+                                                register["models"][c5_import.RELEASE_FILE])
+                 for variant, patients in confirm.c5_variants(arms).items()}
     freeze.open_once(OUT, sorted(arms), note="sensitivity arms of the completed primary")
     results = {}
     for arm, spec in arms.items():
         rows = {}
         for p in spec["patients"]:
-            target = None
-            if spec.get("alt_cavity"):
-                import SimpleITK as sitk
-                post = rhuh.files(p, "postop")
-                seg = sitk.GetArrayFromImage(sitk.ReadImage(str(post["seg"])))
-                brain = sitk.GetArrayFromImage(sitk.ReadImage(
-                    str(spec["label_dir"] / p / "brain_mask.nii.gz"))) > 0
-                core = rhuh.carried_preop_core(
-                    p, mapping, stable_seed(p, "rhuh-core", master_seed=master))
-                if rhuh.cavity_rule() is None:
-                    # Primary: residual + the whole carried pre-op core. Alternative
-                    # (D13, proposed): residual + only the fluid-dark part of that core,
-                    # i.e. the cavity as the post-op image shows it.
-                    t1 = sitk.GetArrayFromImage(sitk.ReadImage(str(post["T1ce"])))
-                    dark = t1 < float(config.get("rhuh.cavity_dark_t1ce_z"))
-                    target, _ = rhuh.treatment_target(seg, brain, None, core & dark, mapping)
-                else:
-                    # Primary: enhancing + labelled cavity. Alternative: the carried-core rule.
-                    target, _ = rhuh.treatment_target(seg, brain, None, core, mapping)
-            inp = primary.patient_inputs(p, mapping, spec["label_dir"],
-                                         spec.get("positive", ("enhancing",)), target)
-            row, _, _ = confirm.score_patient(inp, models)
+            target = (confirm.alt_cavity_target(p, mapping, spec["label_dir"], master)
+                      if spec.get("alt_cavity") else None)
+            inp = confirm.load_patient(p, mapping, spec["label_dir"],
+                                       spec.get("positive", ("enhancing",)), target)
+            row, _, _ = confirm.score_patient(inp, models, c5_scores[spec["c5"]][p])
             rows[p] = row
         results[arm] = {"n_scored": len(rows),
                         "n_evaluable": sum(r["evaluable"] for r in rows.values()),

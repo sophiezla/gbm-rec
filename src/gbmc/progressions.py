@@ -7,11 +7,12 @@ DeepBraTumIA segmentation.
 from __future__ import annotations
 
 from gbmc.lumiere import (
+    baseline_name,
+    first_progression,
     load_completeness,
     load_ratings,
     lumiere_root,
     timepoint_sort_key,
-    transport_qc,
 )
 
 #: Plan Step 1.8: "the second and third progression".
@@ -40,7 +41,7 @@ def schedule(patients: list[str]) -> list[dict]:
     completeness = load_completeness(md).set_index(["Patient", "Timepoint"])
     out = []
     for p in patients:
-        qc = transport_qc(p)
-        out.append({"patient": p, "baseline": qc["baseline"], "first": qc["progression"],
-                    "later": later_progressions(ratings, completeness, p, qc["progression"])})
+        first = first_progression(p)
+        out.append({"patient": p, "baseline": baseline_name(p), "first": first,
+                    "later": later_progressions(ratings, completeness, p, first)})
     return out

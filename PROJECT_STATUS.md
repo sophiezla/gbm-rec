@@ -1,15 +1,24 @@
 # Project Status: gbm-rec ("Where Does Glioblastoma Come Back?")
 
-_Last updated: 2026-09-24_
+_Last updated: 2026-11-08_
 
 ## Current Objective
-Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as written. The user reports Phase 0 is complete, and **Phase 1 (tournament on LUMIERE)** has started. Phase 0 checklist boxes below are not yet ticked individually. Tick them, with their dates, when committing.
+Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as written. **Phase 1 (tournament on LUMIERE)**: the rules are locked (D6, 2026-11-07), and C5 is waiting to be trained on the GPU computer (`docs/C5_GPU.md`). Nothing is scored. The user reports Phase 0 is complete; its checklist boxes below are not ticked individually.
+
+### Current blockers (2026-11-08)
+1. **C5 training.** On the GPU computer, train the 7 folds, then copy `data/interim/c5_oof/` here. `02_` refuses until then.
+2. **LightGBM cannot load on this Mac** (`libomp` missing, no Homebrew), so `02_` cannot fit C2 here. Fix: install `libomp` (`docs/SETUP.md`). Not done: it is a system install, for the user. With PyTorch's bundled `libomp` on `DYLD_FALLBACK_LIBRARY_PATH` in `.venv-c5`, all 148 tests pass, so the code itself works.
+3. **Data not on this Mac** for `05_`, `07_` and the app export (`40_`):
+   - the progression scans (the raw LUMIERE copy here holds baselines only);
+   - the LUMIERE rating and completeness sheets (`metadata/`);
+   - the first-progression recurrence labels (`label_field/`);
+   - the first-progression names of the 13 gbm-4d test patients (`results/cohort_lock/first_progressions.json` lists them as missing). The three app hero cases are among those 13.
 
 ## Phase Gates (plan §3)
 | Phase | Weeks | Gate | State |
 |---|---|---|---|
 | 0 Setup + paperwork | 1 | ISEF forms signed; SRC contacted; repo scaffolded, builds, tests pass; CNN hardware + starting-weights decisions recorded; literature search string committed; expert emails sent | **Open.** Repo, build and tests done |
-| 1 Tournament on LUMIERE | 1–2 | All candidates scored on identical folds; challenger named by rule; weights hashed | **Started.** Code and tests done; rules drafted (D6); nothing scored |
+| 1 Tournament on LUMIERE | 1–2 | All candidates scored on identical folds; challenger named by rule; weights hashed | **Started.** Rules locked (D6); code and tests done, C5 included; waiting on C5 training; nothing scored |
 | 2 Freeze + OSF | 2 | OSF timestamp precedes the RHUH-GBM download date | Not started |
 | 3 RHUH-GBM cohort lock | 3 | Cohort locked; CONSORT committed; achieved MDE recorded; no model score computed | Not started |
 | 4 Confirmatory run, once | 4–5 | Verdict sentence filled; figures from results/; audit passes | Not started |
@@ -39,13 +48,13 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 - 2026-09-23: Steps 0.2, 0.3 and 0.5. `pytest`: 18 passed. `ruff`: clean.
 
 ## Phase 1 Checklist
-- [ ] 1.1 Rules committed: D6 drafted; open points (a)–(j) await approval
+- [x] 1.1 Rules committed and locked (D6, 2026-11-07; seed 20261107)
 - [x] 1.2 Cohort and endpoint wired to gbm-4d's frozen data (D5); Patient-001 matches gbm-4d exactly
-- [x] 1.3 Features extracted for all 63 patients (`data/interim/features/`). 53 are evaluable, matching gbm-4d's 42 + 11. Patient-074 has no ventricle barrier (D6 j)
-- [ ] 1.4 Candidates: C0, C0T, C4, C1, C3, C2, C6 coded; C5 waits on Step 0.4
-- [ ] 1.5 / 1.6 Folds, metrics, BCa and selection rule coded and unit-tested; `02_` not run (needs committed rules + seed)
-- [ ] 1.7 Refit and hash: `03_` and `gbmc.freeze` built and tested; not run
-- [ ] 1.8 Later progressions: `05_` (transport) smoke-tested on 1 of 83 timepoints; `06_` (scoring) built, not run
+- [x] 1.3 Features for all 63 patients (`data/interim/features/`), rebuilt under V3 and V4; 53 evaluable
+- [ ] 1.4 Candidates: all eight coded. C5 is built and its inputs are packed; training on the GPU computer is pending
+- [ ] 1.5 / 1.6 Folds, metrics, BCa and selection rule coded and unit-tested; `02_` refuses until the C5 maps are imported
+- [ ] 1.7 Refit and hash: `03_` built, including the C5 release import (2026-11-08); not run
+- [ ] 1.8 Later progressions: `05_` and `06_` built. Under V3 the old smoke unit must be redone. Blocked on data not on this Mac (see Current blockers)
 
 ## Other work done ahead of its phase (no scoring, no RHUH-GBM data)
 - **Phase 2 (Steps 2.1, 2.4, 2.5):**
@@ -69,10 +78,10 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 - **Tooling:** `update_handoff.py` + `install_hooks.py` (hook not installed).
 
 ## Next Steps
-1. Step 0.1: sign the forms and email the SRC. **No model training and no data download before this.**
-2. Step 0.4: check the second machine's GPU; search for pretrained weights; record both in DECISIONS.md by Sep 28.
-3. Step 0.6: commit the PubMed search string and extraction form before reading.
-4. Step 0.7: send the expert emails.
+1. GPU computer: train C5's 7 folds (`docs/C5_GPU.md`) and copy `c5_oof/` back.
+2. This Mac: install `libomp`, then run `02_`.
+3. Copy from the Windows PC (or LUMIERE's public release) the data listed under Current blockers, item 3. Then run `15_first_progressions.py` for the 13 missing patients, and run `05_`, `07_` and `40_`.
+4. Phase 0 leftovers, status not recorded here: 0.6 (commit the PubMed search string) and 0.7 (expert emails).
 
 ## Known Issues
 - Resolved 2026-11-03: the gbm-4d dependency is gone (deviation V3).
@@ -80,7 +89,7 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 - 2026-11-07: the tournament rules are locked (D6, Step 1.1), with seed 20261107 and C5 in. Nothing is scored yet. The C5 code is built and its inputs are packed. Blocking the tournament: training C5 on the GPU computer (`docs/C5_GPU.md`).
 
 ## Blockers
-- ISEF forms not signed (blocks Phase 1).
+- See "Current blockers" at the top. ISEF forms: the user reports Phase 0 complete; whether the forms are signed is not recorded here (TODO: verify).
 
 ## Items Requiring Approval
 - The fair date. The plan assumes the week of Nov 16 but says the date is not recorded yet.

@@ -22,6 +22,7 @@ import SimpleITK as sitk
 
 from gbmc import candidates, config, freeze, metrics, rhuh_features
 from gbmc.features import COLUMNS
+from gbmc.imaging import zscore_array
 
 
 @dataclass
@@ -36,6 +37,124 @@ class PatientInputs:
     recurrence: np.ndarray        # transported recurrence label(s) counted as positive
 
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+LABEL_FIELD = REPO_ROOT / "data" / "interim" / "rhuh" / "label_field_tuned"
+
+
+def load_patient(patient: str, mapping: dict[int, str], label_dir: Path = LABEL_FIELD,
+                 positive: tuple[str, ...] = ("enhancing",), target: np.ndarray | None = None,
+                 with_recurrence: bool = True) -> PatientInputs:
+    """One RHUH-GBM patient on the early post-op grid.
+
+    ``positive`` names the label(s) counted as recurrence. With ``with_recurrence=False``
+    the recurrence file is never opened and ``recurrence`` is all False: that is how C5's
+    inputs are packed before the confirmatory run (``24_rhuh_c5_pack.py``).
+
+    T1 for the falx white-matter test is z-scored inside the brain, because the test's
+    threshold (``anatomy.WHITE_MATTER_Z``) is on the z scale, as on LUMIERE's preprocessed
+    images. RHUH-GBM ships intensities that are not z-scored.
+    """
+    from gbmc import rhuh
+
+    post = rhuh.files(patient, "postop")
+    reference = sitk.ReadImage(str(post["T1ce"]), sitk.sitkFloat32)
+    arr = lambda p: sitk.GetArrayFromImage(sitk.ReadImage(str(p)))  # noqa: E731
+    seg = arr(post["seg"])
+    brain = arr(label_dir / patient / "brain_mask.nii.gz") > 0
+    if target is None:
+        target = arr(label_dir / patient / "target_mask.nii.gz") > 0
+    peri = next(v for v, n in mapping.items() if n == "peritumoral")
+    if with_recurrence:
+        rec = arr(label_dir / patient / "recurrence_labels.nii.gz")
+        pos_values = [v for v, n in mapping.items() if n in positive]
+        recurrence = np.isin(rec, pos_values) & brain
+    else:
+        recurrence = np.zeros(brain.shape, bool)
+    t1 = arr(post[config.get("rhuh.falx_t1_sequence")]).astype(np.float32)
+    return PatientInputs(
+        patient=patient, reference=reference, brain=brain, target=target,
+        flair_abnormal=(seg == peri) & brain, t1_z=zscore_array(t1, brain),
+        lesion=seg > 0, recurrence=recurrence)
+
+
+def alt_cavity_target(patient: str, mapping: dict[int, str], label_dir: Path,
+                      master: int) -> np.ndarray:
+    """The other branch of the Step 2.2 cavity rule (sensitivity arm ``alt_cavity``, D13)."""
+    from gbmc import rhuh
+    from gbmc.rng import stable_seed
+
+    post = rhuh.files(patient, "postop")
+    seg = sitk.GetArrayFromImage(sitk.ReadImage(str(post["seg"])))
+    brain = sitk.GetArrayFromImage(sitk.ReadImage(
+        str(label_dir / patient / "brain_mask.nii.gz"))) > 0
+    core = rhuh.carried_preop_core(patient, mapping,
+                                   stable_seed(patient, "rhuh-core", master_seed=master))
+    if rhuh.cavity_rule() is None:
+        # Primary: residual + the whole carried pre-op core. Alternative (D13, proposed):
+        # residual + only the fluid-dark part of that core, the cavity as the post-op
+        # image shows it.
+        # The threshold is on the z scale, z-scored over non-zero voxels exactly as in
+        # 20_'s cavity inspection, which is where the threshold is chosen.
+        t1 = sitk.GetArrayFromImage(sitk.ReadImage(str(post["T1ce"]))).astype(np.float32)
+        dark = zscore_array(t1, t1 != 0) < float(config.get("rhuh.cavity_dark_t1ce_z"))
+        target, _ = rhuh.treatment_target(seg, brain, None, core & dark, mapping)
+    else:
+        # Primary: enhancing + labelled cavity. Alternative: the carried-core rule.
+        target, _ = rhuh.treatment_target(seg, brain, None, core, mapping)
+    return target
+
+
+def _json(path: Path) -> dict:
+    import json
+
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
+def transported(label_dir: Path) -> list[str]:
+    """Patients whose transport finished with ``qc.json`` ok."""
+    return sorted(p.name for p in label_dir.iterdir()
+                  if (p / "qc.json").is_file() and _json(p / "qc.json").get("ok"))
+
+
+def sensitivity_arms(repo_root: Path = REPO_ROOT) -> dict[str, dict]:
+    """The pre-registered sensitivity arms (``31_``), from the Phase 3 records.
+
+    Each arm names its patients, its label folder, and the C5 input variant whose maps it
+    scores with (``gbmc.c5_import.RHUH_VARIANTS``): C5's inputs change only when the
+    target or the transported label folder changes.
+    """
+    rhuh_dir = repo_root / "data" / "interim" / "rhuh"
+    inv = _json(repo_root / "results/rhuh_inventory/inventory.json")
+    lock = _json(repo_root / "results/rhuh_lock/consort.json")
+    screened_out = {r["patient"] for r in
+                    _json(repo_root / "results/rhuh_screens/verdict.json")["rows"]
+                    if r["status"] == "EXCLUDE"}
+    secondary = {r["patient"] for r in inv["rows"] if r.get("secondary_facility")}
+    tuned, original = rhuh_dir / "label_field_tuned", rhuh_dir / "label_field_original"
+    return {
+        "unscreened": dict(patients=transported(tuned), label_dir=tuned, c5="tuned"),
+        "original_recipe": dict(patients=[p for p in transported(original)
+                                          if p not in screened_out],
+                                label_dir=original, c5="original"),
+        "alt_cavity": dict(patients=lock["evaluable"], label_dir=tuned, alt_cavity=True,
+                           c5="alt_cavity"),
+        "enh_necrosis": dict(patients=lock["evaluable"], label_dir=tuned,
+                             positive=("enhancing", "necrosis"), c5="tuned"),
+        "no_secondary": dict(patients=[p for p in lock["evaluable"] if p not in secondary],
+                             label_dir=tuned, c5="tuned"),
+    }
+
+
+def c5_variants(arms: dict[str, dict], primary: list[str] | None = None) -> dict[str, list[str]]:
+    """Patients per C5 input variant: every patient any arm (or the primary) scores with it."""
+    out: dict[str, set[str]] = {}
+    for spec in arms.values():
+        out.setdefault(spec["c5"], set()).update(spec["patients"])
+    if primary is not None:
+        out.setdefault("tuned", set()).update(primary)
+    return {variant: sorted(patients) for variant, patients in out.items()}
+
+
 def load_models(release_dir: Path, register: dict[str, str]) -> dict:
     """Every learned candidate, each loaded only after its SHA-256 matches (Step 4.2)."""
     return {name: freeze.load_model(release_dir / f"models/{name}.joblib",
@@ -43,8 +162,13 @@ def load_models(release_dir: Path, register: dict[str, str]) -> dict:
             for name in candidates.LEARNED}
 
 
-def score_patient(inp: PatientInputs, models: dict) -> tuple[dict, dict[str, np.ndarray], dict]:
-    """Metrics per candidate, voxel scores per candidate, and feature QC."""
+def score_patient(inp: PatientInputs, models: dict, c5_score: np.ndarray | None = None
+                  ) -> tuple[dict, dict[str, np.ndarray], dict]:
+    """Metrics per candidate, voxel scores per candidate, and feature QC.
+
+    ``c5_score`` is C5's imported map for this patient (``gbmc.c5_import.rhuh_scores``),
+    one value per evaluation voxel in C order; C5 runs on the GPU computer (D6 item 9).
+    """
     vols, qc = rhuh_features.build(inp.reference, inp.brain, inp.target, inp.flair_abnormal,
                                    inp.t1_z, inp.lesion)
     evaluate = vols.evaluate
@@ -61,11 +185,12 @@ def score_patient(inp: PatientInputs, models: dict) -> tuple[dict, dict[str, np.
     scores = {name: rule.score(x) for name, rule in candidates.RULES.items()}
     for name, cand in candidates.LEARNED.items():
         scores[name] = candidates.predict(cand, models[name], x)
-    if "C5" in models:
-        scores["C5"] = np.asarray(models["C5"], dtype=np.float64)
-    if any(m not in scores for m in candidates.ENSEMBLE_MEMBERS):
-        # TODO (D6 (g)): C5's RHUH-GBM maps come from the GPU computer; the import is not built.
+    if c5_score is None:
         raise RuntimeError("C5 scores missing: C6 cannot be formed with its fixed members")
+    if c5_score.shape != (int(evaluate.sum()),):
+        raise RuntimeError(f"{inp.patient}: {c5_score.size} C5 scores for "
+                           f"{int(evaluate.sum())} evaluation voxels")
+    scores["C5"] = np.asarray(c5_score, dtype=np.float64)
     scores["C6"] = candidates.rank_average([scores[m] for m in candidates.ENSEMBLE_MEMBERS])
 
     escape = f1 > 20.0   # plan Step 2.3: the escape region, > 20 mm from the target

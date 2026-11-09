@@ -50,9 +50,28 @@ python scripts/13_c5_train.py
 
 Copy `data/interim/c5_oof/` (maps, `models/`, `folds/`, `manifest.json`) to the same path on the Mac. On the Mac, `scripts/02_tournament.py` checks the folds, the clean-tree flag, the smoke flag and every hash before it scores anything.
 
-## Phase 2 (after the tournament)
+Do not `git pull` while the folds are training. A fold finished at a different commit makes the manifest step refuse ("folds were trained at different commits"), and those folds then have to be retrained.
 
-`python scripts/13_c5_train.py --release` trains one model on all 63 patients into `data/interim/c5_release/`. Importing it into `03_`, and scoring RHUH-GBM with it for `30_`, are not built yet.
+## 5. Release model (Phase 1, Step 1.7, after the tournament)
+
+1. GPU computer: `python scripts/13_c5_train.py --release`. This trains one model on all 63 patients into `data/interim/c5_release/` (`model.pt` + `manifest.json`).
+2. Copy `data/interim/c5_release/` to the same path on the Mac.
+3. Mac: `python scripts/03_refit_release.py`. `gbmc.c5_import.import_release` refuses unless the release run:
+   - was clean and not a smoke run;
+   - used today's `config.yaml:c5`;
+   - trained on exactly the locked cohort;
+   - used the same `src/gbmc/c5.py` as the tournament maps;
+   - matches its own hash.
+
+   It then copies the model to `results/release/models/C5.pt` and registers its SHA-256 in `results/release/model_hashes.json`.
+4. Commit the register on the Mac and push. It goes into the OSF pre-registration.
+
+## 6. RHUH-GBM maps (Phase 3–4, after the cohort lock, before `30_`)
+
+1. Mac: `python scripts/24_rhuh_c5_pack.py`. This writes `data/interim/rhuh/c5_inputs/<variant>/` for the primary and every sensitivity arm. No label is read: the recurrence file is never opened.
+2. Copy `data/interim/rhuh/c5_inputs/` to the GPU computer, then `git pull` there, so the committed register is present.
+3. GPU computer: `python scripts/14_c5_score_rhuh.py`. It loads `c5_release/model.pt` only if it matches the registered hash, checks every input, and writes `data/interim/rhuh/c5_maps/<variant>/`.
+4. Copy `data/interim/rhuh/c5_maps/` back to the Mac. `30_` and `31_` check the model hash, the inputs and every map before they write the run-once marker.
 
 ## Rules that must not bend
 

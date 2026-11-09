@@ -1,8 +1,26 @@
 # Project Handoff
 
-_Last updated: 2026-09-24_
+_Last updated: 2026-11-08_
 
-## Current State (Phase 1, uncommitted)
+## Latest (2026-11-08): work that does not need the GPU
+- **C5 imports built** (`gbmc.c5_import`, runbook `docs/C5_GPU.md` sections 5–6):
+  - `03_` imports and registers the release model with full checks.
+  - RHUH-GBM C5 maps flow Mac (`24_`, label-free inputs) → GPU computer (`14_`, registered model only) → Mac (`30_`/`31_` check everything before the run-once marker).
+- **Bug fixed before any RHUH-GBM file exists.** On RHUH-GBM, the falx test and the cavity threshold would have compared raw intensities with z-scale thresholds. Both now z-score.
+- **First-progression names** are committed in `results/cohort_lock/first_progressions.json`: 50 of 63, from the gbm-4d bundle on Google Drive. The 13 gbm-4d test patients are missing, including all three app hero cases.
+- **D9 and D15** are reworded for V3.
+- **PDE frames** rebuilt from the V3 baselines (`data/interim/pde_frames/`); see the CHANGELOG for the result.
+- **Not on this Mac**, so `05_`, `07_` and `40_` cannot run here:
+  - progression scans;
+  - LUMIERE rating sheets;
+  - `label_field/` recurrence labels;
+  - the 13 missing names.
+  
+  The old "data on disk" list below described the old Windows computer.
+- **LightGBM** cannot load here without `libomp`. `02_` needs it, so install it before the tournament.
+- **Tests:** 148 passed in `.venv-c5` with PyTorch's `libomp`; 143 passed, 2 libomp failures and 3 PyTorch skips in `.venv`. `ruff` clean.
+
+## Current State (Phase 1, as of 2026-11-07)
 All of this work was committed and pushed to the public `sophiezla/gbm-rec` on 2026-11-03, so both partners work from that repo; clone it outside Google Drive. No dates were filled in. **No candidate has been scored, and no RHUH-GBM file exists.**
 - **Feature recompute (2026-11-06, deviation V3).** `data/interim/features/` now holds the corrected caches, and `data/interim/features_v1/` the earlier ones. Masks, labels and f1-f4 are unchanged; f5 and C0T changed. Neither is in git, and the Google Drive backup still has only the earlier caches.
 - **Open before the tournament rules lock (2026-11-06):**

@@ -107,16 +107,21 @@ def resample_isotropic(image: sitk.Image, spacing_mm: float = 1.0) -> sitk.Image
                          image.GetPixelID())
 
 
-def zscore(image: sitk.Image, mask: sitk.Image) -> sitk.Image:
-    """Z-score over in-mask voxels only; background would make it depend on field of view."""
-    values = sitk.GetArrayFromImage(image)
-    inside = sitk.GetArrayFromImage(mask).astype(bool)
+def zscore_array(values: np.ndarray, inside: np.ndarray) -> np.ndarray:
+    """Z-score over ``inside`` voxels only, 0 elsewhere (float32)."""
+    inside = inside.astype(bool)
     voxels = values[inside]
     if voxels.size == 0 or float(voxels.std()) == 0.0:
         raise ValueError("cannot z-score: empty mask or zero variance inside it")
-    scored = np.zeros_like(values, dtype=np.float32)
+    scored = np.zeros(values.shape, dtype=np.float32)
     scored[inside] = (voxels - voxels.mean()) / voxels.std()
-    out = sitk.GetImageFromArray(scored)
+    return scored
+
+
+def zscore(image: sitk.Image, mask: sitk.Image) -> sitk.Image:
+    """Z-score over in-mask voxels only; background would make it depend on field of view."""
+    out = sitk.GetImageFromArray(zscore_array(sitk.GetArrayFromImage(image),
+                                              sitk.GetArrayFromImage(mask)))
     out.CopyInformation(image)
     return out
 

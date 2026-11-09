@@ -151,7 +151,11 @@ Decision:
    - The GPU computer only trains C5 and writes its held-out maps, model files and their SHA-256 hashes. It runs from a clean, recorded commit with the same folds.
    - This Mac imports those files with hash checks (`gbmc.tournament.c5_held_out`) and computes every reportable number, C6 and the confirmatory run included.
    - PyTorch is approved for C5. It is pinned in a separate GPU lockfile; the main environment is unchanged.
-   - Built 2026-11-07: `scripts/12_c5_pack.py` (Mac), `scripts/13_c5_train.py` (GPU computer) and `docs/C5_GPU.md`. Not built yet (TODO): the release-model import for `03_` and the RHUH-GBM map import for `30_`; until they exist, `03_` and the confirmatory scoring refuse to run.
+   - Built 2026-11-07: `scripts/12_c5_pack.py` (Mac), `scripts/13_c5_train.py` (GPU computer) and `docs/C5_GPU.md`.
+   - Built 2026-11-08 (`gbmc.c5_import`, runbook sections 5–6):
+     - **Release model.** `03_` imports the GPU computer's release model. It checks the clean tree, the smoke flag, the settings, the cohort, the SHA-256, and that `src/gbmc/c5.py` is the same as for the tournament maps. The model is copied to `results/release/models/C5.pt` and registered.
+     - **RHUH-GBM maps.** The Mac packs label-free inputs (`24_rhuh_c5_pack.py`). The GPU computer scores them only with the model whose hash is in the committed register (`14_c5_score_rhuh.py`). `30_` and `31_` import the maps after checking the model hash, the inputs and every map, before the run-once marker.
+     - The GPU computer therefore also runs C5's network on RHUH-GBM. It reads no RHUH-GBM label and computes no metric.
 
 Open points: the user decided all of them on 2026-11-07. (a) is 20261107; (b), (c), (d), (e), (f), (h) and (i) are approved as written below; (g) is approved with C5 in (item 8).
 - (a) `seeds.master` value. **Decided: 20261107** (the date the rules were set).
@@ -191,19 +195,29 @@ C6 is an unweighted rank average; no second-level model is fitted.
 Reason:
 Learning member weights would need nested cross-validation, and with about 54 training patients per fold the weights would be noisy.
 
-## D9: Later progressions are transported with gbm-4d's frozen scripts (proposed)
+## D9: Later progressions are transported with the rewritten original recipe (proposed)
 
-Date: (set at commit)
+Date: (set at commit; reworded 2026-11-08 for deviation V3)
 Status: Proposed
 
 Decision:
-`scripts/05_later_progressions.py` selects the second and third segmented PD timepoints with gbm-4d's own rules. It runs gbm-4d's `03_preprocess.process_one` and `04_label_transport.transport_one`, loaded from the gbm-4d checkout. The loader refuses unless that checkout is at the pinned commit with `scripts/` and `src/` unmodified, and it redirects every output root into this repository's `data/interim/`. The seed is gbm-4d's master seed, 20260819 (`config.yaml:later_progression.transport_master_seed`), so the recipe matches the one that made the first-progression labels.
+- `scripts/05_later_progressions.py` selects the second and third segmented PD timepoints after the first progression (`gbmc.progressions`, the gbm-4d rules: rated PD, with a DeepBraTumIA segmentation).
+- Each later timepoint is preprocessed with `gbmc.imaging.preprocess_timepoint`, the same function as the baselines (`00_`). It is then transported with `gbmc.registration.transport_pair` using the original recipe (`recipe={}`).
+- That code is the `gbmc` rewrite of gbm-4d's `03_` and `04_` (deviation V3). It replaces the earlier plan to load the frozen gbm-4d scripts from a pinned checkout, which no longer exists.
+- The seed is gbm-4d's master seed, 20260819 (`config.yaml:later_progression.transport_master_seed`), with `stable_seed(patient, timepoint, step)`.
+- Each patient's first-progression timepoint comes from the committed `results/cohort_lock/first_progressions.json` (`15_first_progressions.py`, 2026-11-08), because the gbm-4d transport records it was read from are not on this computer. 50 of 63 are recorded, copied from the gbm-4d bundle; the 13 gbm-4d test patients are missing.
 
 Reason:
 Plan Step 1.8: later progressions are "carried into baseline space by the same transport". gbm-4d transported only the first progression.
 
 Consequences:
-83 later timepoints in 46 of 63 patients (37 have both a 2nd and a 3rd). The smoke test on Patient-002 (week-047) passed: transport ok, label written, round-trip median 0.87 mm, verdict pass. It took 1,101 s at one ITK thread, so all 83 need about 25 hours sequentially. That suits the second machine, or several worker processes, since each timepoint is independent.
+- 83 later timepoints in 46 of 63 patients, of which 37 have both a 2nd and a 3rd. Counted from gbm-4d's ratings; not recounted, because the LUMIERE rating sheets are not on this computer.
+- The earlier smoke test on Patient-002 (week-047) ran the old gbm-4d code. Under V3 it must be redone.
+- This computer's raw LUMIERE copy holds only the baselines. Running `05_` needs:
+  - the progression scans;
+  - the rating and completeness sheets in `$GBMC_LUMIERE_ROOT/metadata`;
+  - the 13 missing first-progression names.
+- At about 1,100 s per timepoint on one ITK thread (old code), all 83 need about 25 hours sequentially.
 
 ## D10: Mesh face budget by marching-cubes step, not quadric decimation (proposed)
 
@@ -291,16 +305,21 @@ Open:
 - No dark-surface palette passes yet: orange vs vermillion collides in dark mode.
 - In the lit 3D view the target and the recurrence look alike (seen in the browser check).
 
-## D15: PDE mode re-runs gbm-4d's frozen Fisher–KPP simulation (proposed)
+## D15: PDE mode re-runs gbm-4d's Fisher–KPP simulation, rewritten in gbmc (proposed)
 
-Date: (set at commit)
+Date: (set at commit; reworded 2026-11-08 for deviation V3)
 Status: Proposed
 
 Decision:
-`scripts/42_pde_frames.py` calls gbm-4d `23_arm1_fkpp.py`'s `load_patient` and `build_fields` through the verified loader, at gbm-4d's population point (D 0.5 mm²/day, ρ 0.002/day). It runs the solver in chunks with gbm-4d's exact time step and keeps nine frames from day 0 to 206. Nothing is fitted.
+- `scripts/42_pde_frames.py` builds the fields with `gbmc.pde.build_fields` from the patient's baseline (`gbmc.lumiere.load_baseline`).
+- It runs at gbm-4d's population point: D 0.5 mm²/day, ρ 0.002/day, white-to-grey ratio 10 (`config.yaml:pde`).
+- It advances the solver in chunks with gbm-4d's time-step rule (`pde.stable_dt`, CFL safety 0.5) and keeps nine frames from day 0 to 206. Nothing is fitted.
+- `gbmc.pde` is the V3 rewrite of gbm-4d `23_arm1_fkpp.py`'s `load_patient` and `build_fields`, which the first version called through a loader that no longer exists.
 
 Consequences:
-The final frame equals gbm-4d's saved density exactly (maximum absolute difference 0.0, checked for Patients 038, 039 and 090).
+- The first version, on gbm-4d's code and data, matched gbm-4d's saved density exactly (maximum absolute difference 0.0, Patients 038, 039 and 090).
+- The rewrite matched the old solver to within 3.5e-18 over the full 206-day run on synthetic inputs (deviation V3).
+- The three hero cases' frames on disk were made before the V3 baseline rebuild, so they must be re-made from the rebuilt baselines (and the app cases re-exported).
 
 ## D16: Ventricle rule V4 for f5 and C0T
 

@@ -156,9 +156,20 @@ def atlas_transform(patient: str, session: str) -> sitk.Transform:
     return stored if inverted > as_stored else stored.GetInverse()
 
 
-def transport_qc(patient: str) -> dict:
-    path = derived_root() / "data" / "interim" / "label_field" / patient / "qc.json"
-    return json.loads(path.read_text(encoding="utf-8"))
+#: Committed table of each patient's first-progression timepoint, built by
+#: ``scripts/15_first_progressions.py`` from gbm-4d's transport records (the timepoints
+#: whose labels are in the feature cache). It replaces reading ``label_field/<p>/qc.json``,
+#: which is not on this computer.
+FIRST_PROGRESSIONS = COHORT_LOCK.with_name("first_progressions.json")
+
+
+def first_progression(patient: str, table: Path = FIRST_PROGRESSIONS) -> str:
+    """The first segmented RANO progression timepoint whose label is the endpoint."""
+    record = json.loads(table.read_text(encoding="utf-8"))
+    if patient not in record["first_progression"]:
+        raise KeyError(f"{patient}: first-progression timepoint not recorded in {table.name} "
+                       "(its gbm-4d transport record is missing; see 15_first_progressions.py)")
+    return record["first_progression"][patient]
 
 
 def baseline_name(patient: str) -> str:

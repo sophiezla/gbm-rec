@@ -32,6 +32,7 @@ import numpy as np
 import SimpleITK as sitk
 
 from gbmc import config, freeze, rhuh
+from gbmc.imaging import zscore_array
 from gbmc.provenance import require_clean_tree, run_manifest
 from gbmc.rng import stable_seed
 
@@ -107,11 +108,13 @@ def main() -> int:
     for p in pick:
         pre, post = rhuh.files(p, "preop"), rhuh.files(p, "postop")
         core = rhuh.preop_core(_array(pre["seg"]), decision.mapping)
-        t1 = _array(post["T1ce"])
+        t1 = _array(post["T1ce"]).astype(np.float32)
         # Both timepoints are in SRI24; the rule's rigid carry is applied in 21_.
         # For the inspection, the pre-op core is read in the shared atlas frame.
+        # The dark threshold is on the z scale (non-zero voxels), as its name says.
         cavity[p] = rhuh.cavity_label_counts(
-            _array(post["seg"]), t1, core, t1 != 0, float(config.get("rhuh.cavity_dark_t1ce_z"))
+            _array(post["seg"]), zscore_array(t1, t1 != 0), core, t1 != 0,
+            float(config.get("rhuh.cavity_dark_t1ce_z"))
         )
 
     with run_manifest(OUT, inputs=[REPO_ROOT / "config.yaml"]) as m:

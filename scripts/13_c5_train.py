@@ -108,7 +108,8 @@ def main() -> int:
         digest = save_model(model, out / "model.pt")
         (out / "manifest.json").write_text(json.dumps(
             {"commit": state["commit"], "dirty": state["dirty"], "smoke": args.smoke,
-             "settings": dataclasses.asdict(settings), "model_sha256": digest} | info,
+             "settings": dataclasses.asdict(settings), "patients": sorted(cases),
+             "model_sha256": digest} | info,
             indent=2) + "\n", encoding="utf-8")
         return 0
 

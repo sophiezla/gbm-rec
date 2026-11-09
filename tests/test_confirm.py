@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 import SimpleITK as sitk
 
 from gbmc import candidates, confirm, rhuh_features
@@ -31,8 +32,14 @@ def _models():
 def test_score_patient_every_candidate(monkeypatch, tmp_path):
     monkeypatch.setattr(rhuh_features, "falx", lambda ref, brain, t1: np.zeros(brain.shape, bool))
     inp = _patient()
-    row, scores, qc = confirm.score_patient(inp, _models())
-    assert set(scores) == {"C0", "C0T", "C4", "C1", "C3", "C2", "C6"}
+    n = int((inp.brain & ~inp.target).sum())
+    c5_score = np.random.default_rng(2).random(n)
+    with pytest.raises(RuntimeError, match="C5 scores missing"):
+        confirm.score_patient(inp, _models())
+    with pytest.raises(RuntimeError, match="evaluation voxels"):
+        confirm.score_patient(inp, _models(), c5_score[:-1])
+    row, scores, qc = confirm.score_patient(inp, _models(), c5_score)
+    assert set(scores) == {"C0", "C0T", "C4", "C1", "C3", "C2", "C5", "C6"}
     assert row["evaluable"] and row["n_positive"] > 0
     assert 0 < row["share_beyond_20mm"] < 1          # the far lesion escapes the margin
     for name in scores:

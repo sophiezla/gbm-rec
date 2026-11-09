@@ -3,12 +3,33 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-08: the C5 imports that were TODO in D6 item 9:
+  - `gbmc.c5_import`:
+    - `import_release` (used by `03_`) checks the clean tree, the smoke flag, the settings, the cohort, the hash, and that `gbmc/c5.py` is the same as for the tournament maps. It registers `models/C5.pt`.
+    - `rhuh_scores` (used by `30_` and `31_`) checks the registered model hash, the packed inputs, each map's hash and its voxel count.
+  - New scripts: `24_rhuh_c5_pack.py` (Mac; label-free RHUH-GBM inputs per variant: tuned, original, alt_cavity) and `14_c5_score_rhuh.py` (GPU computer).
+  - `13_ --release` records its patient list.
+  - Tests: `tests/test_c5_release_rhuh.py`; runbook sections 5–6 in `docs/C5_GPU.md`.
+- 2026-11-08: `scripts/15_first_progressions.py` and the committed `results/cohort_lock/first_progressions.json`:
+  - The table holds the first-progression timepoint names, copied from the gbm-4d bundle's transport records (50 of 63; the 13 gbm-4d test patients are missing).
+  - `gbmc.lumiere.first_progression` replaces `transport_qc`, whose `label_field/<p>/qc.json` is not on this computer.
+  - `07_` now preprocesses the first-progression scan itself when it is missing, with the same function and seed as `00_`/`05_`.
+  - Tests: `tests/test_first_progressions.py`.
+- 2026-11-08: PDE frames re-made from the V3 baselines for the three hero cases (`42_`, `data/interim/pde_frames/`, not in git). 93 s in all; 9 frames from day 0 to 206 each; the peak density falls from 0.80 to 0.12–0.24. gbm-4d's saved densities are not on this computer, so the exact-match check of D15 was not repeated. The app cases (`40_`) cannot be re-exported yet: they need the first-progression labels and names for these three gbm-4d test patients.
 - 2026-11-07: C5 code: `src/gbmc/c5.py` (3D U-Net, patch sampling, augmentation, training, sliding-window prediction; PyTorch imported lazily), `scripts/12_c5_pack.py`, `scripts/13_c5_train.py`, `tests/test_c5.py`, `docs/C5_GPU.md`, `requirements-gpu.txt`. The C5 import also refuses smoke runs. Inputs packed for all 63; a CPU smoke run passed on 4 patients.
 - 2026-11-07: tournament rules locked (D6): `seeds.master` = 20261107; C5 gate passed, settings in `config.yaml:c5`; C5 joins the C6 members. `gbmc.tournament.c5_held_out` imports C5 maps with hash and fold checks (`tests/test_c5_import.py`). `02_` refuses without them, and `03_` and the confirmatory scoring refuse until C5's imports are built.
 - 2026-11-07: ventricle rule V4 in `gbmc.anatomy.segment_ventricles` (the old rule is kept as `segment_ventricles_otsu`); `tests/test_ventricles.py`; `--old/--new/--out` options on `10_` and `--out` on `11_`; `results/feature_recompute_v4/` and `results/f5_cap_survey_v4/`. f5 and C0T are recomputed for all 63 (D16, deviation V4).
 - 2026-11-06: `scripts/11_f5_cap_survey.py` and `results/f5_cap_survey/`: anatomy-only survey of voxels at the f5 cap. No sealed-off tissue; found unreliable ventricle masks (`DECISIONS.md` D6 (k), open). Nothing changed in the features.
 
+### Fixed
+- 2026-11-08, RHUH-GBM intensity scale (found in code review; no RHUH-GBM file exists, nothing scored):
+  - **Falx test.** `30_` passed raw post-op T1 as `t1_z` to the falx white-matter test, whose threshold (`WHITE_MATTER_Z` = 0) is on the z scale. That would have left RHUH-GBM with no falx barrier. T1 is now z-scored inside the brain, as on LUMIERE's preprocessed images.
+  - **Cavity threshold.** The cavity inspection (`20_`) and the alternative-cavity target compared raw T1ce with `rhuh.cavity_dark_t1ce_z`. Both now z-score T1ce over non-zero voxels. The threshold is still null.
+  - The ventricle rule needs no change: its threshold is built from a percentile and the median, so the intensity scale does not matter.
+- 2026-11-08: the RHUH-GBM patient loader and the sensitivity-arm definitions moved from `30_`/`31_` into `gbmc.confirm` (`load_patient`, `alt_cavity_target`, `sensitivity_arms`, `c5_variants`), so the C5 packer builds exactly the patients the scoring builds. `confirm.score_patient` now takes C5's scores explicitly and checks their length. `gbmc.imaging.zscore_array` is new.
+
 ### Changed
+- 2026-11-08: `DECISIONS.md` D9 and D15 reworded for the V3 rewrite (no gbm-4d loader); D6 item 9 records the built imports.
 - 2026-11-06: rebuilt the 63 LUMIERE baselines from raw data with the corrected alignment and recomputed f1-f5 and C0T, keeping the original evaluation masks and labels (`00_`, `01_ --keep-from`, `10_`; results in `results/feature_recompute/`; deviation V3).
 - 2026-11-03: gbm-rec is standalone (deviation V3). New modules `gbmc.imaging`, `transport`, `anatomy`, `pde` replace the gbm4d package and scripts; `results/cohort_lock/cohort_lock.json` is committed; data paths now come only from `$GBMC_LUMIERE_ROOT` and `$GBMC_DERIVED_ROOT`; rigid resampling direction corrected; `--recipe gbm4d` renamed `original`.
 

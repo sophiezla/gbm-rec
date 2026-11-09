@@ -4,15 +4,20 @@ The analysis protocol is the plan, `docs/plan/final_plan.md`. This file will hol
 
 ## Phase 1: tournament on LUMIERE
 
-Rules: `DECISIONS.md` D6 (draft until committed).
+Rules: `DECISIONS.md` D6 (locked 2026-11-07). C5 runs on the GPU computer: `docs/C5_GPU.md`.
 
 | Script | Does | Writes |
 |---|---|---|
 | `scripts/01_lumiere_features.py` | f1-f5 and the C0T distance for the 63 patients; ~20 s per patient; resumable | `data/interim/features/<patient>.{npz,json}` (not in git) |
 | `scripts/02_tournament.py` | every candidate on the shared 7 folds; metrics; Δ vs C0 with BCa CIs; challenger by rule. Refuses a dirty tree or a null master seed | `results/tournament/`, `data/interim/oof/` |
-| `scripts/03_refit_release.py` | Step 1.7: refit C1, C3, C2 on all 63; save and SHA-256 the weights | `results/release/` |
+| `scripts/03_refit_release.py` | Step 1.7: refit C1, C3, C2 on all 63; import C5's release model; save and SHA-256 the weights | `results/release/` |
 | `scripts/04_power.py` | Step 2.1: MDE at n = 20–35 from C0's LUMIERE scores, BCa decision rule | `results/power/` |
-| `scripts/05_later_progressions.py` | Step 1.8 inputs: preprocess and transport progressions 2 and 3 with gbm-4d's frozen scripts (D9). Long | `data/interim/{preprocessed_later,label_field_later}/` |
+| `scripts/12_c5_pack.py` | C5 inputs for the GPU computer (Mac) | `data/interim/c5_inputs/` |
+| `scripts/13_c5_train.py` | GPU computer: C5's 7 folds (held-out maps) or `--release` | `data/interim/c5_oof/`, `c5_release/` |
+| `scripts/14_c5_score_rhuh.py` | GPU computer: RHUH-GBM maps from the registered C5 model, no labels | `data/interim/rhuh/c5_maps/` |
+| `scripts/15_first_progressions.py` | first-progression timepoint names from gbm-4d's transport records | `results/cohort_lock/first_progressions.json` |
+| `scripts/24_rhuh_c5_pack.py` | label-free C5 inputs for RHUH-GBM, after the cohort lock | `data/interim/rhuh/c5_inputs/` |
+| `scripts/05_later_progressions.py` | Step 1.8 inputs: preprocess and transport progressions 2 and 3 with the rewritten original recipe (D9, V3). Long | `data/interim/{preprocessed_later,label_field_later}/` |
 | `scripts/06_later_progression_scores.py` | Step 1.8: exploratory scores on new enhancing tumour | `results/tournament/later_progression/` |
 | `scripts/07_roundtrip_threshold.py` | Step 3.3: tuned-recipe round-trip distribution on 63 LUMIERE pairs, registration only (D12). Long | `data/interim/roundtrip_tuned/`, `--summary` -> `results/registration_threshold/` |
 | `scripts/08_pack_bundle.py` / `09_import_bundle.py` | run `05_` and `07_` on another PC and merge the results back | `../gbmrec_bundle(.zip)` |
@@ -22,7 +27,7 @@ Rules: `DECISIONS.md` D6 (draft until committed).
 | `scripts/23_rhuh_lock.py` | Steps 3.5-3.6: CONSORT, evaluable n, achieved MDE | `results/rhuh_lock/` |
 | `scripts/30_confirm.py` | Steps 4.2-4.6: hash check, run-once marker, primary, verdict, secondaries (BH-FDR), maps | `results/confirm/` |
 | `scripts/31_sensitivity.py` | Step 4.5: sensitivity arms, once, after 30_ | `results/confirm_sensitivity/` |
-| `scripts/42_pde_frames.py` | PDE mode: gbm-4d's Fisher-KPP re-run in frames (D15) | `data/interim/pde_frames/` |
+| `scripts/42_pde_frames.py` | PDE mode: gbm-4d's Fisher-KPP (rewritten in `gbmc.pde`) re-run in frames (D15) | `data/interim/pde_frames/` |
 | `scripts/50_figures.py` / `51_reveal_figure.py` | Step 4.7 figures from results/ | `results/figures*/` |
 | `scripts/update_handoff.py` / `install_hooks.py` | regenerate HANDOFF.md's status block; install it as a pre-commit hook (not installed) | `HANDOFF.md` |
 | `scripts/40_export_case.py` | Step 5.4: GLB layers, slice volumes, case.json per LUMIERE hero case | `app/public/cases/` (not in git, D11) |
@@ -30,7 +35,7 @@ Rules: `DECISIONS.md` D6 (draft until committed).
 
 Every script that writes to `results/` refuses a dirty tree. `02_`–`04_` and `06_` also need `seeds.master`.
 
-Still to build: C5 (Step 0.4 gate) and the exploratory C1 + ADC arm. Every RHUH-GBM script refuses until the OSF record and the verified file layout are in `config.yaml`.
+Still to build: the exploratory C1 + ADC arm. Every RHUH-GBM script refuses until the OSF record and the verified file layout are in `config.yaml`.
 
 ## App (Phase 5)
 
