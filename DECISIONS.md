@@ -150,6 +150,7 @@ Decision:
 9. **Machines** (user decision, 2026-11-07):
    - The GPU computer only trains C5 and writes its held-out maps, model files and their SHA-256 hashes. It runs from a clean, recorded commit with the same folds.
    - This Mac imports those files with hash checks (`gbmc.tournament.c5_held_out`) and computes every reportable number, C6 and the confirmatory run included.
+   - From 2026-11-10 the "GPU computer" is a Google Colab runtime run by the user's partner with their own notebook (runbook section 0). The same rules apply: a pinned clean commit, the same folds, and all output on Drive.
    - PyTorch is approved for C5. It is pinned in a separate GPU lockfile; the main environment is unchanged.
    - Built 2026-11-07: `scripts/12_c5_pack.py` (Mac), `scripts/13_c5_train.py` (GPU computer) and `docs/C5_GPU.md`.
    - Built 2026-11-08 (`gbmc.c5_import`, runbook sections 5–6):
@@ -164,7 +165,7 @@ Open points: the user decided all of them on 2026-11-07. (a) is 20261107; (b), (
 - (d) f5 closes the ventricles fully. The plan's f5 names the falx, ventricles and skull, and the plan does not give the 5 mm allowance to f5.
 - (e) Rule 7 applies the 0.005 margin to every pair. The plan spells it out only for C6, but also says "a simple model wins ties".
 - (f) C3 uses patient-balanced weights like C1. The plan states the weights only for C1; using them for C3 too makes C3 vs C1 isolate f5.
-- (g) C5 is out until Step 0.4 is recorded (GPU, starting weights). **Decided 2026-11-07: the gate passes.** The user reports an NVIDIA RTX GPU on another computer that meets the gate (CUDA, at least 8 GB). The exact model and memory are not recorded yet (TODO: verify with `nvidia-smi` before C5 training). Starting weights: none were verified in week 1, so C5 trains from scratch (plan Step 0.4). Settings are in item 8; the machine split is in item 9.
+- (g) C5 is out until Step 0.4 is recorded (GPU, starting weights). **Decided 2026-11-07: the gate passes.** The user reports an NVIDIA RTX GPU on another computer that meets the gate (CUDA, at least 8 GB). The exact model and memory are not recorded yet (TODO: verify with `nvidia-smi` before C5 training). Starting weights: none were verified in week 1, so C5 trains from scratch (plan Step 0.4). Settings are in item 8; the machine split is in item 9. **Update 2026-11-10 (user):** the user's partner trains C5 on Google Colab, not on the RTX computer. Every Colab GPU meets the gate (CUDA, at least 8 GB), but the model can differ from session to session, so each fold records its GPU (`device_info`) and the manifest lists them (`fold_devices`). The settings, seeds and folds are unchanged. A different GPU can change the last digits of the weights; the run stays deterministic for a given GPU. The direction of effect on any score is unknown, and none has been seen.
 - (h) Power (Step 2.1): a simulated study "detects" when the BCa lower bound is above 0, which is how the verdict rule reads the CI. gbm-4d used a two-sided percentile test. The assumed arm correlation rho is reported at 0.5, 0.7 and 0.9, with 0.5 as the pessimistic headline (`config.yaml:power`).
 - (j) **Resolved 2026-11-07 by D16:** the V4 rule finds Patient-074's ventricles (10 ml), so all 63 have both barriers. Original note: gbm-4d's ventricle segmentation found no central component ("segmentation not trusted"), so this patient's f5 and C0T had the falx barrier but no ventricle barrier.
 - (k) **Resolved 2026-11-07 by D16 (user: "Fix for all patients"; deviation V4).** Ventricle masks (found 2026-11-06, no labels read, `results/f5_cap_survey/`). The segmenter applies Otsu to T1c in the deep brain. Confirmed: Patient-002's mask is 771 ml (52.8% of the brain) with threshold 1.08, against a cohort median of 49 ml and -0.18, and it passes the QC because the QC has no upper limit. In 27 of 62 masks under half the voxels pass a rough CSF screen (T2 z > 1 and FLAIR z < 0; not validated), and 12 are under a quarter. Overlays of the 9 masks checked by eye show several spreading into deep tissue. Lower CSF share goes with a higher threshold (r = -0.87), which suggests Otsu is sometimes splitting grey from white matter rather than CSF from tissue (hypothesis, not proven). The masks feed f5, C0T and so the matched volume: C0T's 15 mm margin holds a median 6.4% fewer voxels than the Euclidean shell, up to 18.5%, though falx trimming is part of that. Direction of effect on any score: unknown, nothing scored. The rewrite matched the original code, so this is inherited, and plan Step 4.1 says to derive barriers "the same way gbm-4d did", so any change is a deviation. Options: fix the segmenter for all patients before scoring; fix or exclude only Patient-002; or keep and report. Any fix must also work on RHUH-GBM (its sequences: TODO verify from the plan, no download).
@@ -358,6 +359,31 @@ Consequences:
 
 Do Not Revisit Unless:
 A failure is found on anatomy alone, before any candidate is scored.
+
+## D17: Pre-registration constants (plan Steps 2.2, 3.3, 3.4, 4.4)
+
+Date: 2026-11-10
+Status: Active (user decisions, 2026-11-10). Fixed before any RHUH-GBM file is downloaded and before any candidate score is seen; any change after the OSF posting is a deviation.
+
+Decision (each value is in `config.yaml`):
+1. **Label-mapping check** (`rhuh.mapping_min_agreement` = 0.8). A swapped RHUH-GBM label mapping is corrected only when at least 80% of voting scans derive the same alternative. Otherwise the pipeline stops. Recommended and chosen: a real swap is systematic, while intensity-based derivations are noisy on some scans.
+2. **Cavity darkness** (`rhuh.cavity_dark_t1ce_z` = -1.0). T1ce, z-scored over non-zero voxels, below -1.0 counts as fluid-dark. This applies to the cavity inspection (`20_`) and the alternative-cavity sensitivity arm.
+   - Evidence: 12 LUMIERE baselines drawn with seed 20261107. Only baseline images and baseline labels were read; no outcome.
+   - Ventricle fluid had a median z of about -1.9 (per-patient medians -1.0 to -2.3); normal tissue about +0.1.
+   - -1.0 is roughly the midpoint, the same logic as ventricle rule V4.
+   - These numbers came from an exploratory run. `scripts/16_cavity_dark_evidence.py` reproduces them into `results/cavity_dark_evidence/` from a clean commit (TODO: run after committing).
+   - Caveat: RHUH-GBM's preprocessing differs, so the scale is not verified on its files. Recommended and chosen.
+3. **Round-trip exclusion rule** (`registration.roundtrip_threshold_rule` = `max`). The RHUH-GBM threshold on each patient's median round-trip error is the maximum of the per-patient medians from `07_ --summary`. That run uses the tuned recipe on the 63 LUMIERE baseline→first-progression pairs and reads no label.
+   - The user chose the maximum over the recommended 95th percentile. It is the more lenient rule: it excludes only registrations worse than LUMIERE's single worst pair.
+   - The value (`registration.roundtrip_threshold_mm`) is filled from `07_ --summary` before posting, and `07_` still has to run.
+4. **Brain-surface screen** (`screens.surface_review_mm` = 3.0, `screens.surface_worse_margin_mm` = 1.0). These are gbm-wm's values, carried over unchanged. They were chosen post hoc in gbm-wm, but here they are fixed before any RHUH-GBM image. A surface flag excludes a patient only when the arbiters also dissent from our transform. Recommended and chosen.
+5. **Verdict MDE** (`verdict.mde_rho` = 0.7). The Step 4.4 outcome ("Bounded null" vs "Inconclusive") uses the achieved MDE at an assumed arm correlation of 0.7.
+   - The user chose the middle value over the recommended pessimistic 0.5.
+   - The MDE at 0.7 is smaller than at 0.5, so "Bounded null" is easier to reach.
+   - The achieved MDE at every rho (0.5, 0.7, 0.9) is still recorded by `23_`.
+
+Reason:
+Plan Steps 2.2–2.5: these rules must be on record in the OSF pre-registration, before the RHUH-GBM download.
 
 ## D0: Documentation structure
 

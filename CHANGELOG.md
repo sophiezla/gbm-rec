@@ -3,6 +3,17 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-10: D17, the pre-registration constants (user decisions):
+  - mapping agreement 0.8;
+  - cavity dark z -1.0 (from LUMIERE ventricle and tissue intensities);
+  - round-trip rule `max`;
+  - surface review 3.0 mm and worse-margin 1.0 mm;
+  - `mde_rho` 0.7.
+
+  They are written into `config.yaml` and `docs/preregistration.md`. `07_ --summary` now applies the rule and reports `threshold_mm`.
+- 2026-11-10: `docs/C5_COLAB_FOR_PARTNER.md`: instructions for the partner's AI to build their own Colab setup for C5. It says to train on the shared `c5_inputs/`, never a re-pack from their own LUMIERE copy, because the labels and masks inside come from gbm-4d's lost transport and a re-pack would not line up voxel for voxel. The inputs are shared as Google Drive folder `gbm-rec-c5/` (63 files, hashes verified after copying).
+- 2026-11-10: `docs/preregistration.md` filled from the plan (Steps 2.2–2.5, 3.3–3.6, 4.4) and the locked D6: candidates and features, the cavity and mapping rules, the registration and exclusions, the primary and verdict with outcome classes, all secondary, sensitivity and exploratory lists, and the deviations. The open constants are listed. `41_` passes on it.
+- 2026-11-10: C5 is trained on Google Colab by the user's partner, with their own notebook. `13_` now records the device and GPU per fold (`device_info`) and lists them in the manifest (`fold_devices`), because Colab GPUs can differ between sessions. Runbook section 0 lists what any Colab notebook must respect; D6 (g) and item 9 record the switch.
 - 2026-11-08: the C5 imports that were TODO in D6 item 9:
   - `gbmc.c5_import`:
     - `import_release` (used by `03_`) checks the clean tree, the smoke flag, the settings, the cohort, the hash, and that `gbmc/c5.py` is the same as for the tournament maps. It registers `models/C5.pt`.
@@ -23,7 +34,7 @@
 
 ### Fixed
 - 2026-11-08, RHUH-GBM intensity scale (found in code review; no RHUH-GBM file exists, nothing scored):
-  - **Falx test.** `30_` passed raw post-op T1 as `t1_z` to the falx white-matter test, whose threshold (`WHITE_MATTER_Z` = 0) is on the z scale. That would have left RHUH-GBM with no falx barrier. T1 is now z-scored inside the brain, as on LUMIERE's preprocessed images.
+  - **Falx test.** `30_` passed raw post-op T1 as `t1_z` to the falx white-matter test, whose threshold (`WHITE_MATTER_Z` = 0) is on the z scale. If RHUH-GBM's files are not z-scored, that would have left it with no falx barrier. The plan says they are z-scored by the dataset's own pipeline, over a region not yet verified (no file downloaded; corrected 2026-11-10), so the effect may be small. Either way, z-scoring again inside the brain mask matches LUMIERE. T1 is now z-scored inside the brain, as on LUMIERE's preprocessed images.
   - **Cavity threshold.** The cavity inspection (`20_`) and the alternative-cavity target compared raw T1ce with `rhuh.cavity_dark_t1ce_z`. Both now z-score T1ce over non-zero voxels. The threshold is still null.
   - The ventricle rule needs no change: its threshold is built from a percentile and the median, so the intensity scale does not matter.
 - 2026-11-08: the RHUH-GBM patient loader and the sensitivity-arm definitions moved from `30_`/`31_` into `gbmc.confirm` (`load_patient`, `alt_cavity_target`, `sensitivity_arms`, `c5_variants`), so the C5 packer builds exactly the patients the scoring builds. `confirm.score_patient` now takes C5's scores explicitly and checks their length. `gbmc.imaging.zscore_array` is new.

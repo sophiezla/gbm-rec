@@ -6,7 +6,7 @@ _Last updated: 2026-11-08_
 Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as written. **Phase 1 (tournament on LUMIERE)**: the rules are locked (D6, 2026-11-07), and C5 is waiting to be trained on the GPU computer (`docs/C5_GPU.md`). Nothing is scored. The user reports Phase 0 is complete; its checklist boxes below are not ticked individually.
 
 ### Current blockers (2026-11-08)
-1. **C5 training.** On the GPU computer, train the 7 folds, then copy `data/interim/c5_oof/` here. `02_` refuses until then.
+1. **C5 training.** The partner trains the 7 folds on Google Colab with their own notebook (from 2026-11-10; runbook section 0). Then copy `c5_oof/` here, to `data/interim/c5_oof/`. `02_` refuses until then.
 2. **LightGBM cannot load on this Mac** (`libomp` missing, no Homebrew), so `02_` cannot fit C2 here. Fix: install `libomp` (`docs/SETUP.md`). Not done: it is a system install, for the user. With PyTorch's bundled `libomp` on `DYLD_FALLBACK_LIBRARY_PATH` in `.venv-c5`, all 148 tests pass, so the code itself works.
 3. **Data not on this Mac** for `05_`, `07_` and the app export (`40_`):
    - the progression scans (the raw LUMIERE copy here holds baselines only);
@@ -78,10 +78,11 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 - **Tooling:** `update_handoff.py` + `install_hooks.py` (hook not installed).
 
 ## Next Steps
-1. GPU computer: train C5's 7 folds (`docs/C5_GPU.md`) and copy `c5_oof/` back.
+1. Share `c5_inputs/` in a Drive folder `gbm-rec-c5/`. The partner trains on Colab (runbook section 0) and shares back `c5_oof/`.
 2. This Mac: install `libomp`, then run `02_`.
 3. Copy from the Windows PC (or LUMIERE's public release) the data listed under Current blockers, item 3. Then run `15_first_progressions.py` for the 13 missing patients, and run `05_`, `07_` and `40_`.
-4. Phase 0 leftovers, status not recorded here: 0.6 (commit the PubMed search string) and 0.7 (expert emails).
+4. Pre-registration constants decided 2026-11-10 (D17). Still open: the round-trip threshold value, which comes from `07_ --summary`.
+5. Phase 0 leftovers, status not recorded here: 0.6 (commit the PubMed search string) and 0.7 (expert emails).
 
 ## Known Issues
 - Resolved 2026-11-03: the gbm-4d dependency is gone (deviation V3).

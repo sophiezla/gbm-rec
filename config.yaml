@@ -67,7 +67,8 @@ c5:
   steps_per_epoch: 100          # last epoch kept; no early stopping
   max_rotation_deg: 10          # plus left-right flips; no other augmentation
   inference_overlap: 0.5        # sliding window
-  gpu: null                     # TODO: record the model and memory from nvidia-smi before training
+  gpu: null                     # Colab (2026-11-10): the GPU can differ per session; each fold
+                                # records its own in c5_oof/folds/fold<k>.json (device_info)
 
 # Power simulation (plan Step 2.1). DRAFT with D6.
 power:
@@ -92,20 +93,20 @@ app:
 registration:
   recipe: tuned_syn                 # gbm-wm D11 (gbmc.registration.TUNED_SYN); gbm-4d's recipe is the sensitivity arm
   master_seed: 20260819             # gbm-4d's seed, as for the later-progression transport (D9)
-  roundtrip_threshold_rule: null    # how scripts/07_'s LUMIERE distribution becomes the RHUH-GBM threshold: decide before OSF
+  roundtrip_threshold_rule: max     # D17: threshold = maximum of the per-patient round-trip medians from 07_ --summary
   roundtrip_threshold_mm: null      # filled from the rule, in the OSF pre-registration
 
 # RHUH-GBM label and screen rules (plan Steps 2.2, 3.4). Fixed in Phase 2, before download. D13.
 rhuh:
-  mapping_min_agreement: null     # share of scans that must agree before a swapped mapping is corrected
+  mapping_min_agreement: 0.8      # D17 (2026-11-10): share of voting scans that must agree before a swapped mapping is corrected
   cavity_inspection_n: 5          # plan Step 2.2
-  cavity_dark_t1ce_z: null        # fluid-dark threshold for the cavity inspection
+  cavity_dark_t1ce_z: -1.0        # D17: fluid-dark T1ce (z over non-zero voxels); midpoint of LUMIERE ventricle fluid (~-1.9) and tissue (~+0.1)
   cavity_rule: null               # after 20_'s inspection: "unlabelled" or "labelled:<value>" (Step 2.2)
   sri24_midline_x_mm: null        # Step 4.1: falx adapted from MNI to SRI24; record before scoring
   falx_t1_sequence: null          # Step 4.1: sequence for the falx white-matter test (T1 if shipped)
 screens:
-  surface_review_mm: null         # gbm-wm carried 3.0 (gbm-4d D14, post hoc there)
-  surface_worse_margin_mm: null   # gbm-wm 1.0 (set after one patient, D10 there)
+  surface_review_mm: 3.0          # D17: gbm-wm's value carried over (chosen post hoc there; fixed here before any RHUH-GBM image)
+  surface_worse_margin_mm: 1.0    # D17: gbm-wm's value carried over (set after one patient there)
   simulate_n: 10                  # plan Step 3.4
 
 # OSF pre-registration (plan Phase 2). Both stay null until posted; the RHUH-GBM
@@ -117,7 +118,7 @@ osf:
 # Verdict (plan Steps 2.3, 4.4).
 verdict:
   fdr_q: 0.05                     # plan Step 2.3
-  mde_rho: null                   # which rho's achieved MDE the Step 4.4 outcome uses; proposal 0.5 (pessimistic)
+  mde_rho: 0.7                    # D17: the Step 4.4 outcome uses the achieved MDE at rho 0.7 (user chose the middle value)
 
 # PDE animation for the app (plan Step 5.3). Values carried over from gbm-4d's Arm 1; nothing fitted here.
 pde:

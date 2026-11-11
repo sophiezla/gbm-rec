@@ -127,7 +127,8 @@ def main() -> int:
                          log=lambda m, k=k: print(f"fold {k}: {m}", flush=True))
         record = {"commit": state["commit"], "dirty": state["dirty"], "fold": k,
                   "model_sha256": save_model(model, out / "models" / f"fold{k}.pt"),
-                  "maps": {}, "seconds": round(time.time() - start)}
+                  "maps": {}, "seconds": round(time.time() - start),
+                  "device_info": info}   # Colab may hand out a different GPU per session
         for patient in held_out:
             score = c5.predict(model, cases[patient], settings, args.device)
             path = out / f"{patient}.npz"
@@ -150,7 +151,9 @@ def main() -> int:
              "smoke": args.smoke, "folds": folds,
              "settings": dataclasses.asdict(settings),
              "sha256": {p: d for r in loaded for p, d in r["maps"].items()},
-             "model_sha256": {f"fold{r['fold']}": r["model_sha256"] for r in loaded}} | info,
+             "model_sha256": {f"fold{r['fold']}": r["model_sha256"] for r in loaded},
+             "fold_devices": {f"fold{r['fold']}": r.get("device_info") for r in loaded}}
+            | info,
             indent=2) + "\n", encoding="utf-8")
         print(f"manifest written: {out / 'manifest.json'}")
     return 0

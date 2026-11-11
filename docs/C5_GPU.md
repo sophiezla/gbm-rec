@@ -2,6 +2,16 @@
 
 C5 is the only candidate trained away from the Mac (`DECISIONS.md` D6 items 8–9). The GPU computer only trains C5 and writes its maps, models and hashes. The Mac imports them and computes every reportable number.
 
+## 0. Google Colab (the partner's route, from 2026-11-10)
+
+The partner trains C5 on Colab with a notebook of their own. Instructions for building it: `docs/C5_COLAB_FOR_PARTNER.md`. Whatever it looks like, it must:
+- run `scripts/13_c5_train.py` unchanged, from a clone at **one pinned commit** for all 7 folds. A re-clone after a disconnect must check out that same commit, not the newest `main`;
+- leave the clone **clean**. Any file written inside it (a lockfile, a notebook, outputs) makes `git status` non-empty, and the Mac refuses the maps. `data/` is git-ignored, so `data/interim/c5_*` can be links to persistent storage;
+- keep `data/interim/c5_oof/` on storage that outlives the runtime (Colab wipes its disk). Finished folds are skipped on a rerun; an interrupted fold restarts from scratch;
+- install the pinned environment (sections 1.2–1.3; `uv pip install --torch-backend auto -r requirements-gpu.txt` picks the CUDA build) and save `requirements-gpu.lock` outside the clone.
+
+Each fold records its GPU (`device_info`), because Colab can hand out a different GPU per session.
+
 ## 1. Set up the GPU computer (once)
 
 You need an NVIDIA GPU with CUDA and at least 8 GB of memory (the plan's Step 0.4 gate).

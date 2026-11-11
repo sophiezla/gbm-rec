@@ -2,11 +2,21 @@
 
 _Last updated: 2026-11-08_
 
-## Latest (2026-11-08): work that does not need the GPU
+## Latest (2026-11-10): C5 trains on Google Colab
+**Partner's AI:** read `docs/C5_COLAB_FOR_PARTNER.md` before building the Colab setup. Train on the shared `c5_inputs/`, not a re-pack.
+
+The user's partner trains C5 on Colab with their own notebook; `docs/C5_GPU.md` section 0 lists what it must respect.
+- The Mac owner shares a Drive folder `gbm-rec-c5/` with `c5_inputs/` (434 MB) in it.
+- The partner trains all 7 folds at one pinned commit, from a clean clone.
+- The partner shares back `c5_oof/` and `requirements-gpu.lock`. Copy `c5_oof/` to `data/interim/c5_oof/` and commit the lockfile.
+
+Each fold records its GPU. Not yet run on Colab.
+
+## Earlier (2026-11-08): work that does not need the GPU
 - **C5 imports built** (`gbmc.c5_import`, runbook `docs/C5_GPU.md` sections 5–6):
   - `03_` imports and registers the release model with full checks.
   - RHUH-GBM C5 maps flow Mac (`24_`, label-free inputs) → GPU computer (`14_`, registered model only) → Mac (`30_`/`31_` check everything before the run-once marker).
-- **Bug fixed before any RHUH-GBM file exists.** On RHUH-GBM, the falx test and the cavity threshold would have compared raw intensities with z-scale thresholds. Both now z-score.
+- **Bug fixed before any RHUH-GBM file exists.** On RHUH-GBM, the falx test and the cavity threshold assumed z-scaled intensities without making sure. Both now z-score inside the mask. Whether the shipped files are already z-scored is unverified (the plan says the dataset's pipeline z-scores).
 - **First-progression names** are committed in `results/cohort_lock/first_progressions.json`: 50 of 63, from the gbm-4d bundle on Google Drive. The 13 gbm-4d test patients are missing, including all three app hero cases.
 - **D9 and D15** are reworded for V3.
 - **PDE frames** rebuilt from the V3 baselines (`data/interim/pde_frames/`); see the CHANGELOG for the result.

@@ -52,7 +52,9 @@ def load_patient(patient: str, mapping: dict[int, str], label_dir: Path = LABEL_
 
     T1 for the falx white-matter test is z-scored inside the brain, because the test's
     threshold (``anatomy.WHITE_MATTER_Z``) is on the z scale, as on LUMIERE's preprocessed
-    images. RHUH-GBM ships intensities that are not z-scored.
+    images. The plan says RHUH-GBM's own pipeline z-scores its images, but over which region
+    is not verified (no file downloaded); z-scoring again inside this brain mask puts it on
+    LUMIERE's scale either way, and is a no-op if the files are already z-scored there.
     """
     from gbmc import rhuh
 

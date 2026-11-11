@@ -118,6 +118,11 @@ def summary() -> int:
     stats = {"n": int(med.size), "median": float(np.median(med)),
              "p90": float(np.percentile(med, 90)), "p95": float(np.percentile(med, 95)),
              "max": float(med.max())}
+    rule = config.get("registration.roundtrip_threshold_rule")   # D17: "max"
+    if rule not in stats:
+        raise SystemExit(f"registration.roundtrip_threshold_rule {rule!r} is not one of "
+                         f"{sorted(k for k in stats if k != 'n')}")
+    stats["threshold_rule"], stats["threshold_mm"] = rule, stats[rule]
     with run_manifest(OUT, inputs=[REPO_ROOT / "config.yaml"]) as m:
         m.record(**stats, master_seed=int(config.get("registration.master_seed")))
         (OUT / "roundtrip.json").write_text(json.dumps(
