@@ -59,3 +59,40 @@ def test_committed_table_covers_only_the_locked_cohort():
     cohort = set(lumiere.cohort())
     assert set(table["first_progression"]) | set(table["missing"]) == cohort
     assert not set(table["first_progression"]) & set(table["missing"])
+
+
+def _sheets():
+    import pandas as pd
+
+    ratings = pd.DataFrame({"Patient": ["P1"] * 5,
+                            "Timepoint": ["week-000-1", "week-000-2", "week-010", "week-020",
+                                          "week-030"],
+                            "Rating": ["Pre-Op", "Post-Op", "PD", "PD", "PD"]})
+    completeness = pd.DataFrame({"Patient": ["P1"] * 5, "Timepoint": ratings["Timepoint"],
+                                 "DeepBraTumIA": [True, True, False, True, True]}
+                                ).set_index(["Patient", "Timepoint"])
+    return ratings, completeness
+
+
+def test_rule_takes_first_segmented_pd_after_baseline():
+    from gbmc.progressions import first_progression_from_ratings
+
+    ratings, completeness = _sheets()
+    # week-010 is PD but has no segmentation, so the first segmented PD is week-020
+    assert first_progression_from_ratings(ratings, completeness, "P1", "week-000-2") == "week-020"
+    assert first_progression_from_ratings(ratings, completeness, "P1", "week-030") is None
+
+
+def test_from_ratings_refuses_when_it_disagrees(monkeypatch, tmp_path):
+    fp = _script()
+    ratings, completeness = _sheets()
+    monkeypatch.setattr(lumiere, "load_ratings", lambda md: ratings)
+    monkeypatch.setattr(lumiere, "load_completeness", lambda md: completeness.reset_index())
+    monkeypatch.setattr(lumiere, "baseline_name", lambda p: "week-000-2")
+    monkeypatch.setattr(lumiere, "lumiere_root", lambda: tmp_path)
+    (tmp_path / "metadata").mkdir()
+    (tmp_path / "metadata" / "LUMIERE-ExpertRating-v202211.csv").write_text("x")
+    with pytest.raises(SystemExit, match="disagrees"):
+        fp.from_ratings({"first_progression": {"P1": "week-030"}}, ["P1"])
+    new, digests, _ = fp.from_ratings({"first_progression": {}}, ["P1"])
+    assert new == {"P1": "week-020"}

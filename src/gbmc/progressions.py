@@ -19,6 +19,25 @@ from gbmc.lumiere import (
 N_LATER = 2
 
 
+def first_progression_from_ratings(ratings, completeness, patient: str,
+                                   baseline: str) -> str | None:
+    """The first timepoint after ``baseline`` rated PD with a DeepBraTumIA segmentation.
+
+    The same test as :func:`later_progressions`. It reproduces all 50 first-progression
+    names in gbm-4d's surviving transport records (checked 2026-11-10 by
+    ``15_first_progressions.py --from-ratings``, which refuses on any disagreement).
+    """
+    after = timepoint_sort_key(baseline)
+    rows = ratings[(ratings["Patient"] == patient) & (ratings["Rating"] == "PD")]
+    for tp in sorted(rows["Timepoint"], key=timepoint_sort_key):
+        if timepoint_sort_key(tp) <= after:
+            continue
+        key = (patient, tp)
+        if key in completeness.index and bool(completeness.loc[key].get("DeepBraTumIA", False)):
+            return tp
+    return None
+
+
 def later_progressions(ratings, completeness, patient: str, first_progression: str,
                        n_later: int = N_LATER) -> list[str]:
     """PD timepoints after ``first_progression`` with a DeepBraTumIA segmentation."""

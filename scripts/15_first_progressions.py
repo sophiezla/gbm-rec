@@ -12,6 +12,7 @@ another folder adds patients; a patient already recorded with a different timepo
 the script. Reads no image and no label.
 
     python scripts/15_first_progressions.py --from <gbm-4d>/data/interim/label_field
+    python scripts/15_first_progressions.py --from-ratings
 """
 
 from __future__ import annotations
@@ -51,28 +52,67 @@ def merge(table: dict, names: dict[str, str], digests: dict[str, str], source: s
         known[patient] = name
         sources[patient] = digests[patient]
     folders = sorted(set(table.get("source_folders", [])) | {source})
-    return {"note": "First segmented RANO progression per patient, copied from gbm-4d's "
-                    "transport records (label_field/<patient>/qc.json). Names only.",
+    return {"note": "First segmented RANO progression per patient. Copied from gbm-4d's "
+                    "transport records (label_field/<patient>/qc.json), or, for the patients "
+                    "in derived_from_ratings, derived from LUMIERE's rating sheets by a rule "
+                    "that reproduces every copied name. Names only.",
             "first_progression": dict(sorted(known.items())),
             "missing": [p for p in patients if p not in known],
             "source_sha256": dict(sorted(sources.items())), "source_folders": folders}
 
 
+def from_ratings(table: dict, patients: list[str]) -> tuple[dict, dict, str]:
+    """Names for the patients not yet recorded, from LUMIERE's rating sheets.
+
+    The rule (``gbmc.progressions.first_progression_from_ratings``) must reproduce every
+    name already in the table first; any disagreement stops the script.
+    """
+    from gbmc.progressions import first_progression_from_ratings
+
+    md = lumiere.lumiere_root() / "metadata"
+    sheet = md / "LUMIERE-ExpertRating-v202211.csv"
+    ratings = lumiere.load_ratings(md)
+    completeness = lumiere.load_completeness(md).set_index(["Patient", "Timepoint"])
+    known = table.get("first_progression", {})
+    derived = {p: first_progression_from_ratings(ratings, completeness, p,
+                                                 lumiere.baseline_name(p))
+               for p in patients}
+    wrong = {p: (known[p], derived[p]) for p in known if derived[p] != known[p]}
+    if wrong:
+        raise SystemExit(f"the rule disagrees with recorded names (recorded, derived): {wrong}")
+    print(f"rule reproduces all {len(known)} recorded names")
+    new = {p: tp for p, tp in derived.items() if p not in known and tp is not None}
+    digest = file_digest(sheet)
+    return new, dict.fromkeys(new, digest), f"rule on {sheet.name} + LUMIERE-datacompleteness.csv"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--from", dest="source", type=Path, required=True,
-                    help="a gbm-4d data/interim/label_field folder")
+    src = ap.add_mutually_exclusive_group(required=True)
+    src.add_argument("--from", dest="source", type=Path,
+                     help="a gbm-4d data/interim/label_field folder")
+    src.add_argument("--from-ratings", action="store_true",
+                     help="derive the names from LUMIERE's rating sheets "
+                          "($GBMC_LUMIERE_ROOT/metadata); refuses unless every name already "
+                          "recorded is reproduced")
     ap.add_argument("--source-name", default=None,
                     help="how to describe the folder in the record (default: its path)")
     args = ap.parse_args()
     patients = lumiere.cohort()
     table_path = lumiere.FIRST_PROGRESSIONS
     table = json.loads(table_path.read_text(encoding="utf-8")) if table_path.is_file() else {}
-    names, digests = collect(args.source, patients)
+    if args.from_ratings:
+        names, digests, source = from_ratings(table, patients)
+    else:
+        names, digests = collect(args.source, patients)
+        source = args.source_name or str(args.source)
     if not names:
-        raise SystemExit(f"no records for the locked cohort under {args.source}")
-    record = merge(table, names, digests, args.source_name or str(args.source), patients)
+        raise SystemExit("no new names for the locked cohort")
+    record = merge(table, names, digests, source, patients)
+    if args.from_ratings:
+        record["derived_from_ratings"] = sorted(
+            set(table.get("derived_from_ratings", [])) | set(names))
     table_path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     print(f"{len(record['first_progression'])} of {len(patients)} recorded; "
           f"missing {len(record['missing'])}")

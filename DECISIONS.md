@@ -206,18 +206,18 @@ Decision:
 - Each later timepoint is preprocessed with `gbmc.imaging.preprocess_timepoint`, the same function as the baselines (`00_`). It is then transported with `gbmc.registration.transport_pair` using the original recipe (`recipe={}`).
 - That code is the `gbmc` rewrite of gbm-4d's `03_` and `04_` (deviation V3). It replaces the earlier plan to load the frozen gbm-4d scripts from a pinned checkout, which no longer exists.
 - The seed is gbm-4d's master seed, 20260819 (`config.yaml:later_progression.transport_master_seed`), with `stable_seed(patient, timepoint, step)`.
-- Each patient's first-progression timepoint comes from the committed `results/cohort_lock/first_progressions.json` (`15_first_progressions.py`, 2026-11-08), because the gbm-4d transport records it was read from are not on this computer. 50 of 63 are recorded, copied from the gbm-4d bundle; the 13 gbm-4d test patients are missing.
+- Each patient's first-progression timepoint comes from the committed `results/cohort_lock/first_progressions.json` (`15_first_progressions.py`, 2026-11-08), because the gbm-4d transport records it was read from are not on this computer. 50 of 63 were copied from the gbm-4d bundle. The 13 gbm-4d test patients were derived on 2026-11-10 from the rating sheets (`15_ --from-ratings`), with the rule `gbmc.progressions.first_progression_from_ratings`, which reproduces all 50 copied names exactly.
 
 Reason:
 Plan Step 1.8: later progressions are "carried into baseline space by the same transport". gbm-4d transported only the first progression.
 
 Consequences:
-- 83 later timepoints in 46 of 63 patients, of which 37 have both a 2nd and a 3rd. Counted from gbm-4d's ratings; not recounted, because the LUMIERE rating sheets are not on this computer.
+- 83 later timepoints in 46 of 63 patients, of which 37 have both a 2nd and a 3rd. Recounted on 2026-11-10 from the downloaded rating sheets: the same 83 / 46 / 37.
 - The earlier smoke test on Patient-002 (week-047) ran the old gbm-4d code. Under V3 it must be redone.
-- This computer's raw LUMIERE copy holds only the baselines. Running `05_` needs:
-  - the progression scans;
-  - the rating and completeness sheets in `$GBMC_LUMIERE_ROOT/metadata`;
-  - the 13 missing first-progression names.
+- Resolved 2026-11-10: the inputs `05_` needs are now here.
+  - The rating and completeness sheets were downloaded from LUMIERE's figshare release (`LUMIERE-ExpertRating-v202211.csv` MD5 `3f196e11…`, `LUMIERE-datacompleteness.csv` MD5 `3be2baf9…`, both matching figshare).
+  - The 146 needed timepoints (first plus later progressions) were extracted from the already-downloaded `Imaging-v202211.zip`.
+  - The 13 missing first-progression names were derived from the ratings by a rule that reproduces all 50 copied names.
 - At about 1,100 s per timepoint on one ITK thread (old code), all 83 need about 25 hours sequentially.
 
 ## D10: Mesh face budget by marching-cubes step, not quadric decimation (proposed)

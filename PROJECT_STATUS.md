@@ -8,11 +8,11 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 ### Current blockers (2026-11-08)
 1. **C5 training.** The partner trains the 7 folds on Google Colab with their own notebook (from 2026-11-10; runbook section 0). Then copy `c5_oof/` here, to `data/interim/c5_oof/`. `02_` refuses until then.
 2. **LightGBM cannot load on this Mac** (`libomp` missing, no Homebrew), so `02_` cannot fit C2 here. Fix: install `libomp` (`docs/SETUP.md`). Not done: it is a system install, for the user. With PyTorch's bundled `libomp` on `DYLD_FALLBACK_LIBRARY_PATH` in `.venv-c5`, all 148 tests pass, so the code itself works.
-3. **Data not on this Mac** for `05_`, `07_` and the app export (`40_`):
-   - the progression scans (the raw LUMIERE copy here holds baselines only);
-   - the LUMIERE rating and completeness sheets (`metadata/`);
-   - the first-progression recurrence labels (`label_field/`);
-   - the first-progression names of the 13 gbm-4d test patients (`results/cohort_lock/first_progressions.json` lists them as missing). The three app hero cases are among those 13.
+3. **Data for `05_`, `07_` and `40_`: mostly resolved 2026-11-10.**
+   - The rating sheets were downloaded from figshare (MD5 checked).
+   - The 146 progression timepoints were extracted from `Imaging-v202211.zip`.
+   - All 63 first-progression names are recorded.
+   - Still missing: gbm-4d's `label_field/` recurrence labels. Only the app export (`40_`) needs them, for the hero cases; re-transporting them with the current code is the way to rebuild them.
 
 ## Phase Gates (plan §3)
 | Phase | Weeks | Gate | State |

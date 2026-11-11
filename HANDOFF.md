@@ -2,6 +2,11 @@
 
 _Last updated: 2026-11-08_
 
+## Latest (2026-11-10): LUMIERE inputs rebuilt from the public release
+- The rating sheets were downloaded (MD5 checked), and the 146 progression timepoints were extracted from `~/Downloads/Imaging-v202211.zip` into `data/raw/lumiere/Imaging/`.
+- All 63 first-progression names are recorded (13 derived by a rule that reproduces the other 50).
+- `05_` and `07_` can now run here. The app export still needs re-transported first-progression labels.
+
 ## Latest (2026-11-10): C5 trains on Google Colab
 **Partner's AI:** read `docs/C5_COLAB_FOR_PARTNER.md` before building the Colab setup. Train on the shared `c5_inputs/`, not a re-pack.
 

@@ -3,6 +3,12 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-10: rebuilt the missing LUMIERE inputs from the public release (user decision: "Rebuild from public"):
+  - Downloaded `LUMIERE-ExpertRating-v202211.csv` and `LUMIERE-datacompleteness.csv` from figshare collection 5904905, MD5 matching, into `$GBMC_LUMIERE_ROOT/metadata/` (not in git).
+  - Extracted the 146 first- and later-progression timepoints (8.1 GB) from the local `Imaging-v202211.zip`. Its size matches figshare's to the byte.
+  - Added `gbmc.progressions.first_progression_from_ratings` and `15_ --from-ratings`. The rule reproduces all 50 copied names exactly and refuses on any disagreement.
+  - The 13 missing names are now recorded: 63 of 63, listed in `derived_from_ratings`.
+  - The schedule recounts as 83 later timepoints in 46 patients, matching D9.
 - 2026-11-10: D17, the pre-registration constants (user decisions):
   - mapping agreement 0.8;
   - cavity dark z -1.0 (from LUMIERE ventricle and tissue intensities);

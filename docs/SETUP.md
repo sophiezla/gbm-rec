@@ -28,3 +28,7 @@ npm run dev
 | `data/interim/features/` | Corrected feature caches for all 63 LUMIERE patients | The tournament |
 | `$GBMC_LUMIERE_ROOT` | Raw LUMIERE archive (`Imaging/`, `metadata/`; CC0) | `01_`, `05_`, `07_`, `40_`, `42_` |
 | `$GBMC_DERIVED_ROOT` | `data/interim/preprocessed/` and `data/interim/label_field/` | `01_`, `05_`, `06_`, `07_`, `40_`, `42_` |
+
+## LUMIERE metadata
+
+`$GBMC_LUMIERE_ROOT/metadata/` holds `LUMIERE-ExpertRating-v202211.csv` and `LUMIERE-datacompleteness.csv` from LUMIERE's figshare collection 5904905. Downloads: https://ndownloader.figshare.com/files/38369741 (MD5 `3f196e118aa5390952ff8397aa3d25ed`) and https://ndownloader.figshare.com/files/37575523 (MD5 `3be2baf9b7fe060cca03b7965ae5513f`). The scans come from `Imaging-v202211.zip` (https://ndownloader.figshare.com/files/38249697, MD5 `b2708d297badd245c8c8cbbb91fdda40`, 32.6 GB).
