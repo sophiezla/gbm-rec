@@ -371,7 +371,10 @@ Decision (each value is in `config.yaml`):
    - Evidence: 12 LUMIERE baselines drawn with seed 20261107. Only baseline images and baseline labels were read; no outcome.
    - Ventricle fluid had a median z of about -1.9 (per-patient medians -1.0 to -2.3); normal tissue about +0.1.
    - -1.0 is roughly the midpoint, the same logic as ventricle rule V4.
-   - These numbers came from an exploratory run. `scripts/16_cavity_dark_evidence.py` reproduces them into `results/cavity_dark_evidence/` from a clean commit (TODO: run after committing).
+   - Recorded by `scripts/16_cavity_dark_evidence.py` in `results/cavity_dark_evidence/`, run from a clean commit:
+     - ventricle fluid median z -1.92; tissue +0.15; exact midpoint -0.89;
+     - per patient, a median 85% of ventricle voxels and 10% of tissue voxels fall below -1.0.
+     - So -1.0 is the midpoint rounded slightly toward the darker, stricter side.
    - Caveat: RHUH-GBM's preprocessing differs, so the scale is not verified on its files. Recommended and chosen.
 3. **Round-trip exclusion rule** (`registration.roundtrip_threshold_rule` = `max`). The RHUH-GBM threshold on each patient's median round-trip error is the maximum of the per-patient medians from `07_ --summary`. That run uses the tuned recipe on the 63 LUMIERE baseline→first-progression pairs and reads no label.
    - The user chose the maximum over the recommended 95th percentile. It is the more lenient rule: it excludes only registrations worse than LUMIERE's single worst pair.

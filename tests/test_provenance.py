@@ -37,6 +37,15 @@ def test_manifest_records_git_and_outputs(repo):
     assert [o["path"] for o in manifest["outputs"]] == ["results/stage/x.json"]
 
 
+def test_manifest_git_state_is_taken_before_the_run_writes(repo):
+    # A clean run's own new outputs must not make it look dirty (found 2026-11-10 with 16_).
+    out = repo / "results" / "fresh"
+    with provenance.run_manifest(out):
+        (out / "x.json").write_text("{}", encoding="utf-8")
+    manifest = json.loads((out / provenance.MANIFEST_NAME).read_text(encoding="utf-8"))
+    assert manifest["git"]["dirty"] is False
+
+
 def test_require_clean_tree_passes_on_clean_repo(repo):
     provenance.require_clean_tree()
 

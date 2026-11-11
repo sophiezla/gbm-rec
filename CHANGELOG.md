@@ -33,6 +33,7 @@
 - 2026-11-06: `scripts/11_f5_cap_survey.py` and `results/f5_cap_survey/`: anatomy-only survey of voxels at the f5 cap. No sealed-off tissue; found unreliable ventricle masks (`DECISIONS.md` D6 (k), open). Nothing changed in the features.
 
 ### Fixed
+- 2026-11-10: `gbmc.provenance.run_manifest` read the git state when a run ended, so a clean run's own new outputs made its manifest say `dirty: true`. That is why manifests had to be regenerated after committing. It now captures the state when the run starts. Test: `test_manifest_git_state_is_taken_before_the_run_writes`. The committed manifests were all regenerated clean, so none is affected.
 - 2026-11-08, RHUH-GBM intensity scale (found in code review; no RHUH-GBM file exists, nothing scored):
   - **Falx test.** `30_` passed raw post-op T1 as `t1_z` to the falx white-matter test, whose threshold (`WHITE_MATTER_Z` = 0) is on the z scale. If RHUH-GBM's files are not z-scored, that would have left it with no falx barrier. The plan says they are z-scored by the dataset's own pipeline, over a region not yet verified (no file downloaded; corrected 2026-11-10), so the effect may be small. Either way, z-scoring again inside the brain mask matches LUMIERE. T1 is now z-scored inside the brain, as on LUMIERE's preprocessed images.
   - **Cavity threshold.** The cavity inspection (`20_`) and the alternative-cavity target compared raw T1ce with `rhuh.cavity_dark_t1ce_z`. Both now z-score T1ce over non-zero voxels. The threshold is still null.

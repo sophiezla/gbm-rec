@@ -85,6 +85,9 @@ class Manifest:
     inputs: list[str] = field(default_factory=list)
     values: dict[str, Any] = field(default_factory=dict)
     started: float = field(default_factory=time.time)
+    # Captured when the run starts: the code that produced the outputs. Read at exit, the
+    # run's own new (untracked) outputs would make every first run look dirty.
+    git: dict[str, Any] = field(default_factory=lambda: git_state())
 
     def record(self, **kwargs: Any) -> None:
         """Attach key/values such as seeds, counts and resolved data paths."""
@@ -97,7 +100,7 @@ class Manifest:
             "argv": sys.argv,
             "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(self.started)),
             "duration_s": round(time.time() - self.started, 3),
-            "git": git_state(),
+            "git": self.git,
             "environment": env_state(),
             "inputs": [
                 {"path": str(p), "sha256": file_digest(p), "bytes": Path(p).stat().st_size}
