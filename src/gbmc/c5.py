@@ -288,7 +288,9 @@ def train(cases: list[Case], settings: Settings, seed: int, device: str = "cpu",
     schedule = torch.optim.lr_scheduler.LambdaLR(optimiser, lambda s: 1.0 - s / total)
     first = 0
     if checkpoint is not None and checkpoint.is_file():
-        saved = torch.load(checkpoint, map_location=device, weights_only=True)
+        # Load onto the CPU: the random-number states must stay CPU tensors; the model and
+        # optimiser states are copied to ``device`` by their load_state_dict methods.
+        saved = torch.load(checkpoint, map_location="cpu", weights_only=True)
         if saved["key"] != key:
             raise SystemExit(f"{checkpoint} is from a different run (commit, fold, settings "
                              "or seed); delete it to start this fold from scratch")

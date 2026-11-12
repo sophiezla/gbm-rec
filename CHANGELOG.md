@@ -7,6 +7,7 @@
   - `tests/test_c5.py`: an interrupted-and-resumed run ends with the same weights as an uninterrupted one, bit for bit; a checkpoint from another run is refused.
   - One-off check (CPU, PyTorch 2.8, not the pinned environment): the new code with checkpoints and the code at `940e8ea` train bit-identical models at two network sizes.
   - Folds trained at `940e8ea` do not carry over: the fold records are per commit, so all 7 folds are trained at the new commit.
+  - Fixed 2026-11-12: resuming on a GPU failed (`RNG state must be a torch.ByteTensor`), because the checkpoint was loaded onto the GPU, random-number states included. It now loads onto the CPU. The resume test also runs on CUDA when a GPU is present; the CPU-only tests had missed this. Fold 0 at `939be80` reached epoch 16 before Colab's free GPU limit; its checkpoint is not reused (user decision: restart fold 0 at the fixed commit).
 - 2026-11-10: rebuilt the missing LUMIERE inputs from the public release (user decision: "Rebuild from public"):
   - Downloaded `LUMIERE-ExpertRating-v202211.csv` and `LUMIERE-datacompleteness.csv` from figshare collection 5904905, MD5 matching, into `$GBMC_LUMIERE_ROOT/metadata/` (not in git).
   - Extracted the 146 first- and later-progression timepoints (8.1 GB) from the local `Imaging-v202211.zip`. Its size matches figshare's to the byte.

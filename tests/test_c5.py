@@ -111,14 +111,24 @@ def _stop_after(epoch):
     return log
 
 
-def test_resumed_training_matches_an_uninterrupted_run(tmp_path):
+def _devices():
+    try:
+        import torch
+    except ImportError:
+        return ["cpu"]
+    return ["cpu", "cuda"] if torch.cuda.is_available() else ["cpu"]
+
+
+@pytest.mark.parametrize("device", _devices())   # cuda runs on the GPU computer only
+def test_resumed_training_matches_an_uninterrupted_run(tmp_path, device):
     pytest.importorskip("torch")
     settings = c5.Settings(patch=(16, 16, 16), batch=2, epochs=4, steps_per_epoch=3,
                            levels=3, base_channels=4)
     cases = [_case(0), _case(1)]
-    plain = _weights(c5.train(cases, settings, seed=3, log=lambda m: None))
+    plain = _weights(c5.train(cases, settings, seed=3, device=device, log=lambda m: None))
     checkpoint = tmp_path / "fold0.pt"
-    kwargs = {"checkpoint": checkpoint, "checkpoint_every": 3, "checkpoint_tag": "c fold0"}
+    kwargs = {"checkpoint": checkpoint, "checkpoint_every": 3, "checkpoint_tag": "c fold0",
+              "device": device}
     with pytest.raises(_Stop):    # a disconnect right after epoch 2's checkpoint
         c5.train(cases, settings, seed=3, log=_stop_after(2), **kwargs)
     assert checkpoint.is_file()
