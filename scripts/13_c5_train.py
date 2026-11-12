@@ -11,6 +11,10 @@ SHA-256 of every map and model, the commit, the GPU and the PyTorch version. Cop
 to the same path on the Mac; ``02_`` checks it before scoring.
 
 Resumable: a fold whose record (``folds/fold<k>.json``) is from the same commit is skipped.
+A fold in progress saves its full training state to ``checkpoints/fold<k>.pt`` every
+``CHECKPOINT_EPOCHS`` epochs; after a disconnect, a rerun at the same commit continues from
+it and ends with the same model as an uninterrupted run. The checkpoint is deleted once the
+fold's record is written.
 
     python scripts/13_c5_train.py                 # all 7 folds (CUDA)
     python scripts/13_c5_train.py --release       # Phase 2: one model on all 63 patients
@@ -39,6 +43,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 INPUTS = REPO_ROOT / "data" / "interim" / "c5_inputs"
 SMOKE = c5.Settings(patch=(32, 32, 32), batch=2, epochs=2, steps_per_epoch=3,
                     levels=3, base_channels=4)
+#: How often a fold in progress saves its state (engineering only: changes no result).
+CHECKPOINT_EPOCHS = 5
 
 
 def load_inputs(patients: list[str]) -> dict[str, c5.Case]:
@@ -103,14 +109,20 @@ def main() -> int:
     print(json.dumps(info), flush=True)
 
     if args.release:
+        checkpoint = out / "checkpoints" / "release.pt"
         model = c5.train(list(cases.values()), settings,
-                         stable_seed("C5_release", master_seed=master), args.device)
+                         stable_seed("C5_release", master_seed=master), args.device,
+                         log=lambda m: print(f"release: {m}", flush=True),
+                         checkpoint=checkpoint,
+                         checkpoint_every=CHECKPOINT_EPOCHS * settings.steps_per_epoch,
+                         checkpoint_tag=f"{state['commit']} release")
         digest = save_model(model, out / "model.pt")
         (out / "manifest.json").write_text(json.dumps(
             {"commit": state["commit"], "dirty": state["dirty"], "smoke": args.smoke,
              "settings": dataclasses.asdict(settings), "patients": sorted(cases),
              "model_sha256": digest} | info,
             indent=2) + "\n", encoding="utf-8")
+        checkpoint.unlink(missing_ok=True)
         return 0
 
     for k, held_out in enumerate(folds):
@@ -123,8 +135,13 @@ def main() -> int:
                 continue
         train = [cases[p] for p in patients if p not in held_out]
         start = time.time()
+        checkpoint = out / "checkpoints" / f"fold{k}.pt"
         model = c5.train(train, settings, stable_seed("C5", k, master_seed=master), args.device,
-                         log=lambda m, k=k: print(f"fold {k}: {m}", flush=True))
+                         log=lambda m, k=k: print(f"fold {k}: {m}", flush=True),
+                         checkpoint=checkpoint,
+                         checkpoint_every=(1 if args.smoke else CHECKPOINT_EPOCHS)
+                         * settings.steps_per_epoch,
+                         checkpoint_tag=f"{state['commit']} fold{k}")
         record = {"commit": state["commit"], "dirty": state["dirty"], "fold": k,
                   "model_sha256": save_model(model, out / "models" / f"fold{k}.pt"),
                   "maps": {}, "seconds": round(time.time() - start),
@@ -138,6 +155,7 @@ def main() -> int:
             record["maps"][patient] = file_digest(path)
         record_path.parent.mkdir(parents=True, exist_ok=True)
         record_path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+        checkpoint.unlink(missing_ok=True)
         print(f"fold {k}: {len(held_out)} maps written ({record['seconds']} s)", flush=True)
 
     records = [out / "folds" / f"fold{k}.json" for k in range(len(folds))]

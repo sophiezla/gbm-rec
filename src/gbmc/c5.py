@@ -15,7 +15,9 @@ leave open, fixed here before any training (D6 item 8):
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import json
+import os
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 import numpy as np
@@ -240,22 +242,68 @@ def augment(x, y, w, axes, rng: np.random.Generator, max_deg: float):
     return smooth, yw[:, 0], yw[:, 1]
 
 
+def _checkpoint_key(cases: list[Case], settings: Settings, seed: int, tag: str) -> str:
+    return json.dumps({"tag": tag, "seed": seed, "settings": asdict(settings),
+                       "patients": [c.patient for c in cases]}, sort_keys=True)
+
+
+def _save_checkpoint(path: Path, key: str, step: int, model, optimiser, schedule,
+                     rng: np.random.Generator) -> None:
+    """Write the full training state atomically: a crash mid-write keeps the old file."""
+    import torch
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    torch.save({"key": key, "step": step, "model": model.state_dict(),
+                "optimiser": optimiser.state_dict(), "schedule": schedule.state_dict(),
+                "numpy_rng": json.dumps(rng.bit_generator.state),
+                "torch_rng": torch.get_rng_state(),
+                "cuda_rng": torch.cuda.get_rng_state_all() if torch.cuda.is_available()
+                else None}, tmp)
+    os.replace(tmp, path)
+
+
 def train(cases: list[Case], settings: Settings, seed: int, device: str = "cpu",
-          log=print):
-    """Train from scratch for exactly ``settings.total_steps``; returns the last model."""
+          log=print, checkpoint: Path | None = None, checkpoint_every: int = 0,
+          checkpoint_tag: str = ""):
+    """Train from scratch for exactly ``settings.total_steps``; returns the last model.
+
+    With ``checkpoint``, the full training state (model, optimiser, schedule, step and the
+    random-number states) is saved there every ``checkpoint_every`` steps, and a call that
+    finds a checkpoint for the same run (cases, settings, seed and ``checkpoint_tag``)
+    continues from it. A resumed run ends with the same model as an uninterrupted one,
+    bit for bit; checkpointing changes no setting and no step (tests/test_c5.py).
+    """
     import torch
     import torch.nn.functional as F
 
     set_determinism(seed)
     rng = np.random.default_rng(seed)
+    key = _checkpoint_key(cases, settings, seed, checkpoint_tag)
     cases = [c.padded(settings.patch) for c in cases]
     weight = torch.tensor(pos_weight(cases, settings.pos_weight_cap), device=device)
     model = build_unet(settings).to(device)
     optimiser = torch.optim.Adam(model.parameters(), lr=settings.learning_rate)
     total = settings.total_steps
     schedule = torch.optim.lr_scheduler.LambdaLR(optimiser, lambda s: 1.0 - s / total)
+    first = 0
+    if checkpoint is not None and checkpoint.is_file():
+        saved = torch.load(checkpoint, map_location=device, weights_only=True)
+        if saved["key"] != key:
+            raise SystemExit(f"{checkpoint} is from a different run (commit, fold, settings "
+                             "or seed); delete it to start this fold from scratch")
+        model.load_state_dict(saved["model"])
+        optimiser.load_state_dict(saved["optimiser"])
+        schedule.load_state_dict(saved["schedule"])
+        rng.bit_generator.state = json.loads(saved["numpy_rng"])
+        torch.set_rng_state(saved["torch_rng"])
+        if saved["cuda_rng"] is not None and torch.cuda.is_available():
+            torch.cuda.set_rng_state_all(saved["cuda_rng"])
+        first = int(saved["step"])
+        log(f"resumed from checkpoint at epoch {first // settings.steps_per_epoch}/"
+            f"{settings.epochs}")
     model.train()
-    for step in range(total):
+    for step in range(first, total):
         xb, yb, wb, axes = sample_batch(cases, rng, settings, step)
         x = torch.as_tensor(xb, device=device)
         y = torch.as_tensor(yb, dtype=torch.float32, device=device)
@@ -269,6 +317,9 @@ def train(cases: list[Case], settings: Settings, seed: int, device: str = "cpu",
         loss.backward()
         optimiser.step()
         schedule.step()
+        if (checkpoint is not None and checkpoint_every > 0
+                and (step + 1) % checkpoint_every == 0 and step + 1 < total):
+            _save_checkpoint(checkpoint, key, step + 1, model, optimiser, schedule, rng)
         if (step + 1) % settings.steps_per_epoch == 0:
             log(f"epoch {(step + 1) // settings.steps_per_epoch}/{settings.epochs} "
                 f"loss {loss.item():.4f}")

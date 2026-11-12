@@ -96,6 +96,57 @@ def test_train_and_predict_are_deterministic():
     assert np.array_equal(scores[0], scores[1])
 
 
+class _Stop(Exception):
+    pass
+
+
+def _weights(model):
+    return {k: v.detach().cpu().numpy() for k, v in model.state_dict().items()}
+
+
+def _stop_after(epoch):
+    def log(message):
+        if message.startswith(f"epoch {epoch}/"):
+            raise _Stop
+    return log
+
+
+def test_resumed_training_matches_an_uninterrupted_run(tmp_path):
+    pytest.importorskip("torch")
+    settings = c5.Settings(patch=(16, 16, 16), batch=2, epochs=4, steps_per_epoch=3,
+                           levels=3, base_channels=4)
+    cases = [_case(0), _case(1)]
+    plain = _weights(c5.train(cases, settings, seed=3, log=lambda m: None))
+    checkpoint = tmp_path / "fold0.pt"
+    kwargs = {"checkpoint": checkpoint, "checkpoint_every": 3, "checkpoint_tag": "c fold0"}
+    with pytest.raises(_Stop):    # a disconnect right after epoch 2's checkpoint
+        c5.train(cases, settings, seed=3, log=_stop_after(2), **kwargs)
+    assert checkpoint.is_file()
+    messages = []
+    resumed = _weights(c5.train(cases, settings, seed=3, log=messages.append, **kwargs))
+    assert messages[0] == "resumed from checkpoint at epoch 2/4"
+    assert len(messages) == 3      # epochs 3 and 4 only
+    checkpointed = _weights(c5.train(cases, settings, seed=3, log=lambda m: None,
+                                     **(kwargs | {"checkpoint": tmp_path / "other.pt"})))
+    for name, value in plain.items():
+        assert np.array_equal(value, resumed[name]), name
+        assert np.array_equal(value, checkpointed[name]), name
+
+
+def test_checkpoint_from_another_run_is_refused(tmp_path):
+    pytest.importorskip("torch")
+    cases = [_case(0), _case(1)]
+    checkpoint = tmp_path / "fold0.pt"
+    with pytest.raises(_Stop):
+        c5.train(cases, TINY, seed=3, log=_stop_after(1), checkpoint=checkpoint,
+                 checkpoint_every=2, checkpoint_tag="commitA fold0")
+    for change in ({"seed": 4}, {"checkpoint_tag": "commitB fold0"}):
+        args = {"seed": 3, "checkpoint_tag": "commitA fold0"} | change
+        with pytest.raises(SystemExit, match="different run"):
+            c5.train(cases, TINY, log=lambda m: None, checkpoint=checkpoint,
+                     checkpoint_every=2, **args)
+
+
 def test_unet_keeps_the_patch_shape():
     torch = pytest.importorskip("torch")
     model = c5.build_unet(c5.Settings(levels=4, base_channels=4))
