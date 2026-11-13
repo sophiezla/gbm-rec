@@ -74,7 +74,7 @@ Departure:
 - Folds 2–6 are expected on the L4. If a later session gets another GPU, the fold records and the logs show it.
 
 Why:
-Compute time. About 18 h of T4 training remained (55 s per epoch, measured); the L4 is estimated at 6–12 h (not yet measured). Continuing from the checkpoint avoids retraining fold 0 and fold 1's first 80 epochs. No held-out C5 score has been computed or seen, so the change is not chosen in light of a result.
+Compute time. About 18 h of T4 training remained (55 s per epoch, measured); on the L4 it measured 19.4 s per epoch (30 epochs in 583 s, 2026-11-13 04:28–04:38 UTC), about 2.8× the T4, so about 6 h remained. Continuing from the checkpoint avoids retraining fold 0 and fold 1's first 80 epochs. No held-out C5 score has been computed or seen, so the change is not chosen in light of a result.
 
 Direction of effect:
 - TF32 rounds convolution inputs to a 10-bit mantissa (full precision: 23 bits), with 32-bit accumulation. Training stays deterministic on a given GPU type, but folds trained on the L4 differ from what a T4 would give by more than last-digit rounding, and cannot be reproduced bit for bit on a T4.
