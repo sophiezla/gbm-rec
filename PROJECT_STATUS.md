@@ -1,12 +1,12 @@
 # Project Status: gbm-rec ("Where Does Glioblastoma Come Back?")
 
-_Last updated: 2026-11-12_
+_Last updated: 2026-11-13_
 
 ## Current Objective
 Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as written. **Phase 1 (tournament on LUMIERE)**: the rules are locked (D6, 2026-11-07), and C5 is waiting to be trained on the GPU computer (`docs/C5_GPU.md`). Nothing is scored. The user reports Phase 0 is complete; its checklist boxes below are not ticked individually.
 
 ### Current blockers (2026-11-08)
-1. **C5 training (in progress, 2026-11-12).** The user trains the 7 folds on Colab (T4) at pinned commit `43a41a0`, with checkpoints every 5 epochs. Fold 0 is done and verified (bit-identical to an uninterrupted run, after 3 resumes); folds 1–6 take about 3.1 h each. Then copy `gbm-rec-c5/c5_oof/` here, to `data/interim/c5_oof/`. `02_` refuses until then.
+1. **C5 training: done on Colab 2026-11-13; maps not yet imported.** The user trained the 7 folds at pinned commit `43a41a0` (T4, then an L4 from fold 1 epoch 81: deviation V5). Fold 0 was verified bit-identical to an uninterrupted run after 3 resumes. The user reports that `gbm-rec-c5/c5_oof/manifest.json` exists on Drive, so all 7 folds finished at one commit. Next: copy `gbm-rec-c5/c5_oof/` to `data/interim/c5_oof/` on the computer that holds `data/`. Jack's clone has none (TODO: verify which computer runs `02_`). `02_` checks every hash before scoring.
 2. **LightGBM cannot load on this Mac** (`libomp` missing, no Homebrew), so `02_` cannot fit C2 here. Fix: install `libomp` (`docs/SETUP.md`). Not done: it is a system install, for the user. With PyTorch's bundled `libomp` on `DYLD_FALLBACK_LIBRARY_PATH` in `.venv-c5`, all 148 tests pass, so the code itself works.
 3. **Data for `05_`, `07_` and `40_`: mostly resolved 2026-11-10.**
    - The rating sheets were downloaded from figshare (MD5 checked).

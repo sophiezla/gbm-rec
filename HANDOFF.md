@@ -1,13 +1,13 @@
 # Project Handoff
 
-_Last updated: 2026-11-12_
+_Last updated: 2026-11-13_
 
-## Latest (2026-11-12): the user trains C5 on Colab, with checkpoints
+## Latest (2026-11-12/13): the user trained C5 on Colab, with checkpoints
 - **Who:** the user (Jack) trains C5 on their own Colab (T4, paid compute units), not the partner. The partner was told. Inputs: the shared `gbm-rec-c5/c5_inputs/` (63 files, hashes checked by `13_`).
 - **Pinned commit: `43a41a0`** (`gbm-rec-c5/PINNED_COMMIT.txt`). Do not change it until all 7 folds are done; a new commit restarts every fold.
 - **Checkpoints within a fold** (`939be80`, GPU fix `43a41a0`): every 5 epochs to `c5_oof/checkpoints/fold<k>.pt`; a rerun resumes. Resume after a disconnect: Colab cells mount → clone pinned → env → link → train.
 - **Verified on the T4:** fold 0 was resumed 3 times (epochs 5, 55, 105) and its model is bit-for-bit identical to the uninterrupted fold 0 at `940e8ea` (SHA-256 `f2b7e840…fe77f`); all 186 compared epoch losses match.
-- **Progress:** fold 0 done 2026-11-12/13; folds 1–6 running, about 3.1 h each on a T4. When all 7 are done, copy `gbm-rec-c5/c5_oof/` to `data/interim/c5_oof/` on the Mac, plus `requirements-gpu.lock`.
+- **Progress: all 7 folds done 2026-11-13** (user report: the Colab watcher printed `all 7 folds done: True`, so `gbm-rec-c5/c5_oof/manifest.json` exists on Drive; the manifest step only writes it when all 7 folds share one commit). Not yet checked on a Mac. Next: copy `gbm-rec-c5/c5_oof/` to `data/interim/c5_oof/`, plus `requirements-gpu.lock`, on the computer that holds `data/` (Jack's clone has no `data/` folder, no LUMIERE copies and no `.venv`; TODO: verify which computer runs `02_`).
 - **GPU switch 2026-11-13 (deviation V5):** from fold 1 epoch 81 the run continues on an NVIDIA L4 (TF32 convolutions) to save time; fold 0 and fold 1 epochs 1–80 ran on the T4.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
