@@ -1,12 +1,12 @@
 # Project Status: gbm-rec ("Where Does Glioblastoma Come Back?")
 
-_Last updated: 2026-11-08_
+_Last updated: 2026-11-12_
 
 ## Current Objective
 Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as written. **Phase 1 (tournament on LUMIERE)**: the rules are locked (D6, 2026-11-07), and C5 is waiting to be trained on the GPU computer (`docs/C5_GPU.md`). Nothing is scored. The user reports Phase 0 is complete; its checklist boxes below are not ticked individually.
 
 ### Current blockers (2026-11-08)
-1. **C5 training.** The partner trains the 7 folds on Google Colab with their own notebook (from 2026-11-10; runbook section 0). Then copy `c5_oof/` here, to `data/interim/c5_oof/`. `02_` refuses until then.
+1. **C5 training (in progress, 2026-11-12).** The user trains the 7 folds on Colab (T4) at pinned commit `43a41a0`, with checkpoints every 5 epochs. Fold 0 is done and verified (bit-identical to an uninterrupted run, after 3 resumes); folds 1–6 take about 3.1 h each. Then copy `gbm-rec-c5/c5_oof/` here, to `data/interim/c5_oof/`. `02_` refuses until then.
 2. **LightGBM cannot load on this Mac** (`libomp` missing, no Homebrew), so `02_` cannot fit C2 here. Fix: install `libomp` (`docs/SETUP.md`). Not done: it is a system install, for the user. With PyTorch's bundled `libomp` on `DYLD_FALLBACK_LIBRARY_PATH` in `.venv-c5`, all 148 tests pass, so the code itself works.
 3. **Data for `05_`, `07_` and `40_`: mostly resolved 2026-11-10.**
    - The rating sheets were downloaded from figshare (MD5 checked).
@@ -26,7 +26,7 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 | 6 Communication | 6–8 | Poster final; report drafted; expert review; mock judging; booth kit | Not started |
 
 ## Phase 0 Checklist
-- [ ] 0.1 ISEF forms 1, 1A, Research Plan/Addendum, 1B, 2A, 7; SRC email sent
+- [ ] 0.1 ISEF forms 1, 1A, Research Plan/Addendum, 1B, 2A, 7; SRC email sent. **Forms signed** (user confirmed on 2026-11-08; signing date `TODO: verify`). SRC email / LACSEF SRC outcome: `TODO: verify`
 - [x] 0.2 Repository scaffolded; gbm4d pinned at `eeba777` (see Blockers)
 - [x] 0.3 Environment: Python 3.13.14, gbm-4d lock + scikit-image + trimesh; ITK threads pinned to 1
 - [ ] 0.4 CNN gates: hardware and starting weights (facts so far below)
@@ -90,7 +90,7 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 - 2026-11-07: the tournament rules are locked (D6, Step 1.1), with seed 20261107 and C5 in. Nothing is scored yet. The C5 code is built and its inputs are packed. Blocking the tournament: training C5 on the GPU computer (`docs/C5_GPU.md`).
 
 ## Blockers
-- See "Current blockers" at the top. ISEF forms: the user reports Phase 0 complete; whether the forms are signed is not recorded here (TODO: verify).
+- See "Current blockers" at the top. ISEF forms: signed, per the user on 2026-11-08 (signing date TODO: verify).
 
 ## Items Requiring Approval
 - The fair date. The plan assumes the week of Nov 16 but says the date is not recorded yet.

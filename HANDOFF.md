@@ -1,13 +1,21 @@
 # Project Handoff
 
-_Last updated: 2026-11-08_
+_Last updated: 2026-11-12_
+
+## Latest (2026-11-12): the user trains C5 on Colab, with checkpoints
+- **Who:** the user (Jack) trains C5 on their own Colab (T4, paid compute units), not the partner. The partner was told. Inputs: the shared `gbm-rec-c5/c5_inputs/` (63 files, hashes checked by `13_`).
+- **Pinned commit: `43a41a0`** (`gbm-rec-c5/PINNED_COMMIT.txt`). Do not change it until all 7 folds are done; a new commit restarts every fold.
+- **Checkpoints within a fold** (`939be80`, GPU fix `43a41a0`): every 5 epochs to `c5_oof/checkpoints/fold<k>.pt`; a rerun resumes. Resume after a disconnect: Colab cells mount → clone pinned → env → link → train.
+- **Verified on the T4:** fold 0 was resumed 3 times (epochs 5, 55, 105) and its model is bit-for-bit identical to the uninterrupted fold 0 at `940e8ea` (SHA-256 `f2b7e840…fe77f`); all 186 compared epoch losses match.
+- **Progress:** fold 0 done 2026-11-12/13; folds 1–6 running, about 3.1 h each on a T4. When all 7 are done, copy `gbm-rec-c5/c5_oof/` to `data/interim/c5_oof/` on the Mac, plus `requirements-gpu.lock`.
+- **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
 ## Latest (2026-11-10): LUMIERE inputs rebuilt from the public release
 - The rating sheets were downloaded (MD5 checked), and the 146 progression timepoints were extracted from `~/Downloads/Imaging-v202211.zip` into `data/raw/lumiere/Imaging/`.
 - All 63 first-progression names are recorded (13 derived by a rule that reproduces the other 50).
 - `05_` and `07_` can now run here. The app export still needs re-transported first-progression labels.
 
-## Latest (2026-11-10): C5 trains on Google Colab
+## Earlier (2026-11-10): C5 on Google Colab (superseded 2026-11-12: the user trains it)
 **Partner's AI:** read `docs/C5_COLAB_FOR_PARTNER.md` before building the Colab setup. Train on the shared `c5_inputs/`, not a re-pack.
 
 The user's partner trains C5 on Colab with their own notebook; `docs/C5_GPU.md` section 0 lists what it must respect.

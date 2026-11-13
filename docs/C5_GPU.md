@@ -55,7 +55,8 @@ python scripts/13_c5_train.py
 - The smoke run uses tiny settings and writes to `data/interim/c5_smoke/`. Its maps are marked `smoke` and `02_` refuses them.
 - The real run trains the 7 folds with the fixed settings (`config.yaml:c5`) and writes `data/interim/c5_oof/`. It resumes: a fold already finished at the same commit is skipped. The manifest is written once all 7 folds are done.
 - A fold in progress saves its full training state to `c5_oof/checkpoints/fold<k>.pt` every 5 epochs (model, optimiser, schedule, step, random-number states). After a disconnect, rerunning the same command at the same commit continues that fold from its last checkpoint, losing at most 5 epochs, and ends with the same model as an uninterrupted run, bit for bit (`tests/test_c5.py`). The checkpoint is deleted once the fold's record is written. A checkpoint from another commit, fold or seed is refused. The release run (section 5) does the same with `c5_release/checkpoints/release.pt`.
-- Speed, Tesla T4 on Colab, 2026-11-12 (user's run at `940e8ea`): about 56 s per epoch, so about 3.1 h per fold and about 22 h for 7 folds.
+- Speed, Tesla T4 on Colab, 2026-11-12 (user's run at `940e8ea`): about 55 s per epoch; the uninterrupted fold 0 took 10,947 s (3.0 h) including scoring, so about 21–22 h for 7 folds.
+- Resume verified on a T4 (2026-11-13, `43a41a0`): fold 0 resumed 3 times ended bit-for-bit identical to the uninterrupted run. A fold record's `seconds` counts only the last session.
 
 ## 4. Bring the maps back
 
