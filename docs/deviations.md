@@ -62,6 +62,25 @@ Recompute (2026-11-07; `results/feature_recompute_v4/`, `results/f5_cap_survey_v
 - Capped share of evaluation voxels: median 3.5%, at most 6.0% (V3: 5.4%, up to 55%). The tissue that is truly unreached is at most 0.17 ml.
 - No score has been seen, so none of this was chosen in light of a result.
 
+## V5: C5 folds 1–6 on an NVIDIA L4 with TF32 convolutions; fold 1 split across two GPUs
+
+Date: 2026-11-13
+Source: `DECISIONS.md` D6 (g) ("A different GPU can change the last digits of the weights"); user decision on 2026-11-13 ("let's switch to a100, continue without restart"). No A100 connected, and the user chose an L4.
+
+Departure:
+- Fold 0 (all 200 epochs) and fold 1 epochs 1–80 trained on a Tesla T4, which has no TF32: full 32-bit precision.
+- From fold 1 epoch 81 (resumed from the epoch-80 checkpoint, 2026-11-13 04:23 UTC, commit `43a41a0`), training runs on an NVIDIA L4 (23.7 GB). There PyTorch's default runs cuDNN convolutions in TF32, checked in the pinned environment on that runtime: `cudnn tf32: True | matmul tf32: False`. The code, settings, seeds and folds are unchanged.
+- Fold 1's record will name only the L4 (`device_info` is the GPU that finishes a fold); this entry is the record that its first 80 epochs ran on the T4.
+- Folds 2–6 are expected on the L4. If a later session gets another GPU, the fold records and the logs show it.
+
+Why:
+Compute time. About 18 h of T4 training remained (55 s per epoch, measured); the L4 is estimated at 6–12 h (not yet measured). Continuing from the checkpoint avoids retraining fold 0 and fold 1's first 80 epochs. No held-out C5 score has been computed or seen, so the change is not chosen in light of a result.
+
+Direction of effect:
+- TF32 rounds convolution inputs to a 10-bit mantissa (full precision: 23 bits), with 32-bit accumulation. Training stays deterministic on a given GPU type, but folds trained on the L4 differ from what a T4 would give by more than last-digit rounding, and cannot be reproduced bit for bit on a T4.
+- Fold 0's T4 model is verified bit-identical to an uninterrupted T4 run (CHANGELOG, 2026-11-12/13); no such check exists for the L4 folds.
+- Effect on any C5 score: unknown, and none has been seen. To reproduce exactly, rerun on an L4 at `43a41a0` with the same resume point, or rerun all folds on one GPU type.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29

@@ -8,6 +8,7 @@ _Last updated: 2026-11-12_
 - **Checkpoints within a fold** (`939be80`, GPU fix `43a41a0`): every 5 epochs to `c5_oof/checkpoints/fold<k>.pt`; a rerun resumes. Resume after a disconnect: Colab cells mount → clone pinned → env → link → train.
 - **Verified on the T4:** fold 0 was resumed 3 times (epochs 5, 55, 105) and its model is bit-for-bit identical to the uninterrupted fold 0 at `940e8ea` (SHA-256 `f2b7e840…fe77f`); all 186 compared epoch losses match.
 - **Progress:** fold 0 done 2026-11-12/13; folds 1–6 running, about 3.1 h each on a T4. When all 7 are done, copy `gbm-rec-c5/c5_oof/` to `data/interim/c5_oof/` on the Mac, plus `requirements-gpu.lock`.
+- **GPU switch 2026-11-13 (deviation V5):** from fold 1 epoch 81 the run continues on an NVIDIA L4 (TF32 convolutions) to save time; fold 0 and fold 1 epochs 1–80 ran on the T4.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
 ## Latest (2026-11-10): LUMIERE inputs rebuilt from the public release
