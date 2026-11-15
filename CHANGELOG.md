@@ -11,6 +11,7 @@
   - Verified 2026-11-12/13 on a Colab T4 at `43a41a0`: fold 0 was resumed from checkpoints 3 times (epochs 5, 55, 105), and its model is bit-for-bit identical to the uninterrupted fold 0 at `940e8ea` (SHA-256 `f2b7e8408be6d2cb2e105b01598db3ee1db58cfb4847c4f69c9140ca3c0fe77f`). All 186 epoch losses compared match.
   - Known limit: a fold record's `seconds` counts only the session that finished the fold, not time before a resume.
 - 2026-11-13: C5 training finished on Colab at `43a41a0`. The user reports all 7 folds done (`c5_oof/manifest.json` written on Drive). Not yet imported or hash-checked on a Mac; no candidate scored.
+- 2026-11-15: user decision to retrain C5 folds 0 and 1 on an NVIDIA L4 at the same commit `43a41a0`, so all 7 folds come from one GPU type (deviation V5 update). Decided before any C5 score was computed. The T4-era fold 0/1 records, models and maps, and the first manifest, are set aside in `gbm-rec-c5/c5_oof_T4_folds01/` on Drive.
 - 2026-11-10: rebuilt the missing LUMIERE inputs from the public release (user decision: "Rebuild from public"):
   - Downloaded `LUMIERE-ExpertRating-v202211.csv` and `LUMIERE-datacompleteness.csv` from figshare collection 5904905, MD5 matching, into `$GBMC_LUMIERE_ROOT/metadata/` (not in git).
   - Extracted the 146 first- and later-progression timepoints (8.1 GB) from the local `Imaging-v202211.zip`. Its size matches figshare's to the byte.

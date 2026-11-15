@@ -1,6 +1,6 @@
 # Project Handoff
 
-_Last updated: 2026-11-13_
+_Last updated: 2026-11-15_
 
 ## Latest (2026-11-12/13): the user trained C5 on Colab, with checkpoints
 - **Who:** the user (Jack) trains C5 on their own Colab (T4, paid compute units), not the partner. The partner was told. Inputs: the shared `gbm-rec-c5/c5_inputs/` (63 files, hashes checked by `13_`).
@@ -9,6 +9,7 @@ _Last updated: 2026-11-13_
 - **Verified on the T4:** fold 0 was resumed 3 times (epochs 5, 55, 105) and its model is bit-for-bit identical to the uninterrupted fold 0 at `940e8ea` (SHA-256 `f2b7e840…fe77f`); all 186 compared epoch losses match.
 - **Progress: all 7 folds done 2026-11-13** (user report: the Colab watcher printed `all 7 folds done: True`, so `gbm-rec-c5/c5_oof/manifest.json` exists on Drive; the manifest step only writes it when all 7 folds share one commit). Not yet checked on a Mac. Next: copy `gbm-rec-c5/c5_oof/` to `data/interim/c5_oof/`, plus `requirements-gpu.lock`, on the computer that holds `data/` (Jack's clone has no `data/` folder, no LUMIERE copies and no `.venv`; TODO: verify which computer runs `02_`).
 - **GPU switch 2026-11-13 (deviation V5):** from fold 1 epoch 81 the run continues on an NVIDIA L4 (TF32 convolutions) to save time; fold 0 and fold 1 epochs 1–80 ran on the T4.
+- **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Do not run `02_` until that manifest exists.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
 ## Latest (2026-11-10): LUMIERE inputs rebuilt from the public release

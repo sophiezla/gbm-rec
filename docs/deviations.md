@@ -62,7 +62,7 @@ Recompute (2026-11-07; `results/feature_recompute_v4/`, `results/f5_cap_survey_v
 - Capped share of evaluation voxels: median 3.5%, at most 6.0% (V3: 5.4%, up to 55%). The tissue that is truly unreached is at most 0.17 ml.
 - No score has been seen, so none of this was chosen in light of a result.
 
-## V5: C5 folds 1–6 on an NVIDIA L4 with TF32 convolutions; fold 1 split across two GPUs
+## V5: C5 trained on an NVIDIA L4 with TF32 convolutions (folds 0–1 retrained there, 2026-11-15)
 
 Date: 2026-11-13
 Source: `DECISIONS.md` D6 (g) ("A different GPU can change the last digits of the weights"); user decision on 2026-11-13 ("let's switch to a100, continue without restart"). No A100 connected, and the user chose an L4.
@@ -80,6 +80,13 @@ Direction of effect:
 - TF32 rounds convolution inputs to a 10-bit mantissa (full precision: 23 bits), with 32-bit accumulation. Training stays deterministic on a given GPU type, but folds trained on the L4 differ from what a T4 would give by more than last-digit rounding, and cannot be reproduced bit for bit on a T4.
 - Fold 0's T4 model is verified bit-identical to an uninterrupted T4 run (CHANGELOG, 2026-11-12/13); no such check exists for the L4 folds.
 - Effect on any C5 score: unknown, and none has been seen. To reproduce exactly, rerun on an L4 at `43a41a0` with the same resume point, or rerun all folds on one GPU type.
+
+Update 2026-11-15 (user decision: "i want to retrain folds 0-1"):
+- All 7 folds finished on 2026-11-13 (fold 0 on the T4, fold 1 split T4/L4, folds 2–6 on the L4) and `c5_oof/manifest.json` was written. No C5 score had been computed or seen; `02_` had not run.
+- Folds 0 and 1 are retrained from scratch on an NVIDIA L4 at the same commit `43a41a0`, with the same settings, seeds and folds, so all 7 folds come from one GPU type and none is split across GPUs.
+- The T4-era fold 0 and fold 1 (records, models, the 18 maps) and the first manifest are set aside on Drive in `gbm-rec-c5/c5_oof_T4_folds01/`, not deleted. They are not results and are not scored.
+- Why: consistency of the 7 held-out maps, decided before any score. Direction of effect: unknown; the choice cannot favour any candidate, because no score exists.
+- TODO: verify once the retrain finishes: both fold records name the L4, the commit is `43a41a0`, and a new manifest is written.
 
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
