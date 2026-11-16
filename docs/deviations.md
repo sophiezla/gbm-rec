@@ -87,7 +87,7 @@ Update 2026-11-15 (user decision: "i want to retrain folds 0-1"):
 - The T4-era fold 0 and fold 1 (records, models, the 18 maps) and the first manifest are set aside on Drive in `gbm-rec-c5/c5_oof_T4_folds01/`, not deleted. They are not results and are not scored.
 - Why: consistency of the 7 held-out maps, decided before any score. Direction of effect: unknown; the choice cannot favour any candidate, because no score exists.
 - Done 2026-11-15/16 (user's log `logs/train_20261115_223435.txt`): fold 1 retrained, 9 maps written (4,005 s); folds 2–6 skipped as done at this commit; a new manifest was written, which the script only does when all 7 fold records share one commit.
-- TODO: verify that the fold 0 and fold 1 records (`device_info.gpu`) name the L4; the log tail shown did not include it.
+- Verified 2026-11-16 (fold records on Drive, read by the user): all 7 folds at `43a41a0`, all `NVIDIA L4`, 9 maps each, 3,949–4,010 s per fold. The T4/L4 split described above no longer applies to any fold that will be scored; it applies only to the set-aside files.
 
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
