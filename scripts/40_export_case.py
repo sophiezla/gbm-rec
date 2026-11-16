@@ -34,6 +34,7 @@ import SimpleITK as sitk
 
 from gbmc import candidates, config, export, lumiere
 from gbmc.progressions import schedule
+from gbmc.tournament import scored_recurrence
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CASES = REPO_ROOT / "app" / "public" / "cases"
@@ -138,7 +139,9 @@ def export_case(patient: str) -> dict:
     }
     row = schedule([patient])[0]
     timepoints = [{"id": row["baseline"], "role": "post-op baseline", "weeks_from_baseline": 0}]
-    first = lumiere.load_recurrence(patient)
+    # Exactly the recurrence every candidate is scored on: outside the target only. gbm-4d's
+    # full first-progression label (label_field/) is not on this computer.
+    _, first = scored_recurrence(patient, FEATURES)
     labelled = [(row["first"], first, "first progression")]
     for index, tp in enumerate(row["later"], start=2):
         path = LATER / tp / patient / "recurrence_labels.nii.gz"
@@ -148,7 +151,10 @@ def export_case(patient: str) -> dict:
     for tp, mask, role in labelled:
         timepoints.append({"id": tp, "role": role,
                            "weeks_from_baseline": _week(tp) - _week(row["baseline"]),
-                           "recurrence_centroid_ras_mm": _centroid_ras(mask & case.brain, ref)})
+                           "recurrence_centroid_ras_mm": _centroid_ras(mask & case.brain, ref),
+                           "recurrence_region": ("outside the target, as scored"
+                                                 if role == "first progression"
+                                                 else "all enhancing tumour")})
         layers[f"recurrence_{tp}"] = ("recurrence", mask & case.brain)
 
     oof = OOF / f"{patient}.npz"
@@ -206,8 +212,7 @@ def export_case(patient: str) -> dict:
         overlays[tp] = name
 
     sources = [base / "CT1.nii.gz", base / "FLAIR.nii.gz", base / "brain_mask.nii.gz",
-               lumiere.derived_root() / "data" / "interim" / "label_field" / patient
-               / "recurrence_labels.nii.gz", FEATURES / f"{patient}.npz"]
+               FEATURES / f"{patient}.npz"]
     if oof.is_file():
         sources.append(oof)
     sources += sources_extra

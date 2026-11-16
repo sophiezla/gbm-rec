@@ -12,7 +12,9 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
    - The rating sheets were downloaded from figshare (MD5 checked).
    - The 146 progression timepoints were extracted from `Imaging-v202211.zip`.
    - All 63 first-progression names are recorded.
-   - Still missing: gbm-4d's `label_field/` recurrence labels. Only the app export (`40_`) needs them, for the hero cases; re-transporting them with the current code is the way to rebuild them.
+   - gbm-4d's `label_field/` is no longer needed. `40_` and `06_` take the first-progression label from the feature cache (2026-11-11), and the app cases are re-exported.
+   - `07_` and `05_` are running on this Mac (started 2026-11-11).
+4. **Node.js is not installed on this Mac**, so the app cannot be built or viewed here. Install Node.js (a system install, for the user).
 
 ## Phase Gates (plan §3)
 | Phase | Weeks | Gate | State |

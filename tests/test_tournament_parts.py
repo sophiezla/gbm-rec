@@ -79,3 +79,16 @@ def test_bca_is_deterministic_and_brackets_the_mean():
     assert a == stats.mean_with_bca(np.append(values, np.nan), 1000, seed=5)
     assert a.n == 50
     assert a.low < a.mean < a.high
+
+
+def test_scored_recurrence_rebuilds_the_label_inside_the_evaluation_region(tmp_path):
+    from gbmc.tournament import scored_recurrence
+
+    rng = np.random.default_rng(3)
+    evaluate = rng.random((5, 6, 7)) < 0.6
+    truth = rng.random(int(evaluate.sum())) < 0.2
+    np.savez(tmp_path / "P.npz", evaluate_shape=np.array(evaluate.shape),
+             evaluate_packed=np.packbits(evaluate.ravel()), truth=truth)
+    got_evaluate, recurrence = scored_recurrence("P", tmp_path)
+    assert (got_evaluate == evaluate).all()
+    assert (recurrence[evaluate] == truth).all() and not recurrence[~evaluate].any()

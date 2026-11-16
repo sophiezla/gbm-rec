@@ -30,6 +30,7 @@ from gbmc import candidates, config, lumiere, metrics
 from gbmc.provenance import require_clean_tree, run_manifest
 from gbmc.rng import stable_seed
 from gbmc.stats import mean_with_bca
+from gbmc.tournament import scored_recurrence
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CACHE = REPO_ROOT / "data" / "interim" / "features"
@@ -67,11 +68,9 @@ def main() -> int:
         patient = entry["patient"]
         if not entry["later"]:
             continue
-        with np.load(CACHE / f"{patient}.npz") as z:
-            shape = tuple(z["evaluate_shape"])
-            evaluate = np.unpackbits(z["evaluate_packed"])[: int(np.prod(shape))
-                                                           ].reshape(shape).astype(bool)
-        first = lumiere.load_recurrence(patient)
+        # The first-progression label inside the evaluation region, as scored; new_enhancing
+        # only looks there, so this is exact (gbm-4d's label_field/ is not on this computer).
+        evaluate, first = scored_recurrence(patient, CACHE)
         with np.load(OOF / f"{patient}.npz") as z:
             scores = {k: z[k] for k in z.files}
         for index, timepoint in enumerate(entry["later"], start=2):

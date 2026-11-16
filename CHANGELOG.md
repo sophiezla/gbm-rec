@@ -3,6 +3,11 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-11: `gbmc.tournament.scored_recurrence` rebuilds the first-progression label from the feature cache. It is exact inside the evaluation region and False elsewhere.
+  - `40_` and `06_` use it instead of gbm-4d's lost `label_field/`. `06_` only reads the label inside the evaluation region, so its results are unchanged.
+  - The app's first-progression layer now shows recurrence outside the target only, exactly as scored, and `case.json` says so (`recurrence_region`).
+  - The three hero cases were re-exported (2.4–3.1 MB each, 9 PDE frames). Not browser-checked: Node.js is not installed on this Mac.
+- 2026-11-11: `07_` (3 workers) and `05_` (2 workers) started on this Mac, detached; logs in `logs/`.
 - 2026-11-12: C5 checkpoints within a fold (user request after a Colab disconnect restarted fold 0). `c5.train` saves the full training state every 5 epochs and resumes from it; `13_c5_train.py` keeps one checkpoint per fold (and one for the release model) and deletes it when the fold is done. No setting, seed or step changes:
   - `tests/test_c5.py`: an interrupted-and-resumed run ends with the same weights as an uninterrupted one, bit for bit; a checkpoint from another run is refused.
   - One-off check (CPU, PyTorch 2.8, not the pinned environment): the new code with checkpoints and the code at `940e8ea` train bit-identical models at two network sizes.

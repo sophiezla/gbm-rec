@@ -93,3 +93,21 @@ def c5_held_out(patients: list[str], folds: list[list[str]], maps: Path = C5_MAP
         with np.load(path) as z:
             scores[patient] = z["score"].astype(np.float64)
     return scores
+
+
+def scored_recurrence(patient: str, cache: Path = CACHE) -> tuple[np.ndarray, np.ndarray]:
+    """``(evaluate, recurrence)`` on the baseline grid, from the feature cache.
+
+    ``recurrence`` is the first-progression enhancing label exactly as every candidate is
+    scored on it: inside the evaluation region (brain minus target) only, False elsewhere.
+    It replaces ``lumiere.load_recurrence`` wherever only the evaluation region matters,
+    because gbm-4d's ``label_field/`` files are not on this computer (2026-11-11).
+    """
+    with np.load(cache / f"{patient}.npz") as z:
+        shape = tuple(int(s) for s in z["evaluate_shape"])
+        evaluate = np.unpackbits(z["evaluate_packed"])[: int(np.prod(shape))
+                                                       ].reshape(shape).astype(bool)
+        truth = z["truth"].astype(bool)
+    recurrence = np.zeros(shape, bool)
+    recurrence[evaluate] = truth
+    return evaluate, recurrence

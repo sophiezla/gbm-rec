@@ -12,7 +12,12 @@ _Last updated: 2026-11-15_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-10): LUMIERE inputs rebuilt from the public release
+## Latest (2026-11-11): long jobs running; app cases re-exported
+- `07_` is running detached with 3 workers (`logs/07_roundtrip.log`), at about 20 min per pair per worker. When it finishes, run `07_ --summary` from a clean tree: it gives the D17 threshold.
+- `05_` is running detached with 2 workers (`logs/05_later.log`), 83 timepoints. Rerunning either job resumes it.
+- App hero cases are re-exported. The first-progression layer comes from the feature cache (outside the target, as scored). Node.js is not installed here, so the app was not built or viewed.
+
+## Earlier (2026-11-10): LUMIERE inputs rebuilt from the public release
 - The rating sheets were downloaded (MD5 checked), and the 146 progression timepoints were extracted from `~/Downloads/Imaging-v202211.zip` into `data/raw/lumiere/Imaging/`.
 - All 63 first-progression names are recorded (13 derived by a rule that reproduces the other 50).
 - `05_` and `07_` can now run here. The app export still needs re-transported first-progression labels.
