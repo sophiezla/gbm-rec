@@ -3,6 +3,11 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-15: imported the C5 held-out maps from the partner's Colab run into `data/interim/c5_oof/`. The T4 set-aside folds and the training checkpoints were left out.
+  - Checked without scoring: `02_`'s own gate (`tournament.c5_held_out`) passed for all 63 patients, covering the folds, the clean tree, the smoke flag and each map's hash.
+  - Every map has the feature cache's voxel count and only finite values; all 7 model hashes match; all folds ran at `43a41a0` on an NVIDIA L4, 9 maps each; the settings equal `config.yaml:c5`.
+  - `requirements-gpu.lock` committed. `02_` has not run.
+- 2026-11-15: LightGBM loads on this Mac. `libomp.dylib` is symlinked from the torch wheel into the uv Python's `lib/` (no Homebrew; installing it needs the admin password). Details in `docs/SETUP.md`. The 2 long-standing libomp test failures are gone.
 - 2026-11-11: `gbmc.tournament.scored_recurrence` rebuilds the first-progression label from the feature cache. It is exact inside the evaluation region and False elsewhere.
   - `40_` and `06_` use it instead of gbm-4d's lost `label_field/`. `06_` only reads the label inside the evaluation region, so its results are unchanged.
   - The app's first-progression layer now shows recurrence outside the target only, exactly as scored, and `case.json` says so (`recurrence_region`).
