@@ -3,6 +3,14 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-16: D18. MU-Glioma-Post is reserved as the sealed external test of a later follow-up study (user: "go with MU for later"; role: sealed test). Tweaking happens only on LUMIERE, and on RHUH-GBM after its verdict.
+  - `config.yaml:data.mu_glioma_post`, with `images_local_root` null.
+  - `tests/test_config.py::test_mu_glioma_post_stays_sealed` fails if the image path is set or any image or archive is in `data/raw/mu_glioma_post/`. Checked: it fails with a planted `.nii.gz` and passes without.
+  - `docs/future_cohorts.md`: the exploration and the follow-up roadmap. Only MU's clinical and volume spreadsheets were downloaded (SHA-256 recorded); no image.
+  - `docs/preregistration.md` section 7 discloses what was seen of MU and UCSF.
+- 2026-11-16: **the LUMIERE tournament ran** (`02_`, Step 1.5–1.6; user: "run 02"), from clean commit `e04c555`, seed 20261107, 1,000 BCa resamples, 53 of 63 patients evaluable. Results are in `results/tournament/` and the held-out maps in `data/interim/oof/` (not in git).
+  - **Challenger: C1**, named by D6 rule 7. C6 had the highest mean PR-AUC (0.0683), and C1 (0.0634) is the simplest candidate within 0.005 of it (gap 0.00489).
+  - LUMIERE is development data (V1), so none of these numbers is a validation result.
 - 2026-11-15: imported the C5 held-out maps from the partner's Colab run into `data/interim/c5_oof/`. The T4 set-aside folds and the training checkpoints were left out.
   - Checked without scoring: `02_`'s own gate (`tournament.c5_held_out`) passed for all 63 patients, covering the folds, the clean tree, the smoke flag and each map's hash.
   - Every map has the feature cache's voxel count and only finite values; all 7 model hashes match; all folds ran at `43a41a0` on an NVIDIA L4, 9 maps each; the settings equal `config.yaml:c5`.

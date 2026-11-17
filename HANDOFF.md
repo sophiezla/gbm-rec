@@ -12,7 +12,26 @@ _Last updated: 2026-11-15_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-11): long jobs running; app cases re-exported
+## Latest (2026-11-16): MU-Glioma-Post reserved for a follow-up (D18)
+- For a later follow-up study, MU-Glioma-Post is the **sealed test**. Tweaking happens only on LUMIERE and, after the verdict, RHUH-GBM.
+- Do not download any MU image until the follow-up is pre-registered. A test enforces this.
+- Only its clinical and volume spreadsheets are on disk (`data/raw/mu_glioma_post/`).
+- The roadmap is in `docs/future_cohorts.md`. Nothing in the current study changes.
+
+## Tournament (2026-11-16): challenger C1
+- `02_` ran once from clean commit `e04c555`. The challenger is C1 by rule 7: C6 had the highest mean PR-AUC, and C1 is within the 0.005 margin by 0.00011. Full table in `results/tournament/leaderboard.json`.
+- On LUMIERE (development data):
+  - no candidate's Δ PR-AUC vs C0 has a 95% CI above 0;
+  - C4 and C5 are below C0 (CIs entirely below 0);
+  - C1's Δ is −0.0029 [−0.0079, +0.0013].
+
+  The challenger goes to Phase 4 whatever its Δ (rule 7).
+- Next:
+  - `03_`: refit and hash. It needs the C5 release model: the partner runs `13_c5_train.py --release` at a commit whose `src/gbmc/c5.py` equals `43a41a0`'s.
+  - `04_`: power.
+  - `07_ --summary`: the round-trip threshold.
+
+## Earlier (2026-11-11): long jobs running; app cases re-exported
 - `07_` is running detached with 3 workers (`logs/07_roundtrip.log`), at about 20 min per pair per worker. When it finishes, run `07_ --summary` from a clean tree: it gives the D17 threshold.
 - `05_` is running detached with 2 workers (`logs/05_later.log`), 83 timepoints. Rerunning either job resumes it.
 - App hero cases are re-exported. The first-progression layer comes from the feature cache (outside the target, as scored). Node.js is not installed here, so the app was not built or viewed.

@@ -16,6 +16,9 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
    - `07_` and `05_` are running on this Mac (started 2026-11-11).
 4. **Node.js is not installed on this Mac**, so the app cannot be built or viewed here. Install Node.js (a system install, for the user).
 
+### Follow-up study (later; D18)
+MU-Glioma-Post is reserved as the sealed external test of a follow-up study that starts after the RHUH-GBM verdict. Development happens on LUMIERE and RHUH-GBM only. MU stays undownloaded until the follow-up is pre-registered, and a test enforces this. Roadmap: `docs/future_cohorts.md`.
+
 ## Phase Gates (plan §3)
 | Phase | Weeks | Gate | State |
 |---|---|---|---|
@@ -54,7 +57,7 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 - [x] 1.2 Cohort and endpoint wired to gbm-4d's frozen data (D5); Patient-001 matches gbm-4d exactly
 - [x] 1.3 Features for all 63 patients (`data/interim/features/`), rebuilt under V3 and V4; 53 evaluable
 - [ ] 1.4 Candidates: all eight coded. C5 is built and its inputs are packed; training on the GPU computer is pending
-- [ ] 1.5 / 1.6 Folds, metrics, BCa and selection rule coded and unit-tested; `02_` refuses until the C5 maps are imported
+- [x] 1.5 / 1.6 Tournament run 2026-11-16 (`02_`, clean commit `e04c555`); the challenger is **C1** by rule 7 (`results/tournament/`)
 - [ ] 1.7 Refit and hash: `03_` built, including the C5 release import (2026-11-08); not run
 - [ ] 1.8 Later progressions: `05_` and `06_` built. Under V3 the old smoke unit must be redone. Blocked on data not on this Mac (see Current blockers)
 

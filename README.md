@@ -1,6 +1,6 @@
 # Where Does Glioblastoma Come Back? Can MRI-based models beat distance?
 
-> **Status (2026-09-23): Phase 0, week 1.** The repository, environment and reproducibility helpers are set up. There is no data and there are no results yet. The plan is [`docs/plan/final_plan.md`](docs/plan/final_plan.md).
+> **Status (2026-11-16): Phase 1 done on LUMIERE (development data).** The tournament rules were locked before scoring (D6). All eight candidates were scored on the same 7 folds, and the rule named **C1** as the challenger (`results/tournament/`). Next: refit and hash the models, the power table, then the OSF pre-registration before the one RHUH-GBM test. Current state: [`PROJECT_STATUS.md`](PROJECT_STATUS.md). The plan is [`docs/plan/final_plan.md`](docs/plan/final_plan.md).
 >
 > *Research visualization of a pre-registered method comparison on public data. Not a treatment prediction.*
 
@@ -29,16 +29,18 @@ gbm-rec/
 ├── config.yaml          every study constant; undecided ones are null and raise when read
 ├── pyproject.toml       package gbmc
 ├── requirements.lock    exact package versions
-├── src/gbmc/            library: rng, config, provenance (features, candidates, scoring, export to come)
-├── scripts/             numbered stages 01_ ... 40_ (none yet)
+├── src/gbmc/            library: features, candidates, C5, scoring, stats, RHUH-GBM, export
+├── scripts/             numbered stages 00_ ... 51_ (see docs/protocol.md)
 ├── tests/               pytest suite
-├── results/<stage>/     JSON results, each with run.manifest.json (none yet)
-├── app/                 the explainer app (Phase 5; empty)
+├── results/<stage>/     JSON results, each with run.manifest.json
+├── app/                 the explainer app (Phase 5)
 └── docs/
     ├── plan/final_plan.md   the plan
     ├── protocol.md          operational details, filled in per phase
     ├── deviations.md        V-numbered departures from the plan
-    └── preregistration.md   OSF record (Phase 2)
+    ├── preregistration.md   OSF record (Phase 2, draft)
+    ├── C5_GPU.md            how C5 is trained on a GPU / Colab
+    └── future_cohorts.md    MU-Glioma-Post, reserved for a later follow-up test (D18)
 ```
 
 ## Installation / Setup
@@ -72,7 +74,7 @@ The tests check the following:
 | RHUH-GBM, 40 patients, open NIfTI + clinical CSV only | Confirmatory, analysed **once** | CC BY 4.0 | Not downloaded; download only after the OSF pre-registration |
 
 ## Limitations (known in advance, plan §10 and §12)
-The registration gate cannot be fully discharged. The cohort is small, with an expected evaluable n of about 20–40. Labels and preprocessing shift between the two cohorts. The most likely outcome is that distance remains champion; the plan treats that as a complete result.
+The registration gate cannot be fully discharged. The cohort is small, with an expected evaluable n of about 20–40. Labels and preprocessing shift between the two cohorts. A likely outcome is that distance holds; the plan treats that as a complete result.
 
 ## Reproducibility
 The rules carry over from gbm-4d and gbm-wm (plan §13):
