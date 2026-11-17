@@ -8,6 +8,7 @@ These are standing instructions for every Claude session. The user gave them on 
 ### Hard rules from the plan (never break them)
 - **No model training and no data downloads before the ISEF forms are signed** (Step 0.1).
 - **Do not download RHUH-GBM before the OSF pre-registration is posted.** The download date is committed after the OSF timestamp.
+- **MU-Glioma-Post is sealed** (added 2026-11-16, `DECISIONS.md` D18): it is the test cohort of a later follow-up study. Download none of its images or labels, and tweak nothing using it, until that follow-up's own pre-registration is posted.
 - **The confirmatory run happens once.** An irreversible marker file blocks any rerun. Nothing is tuned, reselected or rerun on RHUH-GBM.
 - **Write tournament rules into DECISIONS.md before the first candidate is scored** (Step 1.1). Any change after a score has been seen is a deviation.
 - **This project is standalone** (deviation V3). It does not import or install gbm-4d or gbm-wm; their write-ups are only sources for constants, findings and the first-progression labels already in the feature caches. Re-fit nothing from them.

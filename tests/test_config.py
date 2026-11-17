@@ -37,6 +37,25 @@ def test_rhuh_gbm_path_stays_unset_before_preregistration():
         config.get("data.rhuh_gbm.local_root")
 
 
+def test_mu_glioma_post_stays_sealed():
+    """MU-Glioma-Post is the follow-up study's sealed test (DECISIONS.md D18).
+
+    No image or segmentation may exist on this computer, and the image path stays unset,
+    until the follow-up's own pre-registration is posted. Only the clinical and volume
+    spreadsheets are allowed. Change this test in the commit that records that posting.
+    """
+    from pathlib import Path
+
+    with pytest.raises(ValueError):
+        config.get("data.mu_glioma_post.images_local_root")
+    root = Path(__file__).resolve().parents[1] / config.get("data.mu_glioma_post.metadata_dir")
+    if root.is_dir():
+        files = [p for p in root.rglob("*") if p.is_file()]
+        sealed = (".nii", ".gz", ".dcm", ".zip", ".npz", ".nrrd", ".mha")
+        assert not [p.name for p in files if p.name.lower().endswith(sealed)]
+        assert all(p.suffix.lower() == ".xlsx" for p in files)
+
+
 def test_itk_threads_pinned_to_one():
     import SimpleITK as sitk
 

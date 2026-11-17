@@ -145,7 +145,8 @@ TODO at posting:
 - all LUMIERE results (the leaderboard, the power table, the round-trip distribution);
 - both predecessor studies (gbm-4d, gbm-wm);
 - the RHUH-GBM dataset paper;
-- no RHUH-GBM image.
+- no RHUH-GBM image;
+- for a separate, later follow-up study (D18), the documentation and the clinical and volume spreadsheets of MU-Glioma-Post, plus the public pages of UCSF-ALPTDG. No image or label of either was downloaded. MU-Glioma-Post is reserved as that study's sealed test and plays no part in this one.
 
 ## Title bands (plan Step 6.1, written in week 2)
 
