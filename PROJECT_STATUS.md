@@ -1,6 +1,6 @@
 # Project Status: gbm-rec ("Where Does Glioblastoma Come Back?")
 
-_Last updated: 2026-11-15_
+_Last updated: 2026-11-18_
 
 ## Current Objective
 Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as written. **Phase 1 (tournament on LUMIERE)**: the rules are locked (D6, 2026-11-07), and C5 is waiting to be trained on the GPU computer (`docs/C5_GPU.md`). Nothing is scored. The user reports Phase 0 is complete; its checklist boxes below are not ticked individually.
@@ -58,7 +58,7 @@ MU-Glioma-Post is reserved as the sealed external test of a follow-up study that
 - [x] 1.3 Features for all 63 patients (`data/interim/features/`), rebuilt under V3 and V4; 53 evaluable
 - [ ] 1.4 Candidates: all eight coded. C5 is built and its inputs are packed; training on the GPU computer is pending
 - [x] 1.5 / 1.6 Tournament run 2026-11-16 (`02_`, clean commit `e04c555`); the challenger is **C1** by rule 7 (`results/tournament/`)
-- [ ] 1.7 Refit and hash: `03_` built, including the C5 release import (2026-11-08); not run
+- [ ] 1.7 Refit and hash: `03_` built, including the C5 release import (2026-11-08); not run. C5 release model trained 2026-11-18 (L4, `bcadfaa`, SHA-256 `285cd2857d2e…`); waiting for `03_` to import it
 - [ ] 1.8 Later progressions: `05_` and `06_` built. Under V3 the old smoke unit must be redone. Blocked on data not on this Mac (see Current blockers)
 
 ## Other work done ahead of its phase (no scoring, no RHUH-GBM data)

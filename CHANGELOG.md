@@ -3,6 +3,7 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-18: C5 release model (Step 1.7) trained by the user on a Colab NVIDIA L4 at `bcadfaa` (same `c5.py` as the tournament folds): 63 patients, settings from `config.yaml:c5`, clean, `model_sha256` `285cd2857d2e5b409f913b0737a629dbc1903641742370f51b54905c1746d687`. On Drive in `gbm-rec-c5/c5_release/`; not yet imported by `03_`.
 - 2026-11-16: D18. MU-Glioma-Post is reserved as the sealed external test of a later follow-up study (user: "go with MU for later"; role: sealed test). Tweaking happens only on LUMIERE, and on RHUH-GBM after its verdict.
   - `config.yaml:data.mu_glioma_post`, with `images_local_root` null.
   - `tests/test_config.py::test_mu_glioma_post_stays_sealed` fails if the image path is set or any image or archive is in `data/raw/mu_glioma_post/`. Checked: it fails with a planted `.nii.gz` and passes without.

@@ -1,6 +1,11 @@
 # Project Handoff
 
-_Last updated: 2026-11-15_
+_Last updated: 2026-11-18_
+
+## Latest (2026-11-18): C5 release model trained (Step 1.7)
+- The user ran `13_c5_train.py --release --device cuda` on Colab at `bcadfaa` (`src/gbmc/c5.py` identical to `43a41a0`'s, checked), log `gbm-rec-c5/logs/release_20261118_050954.txt`.
+- `gbm-rec-c5/c5_release/manifest.json` (as printed on Colab): clean, not smoke, settings equal `config.yaml:c5`, 63 patients (the same set as `results/tournament/folds.json`, checked), NVIDIA L4, torch 2.15.0+cu132 (as in `requirements-gpu.lock`), `model_sha256` `285cd2857d2e5b409f913b0737a629dbc1903641742370f51b54905c1746d687`.
+- Not yet imported. Next (computer with `data/`): copy `gbm-rec-c5/c5_release/` to `data/interim/c5_release/` and run `03_`; it rechecks the hash and registers it in `results/release/model_hashes.json`.
 
 ## Latest (2026-11-12/13): the user trained C5 on Colab, with checkpoints
 - **Who:** the user (Jack) trains C5 on their own Colab (T4, paid compute units), not the partner. The partner was told. Inputs: the shared `gbm-rec-c5/c5_inputs/` (63 files, hashes checked by `13_`).
