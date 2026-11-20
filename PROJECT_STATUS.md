@@ -16,8 +16,8 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
    - `07_` and `05_` are running on this Mac (started 2026-11-11).
 4. **Node.js is not installed on this Mac**, so the app cannot be built or viewed here. Install Node.js (a system install, for the user).
 
-### Follow-up study (later; D18)
-MU-Glioma-Post is reserved as the sealed external test of a follow-up study that starts after the RHUH-GBM verdict. Development happens on LUMIERE and RHUH-GBM only. MU stays undownloaded until the follow-up is pre-registered, and a test enforces this. Roadmap: `docs/future_cohorts.md`.
+### H2 final model (D19, V6)
+A final model is built on LUMIERE only and pre-registered as H2 in the same registration as the primary. It is tested once on RHUH-GBM and once on MU-Glioma-Post (D18), which stays undownloaded until posting; a test enforces this. Plan: `docs/team_plan.md`.
 
 ## Phase Gates (plan §3)
 | Phase | Weeks | Gate | State |
@@ -58,7 +58,7 @@ MU-Glioma-Post is reserved as the sealed external test of a follow-up study that
 - [x] 1.3 Features for all 63 patients (`data/interim/features/`), rebuilt under V3 and V4; 53 evaluable
 - [ ] 1.4 Candidates: all eight coded. C5 is built and its inputs are packed; training on the GPU computer is pending
 - [x] 1.5 / 1.6 Tournament run 2026-11-16 (`02_`, clean commit `e04c555`); the challenger is **C1** by rule 7 (`results/tournament/`)
-- [ ] 1.7 Refit and hash: `03_` built, including the C5 release import (2026-11-08); not run. C5 release model trained 2026-11-18 (L4, `bcadfaa`, SHA-256 `285cd2857d2e…`); waiting for `03_` to import it
+- [x] 1.7 Refit and hash: `03_` ran 2026-11-19 from clean commit `657dc32` (`results/release/model_hashes.json`). C5 release model trained 2026-11-18 (L4, `bcadfaa`, SHA-256 `285cd2857d2e…`); waiting for `03_` to import it
 - [ ] 1.8 Later progressions: `05_` and `06_` built. Under V3 the old smoke unit must be redone. Blocked on data not on this Mac (see Current blockers)
 
 ## Other work done ahead of its phase (no scoring, no RHUH-GBM data)

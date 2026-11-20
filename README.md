@@ -40,7 +40,8 @@ gbm-rec/
     ├── deviations.md        V-numbered departures from the plan
     ├── preregistration.md   OSF record (Phase 2, draft)
     ├── C5_GPU.md            how C5 is trained on a GPU / Colab
-    └── future_cohorts.md    MU-Glioma-Post, reserved for a later follow-up test (D18)
+    ├── future_cohorts.md    MU-Glioma-Post exploration (D18)
+    └── team_plan.md         who does what next (user / partner)
 ```
 
 ## Installation / Setup

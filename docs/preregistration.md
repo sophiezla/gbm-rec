@@ -1,23 +1,29 @@
-# Pre-registration (OSF)
+# Pre-registration
 
 Not posted. This is the Phase 2 draft, built from the plan's checklist in Step 2.5. Every blank is filled only from `results/` or a committed decision. Text marked *plan* is copied from `docs/plan/final_plan.md`. Text marked *implementation* says how this repository carries it out, with its source.
 
-- OSF URL: TODO
-- OSF timestamp: TODO
+- Platform: **OSF Registries** (TODO: confirm when posting).
+  - OSF is phasing out *Projects*: no new projects since 16 Nov 2026, and existing ones become read-only on 19 Feb 2027.
+  - OSF Registries (pre-registration) continues, including files attached to a registration. Check the upload limits when posting.
+  - Fallbacks: AsPredicted (timestamped, can stay private), or a Zenodo deposit (DOI and timestamp) of this document and `results/release/model_hashes.json`.
+  - Whichever is used, its URL and timestamp go into `config.yaml:osf.url` and `osf.timestamp` (the key names stay).
+- Registration URL: TODO
+- Registration timestamp: TODO
 - RHUH-GBM download date: TODO (must be later than the OSF timestamp)
 
 ## Checklist (plan Step 2.5) and where each item comes from
 
 | Item | Source in this repository | State (2026-11-10) |
 |---|---|---|
-| Tournament leaderboard and the named challenger, with the commit hash | `results/tournament/leaderboard.json` + its `run.manifest.json` (`scripts/02_tournament.py`) | not run: waiting on C5 training |
-| SHA-256 of every refit model | `results/release/model_hashes.json` (`scripts/03_refit_release.py`; C5 imported, D6 item 9) | not run |
+| Tournament leaderboard and the named challenger, with the commit hash | `results/tournament/leaderboard.json` + its `run.manifest.json` (`scripts/02_tournament.py`) | done 2026-11-16: challenger C1 |
+| SHA-256 of every refit model | `results/release/model_hashes.json` (`scripts/03_refit_release.py`; C5 imported, D6 item 9) | done 2026-11-19 (commit `657dc32`) |
 | Feature definitions and the label mapping for each cohort | section 1 below | drafted |
 | Cavity rule and label-verification rule | section 2 below | drafted; constants decided (D17) |
-| Registration recipe, screen thresholds, exclusion rules | section 3 below | drafted; the round-trip value waits on `07_` |
-| Power table | `results/power/power_table.json` (`scripts/04_power.py`) | not run: needs C0's LUMIERE scores from `02_` |
+| Registration recipe, screen thresholds, exclusion rules | section 3 below | done: threshold 3.54 mm (`results/registration_threshold/`) |
+| Power table | `results/power/power_table.json` (`scripts/04_power.py`) | done 2026-11-19: MDE 0.04–0.05 at rho 0.7 |
 | Primary, verdict rule, secondaries, sensitivity and exploratory lists | section 4 below | drafted |
 | Result sentences | section 5 below (plan Step 2.4) | drafted |
+| H2: the final model, its hash, and the MU-Glioma-Post cohort rules (D19, V6) | section 8 below | TODO before posting |
 | What was seen before posting | section 7 below | TODO at posting |
 
 ## 1. Candidates and features (locked 2026-11-07, `DECISIONS.md` D6)
@@ -67,7 +73,7 @@ Barriers on RHUH-GBM (*plan* Step 4.1; implementation `gbmc.rhuh_features`, D13)
 
 - **Recipe.** *Primary:* gbm-wm's tuned SyN, driven by T1ce with the cavity masked out of the metric (D12, `gbmc.registration`). *Sensitivity:* the original recipe that made the LUMIERE labels (rewritten in `gbmc`, deviation V3). The mismatch with the LUMIERE training labels is recorded as a deviation, and the sensitivity arm measures its effect.
 - **Round-trip exclusion threshold.** Fixed against the tuned recipe's round-trip distribution on the 63 LUMIERE baseline→first-progression pairs (`07_`, registration only, no LUMIERE label read).
-  - Rule: **the maximum** of LUMIERE's per-patient round-trip medians (D17). **Open before posting:** the value it gives (`07_ --summary`).
+  - Rule: **the maximum** of LUMIERE's per-patient round-trip medians (D17): **3.54 mm** over 63 pairs (`results/registration_threshold/roundtrip.json`, commit `657dc32`).
   - `07_` has not run: the progression scans are not on the analysis computer.
 - **Screens** (*plan* Step 3.4). They can exclude a patient but cannot certify one:
   - round-trip error (peritumoral median and maximum), Jacobian statistics and the folded-voxel count;
@@ -146,7 +152,34 @@ TODO at posting:
 - both predecessor studies (gbm-4d, gbm-wm);
 - the RHUH-GBM dataset paper;
 - no RHUH-GBM image;
-- for a separate, later follow-up study (D18), the documentation and the clinical and volume spreadsheets of MU-Glioma-Post, plus the public pages of UCSF-ALPTDG. No image or label of either was downloaded. MU-Glioma-Post is reserved as that study's sealed test and plays no part in this one.
+- of MU-Glioma-Post (the H2 test cohort, D18/D19): its documentation and its clinical and volume spreadsheets only; of UCSF-ALPTDG: its public pages. No image or label of either was downloaded;
+- the H2 final model was developed on LUMIERE after the tournament scores were seen (V6).
+
+## 8. H2: the final model, tested on RHUH-GBM and MU-Glioma-Post (D19, V6)
+
+TODO before posting. Everything here is fixed before the registration is posted, and before any RHUH-GBM or MU-Glioma-Post image is downloaded.
+
+- **Hypothesis.** The final model ranks recurrence better than distance (C0): Δ mean PR-AUC, final model vs C0, patient-level BCa 95% CI with 1000 resamples.
+  - Tested once on RHUH-GBM's evaluable patients, in the same run-once step as the primary.
+  - Tested once on MU-Glioma-Post's evaluable patients.
+  - It is reported separately and never changes the primary verdict (section 4).
+- **The final model: E1** (D19 item 5): the unweighted mean of within-patient percentile ranks of C0 and C2.
+  - C2 release SHA-256 `2de845b4d2ed2b13cc464389c5e621bfe99f02e6d228d0d49e66c4698dea8479`; C0 has no weights.
+  - It uses only f1–f4, which both test cohorts provide.
+  - LUMIERE (development, V6): Δ PR-AUC vs C0 +0.0019 [−0.0004, +0.0052] (`results/h2_explore/`, after `17_` runs from a clean commit).
+- **MU-Glioma-Post cohort.** TODO, starting from the metadata funnel in `docs/future_cohorts.md`:
+  - eligibility: IDH-wildtype GBM, no earlier brain tumour, imaging-confirmed first progression;
+  - baseline: the first post-treatment MRI at least 56 days before progression (MU has no early post-op scan);
+  - recurrence: an MRI from 14 days before to 60 days after the first progression;
+  - target: built from that baseline's labels (MU: NETC, SNFH, ET, resection cavity);
+  - the label mapping;
+  - exclusions;
+  - the expected n (about 44 by metadata) and its power.
+- **Result sentences for H2** (blanks filled after each cohort's run):
+  - *Final model wins:* "On [cohort], the final model adds [Δ] PR-AUC (95% CI [...]) over distance from the treatment target."
+  - *Bounded null:* "On [cohort], the final model adds less than [upper limit] PR-AUC over distance; distance holds."
+  - *Inconclusive:* "On [cohort], the final model's difference from distance is [Δ] PR-AUC (95% CI [...]); the cohort is too small to bound it tightly."
+  - *Final model worse:* "On [cohort], distance beats the final model by [Δ] PR-AUC (95% CI [...])."
 
 ## Title bands (plan Step 6.1, written in week 2)
 

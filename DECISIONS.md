@@ -388,36 +388,63 @@ Decision (each value is in `config.yaml`):
 Reason:
 Plan Steps 2.2–2.5: these rules must be on record in the OSF pre-registration, before the RHUH-GBM download.
 
-## D18: MU-Glioma-Post is reserved as the sealed test of a later follow-up study
+## D18: MU-Glioma-Post is a sealed test cohort (role updated by D19)
 
 Date: 2026-11-16
-Status: Active (user decisions: "go with MU for later"; MU's role: "Sealed test")
+Status: Active (user decisions: "go with MU for later"; MU's role: "Sealed test"). Updated 2026-11-19 by D19: same registration as the primary; tweaking on LUMIERE only.
 
 Decision:
-1. **Scope.** This is a *separate follow-up study*, run after the current study's RHUH-GBM verdict. It changes nothing in the current study, its pre-registration or its verdict.
+1. **Scope.** ~~This is a separate follow-up study, run after the current study's RHUH-GBM verdict.~~ **Superseded 2026-11-19 by D19:** MU-Glioma-Post is the second sealed test of the H2 final model, inside the same registration as the primary. The primary (C1 vs C0 on RHUH-GBM) is unchanged.
 2. **Roles.**
-   - Development: models may be changed ("tweaked") only on LUMIERE and on RHUH-GBM, and on RHUH-GBM only after its one confirmatory run (`results/confirm/DONE.json`).
+   - Development: models may be changed ("tweaked") **only on LUMIERE** (updated 2026-11-19, D19; was: LUMIERE and, after its verdict, RHUH-GBM).
    - Test: MU-Glioma-Post (TCIA, DOI 10.7937/7k9k-3c83, CC BY 4.0) is the sealed external test. The final tweaked model is scored on it exactly once.
    - Nothing about MU's images or labels may inform any tweak.
-3. **Seal.** Until the follow-up's own pre-registration is posted:
+3. **Seal.** Until the registration that includes MU-Glioma-Post (D19) is posted:
    - no MU image or segmentation is downloaded;
    - `config.yaml:data.mu_glioma_post.images_local_root` stays null;
    - `tests/test_config.py::test_mu_glioma_post_stays_sealed` enforces both.
    - Only the clinical and segmentation-volume spreadsheets were read (2026-11-16, `docs/future_cohorts.md`), to count eligible patients.
-4. **Known design differences, to be pre-registered in the follow-up** (none decided yet):
+4. **Known design differences, to be pre-registered in the shared registration (D19) before posting** (none decided yet):
    - MU has no early post-op scan: its first MRI is a median 94 days after surgery. The baseline would be the first post-treatment MRI, at least 56 days before the first progression, which gives 44 IDH-wildtype GBM patients by metadata.
    - The target and features are then built on a post-chemoradiation scan.
    - MU's labels are NETC/SNFH/ET/resection cavity (nnU-Net, refined by neuroradiologists), not DeepBraTumIA's.
    - Recurrence timing comes from the clinical progression dates (type 1 or 3, imaging-confirmed).
-5. **Approvals.** The new data source needs SRC approval before any image download (ISEF rules on data sources).
+5. **Approvals.** The user decided on 2026-11-19 that no SRC approval is needed for MU-Glioma-Post ("no need for src approval"). The seal in item 3 still applies.
 
 Reason:
 A claim that a tweaked model beats distance needs a test cohort the model never touched. After its confirmatory run, RHUH-GBM can no longer be one. Of the cohorts checked (`docs/future_cohorts.md`), MU-Glioma-Post is the largest usable one that is public: about 44 eligible patients.
 
 Consequences:
-- The fair entry stays the current study. The follow-up is later work.
+- ~~The fair entry stays the current study; the follow-up is later work.~~ Updated by D19: the H2 final model and its MU test belong to the same registration, possibly before the fair.
 - Tweaks made before the MU run are exploratory; only the single MU run can support a "beats distance" claim.
 - UCSF-ALPTDG (expert labels; access by data-use agreement) remains a possible second test.
+
+## D19: A tweaked final model, developed on LUMIERE, pre-registered as a second hypothesis (H2)
+
+Date: 2026-11-19
+Status: Active (user decisions, 2026-11-19: "the tweak can come before the fair … add it together with our upcoming osf registration"; its relation to C1: "Second hypothesis")
+
+Decision:
+1. **The primary is unchanged.** C1, named by the locked rule 7 (D6), against C0 on RHUH-GBM: the primary comparison, verdict rule and outcome classes of plan Step 2.3.
+2. **H2, a second pre-registered hypothesis.** One "final model" is developed ("tweaked") on LUMIERE only, after the tournament scores were seen, and frozen with its SHA-256 before the registration is posted.
+   - H2: final model vs C0, Δ mean PR-AUC with a patient-level BCa 95% CI.
+   - It is tested once on RHUH-GBM, in the same run-once confirmatory step as the primary, and once on MU-Glioma-Post.
+   - H2 is reported separately from the primary and its BH-FDR family, and never replaces the verdict.
+3. **One registration.** The same registration (OSF Registries, or a fallback; see `docs/preregistration.md`) holds the primary, H2, and MU-Glioma-Post's cohort rules. These rules must be written before posting: eligibility, the post-treatment baseline, the label mapping and the endpoint.
+4. **Development data.** LUMIERE only. RHUH-GBM and MU-Glioma-Post stay sealed for development, so neither informs any tweak.
+5. **The final model: E1** (user decision, 2026-11-19: "Yes, use E1"). It is the unweighted mean of within-patient percentile ranks of C0 (distance, no weights) and C2 (LightGBM on f1–f4, release SHA-256 `2de845b4d2ed2b13cc464389c5e621bfe99f02e6d228d0d49e66c4698dea8479`).
+   - Chosen as the best of six non-GPU ensembles fixed before scoring (`scripts/17_h2_explore.py`): Δ PR-AUC vs C0 on LUMIERE +0.0019 [−0.0004, +0.0052] (development, V6).
+   - It needs only f1–f4, which RHUH-GBM and MU-Glioma-Post both provide, and no GPU.
+   - H2 on each cohort uses the outcome classes of H1, with each cohort's own achieved MDE at rho 0.7.
+
+Reason:
+The user wants a final model before the fair. Building it on LUMIERE and pre-registering it before either test cohort is opened gives it two untouched tests (RHUH-GBM and MU-Glioma-Post), without changing the locked primary.
+
+Consequences:
+- Deviation V6 (an analysis added after LUMIERE scores were seen).
+- The final model's LUMIERE numbers are optimistic, because it was shaped after the tournament. Only its RHUH-GBM and MU-Glioma-Post results count as tests.
+- `30_` needs an H2 scoring step and an MU confirmatory run (not built).
+- D18 is updated: MU is no longer a later, separate study.
 
 ## D0: Documentation structure
 

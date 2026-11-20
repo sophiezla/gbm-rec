@@ -28,3 +28,7 @@ app/public/cases/
 app/node_modules/
 app/dist/
 .venv-*/
+
+# Frozen model weights stay local until the user decides to publish them (2026-11-19).
+# Their SHA-256 values are committed in results/release/model_hashes.json.
+results/release/models/

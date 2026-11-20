@@ -38,10 +38,10 @@ def test_rhuh_gbm_path_stays_unset_before_preregistration():
 
 
 def test_mu_glioma_post_stays_sealed():
-    """MU-Glioma-Post is the follow-up study's sealed test (DECISIONS.md D18).
+    """MU-Glioma-Post is a sealed test cohort for the H2 final model (DECISIONS.md D18, D19).
 
     No image or segmentation may exist on this computer, and the image path stays unset,
-    until the follow-up's own pre-registration is posted. Only the clinical and volume
+    until the registration that includes MU is posted. Only the clinical and volume
     spreadsheets are allowed. Change this test in the commit that records that posting.
     """
     from pathlib import Path

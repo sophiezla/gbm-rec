@@ -3,6 +3,20 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-19: the H2 final model is **E1**, the rank average of C0 and C2 (user: "Yes, use E1"). Recorded in D19 item 5 and in `docs/preregistration.md` section 8, with the H2 result sentences.
+- 2026-11-19: pre-registration numbers, each run from clean commit `657dc32` (uncommitted edits stashed during the runs):
+  - `03_`: C1, C3 and C2 refit and C5 imported; hashes in `results/release/model_hashes.json`, all verified.
+  - `04_`: MDE 0.04–0.05 at rho 0.7, n 20–35.
+  - `07_ --summary`: round-trip threshold 3.54 mm (max of 63), written to `config.yaml:registration.roundtrip_threshold_mm`.
+  - `06_`: later progressions, 40 and 33 timepoints scored, 10 skipped with reasons.
+  - New `scripts/17_h2_explore.py`: six ensembles fixed before scoring. E1 (C0 + C2) is best on LUMIERE: +0.0019 [−0.0004, +0.0052]; it must be rerun from a clean commit.
+  - Copy-paste pre-registration doc: https://claude.ai/artifact/Thr2abwHJHFVm8Sv1kXbJj
+- 2026-11-19: D19 and deviation V6 (user decisions). A final model is developed on LUMIERE only and pre-registered as a second hypothesis (H2: final model vs C0) in the same registration as the primary. It is tested once on RHUH-GBM and once on MU-Glioma-Post. C1 stays the primary challenger.
+  - D18 updated: MU is in this registration, not a later study.
+  - `docs/preregistration.md`: section 8 (H2 and MU, TODO) and a platform note. OSF Projects are being phased out; OSF Registries continues; fallbacks are AsPredicted and Zenodo.
+  - New `docs/team_plan.md`: the user/partner split in three handoffs.
+  - Config comment, seal-test docstring and CLAUDE.md rule updated.
+- 2026-11-19: D18 item 5 updated. The user decided no SRC approval is needed for MU-Glioma-Post; `docs/future_cohorts.md` roadmap step 2 is removed. The seal is unchanged.
 - 2026-11-18: C5 release model (Step 1.7) trained by the user on a Colab NVIDIA L4 at `bcadfaa` (same `c5.py` as the tournament folds): 63 patients, settings from `config.yaml:c5`, clean, `model_sha256` `285cd2857d2e5b409f913b0737a629dbc1903641742370f51b54905c1746d687`. On Drive in `gbm-rec-c5/c5_release/`; not yet imported by `03_`.
 - 2026-11-16: D18. MU-Glioma-Post is reserved as the sealed external test of a later follow-up study (user: "go with MU for later"; role: sealed test). Tweaking happens only on LUMIERE, and on RHUH-GBM after its verdict.
   - `config.yaml:data.mu_glioma_post`, with `images_local_root` null.

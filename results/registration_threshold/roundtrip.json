@@ -1,0 +1,520 @@
+{
+  "recipe": "gbm-wm D11 tuned SyN",
+  "cohort": "LUMIERE baseline->first progression",
+  "labels_read": false,
+  "distribution": {
+    "n": 63,
+    "median": 1.87071491499127,
+    "p90": 2.8146415535557288,
+    "p95": 2.985643047882394,
+    "max": 3.54428932435213,
+    "threshold_rule": "max",
+    "threshold_mm": 3.54428932435213
+  },
+  "rows": [
+    {
+      "patient": "Patient-001",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.729886500606717,
+      "roundtrip_max_mm": 5.32263804915636,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-002",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.97330979941119,
+      "roundtrip_max_mm": 8.774812324556413,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-003",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.008137512807863,
+      "roundtrip_max_mm": 6.422030125063199,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-004",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.0869115434632324,
+      "roundtrip_max_mm": 5.734906873877649,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-006",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.7628398513739594,
+      "roundtrip_max_mm": 7.325470546412049,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-007",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.6736159123098675,
+      "roundtrip_max_mm": 4.104696453694937,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-008",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.2282318082428754,
+      "roundtrip_max_mm": 6.2474629626551526,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-009",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.799218494182972,
+      "roundtrip_max_mm": 9.504441033646549,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-011",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.6474436711550213,
+      "roundtrip_max_mm": 3.1029951412527956,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-012",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 0.9317621396086324,
+      "roundtrip_max_mm": 4.221653523502271,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-015",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 0.826496495528165,
+      "roundtrip_max_mm": 2.9494263195746315,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-017",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.3850227199269731,
+      "roundtrip_max_mm": 4.557486844370386,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-018",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.8531454465101782,
+      "roundtrip_max_mm": 5.378387529646203,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-019",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.1655402639284427,
+      "roundtrip_max_mm": 8.044865399216162,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-021",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.1918430043671928,
+      "roundtrip_max_mm": 3.950470312288269,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-022",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.3718170183845317,
+      "roundtrip_max_mm": 5.383999318163398,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-023",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 0.6022880646460822,
+      "roundtrip_max_mm": 1.4347048893802952,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-024",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.09789957077176,
+      "roundtrip_max_mm": 5.283040623995733,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-027",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.6424201220714,
+      "roundtrip_max_mm": 9.69671850863687,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-028",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.3546488619927572,
+      "roundtrip_max_mm": 8.188464027902686,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-029",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 0.9402642524372329,
+      "roundtrip_max_mm": 4.391306387969171,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-030",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 0.9004352039332818,
+      "roundtrip_max_mm": 2.190123095350294,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-031",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.493559733231556,
+      "roundtrip_max_mm": 5.9330756486799405,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-032",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.6255014774643235,
+      "roundtrip_max_mm": 8.024244356440887,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-033",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.761064671128357,
+      "roundtrip_max_mm": 5.485774056076926,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-034",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.661861723052291,
+      "roundtrip_max_mm": 6.730069455811589,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-035",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.8427998918224833,
+      "roundtrip_max_mm": 9.03548006413512,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-037",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.0871651522935446,
+      "roundtrip_max_mm": 7.277606865039743,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-038",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.089484962618513,
+      "roundtrip_max_mm": 4.5165533704571486,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-039",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.99195795505598,
+      "roundtrip_max_mm": 8.020353176691069,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-041",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.7083904838967574,
+      "roundtrip_max_mm": 3.3261192594160205,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-042",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.5151094109716077,
+      "roundtrip_max_mm": 8.369987746749674,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-043",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.1735153961749187,
+      "roundtrip_max_mm": 2.623056840778416,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-045",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.065129780413625,
+      "roundtrip_max_mm": 5.727220268095644,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-046",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.8275919791011708,
+      "roundtrip_max_mm": 10.317732670815461,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-048",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 3.083692234536168,
+      "roundtrip_max_mm": 7.59396804956185,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-050",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.2874455309598019,
+      "roundtrip_max_mm": 4.58282239037839,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-051",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.462649325554966,
+      "roundtrip_max_mm": 5.400312238748874,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-052",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.8516947774438755,
+      "roundtrip_max_mm": 3.8373603966150776,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-054",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.6864457400405433,
+      "roundtrip_max_mm": 4.285213924953435,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-055",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.5522462093637146,
+      "roundtrip_max_mm": 8.348225303198516,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-058",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.5366757886336804,
+      "roundtrip_max_mm": 5.045285785315476,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-059",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.7852015298321076,
+      "roundtrip_max_mm": 2.9406323661630545,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-060",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.928808883320125,
+      "roundtrip_max_mm": 7.4983235186028985,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-061",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.7246546549897506,
+      "roundtrip_max_mm": 9.321853706349957,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-062",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.8059968116703335,
+      "roundtrip_max_mm": 4.374161526166809,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-063",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.208705721644769,
+      "roundtrip_max_mm": 4.8414356218090955,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-064",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.115995609958628,
+      "roundtrip_max_mm": 11.717916148391982,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-065",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.6457801412766297,
+      "roundtrip_max_mm": 5.7124887373472095,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-066",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.8324770613357013,
+      "roundtrip_max_mm": 13.101669996580206,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-067",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.4467200618976586,
+      "roundtrip_max_mm": 3.6137314260713604,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-070",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.518719633635889,
+      "roundtrip_max_mm": 4.998023059832735,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-071",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.6677875918703258,
+      "roundtrip_max_mm": 7.68156796540478,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-072",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.87071491499127,
+      "roundtrip_max_mm": 5.38149334325869,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-073",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 3.54428932435213,
+      "roundtrip_max_mm": 9.95853571864698,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-074",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.392267376809412,
+      "roundtrip_max_mm": 5.775719954713865,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-075",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.049804362290943,
+      "roundtrip_max_mm": 3.374263543903267,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-077",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.045971108045662,
+      "roundtrip_max_mm": 10.232910371001346,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-078",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 1.3954348660895362,
+      "roundtrip_max_mm": 5.786663747124631,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-081",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.1320878522818045,
+      "roundtrip_max_mm": 7.3071818929163355,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-085",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 0.9420853706456456,
+      "roundtrip_max_mm": 5.200328368423262,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-089",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 2.9942170099122007,
+      "roundtrip_max_mm": 10.802709847467908,
+      "jacobian_fraction_negative": 0.0
+    },
+    {
+      "patient": "Patient-090",
+      "ok": true,
+      "note": "",
+      "roundtrip_median_mm": 0.4318367521469592,
+      "roundtrip_max_mm": 3.8121621021933763,
+      "jacobian_fraction_negative": 0.0
+    }
+  ]
+}

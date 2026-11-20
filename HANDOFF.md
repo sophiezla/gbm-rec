@@ -17,7 +17,18 @@ _Last updated: 2026-11-18_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-16): MU-Glioma-Post reserved for a follow-up (D18)
+## Latest (2026-11-19): pre-registration numbers ready
+- `03_`, `04_`, `07_ --summary` and `06_` have run from clean commit `657dc32`.
+  - Hashes: `results/release/`. MDE at rho 0.7: 0.04–0.05. Round-trip threshold: 3.54 mm, set in `config.yaml`.
+- Proposed H2 model: E1, the rank average of C0 and C2 (`scripts/17_h2_explore.py`; rerun from a clean commit).
+- Copy-paste text for every registration field: https://claude.ai/artifact/Thr2abwHJHFVm8Sv1kXbJj
+- Open before posting: the H2 choice, the MU rules, D12/D13 approval, and title/authors. Then commit, push, rerun `17_`, and post.
+
+## Earlier (2026-11-19): H2 final model in the same registration (D19, V6)
+- A final model is built on LUMIERE only, frozen and hashed, and pre-registered as H2 (vs distance) next to the unchanged primary (C1 vs C0). It is tested once on RHUH-GBM and once on MU-Glioma-Post.
+- Who does what: `docs/team_plan.md`. Registration platform: OSF Registries, with fallbacks (`docs/preregistration.md`).
+
+## Earlier (2026-11-16): MU-Glioma-Post reserved (D18)
 - For a later follow-up study, MU-Glioma-Post is the **sealed test**. Tweaking happens only on LUMIERE and, after the verdict, RHUH-GBM.
 - Do not download any MU image until the follow-up is pre-registered. A test enforces this.
 - Only its clinical and volume spreadsheets are on disk (`data/raw/mu_glioma_post/`).

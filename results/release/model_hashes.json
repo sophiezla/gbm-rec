@@ -1,0 +1,23 @@
+{
+  "challenger": "C1",
+  "models": {
+    "models/C1.joblib": "c742daafe4f27c4276370c4c966463580b773cf3cc45b1344a56b825db479ee5",
+    "models/C3.joblib": "6dda8eacdc14a37c21c30034748a1891d384374d6c1af6e7c886f4e1bea60f52",
+    "models/C2.joblib": "2de845b4d2ed2b13cc464389c5e621bfe99f02e6d228d0d49e66c4698dea8479",
+    "models/C5.pt": "285cd2857d2e5b409f913b0737a629dbc1903641742370f51b54905c1746d687"
+  },
+  "C6_members": {
+    "C1": "c742daafe4f27c4276370c4c966463580b773cf3cc45b1344a56b825db479ee5",
+    "C3": "6dda8eacdc14a37c21c30034748a1891d384374d6c1af6e7c886f4e1bea60f52",
+    "C2": "2de845b4d2ed2b13cc464389c5e621bfe99f02e6d228d0d49e66c4698dea8479",
+    "C5": "285cd2857d2e5b409f913b0737a629dbc1903641742370f51b54905c1746d687"
+  },
+  "C5": {
+    "commit": "bcadfaaf1cbe0b7e2f87c82877b01fb2dde26de5",
+    "torch": "2.15.0+cu132",
+    "device": "cuda",
+    "gpu": "NVIDIA L4",
+    "cuda": "13.2",
+    "tournament_maps_commit": "43a41a016cf8f952cb21cfc522bc79b91bbdba86"
+  }
+}

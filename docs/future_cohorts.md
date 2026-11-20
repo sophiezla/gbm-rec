@@ -1,8 +1,8 @@
 # Candidate cohorts for a later external test (explored 2026-11-16)
 
-**Decided 2026-11-16 (`DECISIONS.md` D18): MU-Glioma-Post is the sealed test of a later follow-up study.** Models are tweaked only on LUMIERE and, after its verdict, RHUH-GBM. MU's images stay undownloaded until the follow-up is pre-registered, and `tests/test_config.py::test_mu_glioma_post_stays_sealed` enforces this. The roadmap is at the end.
+**Decided 2026-11-16 (D18), updated 2026-11-19 (D19): MU-Glioma-Post is the second sealed test of the H2 final model, in the same registration as the primary.** The final model is built on LUMIERE only. MU's images stay undownloaded until that registration is posted, and `tests/test_config.py::test_mu_glioma_post_stays_sealed` enforces this. The roadmap is at the end.
 
-Not part of the pre-registered study. This is a feasibility look for a possible follow-up test after the RHUH-GBM verdict, at the user's request. **Only documentation and clinical metadata were read: no image and no segmentation was downloaded or opened**, so both cohorts could still serve as a sealed test later. Any use needs SRC approval and its own pre-registration.
+Not part of the pre-registered study. This is a feasibility look for a possible follow-up test after the RHUH-GBM verdict, at the user's request. **Only documentation and clinical metadata were read: no image and no segmentation was downloaded or opened**, so both cohorts could still serve as a sealed test later. Any use needs its own pre-registration. The user decided on 2026-11-19 that no SRC approval is needed.
 
 ## MU-Glioma-Post (University of Missouri, TCIA)
 
@@ -38,27 +38,9 @@ Not part of the pre-registered study. This is a feasibility look for a possible 
 
 MU-Glioma-Post is the more usable candidate on present evidence: it is public, has progression dates, and gives about 44 IDH-wildtype GBM pairs if the baseline is redefined. UCSF-ALPTDG has better labels, but its fit is unknown until access is granted.
 
-## Follow-up roadmap (D18)
+## Roadmap
 
-The current study comes first; none of this starts before step 1 is complete.
-
-1. **Finish the current study, unchanged.**
-   - Partner trains the C5 release model.
-   - `03_` (refit and hash), `04_` (power), `07_ --summary` (round-trip threshold).
-   - Post the OSF pre-registration, download RHUH-GBM, lock the cohort (`20_`–`24_`).
-   - The C5 RHUH-GBM maps (`14_`), then `30_` once and `31_`.
-   - The verdict stands as pre-registered, whatever the follow-up later finds.
-2. **SRC approval** for MU-Glioma-Post as a new data source, before any MU image is downloaded.
-3. **Develop ("tweak") on LUMIERE + RHUH-GBM only.** Every change is logged in the follow-up's own records and labelled exploratory. Ideas the current results point to, none tested:
-   - The C1 + ADC arm. RHUH-GBM has ADC; MU does not list ADC among its four sequences, so a model needing ADC could not be tested on MU. Check before choosing.
-   - Features that capture where distance fails (the "escape" region).
-   - Fewer candidates, fixed in advance, rather than a new tournament.
-4. **Pre-register the follow-up on OSF** before any MU image is downloaded:
-   - the one frozen model (with its SHA-256) and the comparator, C0 distance;
-   - MU eligibility: IDH-wildtype GBM, no earlier brain tumour, imaging-confirmed first progression, baseline = first post-treatment MRI at least 56 days before progression, plus an MRI from 14 days before to 60 days after progression;
-   - the target definition on a post-treatment scan, and the label mapping (NETC/SNFH/ET/resection cavity);
-   - the primary (Δ PR-AUC vs C0, BCa CI), the verdict rule and the power at about 44 patients.
-5. **Then download MU** (11 GB, Aspera), adapt the pipeline (SRI24 grid as for RHUH-GBM; MU's label names), lock the cohort, and score the frozen model **once**, with a run-once marker as in `30_`.
+Superseded on 2026-11-19 by D19. The H2 final model is built on LUMIERE only and pre-registered in the same registration as the primary. It is then tested once on RHUH-GBM and once on MU-Glioma-Post. The step-by-step split between user and partner is in `docs/team_plan.md`; MU's cohort rules go into `docs/preregistration.md` section 8.
 
 Expected limits:
 - About 44 patients gives wide confidence intervals, similar to LUMIERE's.

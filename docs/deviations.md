@@ -89,6 +89,25 @@ Update 2026-11-15 (user decision: "i want to retrain folds 0-1"):
 - Done 2026-11-15/16 (user's log `logs/train_20261115_223435.txt`): fold 1 retrained, 9 maps written (4,005 s); folds 2–6 skipped as done at this commit; a new manifest was written, which the script only does when all 7 fold records share one commit.
 - Verified 2026-11-16 (fold records on Drive, read by the user): all 7 folds at `43a41a0`, all `NVIDIA L4`, 9 maps each, 3,949–4,010 s per fold. The T4/L4 split described above no longer applies to any fold that will be scored; it applies only to the set-aside files.
 
+## V6: A second pre-registered hypothesis (H2) added after the LUMIERE tournament
+
+Date: 2026-11-19
+Source: plan Step 1.1 ("rules on record before the first candidate is scored") and Step 2.3 (the analysis list); user decisions on 2026-11-19 (`DECISIONS.md` D19)
+
+Departure:
+- After the tournament scores were seen (2026-11-16, challenger C1), a "final model" is developed on LUMIERE.
+- It is added to the registration as a second hypothesis (H2: final model vs C0), tested once on RHUH-GBM and once on MU-Glioma-Post (D18).
+- The plan has no such analysis. The primary, C1 vs C0, the verdict rule and every other locked rule are unchanged.
+
+Why:
+The user wants a final model before the fair, tested on data it never touched.
+
+Direction of effect:
+- On the primary: none. C1 was named by the locked rule before H2 existed, and H2 sits outside the primary's verdict and BH-FDR family.
+- On H2's LUMIERE numbers: optimistic, because the model was shaped after the tournament results were seen. They are development numbers, never test results.
+- On H2's RHUH-GBM and MU-Glioma-Post results: unbiased by development, as long as the model is frozen and hashed before the registration and neither cohort is opened before then.
+- Multiplicity: H2 adds a comparison, and it is reported as its own pre-registered hypothesis, not as the verdict.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29
