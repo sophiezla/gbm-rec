@@ -1,5 +1,8 @@
 # Pre-registration
 
+**Title:** Where Does Glioblastoma Come Back? Can MRI-based models beat distance?
+**Authors:** Sophie Zhu, Jack Xu
+
 Not posted. This is the Phase 2 draft, built from the plan's checklist in Step 2.5. Every blank is filled only from `results/` or a committed decision. Text marked *plan* is copied from `docs/plan/final_plan.md`. Text marked *implementation* says how this repository carries it out, with its source.
 
 - Platform: **OSF Registries** (TODO: confirm when posting).
@@ -23,7 +26,7 @@ Not posted. This is the Phase 2 draft, built from the plan's checklist in Step 2
 | Power table | `results/power/power_table.json` (`scripts/04_power.py`) | done 2026-11-19: MDE 0.04–0.05 at rho 0.7 |
 | Primary, verdict rule, secondaries, sensitivity and exploratory lists | section 4 below | drafted |
 | Result sentences | section 5 below (plan Step 2.4) | drafted |
-| H2: the final model, its hash, and the MU-Glioma-Post cohort rules (D19, V6) | section 8 below | TODO before posting |
+| H2: the final model, its hash, and the MU-Glioma-Post cohort rules (D19, V6) | section 8 below | decided 2026-11-19: E1; MU rules approved |
 | What was seen before posting | section 7 below | TODO at posting |
 
 ## 1. Candidates and features (locked 2026-11-07, `DECISIONS.md` D6)
@@ -167,7 +170,7 @@ TODO before posting. Everything here is fixed before the registration is posted,
   - C2 release SHA-256 `2de845b4d2ed2b13cc464389c5e621bfe99f02e6d228d0d49e66c4698dea8479`; C0 has no weights.
   - It uses only f1–f4, which both test cohorts provide.
   - LUMIERE (development, V6): Δ PR-AUC vs C0 +0.0019 [−0.0004, +0.0052] (`results/h2_explore/`, after `17_` runs from a clean commit).
-- **MU-Glioma-Post cohort.** TODO, starting from the metadata funnel in `docs/future_cohorts.md`:
+- **MU-Glioma-Post cohort.** Approved 2026-11-19 (D18 item 4), from the metadata funnel in `docs/future_cohorts.md`:
   - eligibility: IDH-wildtype GBM, no earlier brain tumour, imaging-confirmed first progression;
   - baseline: the first post-treatment MRI at least 56 days before progression (MU has no early post-op scan);
   - recurrence: an MRI from 14 days before to 60 days after the first progression;

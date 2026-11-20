@@ -3,6 +3,8 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-19: D12 (RHUH-GBM transport recipe and threshold) and D13 (RHUH-GBM pipeline) approved by the user ("Approve both") and set to Active. D12's threshold rule and value are recorded as decided (D17; 3.54 mm). D9–D11, D14 and D15 are still proposed.
+- 2026-11-19: the user approved the MU-Glioma-Post cohort rules (D18 item 4) and set the title ("Where Does Glioblastoma Come Back? Can MRI-based models beat distance?") and authors (Sophie Zhu, Jack Xu) in the pre-registration. D12 and D13 are still proposed.
 - 2026-11-19: the H2 final model is **E1**, the rank average of C0 and C2 (user: "Yes, use E1"). Recorded in D19 item 5 and in `docs/preregistration.md` section 8, with the H2 result sentences.
 - 2026-11-19: pre-registration numbers, each run from clean commit `657dc32` (uncommitted edits stashed during the runs):
   - `03_`: C1, C3 and C2 refit and C5 imported; hashes in `results/release/model_hashes.json`, all verified.

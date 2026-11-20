@@ -245,19 +245,19 @@ The app uses plain TypeScript. Its dependencies are three 0.186, @niivue/niivue 
 Open:
 Exported cases (`app/public/cases/`) are kept out of git for now. Publishing them to GitHub Pages means committing meshes derived from LUMIERE (CC0) and later RHUH-GBM (CC BY 4.0) images, which needs a decision.
 
-## D12: RHUH-GBM transport uses gbm-wm's tuned recipe; the threshold is set on LUMIERE first (proposed)
+## D12: RHUH-GBM transport uses gbm-wm's tuned recipe; the threshold is set on LUMIERE first
 
-Date: (set at commit)
-Status: Proposed
+Date: 2026-11-19
+Status: Active (user approved: "Approve both", 2026-11-19, before the registration)
 
 Decision:
 `gbmc.registration` copies gbm-wm's `register_syn` and its D11 settings (`TUNED_SYN`). `transport_pair` follows gbm-wm's `12_` step for step: rigid pre-alignment; SyN forward and backward with the cavity masked; round trip in the peritumoral region; Jacobian QC; nearest-neighbour warp. The seed is `config.yaml:registration.master_seed` (20260819, gbm-4d's, as in D9).
 
 `scripts/07_roundtrip_threshold.py` runs this recipe on the 63 LUMIERE baseline→first-progression pairs with **registration only**. The progression segmentation is never read (plan Step 3.3: "a check that uses no LUMIERE labels").
 
-Open, to decide before OSF:
-- `registration.roundtrip_threshold_rule`: how that distribution becomes the RHUH-GBM threshold, e.g. its p95 or its max.
-- `registration.roundtrip_threshold_mm`: the value that rule gives.
+Decided before the registration:
+- `registration.roundtrip_threshold_rule`: `max` (D17).
+- `registration.roundtrip_threshold_mm`: 3.54 mm, the maximum over the 63 LUMIERE pairs (`results/registration_threshold/roundtrip.json`, from clean commit `657dc32`).
 
 Consequences:
 Smoke test on Patient-001: registration ok, round-trip median 0.77 mm (p95 1.86 mm), no label written, 2,932 s on one ITK thread.
@@ -265,10 +265,10 @@ Smoke test on Patient-001: registration ok, round-trip median 0.77 mm (p95 1.86 
 Reason:
 gbm-wm lost 21 of 72 patients when a threshold fixed for one recipe met another (plan §2, row 7).
 
-## D13: RHUH-GBM pipeline built before download; every file-dependent constant is null (proposed)
+## D13: RHUH-GBM pipeline built before download; every file-dependent constant is null
 
-Date: (set at commit)
-Status: Proposed
+Date: 2026-11-19
+Status: Active (user approved: "Approve both", 2026-11-19, before the registration)
 
 Decision:
 `gbmc.rhuh`, `gbmc.consort`, `gbmc.screens`, `gbmc.rhuh_features`, `gbmc.confirm`, `gbmc.verdict` and scripts `20_`–`23_`, `30_`, `31_` are written and unit-tested on synthetic data. They use only what the plan states about the dataset. Everything that depends on the files is null in `config.yaml` until the download and refuses to run: the layout, the clinical columns, the timepoint and sequence names, the cavity rule, the SRI24 midline, the falx T1 sequence, the mapping agreement, the cavity dark threshold, the screen thresholds, `verdict.mde_rho`, `osf.url` and `osf.timestamp`.
@@ -404,7 +404,7 @@ Decision:
    - `config.yaml:data.mu_glioma_post.images_local_root` stays null;
    - `tests/test_config.py::test_mu_glioma_post_stays_sealed` enforces both.
    - Only the clinical and segmentation-volume spreadsheets were read (2026-11-16, `docs/future_cohorts.md`), to count eligible patients.
-4. **Known design differences, to be pre-registered in the shared registration (D19) before posting** (none decided yet):
+4. **Design differences, pre-registered in the shared registration (D19).** Approved by the user on 2026-11-19 ("i approve the MU-glioma rules"), as drafted in `docs/preregistration.md` section 8:
    - MU has no early post-op scan: its first MRI is a median 94 days after surgery. The baseline would be the first post-treatment MRI, at least 56 days before the first progression, which gives 44 IDH-wildtype GBM patients by metadata.
    - The target and features are then built on a post-chemoradiation scan.
    - MU's labels are NETC/SNFH/ET/resection cavity (nnU-Net, refined by neuroradiologists), not DeepBraTumIA's.
