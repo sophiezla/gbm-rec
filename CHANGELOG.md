@@ -3,6 +3,10 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-21: the registration is public: https://osf.io/2yuqn/, registered 2026-11-20T16:42:57Z.
+  - Checked through the OSF API: public, accepted, not embargoed, "OSF Preregistration" v4. The registered text contains commit `51d777b`, all four model hashes, the 3.54 mm threshold, E1, the MU 56-day rule and rho 0.7.
+  - Recorded in `config.yaml:osf`.
+  - `tests/test_config.py`: the RHUH-GBM pre-registration gate test was deleted, as its docstring instructed. The MU test now checks only that the metadata folder holds just the spreadsheets.
 - 2026-11-21: H2 and the MU-Glioma-Post pipeline, built and tested on synthetic data, before any test image:
   - **H2 in the RHUH-GBM run.** `candidates.H2_NAME`/`H2_MEMBERS` (E1 = C0 + C2); E1 scored in `confirm.score_patient`; `confirm.h2_summary` (delta, BCa CI, outcome class, the registered H2 sentence); `verdict.h2_sentence`; `30_` reports H2a outside the H1 family.
   - **MU module.** `gbmc.mu`: eligibility from the clinical sheet, labels, target = enhancing + cavity, and a layout that stays null until download. `gbmc.xlsx` is a stdlib .xlsx reader (no new dependency).

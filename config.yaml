@@ -122,8 +122,8 @@ screens:
 # OSF pre-registration (plan Phase 2). Both stay null until posted; the RHUH-GBM
 # download and the confirmatory run refuse until then.
 osf:
-  url: null
-  timestamp: null
+  url: https://osf.io/2yuqn/                # OSF Registries, "OSF Preregistration" v4; public, no embargo
+  timestamp: "2026-11-20T16:42:57Z"           # date_registered from api.osf.io/v2/registrations/2yuqn (UTC), checked 2026-11-21
 
 # Verdict (plan Steps 2.3, 4.4).
 verdict:

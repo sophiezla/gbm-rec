@@ -3,16 +3,17 @@
 **Title:** Where Does Glioblastoma Come Back? Can MRI-based models beat distance?
 **Authors:** Sophie Zhu, Jack Xu
 
-Not posted. This is the Phase 2 draft, built from the plan's checklist in Step 2.5. Every blank is filled only from `results/` or a committed decision. Text marked *plan* is copied from `docs/plan/final_plan.md`. Text marked *implementation* says how this repository carries it out, with its source.
+**Posted 2026-11-20 (OSF Registries, public).** The registered text was pasted from the copy-paste doc in OSF's version 4 form; this file is the working draft behind it, built from the plan's checklist in Step 2.5. Every blank is filled only from `results/` or a committed decision. Text marked *plan* is copied from `docs/plan/final_plan.md`. Text marked *implementation* says how this repository carries it out, with its source.
 
 - Platform: **OSF Registries** (TODO: confirm when posting).
   - OSF is phasing out *Projects*: no new projects since 16 Nov 2026, and existing ones become read-only on 19 Feb 2027.
   - OSF Registries (pre-registration) continues, including files attached to a registration. Check the upload limits when posting.
   - Fallbacks: AsPredicted (timestamped, can stay private), or a Zenodo deposit (DOI and timestamp) of this document and `results/release/model_hashes.json`.
   - Whichever is used, its URL and timestamp go into `config.yaml:osf.url` and `osf.timestamp` (the key names stay).
-- Registration URL: TODO
-- Registration timestamp: TODO
-- RHUH-GBM download date: TODO (must be later than the OSF timestamp)
+- Registration URL: https://osf.io/2yuqn/
+- Registration timestamp: 2026-11-20T16:42:57Z (`date_registered`, OSF API; checked 2026-11-21: public, not embargoed). The registered text contains commit `51d777b` and all four model hashes.
+- RHUH-GBM download date: TODO (must be later than the registration timestamp)
+- MU-Glioma-Post download date: TODO (must be later than the registration timestamp)
 
 ## Checklist (plan Step 2.5) and where each item comes from
 

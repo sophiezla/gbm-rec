@@ -17,7 +17,12 @@ _Last updated: 2026-11-18_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-21): registration submitted; H2 and MU pipeline built
+## Latest (2026-11-21): registration public
+- https://osf.io/2yuqn/ has been public since 2026-11-20T16:42:57Z (checked through the OSF API: accepted, not embargoed). It contains commit `51d777b` and all four model hashes. Recorded in `config.yaml:osf`.
+- The RHUH-GBM pre-registration gate test was deleted, as its docstring said. The MU test now checks only that its metadata folder holds just the spreadsheets.
+- **Next:** download RHUH-GBM and MU-Glioma-Post, and commit each download date (after the timestamp). Then the RHUH-GBM layout and `20_`, and the MU layout and `26_`.
+
+## Earlier (2026-11-21): registration submitted; H2 and MU pipeline built
 - **Registration:** OSF https://osf.io/2yuqn/, submitted 2026-11-20, pending approval and expected public about 24 hours later. Once it is public, record `osf.url` and `osf.timestamp` in `config.yaml`, after checking the date through OSF's API. Only then download RHUH-GBM and MU-Glioma-Post.
 - **H2 in `30_`:** E1 vs C0, outside the H1 family.
 - **MU pipeline:** `25_`–`28_`, `32_`. All refuse until the MU file layout is recorded after download.

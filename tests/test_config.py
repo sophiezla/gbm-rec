@@ -28,26 +28,14 @@ def test_set_constant_is_returned(tmp_path):
     assert config.get("seeds.master", path=path) == 7
 
 
-def test_rhuh_gbm_path_stays_unset_before_preregistration():
-    """RHUH-GBM may not be downloaded before the OSF timestamp (plan Phase 2).
+def test_mu_glioma_post_metadata_folder_holds_only_spreadsheets():
+    """MU-Glioma-Post's metadata folder holds only the two spreadsheets (D18, D19).
 
-    Delete this test in the same commit that records the OSF timestamp.
-    """
-    with pytest.raises(ValueError):
-        config.get("data.rhuh_gbm.local_root")
-
-
-def test_mu_glioma_post_stays_sealed():
-    """MU-Glioma-Post is a sealed test cohort for the H2 final model (DECISIONS.md D18, D19).
-
-    No image or segmentation may exist on this computer, and the image path stays unset,
-    until the registration that includes MU is posted. Only the clinical and volume
-    spreadsheets are allowed. Change this test in the commit that records that posting.
+    The registration was posted on 2026-11-20 (config.yaml:osf), so the images may now be
+    downloaded, into ``images_local_root``, never into the metadata folder.
     """
     from pathlib import Path
 
-    with pytest.raises(ValueError):
-        config.get("data.mu_glioma_post.images_local_root")
     root = Path(__file__).resolve().parents[1] / config.get("data.mu_glioma_post.metadata_dir")
     if root.is_dir():
         files = [p for p in root.rglob("*") if p.is_file()]

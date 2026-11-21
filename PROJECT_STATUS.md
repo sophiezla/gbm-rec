@@ -17,7 +17,7 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 4. **Node.js is not installed on this Mac**, so the app cannot be built or viewed here. Install Node.js (a system install, for the user).
 
 ### Registration (2026-11-20)
-Submitted to OSF Registries: https://osf.io/2yuqn/ (pending approval, then public). `config.yaml:osf` is not yet recorded; the RHUH-GBM and MU-Glioma-Post downloads wait for it.
+Public on OSF Registries since 2026-11-20T16:42:57Z: https://osf.io/2yuqn/ (checked through the OSF API; recorded in `config.yaml:osf`). RHUH-GBM and MU-Glioma-Post may now be downloaded; commit each download date.
 
 ### H2 final model (D19, V6)
 A final model is built on LUMIERE only and pre-registered as H2 in the same registration as the primary. It is tested once on RHUH-GBM and once on MU-Glioma-Post (D18), which stays undownloaded until posting; a test enforces this. Plan: `docs/team_plan.md`.
@@ -27,7 +27,7 @@ A final model is built on LUMIERE only and pre-registered as H2 in the same regi
 |---|---|---|---|
 | 0 Setup + paperwork | 1 | ISEF forms signed; SRC contacted; repo scaffolded, builds, tests pass; CNN hardware + starting-weights decisions recorded; literature search string committed; expert emails sent | **Open.** Repo, build and tests done |
 | 1 Tournament on LUMIERE | 1–2 | All candidates scored on identical folds; challenger named by rule; weights hashed | **Started.** Rules locked (D6); code and tests done, C5 included; waiting on C5 training; nothing scored |
-| 2 Freeze + OSF | 2 | OSF timestamp precedes the RHUH-GBM download date | Not started |
+| 2 Freeze + OSF | 2 | OSF timestamp precedes the RHUH-GBM download date | **OSF posted** 2026-11-20 (https://osf.io/2yuqn/); download dates still to be committed after it |
 | 3 RHUH-GBM cohort lock | 3 | Cohort locked; CONSORT committed; achieved MDE recorded; no model score computed | Not started |
 | 4 Confirmatory run, once | 4–5 | Verdict sentence filled; figures from results/; audit passes | Not started |
 | 5 App | 2–7 | Runs offline; five-person usability check passed | Not started |
