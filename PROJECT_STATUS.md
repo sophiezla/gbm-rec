@@ -16,6 +16,9 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
    - `07_` and `05_` are running on this Mac (started 2026-11-11).
 4. **Node.js is not installed on this Mac**, so the app cannot be built or viewed here. Install Node.js (a system install, for the user).
 
+### Test cohorts: partner's computer (2026-11-21, V9)
+Downloads, the unattended run, C5 scoring (Colab L4) and the one-time runs happen on the partner's computer: `docs/PARTNER_NEXT.md`. The Mac runs none of `30_`/`31_`/`32_`.
+
 ### Registration (2026-11-20)
 Public on OSF Registries since 2026-11-20T16:42:57Z: https://osf.io/2yuqn/ (checked through the OSF API; recorded in `config.yaml:osf`). RHUH-GBM and MU-Glioma-Post may now be downloaded; commit each download date.
 

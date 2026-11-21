@@ -3,6 +3,9 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-21: V9 and D6 item 9 updated. All test-cohort work moves to the partner's computer, with C5 scoring on a Colab L4 and only that computer running the one-time scripts.
+  - `docs/PARTNER_NEXT.md` is rewritten as the full guide: setup for Windows, Mac or Linux; downloads; the unattended run; C5 on an L4; the three confirmatory runs, pushed after each.
+  - The frozen models are copied to Drive (`gbm-rec-c5/release_models/`), all four hash-verified.
 - 2026-11-21: everything up to the C5 handoff now runs unattended after the downloads:
   - `scripts/run_test_cohorts.py`: downloads check and record, RHUH-GBM constants, `20_`–`24_`, then `26_`–`28_`. Each stage is committed locally and the run stops before the one-time runs.
   - D20 fixes the download-time constants as written rules before any image: both file layouts (from TCIA's package listings), RHUH-GBM timepoint names with an automatic check, the SRI24 midline rule, falx T1 = `T1`, and the cavity reading (`rhuh.decide_cavity_rule`). The RHUH-GBM clinical CSV was downloaded (public).

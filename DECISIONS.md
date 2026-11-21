@@ -150,6 +150,7 @@ Decision:
 9. **Machines** (user decision, 2026-11-07):
    - The GPU computer only trains C5 and writes its held-out maps, model files and their SHA-256 hashes. It runs from a clean, recorded commit with the same folds.
    - This Mac imports those files with hash checks (`gbmc.tournament.c5_held_out`) and computes every reportable number, C6 and the confirmatory run included.
+   - **Updated 2026-11-21 (user decision; deviation V9):** all test-cohort work runs on the partner's computer, start to finish: the downloads, `scripts/run_test_cohorts.py`, C5 scoring on a Colab L4, and `30_`, `31_`, `32_`. Every RHUH-GBM and MU-Glioma-Post number therefore comes from one machine. LUMIERE numbers stay from this Mac, frozen. Only the partner's computer may run the run-once scripts. The frozen models travel by hash: every script checks them against `results/release/model_hashes.json`.
    - From 2026-11-10 the "GPU computer" is a Google Colab runtime run by the user's partner with their own notebook (runbook section 0). The same rules apply: a pinned clean commit, the same folds, and all output on Drive.
    - PyTorch is approved for C5. It is pinned in a separate GPU lockfile; the main environment is unchanged.
    - Built 2026-11-07: `scripts/12_c5_pack.py` (Mac), `scripts/13_c5_train.py` (GPU computer) and `docs/C5_GPU.md`.

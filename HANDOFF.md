@@ -17,7 +17,12 @@ _Last updated: 2026-11-18_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-21): ready for the downloads; then one unattended run
+## Latest (2026-11-21): the partner runs the test cohorts (V9)
+- All remaining work runs on the partner's computer, start to finish, following `docs/PARTNER_NEXT.md`: setup, downloads, `run_test_cohorts.py`, C5 on a Colab L4, then `30_`/`31_`/`32_` once each on the user's go, pushing after each.
+- The frozen models are on Drive (`gbm-rec-c5/release_models/`), all four hash-verified against the register on 2026-11-21.
+- **Only the partner's computer may run the one-time scripts.** Do not run `30_`, `31_` or `32_` on the Mac.
+
+## Earlier (2026-11-21): ready for the downloads; then one unattended run (superseded by V9: the partner runs it)
 **User, once:** install the IBM Aspera client (ibm.com/products/aspera/downloads; TCIA's package pages offer it under "Install now"). Then open each package and click **Download all**:
 - RHUH-GBM (2.9 GB), from the NIfTI link on https://www.cancerimagingarchive.net/collection/rhuh-gbm/. Save into `~/Projects/gbm-rec/data/raw/rhuh_gbm/`, so that `RHUH-GBM_nii_v1/` and `RHUH-GBM-nii-v1.sums` land there.
 - MU-Glioma-Post (11 GB), from https://www.cancerimagingarchive.net/collection/mu-glioma-post/. Save into `~/Projects/gbm-rec/data/raw/mu_glioma_post_images/`, so that `MU-Glioma-Post/` lands there.

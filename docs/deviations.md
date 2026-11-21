@@ -136,6 +136,24 @@ The paper reports that 11 patients were first scanned at a secondary facility, b
 Direction of effect:
 None on the primary or H2. One pre-registered sensitivity check is lost. If TCIA or the authors later publish the IDs, the arm can be added, labelled as run after the primary.
 
+## V9: The test cohorts are processed on the partner's computer
+
+Date: 2026-11-21
+Source: `DECISIONS.md` D6 item 9 ("this Mac … computes every reportable number"); user decision on 2026-11-21 (the partner "has better computer")
+
+Departure:
+The downloads, label transport, screens, cohort locks and the run-once confirmatory runs (`30_`, `31_`, `32_`) run on the partner's computer, not the user's Mac. C5's RHUH-GBM scoring stays on a Colab NVIDIA L4 (V5).
+
+Why:
+The partner's computer is faster. Running all test-cohort steps on one machine keeps every RHUH-GBM and MU-Glioma-Post number consistent, and avoids mixing two computers inside one analysis. Deviation V3 found that the same code can give slightly different brain masks on different computers.
+
+Direction of effect:
+- None on any result. No test image, label or score had been seen; every rule, threshold and model is fixed in the registration (https://osf.io/2yuqn/) and in code.
+- Every model is checked against its registered SHA-256 before use.
+- A rerun on another computer could differ in the last decimals of registration-based steps. Each run's manifest records the machine and the environment.
+- The run-once markers live in one folder, so only the partner's computer may run `30_`, `31_` and `32_`, and it pushes each marker and result straight after.
+- The registration does not name a computer.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29

@@ -1,6 +1,8 @@
 # Team plan: who does what, in which order (2026-11-19)
 
-**Update 2026-11-21:**
+**Update 2026-11-21 (later, V9):** the partner does all of it on his computer, following `docs/PARTNER_NEXT.md`. The user reviews the pushed results, then makes the figures, app and poster.
+
+**Earlier update 2026-11-21:**
 1. The registration is public.
 2. The user downloads both cohorts and runs `scripts/run_test_cohorts.py`, unattended, through the C5 input packing.
 3. The partner does the one handoff: `docs/PARTNER_NEXT.md`.
