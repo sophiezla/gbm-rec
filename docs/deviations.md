@@ -108,6 +108,23 @@ Direction of effect:
 - On H2's RHUH-GBM and MU-Glioma-Post results: unbiased by development, as long as the model is frozen and hashed before the registration and neither cohort is opened before then.
 - Multiplicity: H2 adds a comparison, and it is reported as its own pre-registered hypothesis, not as the verdict.
 
+## V7: MU-Glioma-Post eligibility details fixed after the registration was submitted, before any image
+
+Date: 2026-11-21
+Source: registration section 8 (MU-Glioma-Post cohort rules); `DECISIONS.md` D18 item 4; user decision 2026-11-21 ("Closest to date")
+
+Departure:
+The registered rules leave three details open. They were fixed in code (`gbmc.mu`) on 2026-11-21, after the registration was submitted (2026-11-20, awaiting approval) and before any MU image or label was downloaded:
+1. **Recurrence scan.** When several MRIs fall in the window (14 days before to 60 days after progression), the one closest to the progression date is used, the earlier one on a tie. 14 of the 44 eligible patients have several. The "earliest in window" reading would choose differently for 1 patient.
+2. **"Glioblastoma"** includes the one "Glioma w/ GBM features" diagnosis. **"IDH-wildtype"** means IDH1 = 0 and IDH2 not mutated, so an unknown IDH2 is allowed. Both were already used in the count of about 44 that the registration quotes.
+3. **Scan order** is taken from the scan days, not from the timepoint numbers, which are not always chronological (PatientID_0081).
+
+Why:
+The registered text does not say which scan to use when several qualify. 38 of the 44 eligible patients have an MRI on the progression date itself, almost certainly the scan that documented the progression.
+
+Direction of effect:
+Unknown, and no MU image, label or score has been seen. The rules use only the clinical spreadsheet, which was read before registering (disclosed), and none of them depends on where recurrence appears. The eligible count is 44, as registered.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29

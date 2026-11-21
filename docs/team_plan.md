@@ -32,9 +32,13 @@ Designed for few handoffs: the Mac (user) does all data work and every reportabl
 10. Run `50_`/`51_` (figures) and `40_` (app cases with results), and put the cases on Drive. **→ Handoff 3**
 11. Partner: drop the cases and numbers into the app and poster. Done.
 
-## Code still to build (Mac side, during round 1)
-- H2 scoring inside `30_`: one extra frozen model, hash-checked, outside the primary's BH-FDR family.
-- The MU-Glioma-Post pipeline: inventory and eligibility from the clinical table, label mapping, transport and screens (as for RHUH-GBM; both are SRI24), features on the post-treatment baseline, cohort lock, and the run-once H2 test.
+## Code (built 2026-11-21)
+- H2 scoring inside `30_`: E1 is scored next to the candidates, outside the primary's BH-FDR family.
+- The MU-Glioma-Post pipeline:
+  - `25_mu_eligibility` (metadata only: 44 eligible);
+  - `26_mu_transport` and `27_mu_screens` (the RHUH-GBM recipe and screens);
+  - `28_mu_lock`;
+  - `32_mu_confirm`, the run-once H2b test.
 
 ## Guard rails
 - RHUH-GBM and MU-Glioma-Post stay unopened until the registration is posted. `tests/test_config.py` enforces both.

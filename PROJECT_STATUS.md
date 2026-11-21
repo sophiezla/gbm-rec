@@ -16,6 +16,9 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
    - `07_` and `05_` are running on this Mac (started 2026-11-11).
 4. **Node.js is not installed on this Mac**, so the app cannot be built or viewed here. Install Node.js (a system install, for the user).
 
+### Registration (2026-11-20)
+Submitted to OSF Registries: https://osf.io/2yuqn/ (pending approval, then public). `config.yaml:osf` is not yet recorded; the RHUH-GBM and MU-Glioma-Post downloads wait for it.
+
 ### H2 final model (D19, V6)
 A final model is built on LUMIERE only and pre-registered as H2 in the same registration as the primary. It is tested once on RHUH-GBM and once on MU-Glioma-Post (D18), which stays undownloaded until posting; a test enforces this. Plan: `docs/team_plan.md`.
 

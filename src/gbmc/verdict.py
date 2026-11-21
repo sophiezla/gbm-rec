@@ -49,6 +49,27 @@ def benjamini_hochberg(pvalues: dict[str, float], q: float) -> dict[str, dict]:
                 "rejected": bool(adjusted[i] <= q)} for i, k in enumerate(names)}
 
 
+#: H2 (D19) uses the same four classes as H1, named for the final model.
+H2_OUTCOMES = {"Challenger champion": "Final model wins", "Bounded null": "Bounded null",
+               "Inconclusive": "Inconclusive", "Challenger worse": "Final model worse"}
+
+
+def h2_sentence(outcome: str, cohort: str, delta: float, ci: tuple[float, float]) -> str:
+    """The pre-registered H2 result sentence for one cohort (D19; registration)."""
+    if outcome == "Challenger champion":
+        return (f"On {cohort}, the final model adds {delta:+.4f} PR-AUC (95% CI "
+                f"[{ci[0]:+.4f}, {ci[1]:+.4f}]) over distance from the treatment target.")
+    if outcome == "Bounded null":
+        return (f"On {cohort}, the final model adds less than {ci[1]:.4f} PR-AUC over "
+                "distance; distance holds.")
+    if outcome == "Inconclusive":
+        return (f"On {cohort}, the final model's difference from distance is {delta:+.4f} "
+                f"PR-AUC (95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}]); the cohort is too small to "
+                "bound it tightly.")
+    return (f"On {cohort}, distance beats the final model by {abs(delta):.4f} PR-AUC (95% CI "
+            f"[{ci[0]:+.4f}, {ci[1]:+.4f}]).")
+
+
 def _pct(x: float) -> str:
     return f"{100 * x:.1f}%"
 

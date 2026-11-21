@@ -404,7 +404,7 @@ Decision:
    - `config.yaml:data.mu_glioma_post.images_local_root` stays null;
    - `tests/test_config.py::test_mu_glioma_post_stays_sealed` enforces both.
    - Only the clinical and segmentation-volume spreadsheets were read (2026-11-16, `docs/future_cohorts.md`), to count eligible patients.
-4. **Design differences, pre-registered in the shared registration (D19).** Approved by the user on 2026-11-19 ("i approve the MU-glioma rules"), as drafted in `docs/preregistration.md` section 8:
+4. **Design differences, pre-registered in the shared registration (D19).** Approved by the user on 2026-11-19 ("i approve the MU-glioma rules"), as drafted in `docs/preregistration.md` section 8. Details the text left open were fixed on 2026-11-21, before any image, and are disclosed as deviation V7: the recurrence scan closest to the progression date (user decision); "Glioma w/ GBM features" counted as glioblastoma; IDH2 unknown allowed; scan order by days. `gbmc.mu.eligibility` gives 44 eligible.
    - MU has no early post-op scan: its first MRI is a median 94 days after surgery. The baseline would be the first post-treatment MRI, at least 56 days before the first progression, which gives 44 IDH-wildtype GBM patients by metadata.
    - The target and features are then built on a post-chemoradiation scan.
    - MU's labels are NETC/SNFH/ET/resection cavity (nnU-Net, refined by neuroradiologists), not DeepBraTumIA's.
@@ -443,7 +443,9 @@ The user wants a final model before the fair. Building it on LUMIERE and pre-reg
 Consequences:
 - Deviation V6 (an analysis added after LUMIERE scores were seen).
 - The final model's LUMIERE numbers are optimistic, because it was shaped after the tournament. Only its RHUH-GBM and MU-Glioma-Post results count as tests.
-- `30_` needs an H2 scoring step and an MU confirmatory run (not built).
+- Built on 2026-11-21:
+  - `gbmc.confirm.h2_summary`, and E1 in `score_patient` (H2a, inside `30_`, outside the H1 family);
+  - the MU pipeline: `25_` eligibility, `26_` transport, `27_` screens (generated from `22_`, cohort plumbing only), `28_` lock, and `32_` the run-once H2b test.
 - D18 is updated: MU is no longer a later, separate study.
 
 ## D0: Documentation structure

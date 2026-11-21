@@ -96,6 +96,11 @@ LEARNED = {
 #: Fixed now, never by how the members score (plan Step 1.4, C6 rule 1).
 #: C5 passed the Step 0.4 gate on 2026-11-07 (D6 (g)), so it is a member.
 ENSEMBLE_MEMBERS = ("C1", "C3", "C2", "C5")
+#: H2 final model (DECISIONS.md D19 item 5, pre-registered): the unweighted mean of
+#: within-patient percentile ranks of C0 and C2. No weights of its own; C2's release hash
+#: is in the register. Never part of ORDER, the tournament, or the H1 BH-FDR family.
+H2_NAME = "E1"
+H2_MEMBERS = ("C0", "C2")
 
 
 def fit(candidate: LearnedCandidate, matrices: Sequence[np.ndarray],

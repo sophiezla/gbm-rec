@@ -44,6 +44,10 @@ data:
     metadata_dir: data/raw/mu_glioma_post   # clinical + volume spreadsheets only (2026-11-16)
     images_local_root: null   # must stay null, and no image may be downloaded, until the
                               # registration that includes MU is posted (D18, D19)
+    # File layout: verified on download, never guessed. gbmc.mu.layout() raises until set.
+    image_pattern: null       # relative to images_local_root; {patient} {timepoint} {sequence}
+    seg_pattern: null         # relative to images_local_root; {patient} {timepoint}
+    sequence_names: null      # {T1ce, FLAIR, T1, T2}: the dataset's sequence names
 
 # Tournament rules (plan Steps 1.3-1.6). LOCKED 2026-11-07 (D6). Changing any value
 # after a score is seen is a deviation.

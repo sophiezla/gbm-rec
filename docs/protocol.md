@@ -16,6 +16,11 @@ Rules: `DECISIONS.md` D6 (locked 2026-11-07). C5 runs on the GPU computer: `docs
 | `scripts/13_c5_train.py` | GPU computer: C5's 7 folds (held-out maps) or `--release` | `data/interim/c5_oof/`, `c5_release/` |
 | `scripts/14_c5_score_rhuh.py` | GPU computer: RHUH-GBM maps from the registered C5 model, no labels | `data/interim/rhuh/c5_maps/` |
 | `scripts/15_first_progressions.py` | first-progression timepoint names from gbm-4d's transport records | `results/cohort_lock/first_progressions.json` |
+| `scripts/25_mu_eligibility.py` | MU-Glioma-Post eligibility from the clinical sheet (metadata only; D19, V7) | `results/mu_eligibility/` |
+| `scripts/26_mu_transport.py` | MU recurrence -> baseline, the RHUH-GBM recipe | `data/interim/mu/label_field_tuned/` |
+| `scripts/27_mu_screens.py` | MU registration screens (generated from `22_`) | `results/mu_screens/` |
+| `scripts/28_mu_lock.py` | MU flow table, evaluable n, achieved MDE | `results/mu_lock/` |
+| `scripts/32_mu_confirm.py` | H2b on MU-Glioma-Post, once | `results/mu_confirm/` |
 | `scripts/24_rhuh_c5_pack.py` | label-free C5 inputs for RHUH-GBM, after the cohort lock | `data/interim/rhuh/c5_inputs/` |
 | `scripts/05_later_progressions.py` | Step 1.8 inputs: preprocess and transport progressions 2 and 3 with the rewritten original recipe (D9, V3). Long | `data/interim/{preprocessed_later,label_field_later}/` |
 | `scripts/06_later_progression_scores.py` | Step 1.8: exploratory scores on new enhancing tumour | `results/tournament/later_progression/` |

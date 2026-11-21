@@ -17,7 +17,14 @@ _Last updated: 2026-11-18_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-19): pre-registration numbers ready
+## Latest (2026-11-21): registration submitted; H2 and MU pipeline built
+- **Registration:** OSF https://osf.io/2yuqn/, submitted 2026-11-20, pending approval and expected public about 24 hours later. Once it is public, record `osf.url` and `osf.timestamp` in `config.yaml`, after checking the date through OSF's API. Only then download RHUH-GBM and MU-Glioma-Post.
+- **H2 in `30_`:** E1 vs C0, outside the H1 family.
+- **MU pipeline:** `25_`–`28_`, `32_`. All refuse until the MU file layout is recorded after download.
+- **Next:** run `25_mu_eligibility.py` from a clean commit (metadata only). It fixes the 44 patients now, before any image.
+- **Deviation V7:** MU eligibility details.
+
+## Earlier (2026-11-19): pre-registration numbers ready
 - `03_`, `04_`, `07_ --summary` and `06_` have run from clean commit `657dc32`.
   - Hashes: `results/release/`. MDE at rho 0.7: 0.04–0.05. Round-trip threshold: 3.54 mm, set in `config.yaml`.
 - Proposed H2 model: E1, the rank average of C0 and C2 (`scripts/17_h2_explore.py`; rerun from a clean commit).

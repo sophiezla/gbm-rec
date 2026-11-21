@@ -22,7 +22,9 @@ Order, and every refusal:
    lift over chance; coverage at matched 20 mm and at 50 ml. The hero secondary
    (coverage at the 15 mm margin's volume) and the complexity trend are
    reported outside the family, as the plan lists them.
-7. Step 4.6 export: maps and top-ranked masks to ``results/confirm/maps/``
+7. H2 (D19): the frozen final model E1 (rank average of C0 and C2) vs C0, with its own
+   BCa CI, outcome class and sentence, outside the H1 family (``gbmc.confirm.h2_summary``).
+8. Step 4.6 export: maps and top-ranked masks to ``results/confirm/maps/``
    (images are not in git), per-patient numbers in JSON.
 
     python scripts/30_confirm.py
@@ -130,12 +132,14 @@ def main() -> int:
                "challenger_coverage_volume50ml": table[challenger]["coverage_volume50ml"]
                ["delta_vs_C0"]["p"]}
     secondaries = verdict.benjamini_hochberg(family, float(config.get("verdict.fdr_q")))
+    # H2 (D19): the frozen final model E1 vs C0, reported apart from H1 and its family.
+    h2 = confirm.h2_summary(per_patient, "RHUH-GBM", mde, master, n_boot)
 
     result = {"osf": osf, "challenger": challenger, "n_evaluable": len(per_patient),
               "primary": {"metric": "delta mean PR-AUC, challenger vs C0"} | primary,
               "achieved_mde": mde, "mde_rho": mde_rho, "outcome": outcome,
               "champion": verdict.champion(outcome, challenger), "sentence": text,
-              "hero_coverage_margin15": hero, "secondaries_bh": secondaries,
+              "hero_coverage_margin15": hero, "secondaries_bh": secondaries, "H2": h2,
               "candidates": table,
               "language": "RHUH-GBM numbers are validation results; coverage denominator: "
                           "recurrence outside the target"}
@@ -148,6 +152,7 @@ def main() -> int:
         (OUT / "sentence.txt").write_text(text + "\n", encoding="utf-8")
     freeze.mark_done(OUT, {"outcome": outcome, "champion": result["champion"]})
     print(f"\n{outcome}. Champion: {result['champion']}.\n{text}")
+    print(f"\nH2 ({h2['model']}): {h2['outcome']}.\n{h2['sentence']}")
     return 0
 
 

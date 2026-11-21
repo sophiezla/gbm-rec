@@ -164,12 +164,14 @@ def load_models(release_dir: Path, register: dict[str, str]) -> dict:
             for name in candidates.LEARNED}
 
 
-def score_patient(inp: PatientInputs, models: dict, c5_score: np.ndarray | None = None
-                  ) -> tuple[dict, dict[str, np.ndarray], dict]:
+def score_patient(inp: PatientInputs, models: dict, c5_score: np.ndarray | None = None,
+                  include_c5: bool = True) -> tuple[dict, dict[str, np.ndarray], dict]:
     """Metrics per candidate, voxel scores per candidate, and feature QC.
 
     ``c5_score`` is C5's imported map for this patient (``gbmc.c5_import.rhuh_scores``),
     one value per evaluation voxel in C order; C5 runs on the GPU computer (D6 item 9).
+    ``include_c5=False`` skips C5 and C6: the MU-Glioma-Post run scores only H2 (D19).
+    The H2 final model (``candidates.H2_NAME``) is always added.
     """
     vols, qc = rhuh_features.build(inp.reference, inp.brain, inp.target, inp.flair_abnormal,
                                    inp.t1_z, inp.lesion)
@@ -187,13 +189,16 @@ def score_patient(inp: PatientInputs, models: dict, c5_score: np.ndarray | None 
     scores = {name: rule.score(x) for name, rule in candidates.RULES.items()}
     for name, cand in candidates.LEARNED.items():
         scores[name] = candidates.predict(cand, models[name], x)
-    if c5_score is None:
-        raise RuntimeError("C5 scores missing: C6 cannot be formed with its fixed members")
-    if c5_score.shape != (int(evaluate.sum()),):
-        raise RuntimeError(f"{inp.patient}: {c5_score.size} C5 scores for "
-                           f"{int(evaluate.sum())} evaluation voxels")
-    scores["C5"] = np.asarray(c5_score, dtype=np.float64)
-    scores["C6"] = candidates.rank_average([scores[m] for m in candidates.ENSEMBLE_MEMBERS])
+    if include_c5:
+        if c5_score is None:
+            raise RuntimeError("C5 scores missing: C6 cannot be formed with its fixed members")
+        if c5_score.shape != (int(evaluate.sum()),):
+            raise RuntimeError(f"{inp.patient}: {c5_score.size} C5 scores for "
+                               f"{int(evaluate.sum())} evaluation voxels")
+        scores["C5"] = np.asarray(c5_score, dtype=np.float64)
+        scores["C6"] = candidates.rank_average([scores[m] for m in candidates.ENSEMBLE_MEMBERS])
+    scores[candidates.H2_NAME] = candidates.rank_average(
+        [scores[m] for m in candidates.H2_MEMBERS])
 
     escape = f1 > 20.0   # plan Step 2.3: the escape region, > 20 mm from the target
     row: dict = {"evaluable": bool(truth.any()), "n_positive": int(truth.sum()),
@@ -221,6 +226,33 @@ def score_patient(inp: PatientInputs, models: dict, c5_score: np.ndarray | None 
         row["curves"] = {name: metrics.coverage_curve(s, truth, per_ml)
                          for name, s in scores.items()}
     return row, scores, qc
+
+
+def h2_summary(per_patient: dict, cohort: str, mde: float | None, master: int,
+               n_boot: int) -> dict:
+    """H2 on one cohort (D19): E1 vs C0, delta mean PR-AUC with a BCa CI, its outcome
+    class (H1's rule, with this cohort's achieved MDE) and the pre-registered sentence.
+    Coverage at the 15 mm margin volume is reported beside it. Outside the H1 family."""
+    from gbmc import verdict
+    from gbmc.rng import stable_seed
+    from gbmc.stats import mean_with_bca
+
+    name = candidates.H2_NAME
+    rows = [r for r in per_patient.values() if r.get("evaluable")]
+    out = {"model": name, "members": list(candidates.H2_MEMBERS), "cohort": cohort,
+           "n_evaluable": len(rows), "achieved_mde": mde}
+    for key in ("pr_auc", "coverage_margin15"):
+        a = np.array([r[name][key] for r in rows], float)
+        b = np.array([r["C0"][key] for r in rows], float)
+        ci = mean_with_bca(a - b, n_boot, stable_seed("h2", cohort, key, master_seed=master))
+        out[key] = {"mean_final_model": float(np.nanmean(a)), "mean_C0": float(np.nanmean(b)),
+                    "delta_vs_C0": ci.as_dict()}
+    d = out["pr_auc"]["delta_vs_C0"]
+    outcome = verdict.classify(d["ci_low"], d["ci_high"],
+                               float("inf") if mde is None else float(mde))
+    out["outcome"] = verdict.H2_OUTCOMES[outcome]
+    out["sentence"] = verdict.h2_sentence(outcome, cohort, d["mean"], (d["ci_low"], d["ci_high"]))
+    return out
 
 
 def write_maps(out_dir: Path, patient: str, reference: sitk.Image, evaluate: np.ndarray,

@@ -3,6 +3,12 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-21: H2 and the MU-Glioma-Post pipeline, built and tested on synthetic data, before any test image:
+  - **H2 in the RHUH-GBM run.** `candidates.H2_NAME`/`H2_MEMBERS` (E1 = C0 + C2); E1 scored in `confirm.score_patient`; `confirm.h2_summary` (delta, BCa CI, outcome class, the registered H2 sentence); `verdict.h2_sentence`; `30_` reports H2a outside the H1 family.
+  - **MU module.** `gbmc.mu`: eligibility from the clinical sheet, labels, target = enhancing + cavity, and a layout that stays null until download. `gbmc.xlsx` is a stdlib .xlsx reader (no new dependency).
+  - **MU scripts.** `25_mu_eligibility`, `26_mu_transport` (the RHUH-GBM recipe), `27_mu_screens` (generated from `22_`, cohort plumbing only), `28_mu_lock`, and `32_mu_confirm` (H2b, run once). `score_patient(include_c5=False)` is used for MU.
+  - Eligibility on the real sheet: 44 of 203, as registered. Details are disclosed as deviation V7.
+  - Tests: `tests/test_mu.py` (eligibility rules, tie rule, xlsx reader, end-to-end synthetic H2) and new H2 tests in `tests/test_confirm.py`.
 - 2026-11-19: D12 (RHUH-GBM transport recipe and threshold) and D13 (RHUH-GBM pipeline) approved by the user ("Approve both") and set to Active. D12's threshold rule and value are recorded as decided (D17; 3.54 mm). D9–D11, D14 and D15 are still proposed.
 - 2026-11-19: the user approved the MU-Glioma-Post cohort rules (D18 item 4) and set the title ("Where Does Glioblastoma Come Back? Can MRI-based models beat distance?") and authors (Sophie Zhu, Jack Xu) in the pre-registration. D12 and D13 are still proposed.
 - 2026-11-19: the H2 final model is **E1**, the rank average of C0 and C2 (user: "Yes, use E1"). Recorded in D19 item 5 and in `docs/preregistration.md` section 8, with the H2 result sentences.
