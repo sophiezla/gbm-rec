@@ -1,0 +1,89 @@
+{
+  "argv": [
+    "scripts/25_mu_eligibility.py"
+  ],
+  "command": "25_mu_eligibility.py",
+  "duration_s": 0.042,
+  "environment": {
+    "in_project_venv": true,
+    "machine": "arm64",
+    "packages": [
+      "ImageIO==2.37.4",
+      "PyYAML==6.0.3",
+      "Pygments==2.21.0",
+      "colorama==0.4.6",
+      "contourpy==1.3.3",
+      "coverage==7.15.4",
+      "cycler==0.12.1",
+      "fonttools==4.63.0",
+      "gbmc==0.1.0",
+      "gbmc==0.1.0",
+      "iniconfig==2.3.0",
+      "joblib==1.5.3",
+      "kiwisolver==1.5.0",
+      "lazy-loader==0.6",
+      "lightgbm==4.7.0",
+      "matplotlib==3.11.1",
+      "narwhals==2.24.0",
+      "networkx==3.7",
+      "nibabel==5.4.2",
+      "numpy==2.5.2",
+      "packaging==26.3",
+      "pandas==3.0.5",
+      "pillow==12.3.0",
+      "pluggy==1.6.0",
+      "pyparsing==3.3.2",
+      "pytest-cov==7.1.0",
+      "pytest==9.1.1",
+      "python-dateutil==2.9.0.post0",
+      "ruff==0.16.3",
+      "scikit-image==0.26.0",
+      "scikit-learn==1.9.0",
+      "scipy==1.18.0",
+      "setuptools==84.0.0",
+      "simpleitk==2.5.6",
+      "six==1.17.0",
+      "threadpoolctl==3.6.0",
+      "tifffile==2026.9.20",
+      "tqdm==4.70.0",
+      "trimesh==5.1.0",
+      "tzdata==2026.3",
+      "wheel==0.48.0"
+    ],
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.14 (main, Aug  5 2026, 15:33:38) [Clang 22.1.3 ]",
+    "python_executable": "/Users/sophie/Projects/gbm-rec/.venv/bin/python",
+    "pythonhashseed": null
+  },
+  "git": {
+    "branch": "main",
+    "commit": "870a85e76bce6520129d1c5eb86a7c911e1e6f3a",
+    "dirty": false,
+    "dirty_files": [],
+    "remote": "https://github.com/sophiezla/gbm-rec.git"
+  },
+  "inputs": [
+    {
+      "bytes": 7358,
+      "path": "/Users/sophie/Projects/gbm-rec/config.yaml",
+      "sha256": "96b7f4ff236c80b6e35c2abc8030b941f444e56de98d52d5a0c371ad9868fc84"
+    },
+    {
+      "bytes": 101568,
+      "path": "/Users/sophie/Projects/gbm-rec/data/raw/mu_glioma_post/MU-Glioma-Post_ClinicalData-July2025.xlsx",
+      "sha256": "4341badf954511d67fc52b82b3b488ed7323f7e46d249a354ff9b3a62269c79b"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "results/mu_eligibility/eligibility.json",
+      "sha256": "d6132540bd24cdc1bb58e3bd9a0fa2c7da5d119b6e5d74e5c2603d4ee73bccf4"
+    }
+  ],
+  "schema": "gbmc/manifest/1",
+  "started_utc": "2026-11-21T17:51:31Z",
+  "values": {
+    "eligible": 44,
+    "enrolled": 203
+  }
+}

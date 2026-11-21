@@ -1,0 +1,1894 @@
+{
+  "source": "MU-Glioma-Post_ClinicalData-July2025.xlsx",
+  "source_sha256": "4341badf954511d67fc52b82b3b488ed7323f7e46d249a354ff9b3a62269c79b",
+  "labels_read": false,
+  "images_read": false,
+  "funnel": {
+    "enrolled": 203,
+    "excluded_by_step": {
+      "not glioblastoma": 45,
+      "IDH not wild-type or unknown": 10,
+      "earlier brain tumour": 5,
+      "no imaging-confirmed progression": 44,
+      "no progression date": 1,
+      "no baseline MRI at least 56 days before progression": 39,
+      "no MRI from 14 days before to 60 days after progression": 15
+    },
+    "eligible": 44
+  },
+  "eligible": [
+    "PatientID_0003",
+    "PatientID_0010",
+    "PatientID_0014",
+    "PatientID_0021",
+    "PatientID_0029",
+    "PatientID_0030",
+    "PatientID_0032",
+    "PatientID_0036",
+    "PatientID_0037",
+    "PatientID_0038",
+    "PatientID_0039",
+    "PatientID_0067",
+    "PatientID_0068",
+    "PatientID_0069",
+    "PatientID_0072",
+    "PatientID_0081",
+    "PatientID_0083",
+    "PatientID_0084",
+    "PatientID_0085",
+    "PatientID_0089",
+    "PatientID_0090",
+    "PatientID_0093",
+    "PatientID_0094",
+    "PatientID_0095",
+    "PatientID_0097",
+    "PatientID_0103",
+    "PatientID_0105",
+    "PatientID_0109",
+    "PatientID_0110",
+    "PatientID_0117",
+    "PatientID_0118",
+    "PatientID_0121",
+    "PatientID_0135",
+    "PatientID_0147",
+    "PatientID_0150",
+    "PatientID_0157",
+    "PatientID_0162",
+    "PatientID_0164",
+    "PatientID_0169",
+    "PatientID_0170",
+    "PatientID_0239",
+    "PatientID_0254",
+    "PatientID_0260",
+    "PatientID_0274"
+  ],
+  "rows": [
+    {
+      "patient": "PatientID_0003",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 5,
+      "baseline_days_before_progression": 196.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0004",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0005",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0006",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0007",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0008",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0009",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0010",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 4,
+      "baseline_days_before_progression": 91.0,
+      "recurrence_days_from_progression": 42.0
+    },
+    {
+      "patient": "PatientID_0011",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0012",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0013",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0014",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 6,
+      "baseline_days_before_progression": 358.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0015",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0018",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0019",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0020",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0021",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 2,
+      "recurrence_timepoint": 5,
+      "baseline_days_before_progression": 247.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0022",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0023",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0024",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0025",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0026",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0027",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0029",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 4,
+      "baseline_days_before_progression": 640.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0030",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 319.0,
+      "recurrence_days_from_progression": -1.0
+    },
+    {
+      "patient": "PatientID_0031",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0032",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 63.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0033",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0034",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0035",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0036",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 78.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0037",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 4,
+      "baseline_days_before_progression": 294.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0038",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 153.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0039",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 98.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0040",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0041",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0042",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0043",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0044",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0045",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0046",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0047",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0049",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0051",
+      "eligible": false,
+      "reason": "earlier brain tumour",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0052",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0053",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0054",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0055",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0056",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0057",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0058",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0059",
+      "eligible": false,
+      "reason": "earlier brain tumour",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0060",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0061",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0062",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0063",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0064",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0065",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0066",
+      "eligible": false,
+      "reason": "earlier brain tumour",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0067",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 103.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0068",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 4,
+      "baseline_days_before_progression": 146.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0069",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 2,
+      "recurrence_timepoint": 6,
+      "baseline_days_before_progression": 345.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0070",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0071",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0072",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 103.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0073",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0074",
+      "eligible": false,
+      "reason": "earlier brain tumour",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0076",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0077",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0078",
+      "eligible": false,
+      "reason": "no progression date",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0079",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0080",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0081",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 2,
+      "recurrence_timepoint": 1,
+      "baseline_days_before_progression": 989.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0082",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0083",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 5,
+      "baseline_days_before_progression": 171.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0084",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 101.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0085",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 134.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0086",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0087",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0088",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0089",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 6,
+      "baseline_days_before_progression": 454.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0090",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 91.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0091",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0092",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0093",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 64.0,
+      "recurrence_days_from_progression": -1.0
+    },
+    {
+      "patient": "PatientID_0094",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 91.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0095",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 80.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0097",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 111.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0099",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0101",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0103",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 113.0,
+      "recurrence_days_from_progression": -1.0
+    },
+    {
+      "patient": "PatientID_0105",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 192.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0106",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0108",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0109",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 77.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0110",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 80.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0111",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0112",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0113",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0114",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0115",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0116",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0117",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 111.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0118",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 90.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0120",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0121",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 91.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0123",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0124",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0125",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0126",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0130",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0132",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0133",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0135",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 118.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0136",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0138",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0139",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0140",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0141",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0142",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0143",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0144",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0145",
+      "eligible": false,
+      "reason": "earlier brain tumour",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0147",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 174.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0148",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0149",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0150",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 133.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0151",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0152",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0155",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0156",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0157",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 4,
+      "baseline_days_before_progression": 141.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0158",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0159",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0160",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0161",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0162",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 4,
+      "baseline_days_before_progression": 174.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0164",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 4,
+      "baseline_days_before_progression": 139.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0165",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0168",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0169",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 69.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0170",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 91.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0171",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0173",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0174",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0186",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0187",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0188",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0189",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0191",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0192",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0195",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0196",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0197",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0198",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0199",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0200",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0201",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0202",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0203",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0204",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0205",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0206",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0207",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0208",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0209",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0210",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0211",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0212",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0213",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0214",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0215",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0216",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0220",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0235",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0236",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0237",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0238",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0239",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 6,
+      "baseline_days_before_progression": 470.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0240",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0242",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0244",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0249",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0250",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0251",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0252",
+      "eligible": false,
+      "reason": "no baseline MRI at least 56 days before progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0254",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 113.0,
+      "recurrence_days_from_progression": -1.0
+    },
+    {
+      "patient": "PatientID_0255",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0256",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0258",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0259",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0260",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 2,
+      "baseline_days_before_progression": 84.0,
+      "recurrence_days_from_progression": 0.0
+    },
+    {
+      "patient": "PatientID_0261",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0264",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0265",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0267",
+      "eligible": false,
+      "reason": "no MRI from 14 days before to 60 days after progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0268",
+      "eligible": false,
+      "reason": "no imaging-confirmed progression",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0270",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0271",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0272",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0273",
+      "eligible": false,
+      "reason": "IDH not wild-type or unknown",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    },
+    {
+      "patient": "PatientID_0274",
+      "eligible": true,
+      "reason": null,
+      "baseline_timepoint": 1,
+      "recurrence_timepoint": 3,
+      "baseline_days_before_progression": 91.0,
+      "recurrence_days_from_progression": 54.0
+    },
+    {
+      "patient": "PatientID_0275",
+      "eligible": false,
+      "reason": "not glioblastoma",
+      "baseline_timepoint": null,
+      "recurrence_timepoint": null,
+      "baseline_days_before_progression": null,
+      "recurrence_days_from_progression": null
+    }
+  ]
+}
