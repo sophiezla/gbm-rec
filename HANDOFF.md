@@ -17,7 +17,17 @@ _Last updated: 2026-11-18_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-21): registration public
+## Latest (2026-11-21): ready for the downloads; then one unattended run
+**User, once:** install the IBM Aspera client (ibm.com/products/aspera/downloads; TCIA's package pages offer it under "Install now"). Then open each package and click **Download all**:
+- RHUH-GBM (2.9 GB), from the NIfTI link on https://www.cancerimagingarchive.net/collection/rhuh-gbm/. Save into `~/Projects/gbm-rec/data/raw/rhuh_gbm/`, so that `RHUH-GBM_nii_v1/` and `RHUH-GBM-nii-v1.sums` land there.
+- MU-Glioma-Post (11 GB), from https://www.cancerimagingarchive.net/collection/mu-glioma-post/. Save into `~/Projects/gbm-rec/data/raw/mu_glioma_post_images/`, so that `MU-Glioma-Post/` lands there.
+
+Then run (about a day of compute; it resumes if stopped):
+`GBMC_SHARE_DIR="<your Google Drive folder>/My Drive/gbm-rec-c5" .venv/bin/python scripts/run_test_cohorts.py --workers 4`.
+
+It stops after copying C5's RHUH-GBM inputs to Drive. Then push, and the partner follows `docs/PARTNER_NEXT.md`. When the maps are back on Drive, copy `gbm-rec-c5/rhuh/c5_maps/` to `data/interim/rhuh/c5_maps/`, and on the user's go run `30_`, `31_` and `32_`, each once.
+
+## Earlier (2026-11-21): registration public
 - https://osf.io/2yuqn/ has been public since 2026-11-20T16:42:57Z (checked through the OSF API: accepted, not embargoed). It contains commit `51d777b` and all four model hashes. Recorded in `config.yaml:osf`.
 - The RHUH-GBM pre-registration gate test was deleted, as its docstring said. The MU test now checks only that its metadata folder holds just the spreadsheets.
 - **Next:** download RHUH-GBM and MU-Glioma-Post, and commit each download date (after the timestamp). Then the RHUH-GBM layout and `20_`, and the MU layout and `26_`.

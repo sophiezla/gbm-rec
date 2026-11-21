@@ -90,7 +90,9 @@ def main() -> int:
         m.record(master_seed=master, challenger=challenger)
         (OUT / "sensitivity.json").write_text(json.dumps(
             {"challenger": challenger, "arms": results,
-             "not_run": {"C1_plus_ADC": "exploratory; first in the plan's cut order"}},
+             "not_run": {"C1_plus_ADC": "exploratory; first in the plan's cut order"}
+             | ({} if "no_secondary" in arms else {"no_secondary": "RHUH-GBM publishes "
+                 "no per-patient secondary-facility flag (deviation V8)"})},
             indent=2) + "\n", encoding="utf-8")
     freeze.mark_done(OUT, {"arms": sorted(results)})
     return 0

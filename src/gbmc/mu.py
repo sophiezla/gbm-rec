@@ -163,6 +163,7 @@ def files(patient: str, role: str, table: Path = ELIGIBILITY) -> dict[str, Path]
                   if r["patient"] == patient)
     k = record[ROLES[role]]
     root = Path(lay["images_local_root"])
+    root = root if root.is_absolute() else REPO_ROOT / root
     out = {}
     for ours, theirs in lay["sequence_names"].items():
         path = root / lay["image_pattern"].format(patient=patient, timepoint=k, sequence=theirs)

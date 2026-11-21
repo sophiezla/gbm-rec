@@ -61,9 +61,16 @@ def test_target_rule_both_branches():
         rhuh.treatment_target(seg, brain, cavity_label=None, preop_core_in_postop=None)
 
 
-def test_layout_refuses_before_download():
-    with pytest.raises(ValueError):
-        rhuh.layout()
+def test_layout_resolves_the_package_names():
+    """The layout read from TCIA's package listing (D20) builds the expected file names."""
+    lay = rhuh.layout()
+    tp = lay["timepoint_names"]["postop"]
+    name = lay["image_pattern"].format(patient="RHUH-0001", timepoint=tp,
+                                       sequence=lay["sequence_names"]["T1ce"])
+    assert name == "RHUH-GBM_nii_v1/RHUH-0001/1/RHUH-0001_1_t1ce.nii.gz"
+    assert lay["seg_pattern"].format(patient="RHUH-0001", timepoint=tp).endswith(
+        "RHUH-0001_1_segmentations.nii.gz")
+    assert rhuh.data_root().is_absolute()
 
 
 def test_inventory_reasons():
@@ -115,3 +122,13 @@ def test_synthetic_field_properties():
 def test_screen_verdict(rt, after, before, dissenter, expected):
     r = screens.ScreenResult("P", rt, after, before, dissenter)
     assert screens.verdict(r, 2.0, 3.0, 1.0) == expected
+
+
+def test_decide_cavity_rule():
+    unl = {"0": 900, "1": 50}
+    lab = {"0": 100, "1": 800, "2": 20}
+    mostly_unl = {"a": unl, "b": unl, "c": unl, "d": lab, "e": lab}
+    mostly_lab = {"a": lab, "b": lab, "c": lab, "d": unl, "e": unl}
+    assert rhuh.decide_cavity_rule(mostly_unl) == "unlabelled"
+    assert rhuh.decide_cavity_rule(mostly_lab) == "labelled:1"
+    assert rhuh.decide_cavity_rule({"a": {}, "b": {"0": 5}}) == "unlabelled"

@@ -3,6 +3,12 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-21: everything up to the C5 handoff now runs unattended after the downloads:
+  - `scripts/run_test_cohorts.py`: downloads check and record, RHUH-GBM constants, `20_`–`24_`, then `26_`–`28_`. Each stage is committed locally and the run stops before the one-time runs.
+  - D20 fixes the download-time constants as written rules before any image: both file layouts (from TCIA's package listings), RHUH-GBM timepoint names with an automatic check, the SRI24 midline rule, falx T1 = `T1`, and the cavity reading (`rhuh.decide_cavity_rule`). The RHUH-GBM clinical CSV was downloaded (public).
+  - V8: the secondary-facility arm can't be run (no published IDs), so `sensitivity_arms` leaves it out and `31_` reports it as not run.
+  - `rhuh.data_root()` and `mu.files` resolve repo-relative roots.
+  - `docs/PARTNER_NEXT.md`: the partner's one remaining job (`14_` on an L4).
 - 2026-11-21: the registration is public: https://osf.io/2yuqn/, registered 2026-11-20T16:42:57Z.
   - Checked through the OSF API: public, accepted, not embargoed, "OSF Preregistration" v4. The registered text contains commit `51d777b`, all four model hashes, the 3.54 mm threshold, E1, the MU 56-day rule and rho 0.7.
   - Recorded in `config.yaml:osf`.

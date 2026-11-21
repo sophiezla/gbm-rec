@@ -69,7 +69,7 @@ def main() -> int:
     import pandas as pd
 
     cols = lay["clinical_columns"]
-    table = pd.read_csv(Path(lay["local_root"]) / lay["clinical_csv"]).set_index(cols["patient"])
+    table = pd.read_csv(rhuh.data_root() / lay["clinical_csv"]).set_index(cols["patient"])
     enrolled = rhuh.patients()
     rows, evidence = [], []
     for p in enrolled:
@@ -131,7 +131,7 @@ def main() -> int:
                     "cavity_inspection": {
                         "patients": pick,
                         "label_counts_in_dark_core": cavity,
-                        "decision": "TODO: read the counts; record in DECISIONS.md",
+                        "decision": rhuh.decide_cavity_rule(cavity),   # D20 rule
                     },
                 },
                 indent=2,

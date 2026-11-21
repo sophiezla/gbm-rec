@@ -30,24 +30,27 @@ data:
     # $GBMC_LUMIERE_ROOT (raw LUMIERE) and $GBMC_DERIVED_ROOT (preprocessed baselines, labels).
   rhuh_gbm:
     license: CC BY 4.0
-    local_root: null    # must stay null until the OSF pre-registration is posted (Phase 2)
+    local_root: data/raw/rhuh_gbm   # repo-relative; registration posted 2026-11-20 (osf). D20
     # File layout: verified on download (Step 3.1), never guessed. gbmc.rhuh.layout() raises until set.
-    image_pattern: null
-    seg_pattern: null
-    clinical_csv: null
-    clinical_columns: null    # {patient, postop_hours, secondary_facility}: the dataset's column names
-    timepoint_names: null     # {preop, postop, recurrence}: the dataset's timepoint names
-    sequence_names: null      # {T1ce, FLAIR, T1, T2, ADC}: the dataset's sequence names
+    # Layout read from the TCIA package listing (RHUH-GBM-nii-v1) on 2026-11-21, before download (D20).
+    image_pattern: "RHUH-GBM_nii_v1/{patient}/{timepoint}/{patient}_{timepoint}_{sequence}.nii.gz"
+    seg_pattern: "RHUH-GBM_nii_v1/{patient}/{timepoint}/{patient}_{timepoint}_segmentations.nii.gz"
+    clinical_csv: clinical_data_TCIA_RHUH-GBM.csv   # SHA-256 32d63890..., downloaded 2026-11-21T23:11:21Z
+    clinical_columns: {patient: "Patient ID"}   # no post-op hours (all < 72 h by inclusion) and no
+                                                # secondary-facility flag in the release (V8)
+    timepoint_names: {preop: "0", postop: "1", recurrence: "2"}   # checked on download against
+                                                # the clinical pre-/post-op tumour volumes (D20)
+    sequence_names: {T1ce: t1ce, FLAIR: flair, T1: t1, T2: t2, ADC: adc}
   mu_glioma_post:   # D18/D19: SEALED external test of the H2 final model (same registration as the primary)
     license: CC BY 4.0
     doi: 10.7937/7k9k-3c83
     metadata_dir: data/raw/mu_glioma_post   # clinical + volume spreadsheets only (2026-11-16)
-    images_local_root: null   # must stay null, and no image may be downloaded, until the
-                              # registration that includes MU is posted (D18, D19)
+    images_local_root: data/raw/mu_glioma_post_images   # repo-relative; registration posted 2026-11-20
     # File layout: verified on download, never guessed. gbmc.mu.layout() raises until set.
-    image_pattern: null       # relative to images_local_root; {patient} {timepoint} {sequence}
-    seg_pattern: null         # relative to images_local_root; {patient} {timepoint}
-    sequence_names: null      # {T1ce, FLAIR, T1, T2}: the dataset's sequence names
+    # Layout read from the TCIA package listing (MU-Glioma-Post) on 2026-11-21, before download (D20).
+    image_pattern: "MU-Glioma-Post/{patient}/Timepoint_{timepoint}/{patient}_Timepoint_{timepoint}_{sequence}.nii.gz"
+    seg_pattern: "MU-Glioma-Post/{patient}/Timepoint_{timepoint}/{patient}_Timepoint_{timepoint}_tumorMask.nii.gz"
+    sequence_names: {T1ce: brain_t1c, FLAIR: brain_t2f, T1: brain_t1n, T2: brain_t2w}
 
 # Tournament rules (plan Steps 1.3-1.6). LOCKED 2026-11-07 (D6). Changing any value
 # after a score is seen is a deviation.
@@ -111,9 +114,9 @@ rhuh:
   mapping_min_agreement: 0.8      # D17 (2026-11-10): share of voting scans that must agree before a swapped mapping is corrected
   cavity_inspection_n: 5          # plan Step 2.2
   cavity_dark_t1ce_z: -1.0        # D17: fluid-dark T1ce (z over non-zero voxels); midpoint of LUMIERE ventricle fluid (~-1.9) and tissue (~+0.1)
-  cavity_rule: null               # after 20_'s inspection: "unlabelled" or "labelled:<value>" (Step 2.2)
-  sri24_midline_x_mm: null        # Step 4.1: falx adapted from MNI to SRI24; record before scoring
-  falx_t1_sequence: null          # Step 4.1: sequence for the falx white-matter test (T1 if shipped)
+  cavity_rule: null               # set by D20's written rule from 20_'s inspection (run_test_cohorts.py)
+  sri24_midline_x_mm: null        # set by D20's written rule from pre-op brain masks (run_test_cohorts.py)
+  falx_t1_sequence: T1            # D20: T1 is shipped for every timepoint (also MU's brain_t1n)
 screens:
   surface_review_mm: 3.0          # D17: gbm-wm's value carried over (chosen post hoc there; fixed here before any RHUH-GBM image)
   surface_worse_margin_mm: 1.0    # D17: gbm-wm's value carried over (set after one patient there)

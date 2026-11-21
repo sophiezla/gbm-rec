@@ -125,6 +125,17 @@ The registered text does not say which scan to use when several qualify. 38 of t
 Direction of effect:
 Unknown, and no MU image, label or score has been seen. The rules use only the clinical spreadsheet, which was read before registering (disclosed), and none of them depends on where recurrence appears. The eligible count is 44, as registered.
 
+## V8: The secondary-facility sensitivity arm cannot be run
+
+Date: 2026-11-21
+Source: registration (sensitivity analyses: "without the 11 patients scanned partly at a secondary facility"); RHUH-GBM dataset paper (Cepeda et al. 2023, section 2.3); the TCIA clinical table
+
+Departure:
+The paper reports that 11 patients were first scanned at a secondary facility, but it gives no patient IDs. The released clinical table has no such column. So this arm cannot be formed. It is reported as "not run", with this reason (`gbmc.confirm.sensitivity_arms`, `31_`), and never run on the full cohort under its name.
+
+Direction of effect:
+None on the primary or H2. One pre-registered sensitivity check is lost. If TCIA or the authors later publish the IDs, the arm can be added, labelled as run after the primary.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29

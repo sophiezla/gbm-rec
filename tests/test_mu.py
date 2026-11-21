@@ -65,9 +65,15 @@ def test_target_is_enhancing_plus_cavity():
     assert mu.target(seg, np.ones(5, bool)).tolist() == [False, False, False, True, True]
 
 
-def test_layout_stays_sealed_until_download():
-    with pytest.raises(ValueError):
-        mu.layout()
+def test_layout_resolves_the_package_names():
+    """The layout read from TCIA's package listing (D20) builds the expected file names."""
+    lay = mu.layout()
+    name = lay["image_pattern"].format(patient="PatientID_0003", timepoint=1,
+                                       sequence=lay["sequence_names"]["T1ce"])
+    assert name == ("MU-Glioma-Post/PatientID_0003/Timepoint_1/"
+                    "PatientID_0003_Timepoint_1_brain_t1c.nii.gz")
+    assert lay["seg_pattern"].format(patient="PatientID_0003", timepoint=1).endswith(
+        "PatientID_0003_Timepoint_1_tumorMask.nii.gz")
 
 
 def _xlsx(path, rows):

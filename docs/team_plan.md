@@ -1,5 +1,13 @@
 # Team plan: who does what, in which order (2026-11-19)
 
+**Update 2026-11-21:**
+1. The registration is public.
+2. The user downloads both cohorts and runs `scripts/run_test_cohorts.py`, unattended, through the C5 input packing.
+3. The partner does the one handoff: `docs/PARTNER_NEXT.md`.
+4. The user runs `30_`, `31_` and `32_` once.
+
+H2 (E1) needs no GPU. See `HANDOFF.md`.
+
 Designed for few handoffs: the Mac (user) does all data work and every reportable number (D6 item 9), and the partner works in parallel on what needs no data, plus the one GPU job. There are three handoffs. Sources: `DECISIONS.md` D6, D17–D19; `docs/preregistration.md`; `docs/future_cohorts.md`.
 
 **Recommendation that keeps it this short:** make the H2 final model a non-GPU model (feature-based logistic regression or LightGBM, new features, ensembles). Then the MU-Glioma-Post test runs on the Mac with no extra handoff. A GPU model would need the partner for training and for MU scoring.

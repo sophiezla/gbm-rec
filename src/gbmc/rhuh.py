@@ -35,6 +35,12 @@ EXPECTED_LABELS = {1: "necrosis", 2: "peritumoral", 3: "enhancing"}
 EARLY_POSTOP_MAX_HOURS = 72
 
 
+def data_root() -> Path:
+    """``local_root``, resolved against the repository when it is relative."""
+    root = Path(layout()["local_root"])
+    return root if root.is_absolute() else Path(__file__).resolve().parents[2] / root
+
+
 def layout() -> dict:
     """File-layout constants, verified on download. Raises while any is undecided."""
     return {key: config.get(f"data.rhuh_gbm.{key}")
@@ -55,7 +61,7 @@ def files(patient: str, role: str) -> dict[str, Path]:
     dataset's sequence names. Missing files are simply absent from the result.
     """
     lay = layout()
-    root = Path(lay["local_root"])
+    root = data_root()
     tp = lay["timepoint_names"][role]
     out = {}
     for ours, theirs in lay["sequence_names"].items():
@@ -73,7 +79,7 @@ def patients() -> list[str]:
     import pandas as pd
 
     lay = layout()
-    table = pd.read_csv(Path(lay["local_root"]) / lay["clinical_csv"])
+    table = pd.read_csv(data_root() / lay["clinical_csv"])
     return sorted(table[lay["clinical_columns"]["patient"]].astype(str))
 
 
@@ -178,6 +184,30 @@ def treatment_target(postop_seg: np.ndarray, brain: np.ndarray,
 def preop_core(preop_seg: np.ndarray, mapping: dict[int, str] = EXPECTED_LABELS) -> np.ndarray:
     keep = [v for v, n in mapping.items() if n in ("necrosis", "enhancing")]
     return np.isin(preop_seg, keep)
+
+
+def decide_cavity_rule(counts: dict[str, dict[str, int]]) -> str:
+    """D20's written reading of 20_'s cavity inspection (fixed before any image was seen).
+
+    ``counts`` = per inspected patient, label value -> voxels among the fluid-dark voxels of
+    the pre-op core on the early post-op scan. If label 0 holds more than half of them in a
+    majority of the inspected patients, the cavity carries no label: "unlabelled". Otherwise
+    "labelled:<v>", with v the non-zero label holding the most of those voxels in total.
+    """
+    if not counts:
+        raise ValueError("no inspected patients")
+    unlabelled = 0
+    totals: dict[int, int] = {}
+    for per in counts.values():
+        n = sum(per.values())
+        if n and per.get("0", 0) / n > 0.5:
+            unlabelled += 1
+        for v, c in per.items():
+            if int(v) != 0:
+                totals[int(v)] = totals.get(int(v), 0) + int(c)
+    if unlabelled > len(counts) / 2 or not totals:
+        return "unlabelled"
+    return f"labelled:{max(sorted(totals), key=lambda v: totals[v])}"
 
 
 def cavity_rule() -> int | None:

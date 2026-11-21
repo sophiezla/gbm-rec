@@ -448,6 +448,27 @@ Consequences:
   - the MU pipeline: `25_` eligibility, `26_` transport, `27_` screens (generated from `22_`, cohort plumbing only), `28_` lock, and `32_` the run-once H2b test.
 - D18 is updated: MU is no longer a later, separate study.
 
+## D20: Download-time constants, fixed as written rules before any test image
+
+Date: 2026-11-21
+Status: Active. Fixed after the registration was public (2026-11-20) and before any RHUH-GBM or MU-Glioma-Post image was downloaded. Lets everything up to the C5 handoff run unattended (`scripts/run_test_cohorts.py`; user: "do all the next step… optimally only once").
+
+Decision:
+1. **File layouts.** Read from TCIA's package listings on 2026-11-21 (file names only, nothing downloaded):
+   - RHUH-GBM: `RHUH-GBM_nii_v1/<patient>/<0|1|2>/<patient>_<tp>_<t1ce|flair|t1|t2|adc|segmentations>.nii.gz`.
+   - MU-Glioma-Post: `MU-Glioma-Post/<patient>/Timepoint_<k>/<patient>_Timepoint_<k>_brain_<t1c|t1n|t2f|t2w>.nii.gz` plus `_tumorMask.nii.gz`. Folder k is the clinical sheet's k-th MRI (checked on PatientID_0003: MRIs 1, 2 and 5 and folders 1, 2 and 5).
+   - Both are in `config.yaml`, with repo-relative roots `data/raw/rhuh_gbm` and `data/raw/mu_glioma_post_images`.
+2. **RHUH-GBM timepoint names** are "0" pre-op, "1" early post-op, "2" recurrence. Accepted only if, on download, the median enhancing volume (label 3) at "0" exceeds that at "1" **and** the Spearman correlation between the enhancing volume at "0" and the clinical table's pre-op enhancing volume is at least 0.8. Otherwise the pipeline stops.
+3. **SRI24 midline** (`rhuh.sri24_midline_x_mm`, plan Step 4.1): the median, over the 40 pre-op T1ce scans, of the physical x coordinate of the brain-mask centroid. It uses no label.
+4. **Falx T1 sequence** (`rhuh.falx_t1_sequence`): `T1`, shipped for every timepoint (MU: `brain_t1n`).
+5. **Cavity rule** (plan Step 2.2), read off `20_`'s inspection of 5 seeded patients by `gbmc.rhuh.decide_cavity_rule`:
+   - "unlabelled" if label 0 holds more than half of the fluid-dark pre-op-core voxels in a majority of them;
+   - otherwise "labelled:<the non-zero label holding the most of those voxels>".
+6. **RHUH-GBM clinical table**: `clinical_data_TCIA_RHUH-GBM.csv` (downloaded 2026-11-21T23:11:21Z, SHA-256 `32d63890…`). Patient column "Patient ID". It has no post-op-hours column (all scans are under 72 h by the dataset's inclusion criterion) and no secondary-facility column (V8).
+
+Reason:
+These constants depend on the files, so the plan sets them on download. Writing each as a rule now, before seeing any image, removes judgement calls from the moment the data are open, and lets one unattended run reach the C5 handoff.
+
 ## D0: Documentation structure
 
 Date: 2026-09-23

@@ -131,7 +131,11 @@ def sensitivity_arms(repo_root: Path = REPO_ROOT) -> dict[str, dict]:
     screened_out = {r["patient"] for r in
                     _json(repo_root / "results/rhuh_screens/verdict.json")["rows"]
                     if r["status"] == "EXCLUDE"}
-    secondary = {r["patient"] for r in inv["rows"] if r.get("secondary_facility")}
+    # The secondary-facility arm needs per-patient flags. RHUH-GBM publishes only a count
+    # (11), no IDs (deviation V8), so without any flag the arm is left out, never run on
+    # the full cohort under its name.
+    flagged = [r for r in inv["rows"] if r.get("secondary_facility") is not None]
+    secondary = {r["patient"] for r in flagged if r["secondary_facility"]}
     tuned, original = rhuh_dir / "label_field_tuned", rhuh_dir / "label_field_original"
     return {
         "unscreened": dict(patients=transported(tuned), label_dir=tuned, c5="tuned"),
@@ -142,8 +146,8 @@ def sensitivity_arms(repo_root: Path = REPO_ROOT) -> dict[str, dict]:
                            c5="alt_cavity"),
         "enh_necrosis": dict(patients=lock["evaluable"], label_dir=tuned,
                              positive=("enhancing", "necrosis"), c5="tuned"),
-        "no_secondary": dict(patients=[p for p in lock["evaluable"] if p not in secondary],
-                             label_dir=tuned, c5="tuned"),
+        **({"no_secondary": dict(patients=[p for p in lock["evaluable"] if p not in secondary],
+                                 label_dir=tuned, c5="tuned")} if flagged else {}),
     }
 
 
