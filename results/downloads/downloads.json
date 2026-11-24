@@ -1,0 +1,25 @@
+{
+  "recorded_utc": "2026-11-24T20:43:38Z",
+  "registration_timestamp": "2026-11-20T16:42:57Z",
+  "registration_url": "https://osf.io/2yuqn/",
+  "rhuh_gbm": {
+    "source": "TCIA faspex package RHUH-GBM-nii-v1 (CC BY 4.0)",
+    "files": 720,
+    "bytes": 3098204081,
+    "listing_sha256": "fbfcb1fe458759203d3d9429a318ffe4e95158c05a27716bb37ce0fa234db045",
+    "sums_check": {
+      "file": "RHUH-GBM-nii-v1.sums",
+      "sha256": "7c6ba3fa767bf169679db30caa854e671796416ca365fac6e57662796177c130",
+      "ok": 720,
+      "bad": [],
+      "unparsed_lines": 0
+    }
+  },
+  "mu_glioma_post": {
+    "source": "TCIA faspex package MU-Glioma-Post (CC BY 4.0)",
+    "files": 2978,
+    "bytes": 11890059719,
+    "listing_sha256": "d6dd4554f8795ae649ee8e16aa593fac3717ced60e9dedcc82bf6c86cb1ccd4e",
+    "eligible_scans_missing": []
+  }
+}
