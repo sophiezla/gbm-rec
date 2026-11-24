@@ -1,0 +1,2354 @@
+{
+  "enrolled": [
+    "RHUH-0001",
+    "RHUH-0002",
+    "RHUH-0003",
+    "RHUH-0004",
+    "RHUH-0005",
+    "RHUH-0006",
+    "RHUH-0007",
+    "RHUH-0008",
+    "RHUH-0009",
+    "RHUH-0010",
+    "RHUH-0011",
+    "RHUH-0012",
+    "RHUH-0013",
+    "RHUH-0014",
+    "RHUH-0015",
+    "RHUH-0016",
+    "RHUH-0017",
+    "RHUH-0018",
+    "RHUH-0019",
+    "RHUH-0020",
+    "RHUH-0021",
+    "RHUH-0022",
+    "RHUH-0023",
+    "RHUH-0024",
+    "RHUH-0025",
+    "RHUH-0026",
+    "RHUH-0027",
+    "RHUH-0028",
+    "RHUH-0029",
+    "RHUH-0030",
+    "RHUH-0031",
+    "RHUH-0032",
+    "RHUH-0033",
+    "RHUH-0034",
+    "RHUH-0035",
+    "RHUH-0036",
+    "RHUH-0037",
+    "RHUH-0038",
+    "RHUH-0039",
+    "RHUH-0040"
+  ],
+  "rows": [
+    {
+      "patient": "RHUH-0001",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0002",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0003",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0004",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0005",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0006",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0007",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0008",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0009",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0010",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0011",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0012",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0013",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0014",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0015",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0016",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0017",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0018",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0019",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0020",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0021",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0022",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0023",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0024",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0025",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0026",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0027",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0028",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0029",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0030",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0031",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0032",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0033",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0034",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0035",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0036",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0037",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0038",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0039",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    },
+    {
+      "patient": "RHUH-0040",
+      "has_preop": true,
+      "has_postop": true,
+      "has_recurrence": true,
+      "postop_hours": null,
+      "sequences_ok": true,
+      "secondary_facility": null,
+      "reasons": [],
+      "usable": true
+    }
+  ],
+  "mapping": {
+    "decision": {
+      "mapping": {
+        "1": "necrosis",
+        "2": "peritumoral",
+        "3": "enhancing"
+      },
+      "corrected": false,
+      "agreement": 0.7466666666666667,
+      "n_voting": 75,
+      "note": "derived mapping equals the published one"
+    },
+    "per_scan": [
+      {
+        "patient": "RHUH-0001:preop",
+        "t1ce": {
+          "1": -2.7897305488586426,
+          "2": -0.2724389433860779,
+          "3": 2.580763101577759
+        },
+        "flair": {
+          "1": 0.7569339871406555,
+          "2": 2.4046339988708496,
+          "3": 1.4931113719940186
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0001:postop",
+        "t1ce": {
+          "2": -0.45271041989326477
+        },
+        "flair": {
+          "2": 2.9039981365203857
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0001:recurrence",
+        "t1ce": {
+          "1": -0.9582598805427551,
+          "2": -0.14799003303050995,
+          "3": 4.052694797515869
+        },
+        "flair": {
+          "1": 1.0235155820846558,
+          "2": 2.6404786109924316,
+          "3": 2.183255910873413
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0002:preop",
+        "t1ce": {
+          "1": -1.5683292150497437,
+          "2": -0.7355374693870544,
+          "3": 5.557872295379639
+        },
+        "flair": {
+          "1": 1.3062105178833008,
+          "2": 3.619121789932251,
+          "3": 3.313751697540283
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0002:postop",
+        "t1ce": {
+          "2": 0.11297671496868134
+        },
+        "flair": {
+          "2": 3.55899715423584
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0002:recurrence",
+        "t1ce": {
+          "1": 0.14432832598686218,
+          "2": 0.47129514813423157,
+          "3": 2.856283187866211
+        },
+        "flair": {
+          "1": 1.9376212358474731,
+          "2": 2.7308576107025146,
+          "3": 1.4502708911895752
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0003:preop",
+        "t1ce": {
+          "1": -0.1982884407043457,
+          "2": 0.6487959027290344,
+          "3": 4.6543192863464355
+        },
+        "flair": {
+          "1": 1.2992361783981323,
+          "2": 2.5271124839782715,
+          "3": 2.996600389480591
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0003:postop",
+        "t1ce": {
+          "2": 0.4688866138458252
+        },
+        "flair": {
+          "2": 2.1268506050109863
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0003:recurrence",
+        "t1ce": {
+          "1": -0.4858170747756958,
+          "2": -0.23416639864444733,
+          "3": 2.4584567546844482
+        },
+        "flair": {
+          "1": 0.6753947138786316,
+          "2": 2.4420201778411865,
+          "3": 1.2647510766983032
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0004:preop",
+        "t1ce": {
+          "1": -2.010319709777832,
+          "2": -0.42827558517456055,
+          "3": 4.783664226531982
+        },
+        "flair": {
+          "1": 1.444238543510437,
+          "2": 3.7268993854522705,
+          "3": 2.6539206504821777
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0004:postop",
+        "t1ce": {
+          "2": -0.5634598135948181
+        },
+        "flair": {
+          "2": 4.666987895965576
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0004:recurrence",
+        "t1ce": {
+          "1": -0.3838287591934204,
+          "2": -0.726679801940918,
+          "3": 4.189504623413086
+        },
+        "flair": {
+          "1": 0.8688372373580933,
+          "2": 2.198232412338257,
+          "3": 2.0052988529205322
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0005:preop",
+        "t1ce": {
+          "1": -2.6545917987823486,
+          "2": -0.27509942650794983,
+          "3": 2.3606905937194824
+        },
+        "flair": {
+          "1": 2.8411455154418945,
+          "2": 4.526333808898926,
+          "3": 3.4693543910980225
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0005:postop",
+        "t1ce": {
+          "2": -0.06409171223640442,
+          "3": 4.764914035797119
+        },
+        "flair": {
+          "2": 3.731133460998535,
+          "3": 3.1465237140655518
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0005:recurrence",
+        "t1ce": {
+          "1": 3.021402597427368,
+          "2": 0.6591277122497559,
+          "3": 5.419040679931641
+        },
+        "flair": {
+          "1": 2.2299489974975586,
+          "2": 3.1528797149658203,
+          "3": 2.399369478225708
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0006:preop",
+        "t1ce": {
+          "1": -1.7365527153015137,
+          "2": -0.5957582592964172,
+          "3": 5.818094253540039
+        },
+        "flair": {
+          "1": 1.1150047779083252,
+          "2": 3.1026782989501953,
+          "3": 2.1428120136260986
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0006:postop",
+        "t1ce": {
+          "2": 0.09868071973323822
+        },
+        "flair": {
+          "2": 3.5596957206726074
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0006:recurrence",
+        "t1ce": {
+          "1": 3.729043960571289,
+          "2": 0.638605535030365,
+          "3": 5.705679416656494
+        },
+        "flair": {
+          "1": 0.5969524383544922,
+          "2": 2.1989846229553223,
+          "3": 0.5003779530525208
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0007:preop",
+        "t1ce": {
+          "1": -1.8786729574203491,
+          "2": -0.9132529497146606,
+          "3": 2.3749430179595947
+        },
+        "flair": {
+          "1": 2.247957706451416,
+          "2": 2.772552251815796,
+          "3": 1.9536062479019165
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0007:postop",
+        "t1ce": {
+          "2": 0.1686142086982727
+        },
+        "flair": {
+          "2": 3.4546260833740234
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0007:recurrence",
+        "t1ce": {
+          "1": 0.6624110341072083,
+          "2": -0.17605574429035187,
+          "3": 3.2656116485595703
+        },
+        "flair": {
+          "1": 2.1889188289642334,
+          "2": 3.302990674972534,
+          "3": 2.712923765182495
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0008:preop",
+        "t1ce": {
+          "1": -2.115248203277588,
+          "2": -0.8104198575019836,
+          "3": 0.8571978807449341
+        },
+        "flair": {
+          "1": 0.5231142044067383,
+          "2": 2.5391924381256104,
+          "3": 1.895378589630127
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0008:postop",
+        "t1ce": {
+          "2": -0.7830800414085388
+        },
+        "flair": {
+          "2": 2.5827972888946533
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0008:recurrence",
+        "t1ce": {
+          "1": -1.7908130884170532,
+          "2": -0.3255307376384735,
+          "3": 1.7715312242507935
+        },
+        "flair": {
+          "1": -0.9476683735847473,
+          "2": 1.9590001106262207,
+          "3": 0.3442084789276123
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0009:preop",
+        "t1ce": {
+          "1": -0.8000243306159973,
+          "2": -0.8699491620063782,
+          "3": 4.167736530303955
+        },
+        "flair": {
+          "1": 1.7257715463638306,
+          "2": 2.5788185596466064,
+          "3": 2.5519022941589355
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0009:postop",
+        "t1ce": {
+          "2": -0.2870718836784363
+        },
+        "flair": {
+          "2": 3.2352821826934814
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0009:recurrence",
+        "t1ce": {
+          "1": 1.5847959518432617,
+          "2": 0.18313072621822357,
+          "3": 3.6537485122680664
+        },
+        "flair": {
+          "1": 0.6789143681526184,
+          "2": 2.7511487007141113,
+          "3": 0.13213148713111877
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0010:preop",
+        "t1ce": {
+          "1": -1.9737565517425537,
+          "2": -1.1952178478240967,
+          "3": 3.613495111465454
+        },
+        "flair": {
+          "1": 3.024444580078125,
+          "2": 3.2181591987609863,
+          "3": 2.655634880065918
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0010:postop",
+        "t1ce": {
+          "2": -0.5197197794914246
+        },
+        "flair": {
+          "2": 3.6548638343811035
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0010:recurrence",
+        "t1ce": {
+          "1": -0.705649733543396,
+          "2": -0.3133392930030823,
+          "3": 2.9908287525177
+        },
+        "flair": {
+          "1": 0.9225592613220215,
+          "2": 2.90439510345459,
+          "3": 1.7214090824127197
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0011:preop",
+        "t1ce": {
+          "1": -0.6958385109901428,
+          "2": -0.5272996425628662,
+          "3": 5.80803108215332
+        },
+        "flair": {
+          "1": 1.9036041498184204,
+          "2": 2.8087046146392822,
+          "3": 2.7599215507507324
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0011:postop",
+        "t1ce": {
+          "2": 0.3970142900943756
+        },
+        "flair": {
+          "2": 3.6449739933013916
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0011:recurrence",
+        "t1ce": {
+          "1": 1.8147501945495605,
+          "2": 0.023876842111349106,
+          "3": 2.434499740600586
+        },
+        "flair": {
+          "1": 3.7550175189971924,
+          "2": 2.7836663722991943,
+          "3": 4.200283527374268
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0012:preop",
+        "t1ce": {
+          "1": -1.781192660331726,
+          "2": -0.8627418279647827,
+          "3": 3.934864044189453
+        },
+        "flair": {
+          "1": 2.2258799076080322,
+          "2": 3.246349811553955,
+          "3": 2.418935775756836
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0012:postop",
+        "t1ce": {
+          "2": 0.11523641645908356
+        },
+        "flair": {
+          "2": 3.9973535537719727
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0012:recurrence",
+        "t1ce": {
+          "1": 1.1448639631271362,
+          "2": -0.20191849768161774,
+          "3": 3.515742063522339
+        },
+        "flair": {
+          "1": 1.6070163249969482,
+          "2": 2.9371516704559326,
+          "3": 1.2353171110153198
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0013:preop",
+        "t1ce": {
+          "1": -1.0170300006866455,
+          "2": -0.48319700360298157,
+          "3": 4.048345565795898
+        },
+        "flair": {
+          "1": 2.4333267211914062,
+          "2": 2.7277162075042725,
+          "3": 2.152730941772461
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0013:postop",
+        "t1ce": {
+          "2": 0.03099917806684971,
+          "3": 3.967125177383423
+        },
+        "flair": {
+          "2": 3.1160473823547363,
+          "3": 3.021559953689575
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0013:recurrence",
+        "t1ce": {
+          "1": 0.45209282636642456,
+          "2": 0.4779992401599884,
+          "3": 4.6298346519470215
+        },
+        "flair": {
+          "1": -0.08939044922590256,
+          "2": 2.893796682357788,
+          "3": 0.6504499912261963
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0014:preop",
+        "t1ce": {
+          "1": -1.6220799684524536,
+          "2": -0.3666740357875824,
+          "3": 3.1720478534698486
+        },
+        "flair": {
+          "1": -0.429443359375,
+          "2": 2.155242443084717,
+          "3": 1.3346043825149536
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0014:postop",
+        "t1ce": {
+          "2": -0.1904597282409668,
+          "3": 2.2985332012176514
+        },
+        "flair": {
+          "2": 2.1708521842956543,
+          "3": 1.6110390424728394
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0014:recurrence",
+        "t1ce": {
+          "1": -1.6426984071731567,
+          "2": 0.05544919893145561,
+          "3": 3.0961523056030273
+        },
+        "flair": {
+          "1": 0.17289385199546814,
+          "2": 2.1442348957061768,
+          "3": 1.226475477218628
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0015:preop",
+        "t1ce": {
+          "1": -1.469582438468933,
+          "2": -0.6175022125244141,
+          "3": 3.101917028427124
+        },
+        "flair": {
+          "1": 1.242838740348816,
+          "2": 3.1836860179901123,
+          "3": 2.0357582569122314
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0015:postop",
+        "t1ce": {
+          "2": 0.07536157220602036
+        },
+        "flair": {
+          "2": 3.1018197536468506
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0015:recurrence",
+        "t1ce": {
+          "1": 1.7422295808792114,
+          "2": -0.12249477952718735,
+          "3": 5.0510735511779785
+        },
+        "flair": {
+          "1": 1.7083333730697632,
+          "2": 3.1629717350006104,
+          "3": 2.544813394546509
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0016:preop",
+        "t1ce": {
+          "1": -1.6547174453735352,
+          "2": -1.0391422510147095,
+          "3": 3.808945417404175
+        },
+        "flair": {
+          "1": 2.413961410522461,
+          "2": 3.9231936931610107,
+          "3": 3.1557681560516357
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0016:postop",
+        "t1ce": {
+          "2": -0.5699045658111572
+        },
+        "flair": {
+          "2": 3.688476324081421
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0016:recurrence",
+        "t1ce": {
+          "2": -0.3428988456726074,
+          "3": 7.307312965393066
+        },
+        "flair": {
+          "2": 2.888815402984619,
+          "3": 0.02738538756966591
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0017:preop",
+        "t1ce": {
+          "1": -0.9321735501289368,
+          "2": -0.4307642877101898,
+          "3": 3.6876683235168457
+        },
+        "flair": {
+          "1": 2.9997379779815674,
+          "2": 3.91444993019104,
+          "3": 2.6441256999969482
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0017:postop",
+        "t1ce": {
+          "2": 0.33450931310653687,
+          "3": 4.208853721618652
+        },
+        "flair": {
+          "2": 4.021088123321533,
+          "3": 2.552060842514038
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0017:recurrence",
+        "t1ce": {
+          "1": 0.5889083743095398,
+          "2": -0.3393693268299103,
+          "3": 4.341833114624023
+        },
+        "flair": {
+          "1": -1.480677604675293,
+          "2": 2.7340035438537598,
+          "3": 1.1489486694335938
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0018:preop",
+        "t1ce": {
+          "1": -1.381818413734436,
+          "2": -0.48204904794692993,
+          "3": 2.1941967010498047
+        },
+        "flair": {
+          "1": 2.2983269691467285,
+          "2": 2.7032811641693115,
+          "3": 2.438999652862549
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0018:postop",
+        "t1ce": {
+          "2": -0.26943427324295044,
+          "3": 3.4191770553588867
+        },
+        "flair": {
+          "2": 2.75639271736145,
+          "3": 2.875275135040283
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0018:recurrence",
+        "t1ce": {
+          "1": -1.375781536102295,
+          "2": -0.10132453590631485,
+          "3": 3.2248287200927734
+        },
+        "flair": {
+          "1": 0.4380819797515869,
+          "2": 3.0764362812042236,
+          "3": 1.7604678869247437
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0019:preop",
+        "t1ce": {
+          "1": -2.161266565322876,
+          "2": -0.9849892258644104,
+          "3": 6.175734996795654
+        },
+        "flair": {
+          "1": 1.025019645690918,
+          "2": 2.9363954067230225,
+          "3": 2.4593164920806885
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0019:postop",
+        "t1ce": {
+          "2": -0.645658552646637,
+          "3": 3.8325135707855225
+        },
+        "flair": {
+          "2": 3.739382266998291,
+          "3": 3.449751377105713
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0019:recurrence",
+        "t1ce": {
+          "1": -0.8462824821472168,
+          "2": -0.04010637104511261,
+          "3": 7.355384349822998
+        },
+        "flair": {
+          "1": -0.33731505274772644,
+          "2": 1.854273796081543,
+          "3": -0.207010418176651
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0020:preop",
+        "t1ce": {
+          "1": -0.826074481010437,
+          "2": -1.1149250268936157,
+          "3": 3.759082078933716
+        },
+        "flair": {
+          "1": 1.9516189098358154,
+          "2": 2.518705129623413,
+          "3": 2.2432172298431396
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0020:postop",
+        "t1ce": {
+          "2": -0.22906172275543213
+        },
+        "flair": {
+          "2": 3.087571382522583
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0020:recurrence",
+        "t1ce": {
+          "1": 1.4497863054275513,
+          "2": 0.5443601012229919,
+          "3": 2.3048574924468994
+        },
+        "flair": {
+          "1": 1.2540576457977295,
+          "2": 2.274136543273926,
+          "3": 1.2948240041732788
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0021:preop",
+        "t1ce": {
+          "1": -1.4863749742507935,
+          "2": -1.1711794137954712,
+          "3": 2.2871692180633545
+        },
+        "flair": {
+          "1": 2.2911667823791504,
+          "2": 2.9377195835113525,
+          "3": 2.158325672149658
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0021:postop",
+        "t1ce": {
+          "2": -0.8668507933616638
+        },
+        "flair": {
+          "2": 3.2597877979278564
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0021:recurrence",
+        "t1ce": {
+          "1": 0.08906474709510803,
+          "2": 0.38126203417778015,
+          "3": 3.4590344429016113
+        },
+        "flair": {
+          "1": 1.3477451801300049,
+          "2": 3.2882511615753174,
+          "3": 2.2970592975616455
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0022:preop",
+        "t1ce": {
+          "1": -7.21215295791626,
+          "2": -3.2824065685272217,
+          "3": -0.32319343090057373
+        },
+        "flair": {
+          "1": -7.175324440002441,
+          "2": 2.321747064590454,
+          "3": -3.2520318031311035
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0022:postop",
+        "t1ce": {
+          "2": -0.07263398170471191
+        },
+        "flair": {
+          "2": 3.238426685333252
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0022:recurrence",
+        "t1ce": {
+          "1": 4.077084541320801,
+          "2": 0.20428606867790222,
+          "3": 6.569370746612549
+        },
+        "flair": {
+          "1": 1.4094805717468262,
+          "2": 3.182983636856079,
+          "3": 0.24323150515556335
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0023:preop",
+        "t1ce": {
+          "1": -0.8856630921363831,
+          "2": -0.4770735204219818,
+          "3": 2.7016546726226807
+        },
+        "flair": {
+          "1": 0.7460719347000122,
+          "2": 1.8778449296951294,
+          "3": 1.1421104669570923
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0023:postop",
+        "t1ce": {
+          "2": -0.1200789138674736,
+          "3": 3.1586692333221436
+        },
+        "flair": {
+          "2": 2.92771053314209,
+          "3": 1.8603121042251587
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0023:recurrence",
+        "t1ce": {
+          "1": -0.18058623373508453,
+          "2": 0.1432994157075882,
+          "3": 3.3625996112823486
+        },
+        "flair": {
+          "1": 2.205320119857788,
+          "2": 3.126758098602295,
+          "3": 2.502580404281616
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0024:preop",
+        "t1ce": {
+          "1": -0.04087906703352928,
+          "2": 0.1711271107196808,
+          "3": 3.2189218997955322
+        },
+        "flair": {
+          "1": 3.5074799060821533,
+          "2": 2.668714761734009,
+          "3": 3.0529372692108154
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0024:postop",
+        "t1ce": {
+          "2": -1.2579584121704102
+        },
+        "flair": {
+          "2": 2.466552257537842
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0024:recurrence",
+        "t1ce": {
+          "1": 0.17228201031684875,
+          "2": -0.2989489436149597,
+          "3": 1.9800161123275757
+        },
+        "flair": {
+          "1": 1.7102689743041992,
+          "2": 2.6446423530578613,
+          "3": 2.2317700386047363
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0025:preop",
+        "t1ce": {
+          "1": -0.5997139811515808,
+          "2": 0.7916415929794312,
+          "3": 2.294196128845215
+        },
+        "flair": {
+          "1": 5.099447727203369,
+          "2": 2.4600117206573486,
+          "3": 3.2870218753814697
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0025:postop",
+        "t1ce": {
+          "2": 0.43031972646713257
+        },
+        "flair": {
+          "2": 2.751343250274658
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0025:recurrence",
+        "t1ce": {
+          "1": -1.6472004652023315,
+          "2": -0.1827215999364853,
+          "3": 2.96274733543396
+        },
+        "flair": {
+          "1": 1.515903115272522,
+          "2": 3.651405096054077,
+          "3": 3.5750057697296143
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0026:preop",
+        "t1ce": {
+          "1": -1.3826812505722046,
+          "2": -1.104850172996521,
+          "3": 3.757258653640747
+        },
+        "flair": {
+          "1": 1.8488082885742188,
+          "2": 2.457263708114624,
+          "3": 1.104500651359558
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0026:postop",
+        "t1ce": {
+          "2": 0.6417440176010132
+        },
+        "flair": {
+          "2": 2.9876840114593506
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0026:recurrence",
+        "t1ce": {
+          "2": 0.3782448470592499,
+          "3": 2.1169068813323975
+        },
+        "flair": {
+          "2": 2.926379442214966,
+          "3": 1.1829471588134766
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0027:preop",
+        "t1ce": {
+          "1": -0.34016793966293335,
+          "2": -0.23024597764015198,
+          "3": 5.44213342666626
+        },
+        "flair": {
+          "1": 2.3271005153656006,
+          "2": 2.025987148284912,
+          "3": 1.7989529371261597
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0027:postop",
+        "t1ce": {
+          "2": 0.38163620233535767,
+          "3": 4.795057773590088
+        },
+        "flair": {
+          "2": 2.3677597045898438,
+          "3": 1.6181687116622925
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0027:recurrence",
+        "t1ce": {
+          "1": -0.9042761325836182,
+          "2": -1.0397119522094727,
+          "3": 1.108282208442688
+        },
+        "flair": {
+          "1": 0.15908169746398926,
+          "2": 0.5207798480987549,
+          "3": 0.3383074700832367
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0028:preop",
+        "t1ce": {
+          "1": -1.51511549949646,
+          "2": -1.4411039352416992,
+          "3": 0.2817413806915283
+        },
+        "flair": {
+          "1": 1.1568673849105835,
+          "2": 0.08923061192035675,
+          "3": 0.17350469529628754
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0028:postop",
+        "t1ce": {
+          "2": 1.4532201290130615,
+          "3": 1.8419843912124634
+        },
+        "flair": {
+          "2": 2.0844414234161377,
+          "3": 1.3917909860610962
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0028:recurrence",
+        "t1ce": {
+          "1": -1.6145128011703491,
+          "2": -0.6920586228370667,
+          "3": 3.8921267986297607
+        },
+        "flair": {
+          "1": -0.9528153538703918,
+          "2": 2.0102686882019043,
+          "3": 0.4506606459617615
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0029:preop",
+        "t1ce": {
+          "1": -1.486189842224121,
+          "2": -0.38331010937690735,
+          "3": 7.307808876037598
+        },
+        "flair": {
+          "1": -0.11713511496782303,
+          "2": 2.338876485824585,
+          "3": 1.5439107418060303
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0029:postop",
+        "t1ce": {
+          "2": 0.38466164469718933,
+          "3": 5.6261749267578125
+        },
+        "flair": {
+          "2": 3.226001501083374,
+          "3": 3.0130014419555664
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0029:recurrence",
+        "t1ce": {
+          "1": -0.8952251672744751,
+          "2": -0.4891201853752136,
+          "3": 5.987685203552246
+        },
+        "flair": {
+          "1": -0.9675995707511902,
+          "2": 2.1446988582611084,
+          "3": 0.9674244523048401
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0030:preop",
+        "t1ce": {
+          "1": -0.7818120121955872,
+          "2": -0.33235466480255127,
+          "3": 4.066159248352051
+        },
+        "flair": {
+          "1": 4.1441650390625,
+          "2": 2.5559616088867188,
+          "3": 3.091938018798828
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0030:postop",
+        "t1ce": {
+          "2": -0.08496992290019989,
+          "3": 2.439009428024292
+        },
+        "flair": {
+          "2": 2.504190683364868,
+          "3": 2.4690704345703125
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0030:recurrence",
+        "t1ce": {
+          "1": -0.3078306317329407,
+          "2": -0.03725087270140648,
+          "3": 5.1527628898620605
+        },
+        "flair": {
+          "1": 0.16156969964504242,
+          "2": 2.0536160469055176,
+          "3": 1.1908619403839111
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0031:preop",
+        "t1ce": {
+          "1": 0.3989889919757843,
+          "2": 0.8399262428283691,
+          "3": 6.408029079437256
+        },
+        "flair": {
+          "1": 2.3987631797790527,
+          "2": 2.324127197265625,
+          "3": 2.0702834129333496
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0031:postop",
+        "t1ce": {
+          "2": -0.2832784950733185,
+          "3": 4.5237812995910645
+        },
+        "flair": {
+          "2": 2.6757853031158447,
+          "3": 2.37752366065979
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0031:recurrence",
+        "t1ce": {
+          "2": -0.09641455858945847,
+          "3": 11.113343238830566
+        },
+        "flair": {
+          "2": 2.0087549686431885,
+          "3": 0.08782457560300827
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0032:preop",
+        "t1ce": {
+          "1": -0.8109691143035889,
+          "2": 0.051502473652362823,
+          "3": 2.9168710708618164
+        },
+        "flair": {
+          "1": 6.09232759475708,
+          "2": 2.559346914291382,
+          "3": 2.9744462966918945
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0032:postop",
+        "t1ce": {
+          "2": 0.014513600617647171,
+          "3": 2.7734622955322266
+        },
+        "flair": {
+          "2": 2.8824875354766846,
+          "3": 3.518723964691162
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0032:recurrence",
+        "t1ce": {
+          "1": -0.7509347796440125,
+          "2": -0.08040042221546173,
+          "3": 4.177026748657227
+        },
+        "flair": {
+          "1": 2.5004491806030273,
+          "2": 3.197835922241211,
+          "3": 3.979510545730591
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0033:preop",
+        "t1ce": {
+          "1": -1.8589448928833008,
+          "2": 0.13893677294254303,
+          "3": 2.0051517486572266
+        },
+        "flair": {
+          "1": 2.452263116836548,
+          "2": 2.6599905490875244,
+          "3": 2.094693660736084
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0033:postop",
+        "t1ce": {
+          "2": 0.16686132550239563
+        },
+        "flair": {
+          "2": 2.673245668411255
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0033:recurrence",
+        "t1ce": {
+          "1": -2.0170953273773193,
+          "2": -0.4683823883533478,
+          "3": 2.0110995769500732
+        },
+        "flair": {
+          "1": -0.7059582471847534,
+          "2": 2.530442476272583,
+          "3": 1.2636390924453735
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0034:preop",
+        "t1ce": {
+          "1": -2.336965322494507,
+          "2": -0.4821614921092987,
+          "3": 2.241361379623413
+        },
+        "flair": {
+          "1": -0.957915723323822,
+          "2": 1.6649270057678223,
+          "3": 0.9248371720314026
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0034:postop",
+        "t1ce": {
+          "2": -0.08939911425113678
+        },
+        "flair": {
+          "2": 2.8406972885131836
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0034:recurrence",
+        "t1ce": {
+          "1": -0.666351854801178,
+          "2": -0.9659832119941711,
+          "3": 0.05730431154370308
+        },
+        "flair": {
+          "1": 1.5829633474349976,
+          "2": 1.5056474208831787,
+          "3": 0.9564656019210815
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0035:preop",
+        "t1ce": {
+          "1": -2.5569915771484375,
+          "2": -0.714485228061676,
+          "3": 3.8417720794677734
+        },
+        "flair": {
+          "1": 1.483941674232483,
+          "2": 3.6377952098846436,
+          "3": 2.767920732498169
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0035:postop",
+        "t1ce": {
+          "2": 0.1348886936903
+        },
+        "flair": {
+          "2": 2.9635305404663086
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0035:recurrence",
+        "t1ce": {
+          "2": 0.7186922430992126,
+          "3": 3.788573741912842
+        },
+        "flair": {
+          "2": 2.618802547454834,
+          "3": 3.2858686447143555
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0036:preop",
+        "t1ce": {
+          "1": -0.8815261125564575,
+          "2": 0.17679546773433685,
+          "3": 4.627905368804932
+        },
+        "flair": {
+          "1": 1.7000056505203247,
+          "2": 2.017540693283081,
+          "3": 1.3608918190002441
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0036:postop",
+        "t1ce": {
+          "2": 0.0498230904340744
+        },
+        "flair": {
+          "2": 3.2106969356536865
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0036:recurrence",
+        "t1ce": {
+          "1": 0.2229505479335785,
+          "2": -0.0790359228849411,
+          "3": 3.540055513381958
+        },
+        "flair": {
+          "1": 2.285482883453369,
+          "2": 2.6445882320404053,
+          "3": 2.0709972381591797
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0037:preop",
+        "t1ce": {
+          "1": -0.2055683732032776,
+          "2": -0.8036583065986633,
+          "3": 4.323836803436279
+        },
+        "flair": {
+          "1": 1.148524284362793,
+          "2": 3.850419521331787,
+          "3": 1.7665112018585205
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0037:postop",
+        "t1ce": {
+          "2": -0.598168671131134
+        },
+        "flair": {
+          "2": 3.026090383529663
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0037:recurrence",
+        "t1ce": {
+          "1": -2.445735454559326,
+          "2": -0.8458915948867798,
+          "3": 3.780858039855957
+        },
+        "flair": {
+          "1": -0.4423990249633789,
+          "2": 2.940488576889038,
+          "3": 2.121739149093628
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0038:preop",
+        "t1ce": {
+          "1": -1.3293235301971436,
+          "2": -0.5625696182250977,
+          "3": 5.2922515869140625
+        },
+        "flair": {
+          "1": 1.9395173788070679,
+          "2": 3.019256830215454,
+          "3": 2.1897833347320557
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0038:postop",
+        "t1ce": {
+          "2": -0.22071419656276703
+        },
+        "flair": {
+          "2": 3.1703996658325195
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0038:recurrence",
+        "t1ce": {
+          "2": 0.04275865852832794,
+          "3": 5.097897529602051
+        },
+        "flair": {
+          "2": 2.315154552459717,
+          "3": 1.5515605211257935
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0039:preop",
+        "t1ce": {
+          "1": -1.6962891817092896,
+          "2": -0.4062010943889618,
+          "3": 3.6057655811309814
+        },
+        "flair": {
+          "1": 0.08619112521409988,
+          "2": 2.4449462890625,
+          "3": 0.981894850730896
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0039:postop",
+        "t1ce": {
+          "2": -0.1139422282576561
+        },
+        "flair": {
+          "2": 3.6471168994903564
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0039:recurrence",
+        "t1ce": {
+          "1": -0.7168846130371094,
+          "2": -0.718701958656311,
+          "3": 4.145594120025635
+        },
+        "flair": {
+          "1": 1.5150593519210815,
+          "2": 2.295971632003784,
+          "3": 1.5572561025619507
+        },
+        "derived": {
+          "3": "enhancing",
+          "2": "necrosis",
+          "1": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0040:preop",
+        "t1ce": {
+          "1": -0.9821811318397522,
+          "2": -0.4853442907333374,
+          "3": 2.8372385501861572
+        },
+        "flair": {
+          "1": 2.3809962272644043,
+          "2": 3.605782985687256,
+          "3": 2.6433098316192627
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      },
+      {
+        "patient": "RHUH-0040:postop",
+        "t1ce": {
+          "2": -0.0973428264260292
+        },
+        "flair": {
+          "2": 4.9639482498168945
+        },
+        "derived": {}
+      },
+      {
+        "patient": "RHUH-0040:recurrence",
+        "t1ce": {
+          "1": -1.5592609643936157,
+          "2": -0.8306600451469421,
+          "3": 5.622344970703125
+        },
+        "flair": {
+          "1": 4.736137390136719,
+          "2": 4.430004596710205,
+          "3": 2.5606160163879395
+        },
+        "derived": {
+          "3": "enhancing",
+          "1": "necrosis",
+          "2": "peritumoral"
+        }
+      }
+    ]
+  },
+  "cavity_inspection": {
+    "patients": [
+      "RHUH-0006",
+      "RHUH-0011",
+      "RHUH-0012",
+      "RHUH-0019",
+      "RHUH-0031"
+    ],
+    "label_counts_in_dark_core": {
+      "RHUH-0006": {},
+      "RHUH-0011": {},
+      "RHUH-0012": {},
+      "RHUH-0019": {},
+      "RHUH-0031": {}
+    },
+    "decision": "unlabelled"
+  }
+}
