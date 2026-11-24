@@ -154,6 +154,24 @@ Direction of effect:
 - The run-once markers live in one folder, so only the partner's computer may run `30_`, `31_` and `32_`, and it pushes each marker and result straight after.
 - The registration does not name a computer.
 
+## V10: One RHUH-GBM segmentation file renamed to the recorded pattern
+
+Date: 2026-11-24
+Source: `DECISIONS.md` D20 item 1 (the file layout, read from TCIA's package listing); plan Step 3.2 (inventory) and Step 3.5 (exclusions); decision by both team members on 2026-11-24, before the inventory ran
+
+Departure:
+- TCIA's package ships 719 files that follow D20's pattern and one that does not: `RHUH-GBM_nii_v1/RHUH-0035/2/segmentation.nii.gz` instead of `RHUH-0035_2_segmentations.nii.gz`. Its MD5 (`8b67d0a81c0753f00ccec8cffcc398c8`) matches TCIA's checksum file, so the content is the published segmentation.
+- With the shipped name, `gbmc.rhuh.files` does not find it, and the inventory would exclude RHUH-0035 as "recurrence: missing seg".
+- The download record (`results/downloads/downloads.json`, 2026-11-24T20:43:38Z) was made first, on the files exactly as shipped: 720 files, 720 checksums OK. Then the one file was renamed to the pattern. Its content is unchanged (MD5 checked after the rename). No code or config changed.
+
+Why:
+A file-name inconsistency in the release is not a missing segmentation. Excluding a patient for it would drop data for a reason the plan's exclusion rules do not intend.
+
+Direction of effect:
+- None on any rule, threshold or model. Decided before any RHUH-GBM image, label or score was looked at, so it cannot favour a candidate.
+- RHUH-0035 is now assessed by the inventory, transport and screens like every other patient, and may still be excluded by them.
+- Reproducing from a fresh TCIA download needs the same rename after the download record.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29
