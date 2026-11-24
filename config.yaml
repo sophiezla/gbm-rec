@@ -114,7 +114,7 @@ rhuh:
   mapping_min_agreement: 0.8      # D17 (2026-11-10): share of voting scans that must agree before a swapped mapping is corrected
   cavity_inspection_n: 5          # plan Step 2.2
   cavity_dark_t1ce_z: -1.0        # D17: fluid-dark T1ce (z over non-zero voxels); midpoint of LUMIERE ventricle fluid (~-1.9) and tissue (~+0.1)
-  cavity_rule: null               # set by D20's written rule from 20_'s inspection (run_test_cohorts.py)
+  cavity_rule: "unlabelled"   # D20 reading of 20_'s cavity inspection
   sri24_midline_x_mm: 119.5   # D20 rule: median pre-op brain-mask centroid x (results/rhuh_constants/)
   falx_t1_sequence: T1            # D20: T1 is shipped for every timepoint (also MU's brain_t1n)
 screens:
