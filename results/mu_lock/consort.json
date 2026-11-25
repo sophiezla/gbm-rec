@@ -1,0 +1,146 @@
+{
+  "enrolled": 44,
+  "rows": [
+    {
+      "stage": "enrolled",
+      "n": 44
+    },
+    {
+      "excluded_for": "missing sequence or segmentation",
+      "n_excluded": 0,
+      "patients": [],
+      "remaining": 44
+    },
+    {
+      "excluded_for": "failed transport",
+      "n_excluded": 0,
+      "patients": [],
+      "remaining": 44
+    },
+    {
+      "excluded_for": "screen failure",
+      "n_excluded": 11,
+      "patients": [
+        {
+          "patient": "PatientID_0014",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0068",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0094",
+          "reason": "roundtrip>3.54428932435213mm, surface worse than identity, our transform dissents"
+        },
+        {
+          "patient": "PatientID_0097",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0105",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0109",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0117",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0121",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0147",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0162",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "PatientID_0239",
+          "reason": "roundtrip>3.54428932435213mm"
+        }
+      ],
+      "remaining": 33
+    },
+    {
+      "excluded_for": "empty target",
+      "n_excluded": 1,
+      "patients": [
+        {
+          "patient": "PatientID_0260",
+          "reason": ""
+        }
+      ],
+      "remaining": 32
+    },
+    {
+      "excluded_for": "no enhancing recurrence outside the target",
+      "n_excluded": 1,
+      "patients": [
+        {
+          "patient": "PatientID_0029",
+          "reason": "undefined, not zero"
+        }
+      ],
+      "remaining": 31
+    }
+  ],
+  "evaluable": [
+    "PatientID_0003",
+    "PatientID_0010",
+    "PatientID_0021",
+    "PatientID_0030",
+    "PatientID_0032",
+    "PatientID_0036",
+    "PatientID_0037",
+    "PatientID_0038",
+    "PatientID_0039",
+    "PatientID_0067",
+    "PatientID_0069",
+    "PatientID_0072",
+    "PatientID_0081",
+    "PatientID_0083",
+    "PatientID_0084",
+    "PatientID_0085",
+    "PatientID_0089",
+    "PatientID_0090",
+    "PatientID_0093",
+    "PatientID_0095",
+    "PatientID_0103",
+    "PatientID_0110",
+    "PatientID_0118",
+    "PatientID_0135",
+    "PatientID_0150",
+    "PatientID_0157",
+    "PatientID_0164",
+    "PatientID_0169",
+    "PatientID_0170",
+    "PatientID_0254",
+    "PatientID_0274"
+  ],
+  "n_evaluable": 31,
+  "clinical_exclusions": {
+    "enrolled": 203,
+    "excluded_by_step": {
+      "not glioblastoma": 45,
+      "IDH not wild-type or unknown": 10,
+      "earlier brain tumour": 5,
+      "no imaging-confirmed progression": 44,
+      "no progression date": 1,
+      "no baseline MRI at least 56 days before progression": 39,
+      "no MRI from 14 days before to 60 days after progression": 15
+    },
+    "eligible": 44
+  },
+  "achieved_mde": {
+    "0.5": 0.05,
+    "0.7": 0.04,
+    "0.9": 0.03
+  }
+}
