@@ -115,7 +115,7 @@ rhuh:
   cavity_inspection_n: 5          # plan Step 2.2
   cavity_dark_t1ce_z: -1.0        # D17: fluid-dark T1ce (z over non-zero voxels); midpoint of LUMIERE ventricle fluid (~-1.9) and tissue (~+0.1)
   cavity_rule: null               # set by D20's written rule from 20_'s inspection (run_test_cohorts.py)
-  sri24_midline_x_mm: null        # set by D20's written rule from pre-op brain masks (run_test_cohorts.py)
+  sri24_midline_x_mm: 118.58   # D20 rule: median pre-op brain-mask centroid x (results/rhuh_constants/)
   falx_t1_sequence: T1            # D20: T1 is shipped for every timepoint (also MU's brain_t1n)
 screens:
   surface_review_mm: 3.0          # D17: gbm-wm's value carried over (chosen post hoc there; fixed here before any RHUH-GBM image)
