@@ -1,0 +1,543 @@
+{
+  "gate": "SCREENED-NOT-LICENSED",
+  "rows": [
+    {
+      "patient": "PatientID_0003",
+      "roundtrip_median_mm": 1.9741431666433131,
+      "surface_after_mm": 1.1346798227599106,
+      "surface_before_mm": 1.5984303985229773,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.190227384835269,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0010",
+      "roundtrip_median_mm": 2.787116770277353,
+      "surface_after_mm": 0.5921763397285841,
+      "surface_before_mm": 1.3559349684663329,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.1318606772341449,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0014",
+      "roundtrip_median_mm": 4.6169620355327305,
+      "surface_after_mm": 2.279029822904598,
+      "surface_before_mm": 2.398265641531708,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.546804012947149,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0021",
+      "roundtrip_median_mm": 3.1408664868979983,
+      "surface_after_mm": 0.8194434154583662,
+      "surface_before_mm": 1.6491262975076193,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.3962300529373768,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0029",
+      "roundtrip_median_mm": 0.922134994833075,
+      "surface_after_mm": 1.0084785092307023,
+      "surface_before_mm": 0.6119244028763552,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.3290476272068061,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0030",
+      "roundtrip_median_mm": 1.0029618591349503,
+      "surface_after_mm": 0.7350069369041153,
+      "surface_before_mm": 1.0408074295924141,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8054336713252135,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0032",
+      "roundtrip_median_mm": 2.2980187308203472,
+      "surface_after_mm": 0.48509364993848014,
+      "surface_before_mm": 0.9415891483107863,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.737461813109992,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0036",
+      "roundtrip_median_mm": 1.0765107412613144,
+      "surface_after_mm": 0.881807528476428,
+      "surface_before_mm": 3.2209984519950927,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 2.17040273580084,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0037",
+      "roundtrip_median_mm": 0.7400307879876231,
+      "surface_after_mm": 0.48702103484707504,
+      "surface_before_mm": 0.6542252812776451,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8132745286472263,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0038",
+      "roundtrip_median_mm": 1.9383744899716762,
+      "surface_after_mm": 1.0672935879572356,
+      "surface_before_mm": 1.8892027212339921,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.102948992266747,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0039",
+      "roundtrip_median_mm": 2.979404953987025,
+      "surface_after_mm": 0.6399105457466528,
+      "surface_before_mm": 2.389838964888936,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.899594114239982,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0067",
+      "roundtrip_median_mm": 2.580883769088236,
+      "surface_after_mm": 0.8677512318989372,
+      "surface_before_mm": 1.2590524329706267,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.9734678786238584,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0068",
+      "roundtrip_median_mm": 4.308189630913848,
+      "surface_after_mm": 0.9484658972111522,
+      "surface_before_mm": 1.0842958835571874,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.3016404156183499,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0069",
+      "roundtrip_median_mm": 2.6008502485299307,
+      "surface_after_mm": 0.27871694812076375,
+      "surface_before_mm": 0.682956605387763,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.6550157418605078,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0072",
+      "roundtrip_median_mm": 1.1684136603249646,
+      "surface_after_mm": 0.412143107437344,
+      "surface_before_mm": 0.666376640116731,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.4385955123133296,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0081",
+      "roundtrip_median_mm": 2.40089792776565,
+      "surface_after_mm": 0.4894160480071831,
+      "surface_before_mm": 0.7716014274571927,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.5070968868697221,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0083",
+      "roundtrip_median_mm": 3.380486507298977,
+      "surface_after_mm": 1.08155251727326,
+      "surface_before_mm": 4.188614357843975,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.2934776757131734,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0084",
+      "roundtrip_median_mm": 1.6659193575505908,
+      "surface_after_mm": 2.430425332826504,
+      "surface_before_mm": 1.1504597965116716,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.7836970836025112,
+      "flags": [
+        "surface worse than identity"
+      ],
+      "status": "REVIEW"
+    },
+    {
+      "patient": "PatientID_0085",
+      "roundtrip_median_mm": 1.796083468815526,
+      "surface_after_mm": 2.2333335095024758,
+      "surface_before_mm": 2.9470948238024,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.2604205557352155,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0089",
+      "roundtrip_median_mm": 2.05010715047685,
+      "surface_after_mm": 1.1798489750415222,
+      "surface_before_mm": 3.4984674938286546,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 4.410768211719816,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0090",
+      "roundtrip_median_mm": 1.8706144952653785,
+      "surface_after_mm": 0.6386553132430046,
+      "surface_before_mm": 1.0891564972550338,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8659517735628547,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0093",
+      "roundtrip_median_mm": 0.5774325202995556,
+      "surface_after_mm": 0.3884905931383456,
+      "surface_before_mm": 0.3892179857714578,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.35682225186100847,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0094",
+      "roundtrip_median_mm": 5.207638940172229,
+      "surface_after_mm": 1.8928561124657008,
+      "surface_before_mm": 0.5572754041100696,
+      "dissenter": "T1c",
+      "our_deviation_mm": 1.7556362578553961,
+      "flags": [
+        "roundtrip>3.54428932435213mm",
+        "surface worse than identity",
+        "our transform dissents"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0095",
+      "roundtrip_median_mm": 2.2542085262519174,
+      "surface_after_mm": 1.4843433472398324,
+      "surface_before_mm": 1.565885101902524,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.700336306930239,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0097",
+      "roundtrip_median_mm": 4.200016138887816,
+      "surface_after_mm": 0.9665773545238219,
+      "surface_before_mm": 1.5580047194071192,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.358303874307389,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0103",
+      "roundtrip_median_mm": 2.604564323996194,
+      "surface_after_mm": 0.5315278824891045,
+      "surface_before_mm": 1.432523195037231,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.47682525611462134,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0105",
+      "roundtrip_median_mm": 6.1229329473976275,
+      "surface_after_mm": 0.3493423539827527,
+      "surface_before_mm": 0.5571301730014532,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.3247896577082995,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0109",
+      "roundtrip_median_mm": 5.259033656436625,
+      "surface_after_mm": 1.4859383852565038,
+      "surface_before_mm": 2.3000403068116553,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 3.182274941287937,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0110",
+      "roundtrip_median_mm": 2.550922614151946,
+      "surface_after_mm": 2.277483968151512,
+      "surface_before_mm": 3.572411596278044,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 2.2631628534819477,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0117",
+      "roundtrip_median_mm": 4.185659102127401,
+      "surface_after_mm": 0.9357425730383612,
+      "surface_before_mm": 3.3702863623140917,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.3709042790130406,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0118",
+      "roundtrip_median_mm": 2.489498820628169,
+      "surface_after_mm": 0.5678588989062082,
+      "surface_before_mm": 1.3427504938509256,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.6487055846917841,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0121",
+      "roundtrip_median_mm": 7.2385028500594455,
+      "surface_after_mm": 0.31134844114221527,
+      "surface_before_mm": 0.6117999492522768,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.4115911073242463,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0135",
+      "roundtrip_median_mm": 3.1420712403181104,
+      "surface_after_mm": 1.1141039893993372,
+      "surface_before_mm": 2.461674182877587,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.9659492909656343,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0147",
+      "roundtrip_median_mm": 4.069855732995216,
+      "surface_after_mm": 1.171032819272008,
+      "surface_before_mm": 1.9821344269927268,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.0011816298733047,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0150",
+      "roundtrip_median_mm": 1.342611422946986,
+      "surface_after_mm": 0.2627320427876055,
+      "surface_before_mm": 0.6913576041216442,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.364345573772138,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0157",
+      "roundtrip_median_mm": 2.144107563320517,
+      "surface_after_mm": 1.5526640029564138,
+      "surface_before_mm": 1.8676024201282255,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.8027898611292397,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0162",
+      "roundtrip_median_mm": 3.689433476421406,
+      "surface_after_mm": 0.45854130990065356,
+      "surface_before_mm": 0.6285168148159426,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.5901366696856157,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0164",
+      "roundtrip_median_mm": 1.869871032796658,
+      "surface_after_mm": 0.7525760881518386,
+      "surface_before_mm": 2.153511302191408,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.013652593349779,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0169",
+      "roundtrip_median_mm": 1.9286472921526134,
+      "surface_after_mm": 0.6776498358298879,
+      "surface_before_mm": 1.0088620109143531,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.5351474954998214,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0170",
+      "roundtrip_median_mm": 1.3121923569838851,
+      "surface_after_mm": 0.4204072776160682,
+      "surface_before_mm": 0.6111969833067202,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.6146452734230151,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0239",
+      "roundtrip_median_mm": 6.658374509382596,
+      "surface_after_mm": 1.7637710456388613,
+      "surface_before_mm": 1.196415343287106,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8642420710594994,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "PatientID_0254",
+      "roundtrip_median_mm": 2.755681953433002,
+      "surface_after_mm": 1.0248846697692466,
+      "surface_before_mm": 1.6050825963600213,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.469966457745786,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0260",
+      "roundtrip_median_mm": 0.7938869434285349,
+      "surface_after_mm": 2.1161248544109696,
+      "surface_before_mm": 4.06743261980947,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.6245395145063014,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "PatientID_0274",
+      "roundtrip_median_mm": 1.4832733121922634,
+      "surface_after_mm": 0.5679618485602923,
+      "surface_before_mm": 0.8743683886855992,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.6118926067461989,
+      "flags": [],
+      "status": "SCREENED"
+    }
+  ],
+  "simulate": [
+    {
+      "patient": "PatientID_0068",
+      "true_median_mm": 2.3186628807004293,
+      "error_median_mm": 1.5160092998180084,
+      "error_p95_mm": 3.107135713158286,
+      "recovered_fraction": 0.34617088476439173
+    },
+    {
+      "patient": "PatientID_0003",
+      "true_median_mm": 2.3150224087195856,
+      "error_median_mm": 1.7006671284662718,
+      "error_p95_mm": 3.5787633192670194,
+      "recovered_fraction": 0.2653776818484912
+    },
+    {
+      "patient": "PatientID_0150",
+      "true_median_mm": 2.3457731552469805,
+      "error_median_mm": 1.5411014534331366,
+      "error_p95_mm": 3.043986217341602,
+      "recovered_fraction": 0.34303048443280615
+    },
+    {
+      "patient": "PatientID_0039",
+      "true_median_mm": 2.313653348342031,
+      "error_median_mm": 1.6183511181375871,
+      "error_p95_mm": 3.304876505497921,
+      "recovered_fraction": 0.30052135109293665
+    },
+    {
+      "patient": "PatientID_0170",
+      "true_median_mm": 2.3185851302488047,
+      "error_median_mm": 1.5750895665377178,
+      "error_p95_mm": 3.245208971393208,
+      "recovered_fraction": 0.3206677874412588
+    },
+    {
+      "patient": "PatientID_0036",
+      "true_median_mm": 2.313522031776101,
+      "error_median_mm": 1.5628782482346983,
+      "error_p95_mm": 3.2357617325750905,
+      "recovered_fraction": 0.3244593192679174
+    },
+    {
+      "patient": "PatientID_0094",
+      "true_median_mm": 2.3326652501072673,
+      "error_median_mm": 1.662768782225798,
+      "error_p95_mm": 3.707009510841892,
+      "recovered_fraction": 0.2871807122134924
+    },
+    {
+      "patient": "PatientID_0169",
+      "true_median_mm": 2.2905444128716184,
+      "error_median_mm": 1.4814896233570805,
+      "error_p95_mm": 3.112566420502698,
+      "recovered_fraction": 0.35321506318239826
+    },
+    {
+      "patient": "PatientID_0083",
+      "true_median_mm": 2.313431329501215,
+      "error_median_mm": 1.6144284351361913,
+      "error_p95_mm": 3.383672303900642,
+      "recovered_fraction": 0.3021498349448444
+    },
+    {
+      "patient": "PatientID_0084",
+      "true_median_mm": 2.3280450685390264,
+      "error_median_mm": 1.7125526161037152,
+      "error_p95_mm": 3.68250494974614,
+      "recovered_fraction": 0.26438167402900226
+    }
+  ]
+}
