@@ -1,0 +1,506 @@
+{
+  "gate": "SCREENED-NOT-LICENSED",
+  "rows": [
+    {
+      "patient": "RHUH-0001",
+      "roundtrip_median_mm": 6.378816006800934,
+      "surface_after_mm": 0.9858219634953095,
+      "surface_before_mm": 4.331012695038812,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.0569710904359986,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0002",
+      "roundtrip_median_mm": 4.164215023270224,
+      "surface_after_mm": 0.8794201231286354,
+      "surface_before_mm": 7.158839419994445,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.9989490436681421,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0003",
+      "roundtrip_median_mm": 2.294678657265005,
+      "surface_after_mm": 1.8661241515513753,
+      "surface_before_mm": 1.6081015957526337,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 2.0825842516170083,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0004",
+      "roundtrip_median_mm": 4.313444814821773,
+      "surface_after_mm": 0.9988686169573069,
+      "surface_before_mm": 4.8544576659786856,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.0257144218015124,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0005",
+      "roundtrip_median_mm": 4.284116409914755,
+      "surface_after_mm": 1.1144905738791975,
+      "surface_before_mm": 2.1427789430746205,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 2.549245798190765,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0006",
+      "roundtrip_median_mm": 1.9534337452203336,
+      "surface_after_mm": 1.0704646159327598,
+      "surface_before_mm": 1.0228693302527065,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.2711691658240234,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0007",
+      "roundtrip_median_mm": 2.673968290682699,
+      "surface_after_mm": 0.890765232557542,
+      "surface_before_mm": 4.644113120680814,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.1657050040770152,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0008",
+      "roundtrip_median_mm": 2.0808909054235074,
+      "surface_after_mm": 1.4916928097947515,
+      "surface_before_mm": 102.55437904388499,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 2.5402070419033844,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0009",
+      "roundtrip_median_mm": 4.019921767322808,
+      "surface_after_mm": 0.9588306826872931,
+      "surface_before_mm": 3.227505409389371,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.2999723435643442,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0010",
+      "roundtrip_median_mm": 4.940378531311694,
+      "surface_after_mm": 0.9044564865657437,
+      "surface_before_mm": 3.085720781765968,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.1645111693769166,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0011",
+      "roundtrip_median_mm": 2.2649247244109327,
+      "surface_after_mm": 2.028081459776436,
+      "surface_before_mm": 4.135846272313801,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 3.4942823456242618,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0012",
+      "roundtrip_median_mm": 2.491418910082701,
+      "surface_after_mm": 0.9283114362628071,
+      "surface_before_mm": 2.9377193768450316,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.9946246481081149,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0013",
+      "roundtrip_median_mm": 3.7631510250000084,
+      "surface_after_mm": 1.1349203642657322,
+      "surface_before_mm": 1.49399826575333,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.08923512162703,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0014",
+      "roundtrip_median_mm": 3.4566817651699386,
+      "surface_after_mm": 1.0222632153818452,
+      "surface_before_mm": 3.104954580418166,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.848500451816178,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0015",
+      "roundtrip_median_mm": 2.3067357567627376,
+      "surface_after_mm": 1.23632185586168,
+      "surface_before_mm": 1.7990691658264863,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.2227027560131745,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0016",
+      "roundtrip_median_mm": 7.083289209905014,
+      "surface_after_mm": 1.1726545442341716,
+      "surface_before_mm": 1.9046001517698867,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.3407385389401285,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0017",
+      "roundtrip_median_mm": 2.1714722885967017,
+      "surface_after_mm": 0.8681050834412228,
+      "surface_before_mm": 4.508312184528554,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.2959534036280271,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0018",
+      "roundtrip_median_mm": 2.966482608007248,
+      "surface_after_mm": 1.1453078143608653,
+      "surface_before_mm": 2.6026422141482652,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 3.2549968304050823,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0019",
+      "roundtrip_median_mm": 2.501538280024524,
+      "surface_after_mm": 1.5390231119254845,
+      "surface_before_mm": 3.2240325050090792,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.4421449365306682,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0020",
+      "roundtrip_median_mm": 3.2554794438468577,
+      "surface_after_mm": 0.6980323021819532,
+      "surface_before_mm": 3.3434820909078464,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8888645909998573,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0021",
+      "roundtrip_median_mm": 2.4940866346005164,
+      "surface_after_mm": 0.7530105697320698,
+      "surface_before_mm": 1.5166032712532067,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.1384529759392397,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0022",
+      "roundtrip_median_mm": 4.956377868709917,
+      "surface_after_mm": 0.9201153876810755,
+      "surface_before_mm": 2.7475961166916782,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.5380650518553525,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0023",
+      "roundtrip_median_mm": 2.192774622496983,
+      "surface_after_mm": 1.2176869504475003,
+      "surface_before_mm": 2.092184508871501,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.6922726404332916,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0024",
+      "roundtrip_median_mm": 6.032953928495903,
+      "surface_after_mm": 1.7233464853047915,
+      "surface_before_mm": 5.0715183343906105,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.7573282064958733,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0025",
+      "roundtrip_median_mm": 2.310296851810299,
+      "surface_after_mm": 1.2824753041862182,
+      "surface_before_mm": 1.5604457988214078,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.5043180280912052,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0026",
+      "roundtrip_median_mm": 3.545889875640362,
+      "surface_after_mm": 3.7520646435448177,
+      "surface_before_mm": 2.7847320544960916,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 3.308702252423407,
+      "flags": [
+        "roundtrip>3.54428932435213mm",
+        "surface 3.8mm>review"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0027",
+      "roundtrip_median_mm": 4.668162748712583,
+      "surface_after_mm": 1.2801929144118986,
+      "surface_before_mm": 2.2488410797918315,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.3856613918846366,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0028",
+      "roundtrip_median_mm": 5.00442777673022,
+      "surface_after_mm": 1.268231368205887,
+      "surface_before_mm": 2.9442734224353297,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.9809517444493585,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0029",
+      "roundtrip_median_mm": 1.9960864714693303,
+      "surface_after_mm": 1.9796071684755903,
+      "surface_before_mm": 3.201368122527697,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.5048691743076636,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0030",
+      "roundtrip_median_mm": 2.203926365828403,
+      "surface_after_mm": 1.102712765050247,
+      "surface_before_mm": 5.032839152325108,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.230261423918443,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0031",
+      "roundtrip_median_mm": 2.6792307626788285,
+      "surface_after_mm": 0.9074511264961406,
+      "surface_before_mm": 3.316034793669731,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8400137077685625,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0032",
+      "roundtrip_median_mm": 2.568168228070429,
+      "surface_after_mm": 0.8881698574669384,
+      "surface_before_mm": 3.116853581203058,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.7837126432760846,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0033",
+      "roundtrip_median_mm": 2.567438753900111,
+      "surface_after_mm": 1.1866536162267085,
+      "surface_before_mm": 1.7411997567747781,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.7803968703247518,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0034",
+      "roundtrip_median_mm": 2.747435581429138,
+      "surface_after_mm": 0.88281300315062,
+      "surface_before_mm": 2.8222705397092454,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.6809419407875822,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0035",
+      "roundtrip_median_mm": 2.8837251606993126,
+      "surface_after_mm": 1.0805496486267192,
+      "surface_before_mm": 2.2598026549653722,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.622754666905021,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0036",
+      "roundtrip_median_mm": 3.406371378921534,
+      "surface_after_mm": 0.8681379680962605,
+      "surface_before_mm": 3.68811450485558,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8778085222441615,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0037",
+      "roundtrip_median_mm": 4.435653641295089,
+      "surface_after_mm": 0.7213598867189388,
+      "surface_before_mm": 2.185569453055336,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.074317513494907,
+      "flags": [
+        "roundtrip>3.54428932435213mm"
+      ],
+      "status": "EXCLUDE"
+    },
+    {
+      "patient": "RHUH-0038",
+      "roundtrip_median_mm": 2.8855804850781155,
+      "surface_after_mm": 1.4075370112922145,
+      "surface_before_mm": 3.041076632866705,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 1.0790124987945124,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0039",
+      "roundtrip_median_mm": 1.6122714265592724,
+      "surface_after_mm": 0.795101238049154,
+      "surface_before_mm": 1.3032325023995244,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.9209246707254564,
+      "flags": [],
+      "status": "SCREENED"
+    },
+    {
+      "patient": "RHUH-0040",
+      "roundtrip_median_mm": 1.16460418504145,
+      "surface_after_mm": 0.7811366638001811,
+      "surface_before_mm": 1.74348145632642,
+      "dissenter": "shipped_rigid",
+      "our_deviation_mm": 0.8235942869151518,
+      "flags": [],
+      "status": "SCREENED"
+    }
+  ],
+  "simulate": [
+    {
+      "patient": "RHUH-0023",
+      "true_median_mm": 2.3201116911524857,
+      "error_median_mm": 1.5347585206829413,
+      "error_p95_mm": 3.1192158369857452,
+      "recovered_fraction": 0.33849800139554076
+    },
+    {
+      "patient": "RHUH-0035",
+      "true_median_mm": 2.339966648133493,
+      "error_median_mm": 1.5902863257646194,
+      "error_p95_mm": 3.3311162246279014,
+      "recovered_fraction": 0.3203807725066794
+    },
+    {
+      "patient": "RHUH-0039",
+      "true_median_mm": 2.320210502103239,
+      "error_median_mm": 1.6509962125548592,
+      "error_p95_mm": 3.4220699838582567,
+      "recovered_fraction": 0.2884282649965364
+    },
+    {
+      "patient": "RHUH-0024",
+      "true_median_mm": 2.2500752374180655,
+      "error_median_mm": 1.5629318080879793,
+      "error_p95_mm": 3.313269677714747,
+      "recovered_fraction": 0.3053868679158369
+    },
+    {
+      "patient": "RHUH-0004",
+      "true_median_mm": 2.2790449874018437,
+      "error_median_mm": 1.659401789797571,
+      "error_p95_mm": 3.5424063996067514,
+      "recovered_fraction": 0.27188721636893975
+    },
+    {
+      "patient": "RHUH-0026",
+      "true_median_mm": 2.3737975429672735,
+      "error_median_mm": 1.7486838815382248,
+      "error_p95_mm": 3.629880393197832,
+      "recovered_fraction": 0.26333908015072316
+    },
+    {
+      "patient": "RHUH-0006",
+      "true_median_mm": 2.3131247104608557,
+      "error_median_mm": 1.5867783925020316,
+      "error_p95_mm": 3.4786519690160627,
+      "recovered_fraction": 0.31401087657487803
+    },
+    {
+      "patient": "RHUH-0011",
+      "true_median_mm": 2.274413845898438,
+      "error_median_mm": 1.6009736184909154,
+      "error_p95_mm": 3.3079393401410386,
+      "recovered_fraction": 0.2960939710343262
+    },
+    {
+      "patient": "RHUH-0016",
+      "true_median_mm": 2.3084955817627515,
+      "error_median_mm": 1.6412124606967962,
+      "error_p95_mm": 3.4667856291823473,
+      "recovered_fraction": 0.2890554031541279
+    },
+    {
+      "patient": "RHUH-0021",
+      "true_median_mm": 2.224624453495718,
+      "error_median_mm": 1.602987116571576,
+      "error_p95_mm": 3.5036029897597007,
+      "recovered_fraction": 0.27943473153291865
+    }
+  ]
+}
