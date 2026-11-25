@@ -1,6 +1,6 @@
 # Project Status: gbm-rec ("Where Does Glioblastoma Come Back?")
 
-_Last updated: 2026-11-18_
+_Last updated: 2026-11-25_
 
 ## Current Objective
 Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as written. **Phase 1 (tournament on LUMIERE)**: the rules are locked (D6, 2026-11-07), and C5 is waiting to be trained on the GPU computer (`docs/C5_GPU.md`). Nothing is scored. The user reports Phase 0 is complete; its checklist boxes below are not ticked individually.
@@ -17,7 +17,9 @@ Carry out the final plan (`docs/plan/final_plan.md`, dated 2026-09-22) as writte
 4. **Node.js is not installed on this Mac**, so the app cannot be built or viewed here. Install Node.js (a system install, for the user).
 
 ### Test cohorts: partner's computer (2026-11-21, V9)
-Downloads, the unattended run, C5 scoring (Colab L4) and the one-time runs happen on the partner's computer: `docs/PARTNER_NEXT.md`. The Mac runs none of `30_`/`31_`/`32_`.
+Downloads, the unattended run, C5 scoring (Colab L4) and the one-time runs happen on the partner's computer: `docs/PARTNER_NEXT.md`. That computer is Jack's M4 Mac; no other computer runs `30_`/`31_`/`32_`.
+
+**2026-11-25: both test cohorts locked, no model score computed.** RHUH-GBM 26 of 40 evaluable (14 screen exclusions); MU-Glioma-Post 31 of 44 evaluable. Achieved MDE 0.05/0.04/0.03 (rho 0.5/0.7/0.9). Brain-mask bug found and fixed first (deviation V11). C5 inputs on Drive. Next: C5 scoring on a Colab L4, then the one-time runs on the partner's go. Details: `HANDOFF.md`.
 
 ### Registration (2026-11-20)
 Public on OSF Registries since 2026-11-20T16:42:57Z: https://osf.io/2yuqn/ (checked through the OSF API; recorded in `config.yaml:osf`). RHUH-GBM and MU-Glioma-Post may now be downloaded; commit each download date.
@@ -29,9 +31,9 @@ A final model is built on LUMIERE only and pre-registered as H2 in the same regi
 | Phase | Weeks | Gate | State |
 |---|---|---|---|
 | 0 Setup + paperwork | 1 | ISEF forms signed; SRC contacted; repo scaffolded, builds, tests pass; CNN hardware + starting-weights decisions recorded; literature search string committed; expert emails sent | **Open.** Repo, build and tests done |
-| 1 Tournament on LUMIERE | 1–2 | All candidates scored on identical folds; challenger named by rule; weights hashed | **Started.** Rules locked (D6); code and tests done, C5 included; waiting on C5 training; nothing scored |
-| 2 Freeze + OSF | 2 | OSF timestamp precedes the RHUH-GBM download date | **OSF posted** 2026-11-20 (https://osf.io/2yuqn/); download dates still to be committed after it |
-| 3 RHUH-GBM cohort lock | 3 | Cohort locked; CONSORT committed; achieved MDE recorded; no model score computed | Not started |
+| 1 Tournament on LUMIERE | 1–2 | All candidates scored on identical folds; challenger named by rule; weights hashed | **Done.** Tournament run 2026-11-16 (challenger C1, rule 7); release models hashed (`results/release/model_hashes.json`) |
+| 2 Freeze + OSF | 2 | OSF timestamp precedes the RHUH-GBM download date | **Done.** OSF posted 2026-11-20T16:42:57Z (https://osf.io/2yuqn/); downloads recorded 2026-11-24T20:43:38Z |
+| 3 RHUH-GBM cohort lock | 3 | Cohort locked; CONSORT committed; achieved MDE recorded; no model score computed | **Done 2026-11-25.** 26 of 40 evaluable (`results/rhuh_lock/`); MDE recorded; no score. MU-Glioma-Post also locked: 31 of 44 |
 | 4 Confirmatory run, once | 4–5 | Verdict sentence filled; figures from results/; audit passes | Not started |
 | 5 App | 2–7 | Runs offline; five-person usability check passed | Not started |
 | 6 Communication | 6–8 | Poster final; report drafted; expert review; mock judging; booth kit | Not started |

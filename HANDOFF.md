@@ -1,13 +1,26 @@
 # Project Handoff
 
-_Last updated: 2026-11-18_
+_Last updated: 2026-11-25_
 
-## Latest (2026-11-18): C5 release model trained (Step 1.7)
+## Latest (2026-11-25): test cohorts processed and locked; next is C5 scoring
+- **Where:** Jack's M4 Mac, the "partner's computer" of V9 and `docs/PARTNER_NEXT.md`. This computer also runs `30_`/`31_`/`32_`, once each, on the partner's go.
+- **Downloads** (2026-11-24T20:43:38Z, after the registration): RHUH-GBM 720 files, all TCIA checksums OK (rechecked 2026-11-25, still 720/720); MU-Glioma-Post 2,978 files. V10: one RHUH-0035 file renamed after the download record.
+- **V11 (2026-11-25):** the first unattended run crashed in `22_`. RHUH-GBM's background is a constant negative value, not 0, so every `!= 0` brain mask was the whole image. Fixed by `gbmc.rhuh.brain_mask` (`a279885`); the three bug-era commits were reverted (`808128b`) and everything reran. The bug-era transports are set aside in `data/interim/rhuh_v11_whole_image_mask_20261125/` (not used).
+- **Rerun results** (log `logs/test_cohorts_20261125_052957.log`, all stages committed by the script):
+  - RHUH-GBM: midline 118.58 mm; mapping = published; cavity rule "unlabelled"; screens 14 EXCLUDE, 0 REVIEW, 26 SCREENED; **lock: 26 of 40 evaluable** (`results/rhuh_lock/`).
+  - MU-Glioma-Post: screens 11 EXCLUDE, 1 REVIEW, 32 SCREENED; **lock: 31 of 44 evaluable** (11 screen failures, 1 empty target, 1 undefined: no enhancing recurrence outside the target) (`results/mu_lock/`).
+  - Achieved MDE (both cohorts, by rho 0.5/0.7/0.9): 0.05/0.04/0.03.
+  - After the fix, round-trip errors rose (first 20 RHUH patients: median 2.04 → 3.12 mm; above 3.54 mm: 2 → 8). The metric masks now match LUMIERE's `07_` threshold study (brain only). Nothing was tuned on it.
+- **C5 inputs** for RHUH-GBM: packed at clean `64bf77f` (40 patients, 3 variants) and copied to Drive `gbm-rec-c5/rhuh/c5_inputs/` (95 files, identical to the local copy).
+- **Open for the partner:** (1) MU's one REVIEW patient stayed in the cohort (`28_` removes only EXCLUDE); TODO: verify that is the intended reading. (2) RHUH-0028's pre-op T1ce is not on the SRI24 grid (230 × 230 × 138, oblique); noted in V11, nothing changed.
+- **Next:** C5 scoring of RHUH-GBM on a Colab L4 at the pushed commit (`docs/PARTNER_NEXT.md` step 5). Then `30_`, `31_`, `32_` once each, only on the partner's go, pushing after each.
+
+## Earlier (2026-11-18): C5 release model trained (Step 1.7)
 - The user ran `13_c5_train.py --release --device cuda` on Colab at `bcadfaa` (`src/gbmc/c5.py` identical to `43a41a0`'s, checked), log `gbm-rec-c5/logs/release_20261118_050954.txt`.
 - `gbm-rec-c5/c5_release/manifest.json` (as printed on Colab): clean, not smoke, settings equal `config.yaml:c5`, 63 patients (the same set as `results/tournament/folds.json`, checked), NVIDIA L4, torch 2.15.0+cu132 (as in `requirements-gpu.lock`), `model_sha256` `285cd2857d2e5b409f913b0737a629dbc1903641742370f51b54905c1746d687`.
 - Not yet imported. Next (computer with `data/`): copy `gbm-rec-c5/c5_release/` to `data/interim/c5_release/` and run `03_`; it rechecks the hash and registers it in `results/release/model_hashes.json`.
 
-## Latest (2026-11-12/13): the user trained C5 on Colab, with checkpoints
+## Earlier (2026-11-12/13): the user trained C5 on Colab, with checkpoints
 - **Who:** the user (Jack) trains C5 on their own Colab (T4, paid compute units), not the partner. The partner was told. Inputs: the shared `gbm-rec-c5/c5_inputs/` (63 files, hashes checked by `13_`).
 - **Pinned commit: `43a41a0`** (`gbm-rec-c5/PINNED_COMMIT.txt`). Do not change it until all 7 folds are done; a new commit restarts every fold.
 - **Checkpoints within a fold** (`939be80`, GPU fix `43a41a0`): every 5 epochs to `c5_oof/checkpoints/fold<k>.pt`; a rerun resumes. Resume after a disconnect: Colab cells mount → clone pinned → env → link → train.
@@ -17,7 +30,7 @@ _Last updated: 2026-11-18_
 - **Folds 0–1 retrained on the L4 (user decision 2026-11-15, before any score):** set aside the T4-era fold 0/1 files and the manifest into `gbm-rec-c5/c5_oof_T4_folds01/`, then rerun `13_c5_train.py` at `43a41a0` on an L4; it retrains folds 0–1, skips 2–6 and writes a new manifest. Done 2026-11-15/16: new manifest written (all 7 folds at `43a41a0`). Verified: all 7 fold records name the NVIDIA L4, 9 maps each. Next: copy `c5_oof/` to `data/interim/c5_oof/` on the computer with `data/` and run `02_`.
 - **Set aside on Drive (not results):** `c5_oof_940e8ea/` (the old fold 0, for the hash check) and `old_checkpoints_939be80/`.
 
-## Latest (2026-11-21): the partner runs the test cohorts (V9)
+## Earlier (2026-11-21): the partner runs the test cohorts (V9)
 - All remaining work runs on the partner's computer, start to finish, following `docs/PARTNER_NEXT.md`: setup, downloads, `run_test_cohorts.py`, C5 on a Colab L4, then `30_`/`31_`/`32_` once each on the user's go, pushing after each.
 - The frozen models are on Drive (`gbm-rec-c5/release_models/`), all four hash-verified against the register on 2026-11-21.
 - **Only the partner's computer may run the one-time scripts.** Do not run `30_`, `31_` or `32_` on the Mac.
