@@ -172,6 +172,30 @@ Direction of effect:
 - RHUH-0035 is now assessed by the inventory, transport and screens like every other patient, and may still be excluded by them.
 - Reproducing from a fresh TCIA download needs the same rename after the download record.
 
+## V11: RHUH-GBM brain mask = voxels brighter than the scan's background
+
+Date: 2026-11-25
+Source: plan Steps 3.3–3.5 and 4.x (every RHUH-GBM step that needs the brain); `DECISIONS.md` D20 (midline rule, cavity reading); decision by both team members on 2026-11-25, before any RHUH-GBM model score
+
+Departure:
+- The code took the RHUH-GBM brain as `T1ce != 0`, assuming a zero background. RHUH-GBM's images were rescaled after skull-stripping: no voxel is 0, and the background is one constant, scan-specific value (T1ce: −13.2 to −2.7). So every "brain mask" covered the whole image. Found when `22_ --surface` crashed on 2026-11-25 (a mask with no surface).
+- Already affected: the midline constant (39 of 40 centroids were the image centre, 119.5 mm), the cavity inspection's z scale, and all 80 transports (whole-image metric masks). Would have been affected: `23_`, the `24_` C5 inputs, and `30_`/`31_` (the scoring region would have included the background).
+- Fix: `gbmc.rhuh.brain_mask` = voxels strictly brighter than the image minimum, used everywhere RHUH-GBM's brain was `!= 0` (`run_test_cohorts.py` midline, `20_`, `21_`, `22_`, `confirm.alt_cavity_target`). It refuses when any corner is not the minimum, or when nothing is brighter. No hole filling, no margin.
+- The three local commits made with the bug (midline constant, `20_` inventory, cavity rule) are reverted and rerun; the bug-era `data/interim/rhuh/` is set aside, not used. MU-Glioma-Post's code is unchanged (its background is 0).
+
+Evidence (a read-only check of all 600 RHUH-GBM images, no labels compared with any model):
+- In every image the background is one constant equal to the image minimum, at all 8 corners, 78–90% of voxels. The voxels above it form one component (≥ 99.96%). T1ce has ≤ 12 enclosed background-valued voxels (1 of 120 scans).
+- The gap above the background can be ~3e-7 SD, so no margin is safe. In float32 data a brain voxel equal to the background by chance is implausible, so this rule recovers the release's own skull-strip mask.
+- Labelled voxels on the background (outside the T1ce brain): enhancing 16 of 1.6 million over 5 of 120 timepoints (recurrence: RHUH-0012, 0013 and 0029 one each, 0033 twelve); peritumoral 0.07%. They are outside the brain under this rule and so outside every brain-clipped region, as the plan's "clipped to the brain" intends.
+
+Why:
+It is the rule the code meant (brain = not background), with the background read from each scan instead of assumed to be 0.
+
+Direction of effect:
+- No rule, threshold, candidate or model changes. It restores the intended brain mask before any RHUH-GBM score, so it cannot favour a candidate.
+- The midline constant and possibly the cavity rule change when rerun by D20's written rules.
+- Seen during the fix, not acted on: RHUH-0028's pre-op T1ce is not on the SRI24 grid (230 × 230 × 138, oblique); its midline centroid is an outlier (3.0 mm), and the median rule absorbs it.
+
 ## V2: No usability check with other people (plan Step 5.8 dropped)
 
 Date: 2026-09-29

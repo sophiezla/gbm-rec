@@ -113,7 +113,9 @@ def simulate(patient: str, master: int) -> dict:
 
     post = rhuh.files(patient, "postop")
     fixed = sitk.ReadImage(str(post["T1ce"]), sitk.sitkFloat32)
-    brain = sitk.GetArrayFromImage(fixed) != 0
+    brain = rhuh.brain_mask(sitk.GetArrayFromImage(fixed))
+    brain_img = sitk.GetImageFromArray(brain.astype(np.uint8))
+    brain_img.CopyInformation(fixed)
     sp = fixed.GetSpacing()[::-1]
     truth = screens.synthetic_field(
         brain.shape, sp, brain, stable_seed(patient, "simfield", master_seed=master)
@@ -154,7 +156,7 @@ def simulate(patient: str, master: int) -> dict:
     mask = (
         sitk.GetArrayFromImage(
             transport.coarsen(
-                sitk.Cast(fixed != 0, sitk.sitkUInt8), SPACING, sitk.sitkNearestNeighbor
+                brain_img, SPACING, sitk.sitkNearestNeighbor
             )
         )
         > 0

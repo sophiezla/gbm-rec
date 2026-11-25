@@ -187,7 +187,7 @@ def stage_rhuh_constants(_args) -> None:
             sp = np.prod(seg.GetSpacing())
             vox[name] = float((sitk.GetArrayFromImage(seg) == ENHANCING).sum() * sp / 1000.0)
         img = sitk.ReadImage(str(pre["T1ce"]))
-        idx = np.argwhere(sitk.GetArrayFromImage(img) != 0).mean(axis=0)[::-1]
+        idx = np.argwhere(rhuh.brain_mask(sitk.GetArrayFromImage(img))).mean(axis=0)[::-1]
         x = img.TransformContinuousIndexToPhysicalPoint([float(v) for v in idx])[0]
         xs.append(x)
         rows.append({"patient": p, "enhancing_cm3_tp_preop": vox["preop"],

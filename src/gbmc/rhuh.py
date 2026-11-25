@@ -35,6 +35,25 @@ EXPECTED_LABELS = {1: "necrosis", 2: "peritumoral", 3: "enhancing"}
 EARLY_POSTOP_MAX_HOURS = 72
 
 
+def brain_mask(image: np.ndarray) -> np.ndarray:
+    """Brain = voxels brighter than the scan's background (deviation V11).
+
+    RHUH-GBM's images were rescaled after skull-stripping, so the background is a
+    constant, scan-specific value (the image minimum), not 0. Refuses when any corner
+    is not that value, or when no voxel is brighter, so a whole-image "brain" can never
+    pass silently again.
+    """
+    arr = np.asarray(image)
+    background = arr.min()
+    corners = arr[np.ix_(*[[0, n - 1] for n in arr.shape])]
+    if not np.all(corners == background):
+        raise ValueError("brain_mask: the background is not the image minimum at every corner")
+    brain = arr > background
+    if not brain.any():
+        raise ValueError("brain_mask: no voxel is brighter than the background")
+    return brain
+
+
 def data_root() -> Path:
     """``local_root``, resolved against the repository when it is relative."""
     root = Path(layout()["local_root"])

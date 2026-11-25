@@ -132,3 +132,36 @@ def test_decide_cavity_rule():
     assert rhuh.decide_cavity_rule(mostly_unl) == "unlabelled"
     assert rhuh.decide_cavity_rule(mostly_lab) == "labelled:1"
     assert rhuh.decide_cavity_rule({"a": {}, "b": {"0": 5}}) == "unlabelled"
+
+
+def _skull_stripped(background: float) -> np.ndarray:
+    """A scan whose background is one constant below every brain voxel (V11)."""
+    img = np.full((8, 9, 10), background, np.float32)
+    img[2:6, 3:7, 3:8] = np.linspace(background + 1e-6, background + 9.0, 80).reshape(4, 4, 5)
+    return img
+
+
+def test_brain_mask_negative_background_is_not_the_whole_image():
+    # RHUH-GBM: background about -6.75, no zero voxel. The old rule (!= 0) gave the whole box.
+    img = _skull_stripped(-6.75)
+    assert (img != 0).all()
+    brain = rhuh.brain_mask(img)
+    assert brain.sum() == 80 and not brain[0, 0, 0]
+    assert brain[2, 3, 3]  # a voxel just above the background is brain
+
+
+def test_brain_mask_zero_background_matches_the_nonzero_rule():
+    img = _skull_stripped(0.0)
+    assert np.array_equal(rhuh.brain_mask(img), img != 0)
+
+
+def test_brain_mask_refuses_when_a_corner_is_not_background():
+    img = _skull_stripped(-6.75)
+    img[-1, 0, -1] = 1.0
+    with pytest.raises(ValueError, match="corner"):
+        rhuh.brain_mask(img)
+
+
+def test_brain_mask_refuses_a_constant_image():
+    with pytest.raises(ValueError, match="no voxel"):
+        rhuh.brain_mask(np.full((4, 4, 4), -6.75, np.float32))

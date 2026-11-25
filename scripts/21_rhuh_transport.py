@@ -50,7 +50,7 @@ def one(patient: str, recipe_name: str, master: int, mapping: dict[int, str]) ->
         return json.loads((out / "qc.json").read_text(encoding="utf-8")) | {"skipped": True}
     post, rec = rhuh.files(patient, "postop"), rhuh.files(patient, "recurrence")
     postop = sitk.GetArrayFromImage(sitk.ReadImage(str(post["seg"])))
-    brain_arr = sitk.GetArrayFromImage(sitk.ReadImage(str(post["T1ce"]))) != 0
+    brain_arr = rhuh.brain_mask(sitk.GetArrayFromImage(sitk.ReadImage(str(post["T1ce"]))))
     cavity_label = rhuh.cavity_rule()
     if cavity_label is not None:
         cavity = postop == cavity_label
@@ -72,7 +72,7 @@ def one(patient: str, recipe_name: str, master: int, mapping: dict[int, str]) ->
         masks[name] = path
     rec_brain = out / "recurrence_brain_mask.nii.gz"
     rimg = sitk.ReadImage(str(rec["T1ce"]))
-    rb = sitk.GetImageFromArray((sitk.GetArrayFromImage(rimg) != 0).astype(np.uint8))
+    rb = sitk.GetImageFromArray(rhuh.brain_mask(sitk.GetArrayFromImage(rimg)).astype(np.uint8))
     rb.CopyInformation(rimg)
     sitk.WriteImage(rb, str(rec_brain), useCompression=True)
 

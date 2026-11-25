@@ -3,6 +3,7 @@
 ## [Unreleased: Phase 1 start, not committed]
 
 ### Added
+- 2026-11-25: deviation V11. The unattended run stopped at `22_` (crash): RHUH-GBM's background is a constant negative value, not 0, so every `!= 0` brain mask was the whole image. New `gbmc.rhuh.brain_mask` (voxels above the scan's minimum, with a refusal guard and 4 tests) is used in the midline rule, `20_`, `21_`, `22_` and `confirm.alt_cavity_target`. The three bug-era local commits are reverted and rerun; `data/interim/rhuh/` is set aside. All 720 RHUH-GBM files still match TCIA's checksums.
 - 2026-11-24: test cohorts downloaded on Jack's Mac (V9): RHUH-GBM 720 files (all TCIA checksums OK) and MU-Glioma-Post 2,978 files; download record committed (`d33be41`). Then `RHUH-0035/2/segmentation.nii.gz` was renamed to the recorded pattern `RHUH-0035_2_segmentations.nii.gz`, content unchanged (deviation V10, agreed by both team members).
 - 2026-11-21: V9 and D6 item 9 updated. All test-cohort work moves to the partner's computer, with C5 scoring on a Colab L4 and only that computer running the one-time scripts.
   - `docs/PARTNER_NEXT.md` is rewritten as the full guide: setup for Windows, Mac or Linux; downloads; the unattended run; C5 on an L4; the three confirmatory runs, pushed after each.

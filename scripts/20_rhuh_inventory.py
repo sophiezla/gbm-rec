@@ -91,7 +91,7 @@ def main() -> int:
                 t1 = _array(f["T1ce"])
                 evidence.append(
                     rhuh.derive_mapping(
-                        f"{p}:{role}", _array(f["seg"]), t1, _array(f["FLAIR"]), t1 != 0
+                        f"{p}:{role}", _array(f["seg"]), t1, _array(f["FLAIR"]), rhuh.brain_mask(t1)
                     )
                 )
 
@@ -111,9 +111,9 @@ def main() -> int:
         t1 = _array(post["T1ce"]).astype(np.float32)
         # Both timepoints are in SRI24; the rule's rigid carry is applied in 21_.
         # For the inspection, the pre-op core is read in the shared atlas frame.
-        # The dark threshold is on the z scale (non-zero voxels), as its name says.
+        # The dark threshold is on the z scale (brain voxels, V11), as its name says.
         cavity[p] = rhuh.cavity_label_counts(
-            _array(post["seg"]), zscore_array(t1, t1 != 0), core, t1 != 0,
+            _array(post["seg"]), zscore_array(t1, rhuh.brain_mask(t1)), core, rhuh.brain_mask(t1),
             float(config.get("rhuh.cavity_dark_t1ce_z"))
         )
 

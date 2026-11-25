@@ -95,10 +95,10 @@ def alt_cavity_target(patient: str, mapping: dict[int, str], label_dir: Path,
         # Primary: residual + the whole carried pre-op core. Alternative (D13, proposed):
         # residual + only the fluid-dark part of that core, the cavity as the post-op
         # image shows it.
-        # The threshold is on the z scale, z-scored over non-zero voxels exactly as in
+        # The threshold is on the z scale, z-scored over the brain (V11) exactly as in
         # 20_'s cavity inspection, which is where the threshold is chosen.
         t1 = sitk.GetArrayFromImage(sitk.ReadImage(str(post["T1ce"]))).astype(np.float32)
-        dark = zscore_array(t1, t1 != 0) < float(config.get("rhuh.cavity_dark_t1ce_z"))
+        dark = zscore_array(t1, rhuh.brain_mask(t1)) < float(config.get("rhuh.cavity_dark_t1ce_z"))
         target, _ = rhuh.treatment_target(seg, brain, None, core & dark, mapping)
     else:
         # Primary: enhancing + labelled cavity. Alternative: the carried-core rule.
