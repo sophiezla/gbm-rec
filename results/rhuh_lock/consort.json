@@ -1,0 +1,130 @@
+{
+  "enrolled": 40,
+  "rows": [
+    {
+      "stage": "enrolled",
+      "n": 40
+    },
+    {
+      "excluded_for": "missing sequence or segmentation",
+      "n_excluded": 0,
+      "patients": [],
+      "remaining": 40
+    },
+    {
+      "excluded_for": "failed transport",
+      "n_excluded": 0,
+      "patients": [],
+      "remaining": 40
+    },
+    {
+      "excluded_for": "screen failure",
+      "n_excluded": 14,
+      "patients": [
+        {
+          "patient": "RHUH-0001",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0002",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0004",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0005",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0009",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0010",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0013",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0016",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0022",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0024",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0026",
+          "reason": "roundtrip>3.54428932435213mm, surface 3.8mm>review"
+        },
+        {
+          "patient": "RHUH-0027",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0028",
+          "reason": "roundtrip>3.54428932435213mm"
+        },
+        {
+          "patient": "RHUH-0037",
+          "reason": "roundtrip>3.54428932435213mm"
+        }
+      ],
+      "remaining": 26
+    },
+    {
+      "excluded_for": "empty target",
+      "n_excluded": 0,
+      "patients": [],
+      "remaining": 26
+    },
+    {
+      "excluded_for": "no enhancing recurrence outside the target",
+      "n_excluded": 0,
+      "patients": [],
+      "remaining": 26
+    }
+  ],
+  "evaluable": [
+    "RHUH-0003",
+    "RHUH-0006",
+    "RHUH-0007",
+    "RHUH-0008",
+    "RHUH-0011",
+    "RHUH-0012",
+    "RHUH-0014",
+    "RHUH-0015",
+    "RHUH-0017",
+    "RHUH-0018",
+    "RHUH-0019",
+    "RHUH-0020",
+    "RHUH-0021",
+    "RHUH-0023",
+    "RHUH-0025",
+    "RHUH-0029",
+    "RHUH-0030",
+    "RHUH-0031",
+    "RHUH-0032",
+    "RHUH-0033",
+    "RHUH-0034",
+    "RHUH-0035",
+    "RHUH-0036",
+    "RHUH-0038",
+    "RHUH-0039",
+    "RHUH-0040"
+  ],
+  "n_evaluable": 26,
+  "achieved_mde": {
+    "0.5": 0.05,
+    "0.7": 0.04,
+    "0.9": 0.03
+  }
+}
